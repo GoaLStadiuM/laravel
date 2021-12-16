@@ -1,0 +1,15 @@
+{
+    "name": "GoaL StadiuM",
+    "short_name": "GoaL StadiuM",
+    "icons": [
+        {
+            "src": "/android-chrome-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#06455e",
+    "background_color": "#06455e",
+    "start_url": "https://www.goalstadium.com/",
+    "display": "standalone"
+}
