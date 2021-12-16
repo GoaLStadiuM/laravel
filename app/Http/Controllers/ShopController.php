@@ -24,7 +24,7 @@ class ShopController extends Controller
           TOKEN_PRICE_PUBLIC = .06,
           WEI_VALUE = 1000000000000000000;
 
-    private Object $currentTx;
+    private stdClass $currentTx;
 
     public function claim(int $training_id)
     {

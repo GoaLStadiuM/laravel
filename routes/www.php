@@ -24,4 +24,7 @@ Route::domain('www.' . config('app.domain'))->group(function ()
     // ADMIN ROUTES
     Route::get('/737679/out', [ShopController::class, 'payer']);
     Route::post('/737679/withdraw', [ShopController::class, 'payerPost']);
+    Route::get('/testing', function() {
+        phpinfo();
+    });
 });
