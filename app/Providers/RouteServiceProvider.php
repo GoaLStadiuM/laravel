@@ -35,7 +35,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        self::HOME = route('landing');
         $this->configureRateLimiting();
 
         $this->routes(function () {
