@@ -163,6 +163,6 @@
             }
         }
 
-        setTimeout(() => tick(), 100);
+        setTimeout(() => tick(), 1000);
     </script>
 </x-app-layout>
