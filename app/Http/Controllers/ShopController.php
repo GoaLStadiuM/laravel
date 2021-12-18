@@ -11,6 +11,7 @@ use App\Models\Staking;
 use App\Models\Setting;
 use App\Models\Training;
 use App\Models\Player;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use DateTimeZone;
 use DateTime;
@@ -18,6 +19,23 @@ use DateInterval;
 
 class ShopController extends Controller
 {
+    public function penaltiesShopCharacters()
+    {
+        return view('game_penalties.shop_characters', [
+            'products' => Product::get()->groupBy('division')
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
     const BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX', // TODO move to config
           WALLET_BNB = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA', // todo move to config
           TOKEN_PRICE_PRIVATE = .04,
@@ -431,31 +449,5 @@ class ShopController extends Controller
     {
         // date: 2021 nov
         return $y !== '2021' || $m !== '11';
-    }
-
-    // TODO delete
-    public function payerPost(Request $request)
-    {
-        $elm = Presale::find($request->ide);
-        if($elm == null)
-            abort(404);
-
-
-        $elm->paid = true;
-        $elm->save();
-
-        return "ok";
-    }
-
-    // TODO delete
-    public function payer()
-    {
-        $curl = curl_init();
-        $response = file_get_contents("https://api.bscscan.com/api?module=account&action=txlist&address=0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA&apikey=C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX");
-        $results = json_decode($response);
-
-        $elms = Presale::where('paid', 0)->get();
-
-        return view('payer', compact('elms'));
     }
 }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
 
     <!-- vimeo player -->
-    <link rel="stylesheet" href="{{ asset('vendor/plyr/dist/plyr.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('vendor/plyr/dist/plyr.css') }}"> -->
 
     <!-- custom css -->
     <link rel="stylesheet" href="{{ asset('css/character-slider.css') }}">
@@ -30,7 +30,6 @@
 
     <!-- swiper -->
     <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
-    <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
 
     <script src="{{ asset('js/landing.js') }}"></script>
 @endsection

@@ -18,6 +18,16 @@ use DateInterval;
 
 class ShopController extends Controller
 {
+    public function penalties()
+    {
+        return view('game_penalties.main');
+    }
+
+
+
+
+
+
     const BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX', // TODO move to config
           WALLET_BNB = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA', // todo move to config
           TOKEN_PRICE_PRIVATE = .04,

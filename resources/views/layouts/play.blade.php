@@ -25,14 +25,12 @@
 
         <title>{{ config('app.name') }}@yield('title')</title>
 
-        @include('layouts.partials.www_styles')
+        @include('layouts.partials.play_styles')
         @yield('styles')
     </head>
     <body>
-        @include('layouts.partials.header')
         @yield('content')
-        @include('layouts.partials.footer')
-        @include('layouts.partials.www_scripts')
+        @include('layouts.partials.play_scripts')
         @yield('scripts')
     </body>
 </html>
