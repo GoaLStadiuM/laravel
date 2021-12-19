@@ -48,8 +48,7 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                     continue;
                 }
             }*/
-            if ($tx->to === '0xbb0627A819061a361be4B11f1436C4002f068509')
-                echo 'yes';
+            echo $tx->to;
         }
 /*
         echo "<br>New list:<br>";
