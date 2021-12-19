@@ -48,7 +48,7 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                     continue;
                 }
             }*/
-            echo $tx->to;
+            echo "$tx->to<br>";
         }
 /*
         echo "<br>New list:<br>";
