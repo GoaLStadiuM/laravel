@@ -30,13 +30,13 @@ Route::domain('www.' . config('app.domain'))->group(function ()
         $json = json_decode(file_get_contents("https://api.bscscan.com/api?module=account&action=tokentx&contractaddress=0xc4c12802377ad9fc6c1a570faca44c1e43284dc4&address=0x6eb73DA0c4e007bF4E7db56e6A67F1903a74445f&apikey=C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX"));
         $presale = Presale::get();
         $contract = '0xBF4013ca1d3D34873A3f02B5D169E593185B0204';
-/*
+
         echo "Current list:<br>";
         foreach ($presale as $withdrawal)
         {
-            echo "$withdrawal->wallet,$withdrawal->amount<br>";
+            echo "wallet: $withdrawal->wallet, amount: $withdrawal->amount, paid ", var_dump($withdrawal->paid), "<br>";
         }
-
+/*
         foreach ($json->result as $tx)
         {
             foreach ($presale as $withdrawal)
@@ -49,12 +49,12 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                 }
             }
         }
-*/
+
         echo "<br>New list:<br>";
         foreach ($presale as $withdrawal)
         {echo var_dump($withdrawal->paid);
             if (!$withdrawal->paid)
                 echo "$contract,$withdrawal->wallet,$withdrawal->amount<br>";
-        }
+        }*/
     });
 });
