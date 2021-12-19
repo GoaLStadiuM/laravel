@@ -38,29 +38,23 @@ Route::domain('www.' . config('app.domain'))->group(function ()
         }*/
 
         foreach ($json->result as $tx)
-        {/*
+        {
             foreach ($presale as $withdrawal)
             {
-                if ($withdrawal->wallet === $tx->to)
+                if (strtolower($withdrawal->wallet) === strtolower($tx->to))
                 {
                     $withdrawal->paid = true;
                     $withdrawal->save();
                     continue;
                 }
-            }*/
-            echo "$tx->to === 0xbb0627A819061a361be4B11f1436C4002f068509";
-            if ('0xbb0627A819061a361be4B11f1436C4002f068509' === $tx->to)
-                echo " yes<br>";
-
-            else
-                echo " no<br>";
+            }
         }
-/*
+
         echo "<br>New list:<br>";
         foreach ($presale as $withdrawal)
         {
             if (!$withdrawal->paid)
                 echo "$contract,$withdrawal->wallet,$withdrawal->amount<br>";
-        }*/
+        }
     });
 });
