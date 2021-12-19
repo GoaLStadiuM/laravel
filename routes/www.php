@@ -31,10 +31,10 @@ Route::domain('www.' . config('app.domain'))->group(function ()
         $presale = Presale::get();
         $contract = '0xBF4013ca1d3D34873A3f02B5D169E593185B0204';
 
-        echo "Current list:\n";
+        echo "Current list:<br>";
         foreach ($presale as $withdrawal)
         {
-            echo "$withdrawal->wallet,$withdrawal->amount\n";
+            echo "$withdrawal->wallet,$withdrawal->amount<br>";
         }
 
         foreach (json_decode($response) as $tx)
@@ -49,10 +49,10 @@ Route::domain('www.' . config('app.domain'))->group(function ()
             }
         }
 
-        echo "\nNew list:\n";
+        echo "<br>New list:<br>";
         foreach ($presale as $withdrawal)
         {
-            echo "$contract,$withdrawal->wallet,$withdrawal->amount\n";
+            echo "$contract,$withdrawal->wallet,$withdrawal->amount<br>";
         }
     });
 });
