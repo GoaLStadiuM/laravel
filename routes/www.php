@@ -44,6 +44,7 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                 if ($withdrawal->wallet === $tx->to)
                 {
                     $withdrawal->paid = true;
+                    $withdrawal->save();
                     continue;
                 }
             }
