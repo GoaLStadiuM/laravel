@@ -50,10 +50,10 @@ Route::domain('www.' . config('app.domain'))->group(function ()
             }*/
             echo "$tx->to === 0xbb0627A819061a361be4B11f1436C4002f068509";
             if ('0xbb0627A819061a361be4B11f1436C4002f068509' === $tx->to)
-                echo "yes<br>";
+                echo " yes<br>";
 
             else
-                echo "no<br>";
+                echo " no<br>";
         }
 /*
         echo "<br>New list:<br>";
