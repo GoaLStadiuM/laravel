@@ -38,25 +38,24 @@ Route::domain('www.' . config('app.domain'))->group(function ()
         }*/
 
         foreach ($json->result as $tx)
-        {
+        {/*
             foreach ($presale as $withdrawal)
             {
-                if (strtolower($withdrawal->wallet) === strtolower($tx->to))
+                if ($withdrawal->wallet === $tx->to)
                 {
                     $withdrawal->paid = true;
                     $withdrawal->save();
                     continue;
                 }
-            }
+            }*/
+            echo "$tx->to<br>";
         }
-
+/*
         echo "<br>New list:<br>";
         foreach ($presale as $withdrawal)
         {
-            if (!$withdrawal->paid) {
-                $amount = $withdrawal->amount + 50;
-                echo "$contract,$withdrawal->wallet,$amount<br>";
-            }
-        }
+            if (!$withdrawal->paid)
+                echo "$contract,$withdrawal->wallet,$withdrawal->amount<br>";
+        }*/
     });
 });
