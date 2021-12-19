@@ -16,7 +16,7 @@ use DateTimeZone;
 use DateTime;
 use DateInterval;
 
-class ShopController extends Controller
+class GameController extends Controller
 {
     public function penalties()
     {
