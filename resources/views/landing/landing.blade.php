@@ -1,12 +1,12 @@
 @extends('layouts.www')
 
 @section('content')
-    @include('index.partials.slider')
-    @include('index.partials.video')
-    @include('index.partials.trainingvideo')
-    @include('index.partials.play')
-    @include('index.partials.restingvideo')
-    @include('index.partials.characters')
+    @include('landing.partials.slider')
+    @include('landing.partials.video')
+    @include('landing.partials.trainingvideo')
+    @include('landing.partials.play')
+    @include('landing.partials.restingvideo')
+    @include('landing.partials.characters')
 @endsection
 
 @section('styles')
