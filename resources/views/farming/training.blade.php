@@ -16,7 +16,7 @@
             </div>
             <aside class="sci-panel">
                 <div class="stats">
-                    <h3><img src="{{ asset('img/strong.png') }}" width="64" class="icon-farming"></img> {{ $player->strengh }} <img src="{{ asset('img/accuracy.png') }}" class="icon-farming" width="64"></img> {{ $player->accuracy }}</h3>
+                    <h3><img src="{{ asset('img/strong.webp') }}" width="64" class="icon-farming"></img> {{ $player->strengh }} <img src="{{ asset('img/accuracy.webp') }}" class="icon-farming" width="64"></img> {{ $player->accuracy }}</h3>
                 </div>
                 <section class="max-w-6xl mx-auto py-12 farming-btns">
                     <div class="text-center pb-11">
