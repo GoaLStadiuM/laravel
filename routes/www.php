@@ -49,6 +49,8 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                 }
             }*/
             echo "$tx->to<br>";
+            if ($withdrawal->wallet === $tx->to)
+                echo "yes<br>";
         }
 /*
         echo "<br>New list:<br>";
