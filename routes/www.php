@@ -28,8 +28,30 @@ Route::domain('www.' . config('app.domain'))->group(function ()
 
     Route::get('/test123', function() {
         $json = json_decode(file_get_contents("https://api.bscscan.com/api?module=account&action=tokentx&contractaddress=0xBF4013ca1d3D34873A3f02B5D169E593185B0204&address=0x7f27Ddb0159B8433571D990d24271DDbe345286E&apikey=C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX"));
+        $presale = Presale::get();
+        $contract = '0xBF4013ca1d3D34873A3f02B5D169E593185B0204';
 
         foreach ($json->result as $tx)
-            echo "$tx->to<br>";
+            echo "$tx->to<br>";/*
+        {
+            foreach ($presale as $withdrawal)
+            {
+                if (strtolower($withdrawal->wallet) === strtolower($tx->to))
+                {
+                    $withdrawal->paid = true;
+                    $withdrawal->save();
+                    continue;
+                }
+            }
+        }
+
+        echo "<br>New list:<br>";
+        foreach ($presale as $withdrawal)
+        {
+            if (!$withdrawal->paid) {
+                $amount = $withdrawal->amount + 50;
+                echo "$contract,$withdrawal->wallet,$amount<br>";
+            }
+        }*/
     });
 });
