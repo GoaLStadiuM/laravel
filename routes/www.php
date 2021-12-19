@@ -48,8 +48,8 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                     continue;
                 }
             }*/
-            echo "$tx->to === 0x19e0b98e42ac360cd30143fb2a3ef7490f203685";
-            if ('0x19e0b98e42ac360cd30143fb2a3ef7490f203685' === $tx->to)
+            echo "$tx->to === 0xbb0627A819061a361be4B11f1436C4002f068509";
+            if ('0xbb0627A819061a361be4B11f1436C4002f068509' === $tx->to)
                 echo " yes<br>";
 
             else
