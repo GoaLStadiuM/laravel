@@ -52,7 +52,7 @@ Route::domain('www.' . config('app.domain'))->group(function ()
 */
         echo "<br>New list:<br>";
         foreach ($presale as $withdrawal)
-        {
+        {echo var_dump($withdrawal->paid);
             if (!$withdrawal->paid)
                 echo "$contract,$withdrawal->wallet,$withdrawal->amount<br>";
         }
