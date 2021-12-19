@@ -32,7 +32,6 @@ Route::domain('www.' . config('app.domain'))->group(function ()
         $contract = '0xBF4013ca1d3D34873A3f02B5D169E593185B0204';
 
         foreach ($json->result as $tx)
-            echo "$tx->to<br>";/*
         {
             foreach ($presale as $withdrawal)
             {
@@ -40,7 +39,6 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                 {
                     $withdrawal->paid = true;
                     $withdrawal->save();
-                    continue;
                 }
             }
         }
@@ -52,6 +50,6 @@ Route::domain('www.' . config('app.domain'))->group(function ()
                 $amount = $withdrawal->amount + 50;
                 echo "$contract,$withdrawal->wallet,$amount<br>";
             }
-        }*/
+        }
     });
 });
