@@ -14,11 +14,7 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('settings')->insert([
-            [
-                'code' => 'main_video',
-                'value' => 'video/homeheader.mp4'
-            ],
+        DB::table('setting')->insert([
             [
                 'code' => 'facebook_url',
                 'value' => 'https://www.facebook.com/GoaLStadiuM.Official'

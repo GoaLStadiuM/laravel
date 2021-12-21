@@ -2,18 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Staking extends Model
 {
-    use HasFactory;
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'staking';
 
-    protected $fillable = [
-       'user_id',
-       'tokens_to_stake',
-       'time',
-       'wallet',
-       'tokenpayment_id'
-    ];
+    /**
+     * Get the user that owns the staking.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the staking_option that owns the staking.
+     */
+    public function option()
+    {
+        return $this->belongsTo(StakingOption::class);
+    }
 }

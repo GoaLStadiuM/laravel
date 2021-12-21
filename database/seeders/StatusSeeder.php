@@ -14,25 +14,8 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('statuses')->insert([
-            [
-                'name' => 'initial'
-            ],
-            [
-                'name' => 'pending'
-            ],
-            [
-                'name' => 'waiting_confirmations'
-            ],
-            [
-                'name' => 'success'
-            ],
-            [
-                'name' => 'cancel'
-            ],
-            [
-                'name' => 'dispute'
-            ]
+        DB::table('status')->insert([
+            // TODO: find bscscan transaction codes
         ]);
     }
 }

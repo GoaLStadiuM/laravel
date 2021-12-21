@@ -2,17 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Training extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'user_id',
-        'player_id',
-        'endTime',
-        'training_type',
-        'done'
-    ];
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'training';
+
+    /**
+     * Get the character that owns the training.
+     */
+    public function character()
+    {
+        return $this->belongsTo(Character::class);
+    }
+
+    /**
+     * Get the training_session that owns the training.
+     */
+    public function trainingSession()
+    {
+        return $this->belongsTo(TrainingSession::class, 'session_id');
+    }
 }
