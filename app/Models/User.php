@@ -54,7 +54,7 @@ class User extends Authenticatable
      */
     public function nftPayments()
     {
-        return $this->hasMany(NftPayments::class);
+        return $this->hasMany(NftPayment::class);
     }
 
     /**
