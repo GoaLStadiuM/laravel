@@ -30,6 +30,6 @@ class BaseCharacter extends Model
      */
     public function characters()
     {
-        return $this->hasMany(Character::class);
+        return $this->hasMany(Character::class, 'id', 'base_id');
     }
 }

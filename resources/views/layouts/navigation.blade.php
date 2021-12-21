@@ -12,14 +12,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
-                    <x-nav-link :href="route('purchases')" :active="request()->routeIs('purchases')">
-                        {{ __('My Purchases') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('farming')" :active="request()->routeIs('farming')">
                         {{ __('Farming') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('manualhash')" :active="request()->routeIs('manualhash')">
-                        {{ __('Manual Hash Validation') }}
                     </x-nav-link>
                     <x-nav-link :href="route('landing')" :active="request()->routeIs('landing')">
                         {{ __('Back to Web') }}
@@ -72,14 +66,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden" style="margin-top:100px;">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('purchases')" :active="request()->routeIs('purchases')">
-                {{ __('My Purchases') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('farming')" :active="request()->routeIs('farming')">
                 {{ __('Farming') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('manualhash')" :active="request()->routeIs('manualhash')">
-                {{ __('Manual Hash Validation') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('landing')" :active="request()->routeIs('landing')">
                 {{ __('Back to Web') }}

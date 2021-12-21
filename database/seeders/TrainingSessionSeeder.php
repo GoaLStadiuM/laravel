@@ -16,19 +16,19 @@ class TrainingSessionSeeder extends Seeder
     {
         DB::table('training_session')->insert([
             [
-                'name' => 'training_head',
+                'name' => 'Head Training',
                 'max_hours' => 6
             ],
             [
-                'name' => 'training_shoulders',
+                'name' => 'Shoulders Training',
                 'max_hours' => 6
             ],
             [
-                'name' => 'training_knees',
+                'name' => 'Knees Training',
                 'max_hours' => 6
             ],
             [
-                'name' => 'training_feet',
+                'name' => 'Feet Training',
                 'max_hours' => 6
             ],
         ]);

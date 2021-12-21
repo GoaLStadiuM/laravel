@@ -17,6 +17,8 @@ class CreateTrainingTable extends Migration
             $table->id();
             $table->unsignedBigInteger('character_id');
             $table->unsignedTinyInteger('session_id');
+            $table->boolean('stopped')->default(false);
+            $table->boolean('done')->default(false);
             $table->timestamps();
 
             $table->foreign('character_id')->references('id')->on('character');

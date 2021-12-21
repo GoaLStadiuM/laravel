@@ -30,6 +30,14 @@ class Character extends Model
     }
 
     /**
+     * Get the nft_payment that owns the character.
+     */
+    public function payment()
+    {
+        return $this->belongsTo(NftPayment::class, 'payment_id');
+    }
+
+    /**
      * Get the trainings for the character.
      */
     public function trainings()

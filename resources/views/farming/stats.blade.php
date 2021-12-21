@@ -8,9 +8,13 @@
             </div>
             <aside class="sci-panel">
                 <div class="stats">
-                    <h3><img src="{{ asset('img/strong.png') }}" width="64" class="icon-farming"></img> {{ $player->strengh }} <img src="{{ asset('img/accuracy.png') }}" class="icon-farming" width="64"></img> {{ $player->accuracy }}</h3>
+                    <h3><img src="{{ asset('img/strong.png') }}" width="64" class="icon-farming"></img> {{ $character->strength }} <img src="{{ asset('img/accuracy.png') }}" class="icon-farming" width="64"></img> {{ $character->accuracy }}</h3>
                 </div>
-                @include('farming.partials.selecttraining')
+                <section class="max-w-6xl mx-auto py-12 farming-btns">
+                    @foreach ($sessions as $session)
+                    <a class="farming-btn" href="{{ route('selectTraining', ['payment_id' => $character->payment_id, 'session_id' => $session->id]) }}">{{ $session->name }}</a>
+                    @endforeach
+                </section>
             </aside>
         </section>
     </div>

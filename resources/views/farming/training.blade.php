@@ -16,13 +16,13 @@
             </div>
             <aside class="sci-panel">
                 <div class="stats">
-                    <h3><img src="{{ asset('img/strong.webp') }}" width="64" class="icon-farming"></img> {{ $player->strengh }} <img src="{{ asset('img/accuracy.webp') }}" class="icon-farming" width="64"></img> {{ $player->accuracy }}</h3>
+                    <h3><img src="{{ asset('img/strong.webp') }}" width="64" class="icon-farming"></img> {{ $character->strength }} <img src="{{ asset('img/accuracy.webp') }}" class="icon-farming" width="64"></img> {{ $character->accuracy }}</h3>
                 </div>
                 <section class="max-w-6xl mx-auto py-12 farming-btns">
                     <div class="text-center pb-11">
                         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-1">
                             <div class="mb-8 mx-auto">
-                                <img class="object-center object-cover rounded-full h-36 w-36" src="{{ asset(str_replace('assets/', '', $player->character->img_url)) }}">
+                                <img class="object-center object-cover rounded-full h-36 w-36" src="{{ asset($character->base->img_url . '.webp') }}">
                             </div>
                             <h3 class="cdown">Time remaining</h3>
                             <h3 id="demo" class="cdown-clock"></h3>
@@ -87,11 +87,11 @@
             }
         }
 
-        const arrayDateTime = '{{ $training->endTime }}'.split(' '),
+        const arrayDateTime = '{{ $end_time }}'.split(' '),
               date = arrayDateTime[0].split('-'),
               time = arrayDateTime[1].split(':'),
               endUTC = Date.UTC(date[0], date[1]-1, date[2], time[0], time[1], time[2]),
-              maxHours = {{ $maxHours }},
+              maxHours = {{ $training->session->max_hours }},
               timeNow = new Date(),
               timeUTC = Date.UTC(timeNow.getUTCFullYear(), timeNow.getUTCMonth(), timeNow.getUTCDate(),
                                  timeNow.getUTCHours(), timeNow.getUTCMinutes(), timeNow.getUTCSeconds()),

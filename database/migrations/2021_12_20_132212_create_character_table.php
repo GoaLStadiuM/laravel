@@ -17,13 +17,17 @@ class CreateCharacterTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedTinyInteger('base_id');
+            $table->unsignedBigInteger('payment_id');
             $table->string('name', 15)->nullable();
+            $table->unsignedTinyInteger('division');
+            $table->unsignedTinyInteger('level');
             $table->decimal('strength', 5, 2);
             $table->decimal('accuracy', 5, 2);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user');
             $table->foreign('base_id')->references('id')->on('base_character');
+            $table->foreign('payment_id')->references('id')->on('nft_payment');
         });
     }
 

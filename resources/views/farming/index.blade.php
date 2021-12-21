@@ -9,15 +9,15 @@
                     SELECT CHARACTER
                 </h1>
                 <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
-                    @foreach($payments as $payment)
-                    <a href="{{ route('stats', $payment->id) }}">
+                    @foreach($characters as $character)
+                    <a href="{{ route('stats', $character->payment_id) }}">
                         <div class="w-full rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
                             <div class="mb-8">
-                                <img class="object-center object-cover rounded-full h-36 w-36" src="{{ asset(str_replace('assets/', '', $payment->character->img_url)) }}">
+                                <img class="object-center object-cover rounded-full h-36 w-36" src="{{ asset($character->base->img_url . '.webp') }}">
                             </div>
                             <div class="text-center" style="padding: 20px;background-color: rgba(59, 130, 246, 1);border: gray 2px solid;border-radius: 15px;">
-                                <p class="text-xl text-white font-bold mb-2">{{ $payment->character->name }}</p>
-                                <p class="text-base text-gray-400 font-bold">Division {{$payment->product->division }} Level {{ $payment->product->level }}</p>
+                                <p class="text-xl text-white font-bold mb-2">{{ $character->base->name }}</p>
+                                <p class="text-base text-gray-400 font-bold">Division {{$character->division }} Level {{ $character->level }}</p>
                             </div>
                         </div>
                     </a>

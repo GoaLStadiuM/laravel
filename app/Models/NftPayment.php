@@ -36,4 +36,12 @@ class NftPayment extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * Get the character associated with the nft_payment.
+     */
+    public function character()
+    {
+        return $this->hasOne(Character::class, 'id', 'payment_id');
+    }
 }
