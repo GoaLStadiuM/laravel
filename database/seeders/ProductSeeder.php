@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert([
+        DB::table('product')->insert([
             [
                 'name' => 'Random Character Level 1 Division 1',
                 'description' => 'You will obtain one character from Division 1 with level 1.',
