@@ -16,7 +16,7 @@ class CreateTrainingSessionTable extends Migration
     {
         Schema::create('training_session', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name', 15);
+            $table->string('name');
             $table->unsignedTinyInteger('max_hours');
             $table->timestamps();
         });
