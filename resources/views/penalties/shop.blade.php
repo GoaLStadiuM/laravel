@@ -1,4 +1,4 @@
-@extends('layouts.play')
+@extends('layouts.penalties')
 
 @section('content')
     <main class="min-h-screen h-full bg-cover bg-center" style="background-image: url({{ asset('img/bg/bg-goalstadium.webp') }})">
