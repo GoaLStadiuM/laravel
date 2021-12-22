@@ -101,7 +101,7 @@ nav#wallet-btns {
     padding: 1.8rem 3rem;
     border-radius: 5px;
     border: 2px solid var(--light);
-    background-image: url('../img/bg_btn_header.webp');
+    background-image: url('../img/bg/bg_btn_header.webp');
     background-size: cover;
     font-weight: 900;
     display: flex;
@@ -402,31 +402,6 @@ nav#wallet-btns {
     transform:scale(.8);
 }
 
-.player-name-text{
-   /* position: relative;
-    top:100px;
-    left: 20%;*/
-    font-size: medium;
-    font-weight: 700;
-    color: white;
-    text-align: center;
-   /* width: 300px; */
-}
-
-.player-name-container{
-    background-image: url('../img/player-name.webp');
-    background-size: cover;
-    padding: 0;
-    width: 220px;
-    height: 135px;
-}
-
-.plyr__poster{
-   background-color: var(--plyr-video-background);
-
-
-}
-
 /* footer */
 footer {
     background-color: #040b14;
@@ -537,7 +512,7 @@ footer {
 }
 .invest-text::after{
     position: absolute;
-    content: url(../img/Icon-coins.webp);
+    content: url(../img/staking/Icon-coins.webp);
     top: 0;
     left: 70%;
     transform: scale(.7);
@@ -567,7 +542,7 @@ footer {
 
 .time-text::after{
     position: absolute;
-    content: url(../img/Icon-football.webp);
+    content: url(../img/staking/Icon-football.webp);
     top: 0;
     right: 117%;
     transform: scale(.6);
@@ -579,7 +554,7 @@ footer {
 
 .time-result::after{
     position: absolute;
-    content: url(../img/Icon-calendar.webp);
+    content: url(../img/staking/Icon-calendar.webp);
     top: 124%;
     right: 97%;
     transform: scale(.8);
@@ -587,7 +562,7 @@ footer {
 
 .invest-amount::after{
     position: absolute;
-    content: url(../img/Icon-comments.webp);
+    content: url(../img/staking/Icon-comments.webp);
     bottom: 68%;
     left: 96%;
     transform: scale(.6);

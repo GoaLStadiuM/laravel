@@ -2,7 +2,7 @@
     <div class="container-fluid">
       <div class="row stake-wrapper">
         <div class="col-sm-12 col-md-3 col-lg-3 align-self-end order-sm-1 duel-player">
-          <img class="" src="{{ asset('img/stake/staking1.webp') }}" alt="">
+          <img class="" src="{{ asset('img/staking/staking1.webp') }}" alt="">
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6 align-self-center order-sm-2">
           <div class="invest-div" style="text-align: center;">
@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-3 col-lg-3 align-self-center order-sm-3 lady-player">
-          <img class="" src="{{  asset('img/stake/padel.webp') }}" alt="">
+          <img class="" src="{{  asset('img/staking/padel.webp') }}" alt="">
         </div>
       </div>
     </div>

@@ -28,12 +28,12 @@ html {
 }
 body { height: 100vh; background-color: black }
 .bg-farming {
-    background-image: url('https://static.goalstadium.com/img/bg-farming.webp');
+    background-image: url('../img/tmp/bg_farming.webp');
     background-size: cover;
     width: 100%;
 }
 .sci-panel{
-    background-image: url('https://static.goalstadium.com/img/card.webp');
+    background-image: url('../img/tmp/card.webp');
     background-size: cover;
     width: 410px;
     height: 424px;

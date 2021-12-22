@@ -2,7 +2,7 @@
     <div class="container">
      <!-- <div class="row"> -->
          <div class="col-sm-12 col-md-12 col-lg-12 group-photo">
-           <img class="img-fluid" src="{{ asset('img/stake/filip.webp') }}" alt="">
+           <img class="img-fluid" src="{{ asset('img/staking/filip.webp') }}" alt="">
          </div>
          <h1 class="fs-1 cursor-content mb-5 text-center">{{ __('web.active investments') }}</h1>
          <div class="row active-invest-div cursor-content">

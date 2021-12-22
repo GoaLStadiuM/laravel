@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="div-name-bg">
-        <img src="{{ asset('img/player-name.webp') }}" width="256">
+        <img src="{{ asset('img/landing/player-name.webp') }}" width="256">
         <h3 class="div-name" id="card-name">Benja</h3>
       </div>
 </section>
