@@ -1,7 +1,7 @@
 @extends('layouts.penalties')
 
 @section('content')
-    <main class="min-h-screen bg-cover bg-center flex flex-col relative" style="background-image: url({{ asset('img/penalties/bg-goalstadium.webp') }})">
+    <main class="min-h-screen bg-cover bg-center flex flex-col relative" style="background-image: url({{ asset('img/bg/bg-goalstadium.webp') }})">
         <!-- Goalkeeper Image /start -->
         <img src="{{ asset('img/penalties/goalkeeper.webp') }}" alt="Goalkeeper" class="absolute md:w-1/3 w-full h-auto top-28 right-40 z-0">
         <img src="{{ asset('img/penalties/football.webp') }}" alt="Football" class="absolute w-20 h-20 top-14 right-28 z-0 ball-blur">
