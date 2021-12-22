@@ -17,7 +17,7 @@
             <a href="#game" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Play game</a>
             <a href="#characters" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Character List</a>
             <a href="#marketplace" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Marketplace</a>
-            <a href="{{ route('shop_characters') }}" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Shop</a>
+            <a href="{{ route('shop') }}" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Shop</a>
         </div>
         <!-- Menu /end -->
     </main>
