@@ -28,6 +28,6 @@ class TrainingSession extends Model
      */
     public function trainings()
     {
-        return $this->hasMany(Training::class);
+        return $this->hasMany(Training::class, 'id', 'session_id');
     }
 }

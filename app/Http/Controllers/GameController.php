@@ -61,7 +61,7 @@ class GameController extends Controller
         {
             // Stats Reward
             $pip = $gameConfig['CHARACTER_INCREASE_PERCENTAGE'];
-            $character = $training->character()->first();
+            $character = $training->character;
             $character->strengh += ($character->strengh * $pip) * $hours;
             $character->accuracy += ($character->accuracy * $pip) * $hours;
             $character->save();
@@ -81,11 +81,11 @@ class GameController extends Controller
         if ($payment->doesntExist())
             abort(404, "The Purchase doesn't exist.");
 
-        $character = $payment->first()->character();
+        $character = $payment->first()->character;
         if ($character->doesntExist())
             abort(404, "The character doesn't exist.");
 
-        $training = $character->first()->latestTraining();
+        $training = $character->latestTraining;
         if ($training->exists() && !$training->done)
             abort(403, 'A training session is already in progress.');
 
@@ -106,11 +106,11 @@ class GameController extends Controller
         if ($payment->doesntExist())
             abort(404, "The Purchase doesn't exist.");
 
-        $character = $payment->first()->character;dd($character->doesntExist());
+        $character = $payment->first()->character;
         if ($character->doesntExist())
             abort(404, "The Character doesn't exist.");
 
-        $training = $character->latestTraining();
+        $training = $character->latestTraining;
         if ($training->exists() && !$training->done)
         {
             $view = 'farming.training';
