@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="./index.html" class="py-2  px-5 z-20 items-menu flex items-center text-slate-50">
+                            <a href="{{ route('menu') }}" class="py-2  px-5 z-20 items-menu flex items-center text-slate-50">
                                 <img src="{{ asset('img/penalties/icons/home-icon.svg') }}" alt="Items icon">
                                 Home
                             </a>
@@ -71,17 +71,17 @@
                 <!-- Content Shop /start -->
                 <div class="lg:col-span-3 col-auto lg:flex lg:flex-col block mx-auto w-full">
                     <!-- Top buttons /start -->
-                    <div class="flex lg:flex-row flex-col-reverse align-items-center items-end lg:space-x-5 space-x-0 self-end my-2">
+                    <div class="flex lg:flex-row flex-col-reverse items-center items-end lg:space-x-5 space-x-0 self-end my-2">
                         <div class="lg:flex items-center lg:space-x-5 space-x-0 space-y-2 lg:space-y-0 m-3">
                             <div class="btn-top-goal">
-                                <img src="{{ asset('img/logo.webp') }}" alt="Goal stadium logo" class="w-12">
+                                <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
                                 <span class="inline-flex pr-4">20</span>
                                 <div class="h-8 w-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
                                     <img src="{{ asset('img/penalties/icons/plus-icon.svg') }}" alt="Plus icon" class="w-3/5">
                                 </div>
                             </div>
                             <div class="btn-top-goal">
-                                <img src="{{ asset('img/logo.webp') }}" alt="Goal stadium logo" class="w-12">
+                                <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
                                 <span class="inline-flex pr-4">20</span>
                                 <div class="h-8 w-8  rounded-full bg-white flex items-center justify-center cursor-pointer">
                                     <img src="{{ asset('img/penalties/icons/plus-icon.svg') }}" alt="Plus icon" class="w-3/5">
