@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NftPayment;
 use App\Models\Training;
+use App\Models\TrainingSession;
 use Illuminate\Support\Facades\Auth;
 use DateInterval;
 use DateTime;
