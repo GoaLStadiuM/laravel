@@ -86,7 +86,7 @@ class GameController extends Controller
             abort(404, "The character doesn't exist.");
 
         $training = $character->latestTraining;
-        if (!optional($training)->done)
+        if ($training !== null && !$training->done)
             abort(403, 'A training session is already in progress.');
 
         if (TrainingSession::where('id', $session_id)->doesntExist())
@@ -111,7 +111,7 @@ class GameController extends Controller
             abort(404, "The Character doesn't exist.");
 
         $training = $character->latestTraining;
-        if (!optional($training)->done)
+        if ($training !== null && !$training->done)
         {
             $view = 'farming.training';
             $data = [
