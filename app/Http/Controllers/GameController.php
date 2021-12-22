@@ -100,7 +100,7 @@ class GameController extends Controller
         $payment = NftPayment::where('user_id', Auth::user()->id)->where('id', $payment_id);
         if ($payment->doesntExist())
             abort(404, "The Purchase doesn't exist.");
-
+dd($payment->character->id);
         $character = $payment->character;
         if ($character->doesntExist())
             abort(404, "The Character doesn't exist.");
