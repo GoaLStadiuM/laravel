@@ -1112,6 +1112,7 @@ body::-webkit-scrollbar-track:hover,
 
 .items-menu.disabled,.items-menu.disabled:hover {
   box-shadow: 0 0 8px 5px #ff000027;
+  color: gray;
 }
 
 .items-menu img {
