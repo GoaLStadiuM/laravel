@@ -82,11 +82,11 @@ class GameController extends Controller
             abort(404, "The Purchase doesn't exist.");
 
         $character = $payment->first()->character;
-        if ($character->doesntExist())
+        if ($character === null || $character->doesntExist())
             abort(404, "The character doesn't exist.");
 
         $training = $character->latestTraining;
-        if ($training->exists() && !$training->done)
+        if (!optional($training)->done)
             abort(403, 'A training session is already in progress.');
 
         if (TrainingSession::where('id', $session_id)->doesntExist())
@@ -107,11 +107,11 @@ class GameController extends Controller
             abort(404, "The Purchase doesn't exist.");
 
         $character = $payment->first()->character;
-        if ($character->doesntExist())
+        if ($character === null || $character->doesntExist())
             abort(404, "The Character doesn't exist.");
-dd($character->latestTraining());
+
         $training = $character->latestTraining;
-        if ($training->exists() && !$training->done)
+        if (!optional($training)->done)
         {
             $view = 'farming.training';
             $data = [
