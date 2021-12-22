@@ -1183,10 +1183,6 @@ body::-webkit-scrollbar-track:hover,
   .items-menu {
     font-size: 22px;
   }
-
-  .btn-back {
-    display: none;
-  }
 }
 
 @media (min-width: 768px) {
