@@ -117,7 +117,7 @@ class GameController extends Controller
             $data = [
                 'character' => $character,
                 'training' => $training,
-                'end_time' => (new DateTime($training->created_at, new DateTimeZone('UTC')))->add(new DateInterval("PT{$training->session->max_hours}H"))
+                'end_time' => (new DateTime($training->created_at, new DateTimeZone('UTC')))->add(new DateInterval("PT{$training->session->max_hours}H"))->format('Y-m-d H:i:s')
             ];
         }
 
