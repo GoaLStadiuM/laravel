@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="./index.html" class="bg-white rounded-full p-2 border-4 border-goal-gray-100 btn-back">
+                        <a href="{{ route('menu') }}" class="bg-white rounded-full p-2 border-4 border-goal-gray-100 btn-back">
                             <img src="{{ asset('img/penalties/icons/back-icon.svg') }}" alt="Back icon" class="w-8">
                         </a>
                     </div>
