@@ -26,6 +26,6 @@ class Training extends Model
      */
     public function session()
     {
-        return $this->belongsTo(TrainingSession::class, 'id', 'session_id');
+        return $this->belongsTo(TrainingSession::class, 'session_id');
     }
 }

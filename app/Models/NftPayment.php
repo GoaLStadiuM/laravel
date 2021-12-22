@@ -42,6 +42,6 @@ class NftPayment extends Model
      */
     public function character()
     {
-        return $this->hasOne(Character::class, 'payment_id');
+        return $this->hasOne(Character::class, 'id', 'payment_id');
     }
 }
