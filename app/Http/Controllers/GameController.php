@@ -17,7 +17,7 @@ class GameController extends Controller
     }
 
     public function characterList()
-    {
+    {if (Auth::user()->id === 2) { dd(Auth::user()->characters()); }
         return view('farming.index', [
             'characters' => Auth::user()->characters()
         ]);
