@@ -75,14 +75,14 @@
                         <div class="lg:flex items-center lg:space-x-5 space-x-0 space-y-2 lg:space-y-0 m-3">
                             <div class="btn-top-goal">
                                 <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
-                                <span class="inline-flex pr-4">20</span>
+                                <span class="inline-flex pr-4">{{ number_format(Auth::user()->goal, 4, '.', '') }}</span>
                                 <div class="h-8 w-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
                                     <img src="{{ asset('img/penalties/icons/plus-icon.svg') }}" alt="Plus icon" class="w-3/5">
                                 </div>
                             </div>
                             <div class="btn-top-goal">
                                 <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
-                                <span class="inline-flex pr-4">20</span>
+                                <span class="inline-flex pr-4">{{ number_format(Auth::user()->fls, 4, '.', '') }}</span>
                                 <div class="h-8 w-8  rounded-full bg-white flex items-center justify-center cursor-pointer">
                                     <img src="{{ asset('img/penalties/icons/plus-icon.svg') }}" alt="Plus icon" class="w-3/5">
                                 </div>
