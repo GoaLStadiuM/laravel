@@ -106,7 +106,7 @@ class GameController extends Controller
         if ($payment->doesntExist())
             abort(404, "The Purchase doesn't exist.");
 
-        if ($payment->character->doesntExist())
+        if ($payment->character()->doesntExist())
             abort(404, "The Character doesn't exist.");
 
         $character = $payment->first()->character;
