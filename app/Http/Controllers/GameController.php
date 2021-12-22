@@ -19,7 +19,7 @@ class GameController extends Controller
     public function characterList()
     {
         return view('farming.index', [
-            'characters' => User::characters()->get()
+            'characters' => Auth::user()->characters()
         ]);
     }
 
