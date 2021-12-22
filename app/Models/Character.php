@@ -26,7 +26,7 @@ class Character extends Model
      */
     public function base()
     {
-        return $this->belongsTo(BaseCharacter::class, 'base_id');
+        return $this->belongsTo(BaseCharacter::class, 'id', 'base_id');
     }
 
     /**
@@ -34,7 +34,7 @@ class Character extends Model
      */
     public function payment()
     {
-        return $this->belongsTo(NftPayment::class, 'payment_id');
+        return $this->belongsTo(NftPayment::class, 'id', 'payment_id');
     }
 
     /**
