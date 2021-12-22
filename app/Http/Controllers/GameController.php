@@ -105,7 +105,7 @@ class GameController extends Controller
         if ($character->doesntExist())
             abort(404, "The Character doesn't exist.");
 
-        dd($character);
+        dd($character->first());
         $training = $character->latestTraining();
         if ($training->exists() && !$training->done)
         {
