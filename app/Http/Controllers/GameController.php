@@ -62,7 +62,7 @@ class GameController extends Controller
             // Stats Reward
             $pip = $gameConfig['CHARACTER_INCREASE_PERCENTAGE'];
             $character = $training->character;
-            $character->strengh += ($character->strengh * $pip) * $hours;
+            $character->strength += ($character->strength * $pip) * $hours;
             $character->accuracy += ($character->accuracy * $pip) * $hours;
             $character->save();
 
