@@ -1106,6 +1106,14 @@ body::-webkit-scrollbar-track:hover,
   transition: all ease-in-out 0.3s;
 }
 
+.items-menu.active {
+  box-shadow: 0 0 8px 5px #fff7005d;
+}
+
+.items-menu.disabled,.items-menu:hover {
+  box-shadow: 0 0 8px 5px #ff0000;
+}
+
 .items-menu img {
   width: 20px;
   margin-right: 1.5rem ;
