@@ -26,8 +26,12 @@ class GameController extends Controller
     public function claim(int $training_id)
     {
         $training = Training::where('id', $training_id)->where('done', false);
-        if ($training->doesntExist() || $training->character->user->id !== Auth::user()->id)
+        if ($training->doesntExist())
             abort(404, "The Training doesn't exist or is already completed.");
+
+        $training = $training->first();
+        if ($training->character->user->id !== Auth::user()->id)
+            abort(403, 'You are not authorized to perform this action.');
 
         $gameConfig = config('game');
         $maxHours = $training->session->max_hours;
@@ -56,7 +60,7 @@ class GameController extends Controller
         {
             // Stats Reward
             $pip = $gameConfig['CHARACTER_INCREASE_PERCENTAGE'];
-            $character = $training->character();
+            $character = $training->character()->first();
             $character->strengh += ($character->strengh * $pip) * $hours;
             $character->accuracy += ($character->accuracy * $pip) * $hours;
             $character->save();
@@ -80,7 +84,7 @@ class GameController extends Controller
         if ($character->doesntExist())
             abort(404, "The character doesn't exist.");
 
-        $training = $character->latestTraining();
+        $training = $character->first()->latestTraining();
         if ($training->exists() && !$training->done)
             abort(403, 'A training session is already in progress.');
 
@@ -101,11 +105,12 @@ class GameController extends Controller
         if ($payment->doesntExist())
             abort(404, "The Purchase doesn't exist.");
 
-        $character = $payment->first()->character();
+        $character = $payment->first()->character;
         if ($character->doesntExist())
             abort(404, "The Character doesn't exist.");
 
-        dd($character->first());
+        //$character = $character->first();
+
         $training = $character->latestTraining();
         if ($training->exists() && !$training->done)
         {
