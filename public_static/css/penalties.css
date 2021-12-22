@@ -1110,7 +1110,7 @@ body::-webkit-scrollbar-track:hover,
   box-shadow: 0 0 8px 5px #fff7005d;
 }
 
-.items-menu.disabled,.items-menu:hover {
+.items-menu.disabled,.items-menu.disabled:hover {
   box-shadow: 0 0 8px 5px #ff0000;
 }
 
