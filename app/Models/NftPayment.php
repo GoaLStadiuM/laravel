@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class NftPayment extends Model
 {
-    use HasFactory;
-
     /**
      * The table associated with the model.
      *
@@ -45,6 +42,6 @@ class NftPayment extends Model
      */
     public function character()
     {
-        return $this->hasOne(Character::class, 'id', 'payment_id');
+        return $this->hasOne(Character::class, 'payment_id', 'id');
     }
 }
