@@ -15,19 +15,19 @@
                     <h2 class="text-5xl text-slate-50 text-center py-8 tracking-wide">Shop</h2>
                     <ul class="text-slate-50 space-y-5">
                         <li>
-                            <a href="#characters" class="py-2 px-5 z-20 items-menu flex items-center">
+                            <a href="#characters" class="py-2 px-5 z-20 items-menu flex items-center active">
                                 <img src="{{ asset('img/penalties/icons/character-icon.svg') }}" alt="Character icon">
                                 Characters
                             </a>
                         </li>
                         <li>
-                            <a href="#locker" class="py-2  px-5 z-20 items-menu flex items-center">
+                            <a href="#locker" class="py-2  px-5 z-20 items-menu flex items-center disabled">
                                 <img src="{{ asset('img/penalties/icons/rng-icon.svg') }}" alt="RNG Locker icon">
                                 RNG Locker
                             </a>
                         </li>
                         <li>
-                            <a href="#items" class="py-2  px-5 z-20 items-menu flex items-center">
+                            <a href="#items" class="py-2  px-5 z-20 items-menu flex items-center disabled">
                                 <img src="{{ asset('img/penalties/icons/items-icon.svg') }}" alt="Items icon">
                                 Items
                             </a>
@@ -48,19 +48,19 @@
                     <h2 class="text-5xl text-slate-50 text-center py-8 tracking-wide">Shop</h2>
                     <ul class="text-slate-50 space-y-5">
                         <li>
-                            <a href="#characters" class="py-2 px-5 z-20 items-menu flex items-center">
+                            <a href="#characters" class="py-2 px-5 z-20 items-menu flex items-center active">
                                 <img src="{{ asset('img/penalties/icons/character-icon.svg') }}" alt="Character icon">
                                 Characters
                             </a>
                         </li>
                         <li>
-                            <a href="#locker" class="py-2  px-5 z-20 items-menu flex items-center">
+                            <a href="#locker" class="py-2  px-5 z-20 items-menu flex items-center disabled">
                                 <img src="{{ asset('img/penalties/icons/rng-icon.svg') }}" alt="RNG Locker icon">
                                 RNG Locker
                             </a>
                         </li>
                         <li>
-                            <a href="#items" class="py-2  px-5 z-20 items-menu flex items-center">
+                            <a href="#items" class="py-2  px-5 z-20 items-menu flex items-center disabled">
                                 <img src="{{ asset('img/penalties/icons/items-icon.svg') }}" alt="Items icon">
                                 Items
                             </a>
