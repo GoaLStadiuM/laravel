@@ -1107,11 +1107,11 @@ body::-webkit-scrollbar-track:hover,
 }
 
 .items-menu.active {
-  box-shadow: 0 0 8px 5px #fff7005d;
+  box-shadow: 0 0 8px 5px #fff7002c;
 }
 
 .items-menu.disabled,.items-menu.disabled:hover {
-  box-shadow: 0 0 8px 5px #ff0000;
+  box-shadow: 0 0 8px 5px #ff000027;
 }
 
 .items-menu img {
