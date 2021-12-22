@@ -218,24 +218,25 @@
                         <img src="{{ asset('img/character/5.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="4">
                         <img src="{{ asset('img/character/6.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="5">
                         <img src="{{ asset('img/character/7.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="6">
-                        <img src="{{ asset('img/character/9.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="7">
-                        <img src="{{ asset('img/character/10.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="8">
-                        <img src="{{ asset('img/character/11.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="9">
-                        <img src="{{ asset('img/character/12.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="10">
-                        <img src="{{ asset('img/character/13.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="11">
-                        <img src="{{ asset('img/character/14.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="12">
-                        <img src="{{ asset('img/character/15.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="13">
-                        <img src="{{ asset('img/character/16.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="14">
-                        <img src="{{ asset('img/character/17.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="15">
-                        <img src="{{ asset('img/character/18.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="16">
-                        <img src="{{ asset('img/character/19.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="17">
-                        <img src="{{ asset('img/character/20.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="18">
-                        <img src="{{ asset('img/character/21.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="19">
-                        <img src="{{ asset('img/character/22.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="20">
-                        <img src="{{ asset('img/character/23.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="21">
-                        <img src="{{ asset('img/character/24.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="22">
-                        <img src="{{ asset('img/character/25.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="23">
-                        <img src="{{ asset('img/character/26.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="24">
+                        <img src="{{ asset('img/character/8.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="7">
+                        <img src="{{ asset('img/character/9.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="8">
+                        <img src="{{ asset('img/character/10.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="9">
+                        <img src="{{ asset('img/character/11.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="10">
+                        <img src="{{ asset('img/character/12.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="11">
+                        <img src="{{ asset('img/character/13.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="12">
+                        <img src="{{ asset('img/character/14.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="13">
+                        <img src="{{ asset('img/character/15.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="14">
+                        <img src="{{ asset('img/character/16.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="15">
+                        <img src="{{ asset('img/character/17.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="16">
+                        <img src="{{ asset('img/character/18.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="17">
+                        <img src="{{ asset('img/character/19.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="18">
+                        <img src="{{ asset('img/character/20.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="19">
+                        <img src="{{ asset('img/character/21.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="20">
+                        <img src="{{ asset('img/character/22.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="21">
+                        <img src="{{ asset('img/character/23.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="22">
+                        <img src="{{ asset('img/character/24.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="23">
+                        <img src="{{ asset('img/character/25.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="24">
+                        <img src="{{ asset('img/character/26.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="25">
                     </div>
                 </div>
             </div>
