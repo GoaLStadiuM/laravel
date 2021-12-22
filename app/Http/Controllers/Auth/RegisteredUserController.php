@@ -35,21 +35,10 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            //'presale_code' => ['required'],
+            'name' => ['required', 'string', 'max:15', 'unique:user'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:user'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
-/*
-        $code = Presalecode::where('code', $request->presale_code)->where('used', false)->first();
-
-        if($code == null)
-        {
-            return redirect()->back()->with('error', 'Presale code not valid');
-        }
-
-        $code->used = true;
-        $code->save();*/
 
         $user = User::create([
             'name' => $request->name,
