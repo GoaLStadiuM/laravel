@@ -149,7 +149,7 @@ console.log(card.dataset.price / goal.price);
 console.log(goal_decimals);
         const options = {
             type: 'erc20',
-            amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
+            amount: Moralis.Units.Token(Number.parseFloat(card.dataset.price / goal.price).toFixed(goal_decimals), goal_decimals),
             receiver: shopWallet,
             contractAddress: tokenAddress
         }
