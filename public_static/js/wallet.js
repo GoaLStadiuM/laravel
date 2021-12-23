@@ -5,14 +5,13 @@ let user = Moralis.User.current(), provider = 'metamask';
 
 /* Authentication code */
 async function login() {
-    if (user)
-        return;
-
-    user = await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
-        .then(function (user) {
-            console.log(Moralis.Web3API.account.getTokenBalances());
-        })
-        .catch(function (error) { console.log(error); });
+    if (!user) {
+        user = await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
+            .then(function (user) {
+                console.log(Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' }));
+            })
+            .catch(function (error) { console.log(error); });
+    }
 }
 
 async function logOut() {
@@ -21,16 +20,10 @@ async function logOut() {
 }
 
 function metamask() {
-    if (user)
-        return;
-
     provider = 'metamask';
     login();
 }
 function walletconnect() {
-    if (user)
-        return;
-
     provider = 'walletconnect';
     login();
 }
