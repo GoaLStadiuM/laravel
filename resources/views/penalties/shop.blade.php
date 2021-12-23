@@ -74,6 +74,7 @@
                     <div class="flex lg:flex-row flex-col-reverse items-center items-end lg:space-x-5 space-x-0 self-end my-2">
                         <div class="lg:flex items-center lg:space-x-5 space-x-0 space-y-2 lg:space-y-0 m-3">
                             <button id="connect-wallet">Connect Wallet</button>
+                            <button id="btn-logout">Disconnect</button>
                             <div class="btn-top-goal">
                                 <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
                                 <span class="inline-flex pr-4">0</span>
