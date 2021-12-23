@@ -1,5 +1,5 @@
 /* Moralis init code */
-Moralis.start({ serverUrl, appId });
+Moralis.start({ serverUrl: 'https://9iuhdje4owkr.usemoralis.com:2053/server', appId: 'DTD1H8BKuE2sSM34ppMhV5IlG0DYROpsJRHmnYKl' });
 
 let user = Moralis.User.current();
 
