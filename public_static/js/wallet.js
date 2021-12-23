@@ -8,7 +8,7 @@ async function login() {
     if (!user) {
       user = await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
         .then(function (user) {
-            const balances = await Moralis.Web3API.account.getTokenBalances();
+            const balances = Moralis.Web3API.account.getTokenBalances();
             console.log(balances);
         })
         .catch(function (error) { console.log(error); });
