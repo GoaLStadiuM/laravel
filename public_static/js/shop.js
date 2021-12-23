@@ -44,7 +44,7 @@ stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 </svg>`;
 
-let tries = 0, maxTries = 9, goal = null;
+let tries = 0, maxTries = 9, goal = null, goal_decimals = null;
 
 //Events
 
@@ -124,6 +124,7 @@ async function updateBalance()
     balances.forEach(function(token) {
         if (token.token_address === tokenAddress)
         {
+            goal_decimals = token.decimals;
             goalBalance.textContent = Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
         }
     });
@@ -139,38 +140,37 @@ else
 
 }
 
-document.querySelectorAll(".card-goal").forEach((card) => {
-    card.addEventListener("click", () => {
-
-// sending 0.5 tokens with 18 decimals
-const options = {type: "erc20",
-                 amount: Moralis.Units.Token("0.5", "18"),
-                 receiver: "0x..",
-                 contractAddress: "0x.."}
+document.querySelectorAll('.card-goal').forEach((card) => {
+    card.addEventListener('click', () => {
+console.log(card.id);
+const options = {type: 'erc20',
+                 amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
+                 receiver: '0x..',
+                 contractAddress: '0x..'}
 let result = await Moralis.transfer(options);
 console.log(result);
 
 /*
         swiper.autoplay.start();
 
-        if (modalCarrousel.classList.contains("hidden")) {
-            modalCarrousel.classList.remove("hidden");
-            modalCarrousel.classList.add("flex");
+        if (modalCarrousel.classList.contains('hidden')) {
+            modalCarrousel.classList.remove('hidden');
+            modalCarrousel.classList.add('flex');
             //Modal carrousel animation
             setTimeout(modal, randomTime);
         } else {
-            modalCarrousel.classList.remove("flex");
-            modalCarrousel.classList.add("hidden");
+            modalCarrousel.classList.remove('flex');
+            modalCarrousel.classList.add('hidden');
         }*/
     });
 });
 
 const modal = () => {
     swiper.autoplay.stop();
-    modalCarrousel.addEventListener("click", (ev) => {
+    modalCarrousel.addEventListener('click', (ev) => {
         ev.stopPropagation();
-        modalCarrousel.classList.remove("flex");
-        modalCarrousel.classList.add("hidden");
+        modalCarrousel.classList.remove('flex');
+        modalCarrousel.classList.add('hidden');
         window.location.reload();
     });
     //Get card info
@@ -179,34 +179,34 @@ const modal = () => {
         const cardIndex = card.dataset.index;
         if (swiperIndex === Number(cardIndex)) {
             //Creating prompt card
-            const img = document.createElement("img");
-            const span = document.createElement("span");
+            const img = document.createElement('img');
+            const span = document.createElement('span');
 
             img.src = card.src;
             img.alt = card.alt;
             img.classList.add(
-                "w-full",
-                "h-full",
-                "object-cover",
-                "rounded-t-md"
+                'w-full',
+                'h-full',
+                'object-cover',
+                'rounded-t-md'
             );
 
-            span.innerText = "Added to your team";
-            span.classList.add("text-center", "text-slate-800", "my-2");
+            span.innerText = 'Added to your team';
+            span.classList.add('text-center', 'text-slate-800', 'my-2');
             promptCard.appendChild(img);
             promptCard.appendChild(span);
-            promptCard.classList.remove("hidden");
+            promptCard.classList.remove('hidden');
             promptCard.classList.add(
-                "flex",
-                "animate__animated",
-                "animate__fadeInDown",
-                "animate__faster"
+                'flex',
+                'animate__animated',
+                'animate__fadeInDown',
+                'animate__faster'
             );
-            closeModal.classList.remove("cursor-not-allowed");
-            closeModal.classList.add("cursor-pointer");
+            closeModal.classList.remove('cursor-not-allowed');
+            closeModal.classList.add('cursor-pointer');
             setTimeout(() => {
-                promptCard.classList.remove("flex");
-                promptCard.classList.add("hidden");
+                promptCard.classList.remove('flex');
+                promptCard.classList.add('hidden');
             }, 5000);
         }
     });
