@@ -1,6 +1,7 @@
 export default function walletChoice() {
     //querySelectors
-    const modalMoralis = document.querySelector('#modal-moralis');
+    const modalMoralis = document.querySelector('#modal-moralis'),
+          modalChild = document.querySelector('.wallet-choice');
 
     document.getElementById('connect-wallet')
 
@@ -19,4 +20,6 @@ export default function walletChoice() {
         modalMoralis.classList.remove('flex');
         modalMoralis.classList.add('hidden');
     });
+
+    modalChild.addEventListener('click', (ev) => { ev.stopPropagation(); })
 }
