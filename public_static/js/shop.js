@@ -45,7 +45,7 @@ stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 </svg>`;
 
-let tries = 0, maxTries = 9, goal = null, goal_decimals = null, response = null;
+let tries = 0, maxTries = 9, goal = null, goal_price = null, goal_decimals = null, response = null;
 
 //Events
 
@@ -90,6 +90,7 @@ async function getPrice()
 async function updatePrices()
 {
     goal = (await fetchPrice()).data;
+    goal_price = goal.price;
 
     Array.prototype.forEach.call(prices, function(el, it)
     {
@@ -139,20 +140,15 @@ else
 }
 
 document.querySelectorAll('.card-goal').forEach((card) => {
-    card.addEventListener('click', async (ev) => {
+    card.addEventListener('click', (ev) => {
 
-        const card = ev.target;
-        goal = (await fetchPrice()).data;
-console.log(card.dataset.price);
-console.log(goal.price);
-console.log(card.dataset.price / goal.price);
-console.log(goal_decimals);
-        const options = {
-            type: 'erc20',
-            amount: Moralis.Units.Token(Number.parseFloat(card.dataset.price / goal.price).toFixed(goal_decimals), goal_decimals),
-            receiver: shopWallet,
-            contractAddress: tokenAddress
-        }
+        const card = ev.target,
+              options = {
+                type: 'erc20',
+                amount: Moralis.Units.Token(Number.parseFloat(card.dataset.price / goal_price).toFixed(goal_decimals), goal_decimals),
+                receiver: shopWallet,
+                contractAddress: tokenAddress
+            }
         let result = await Moralis.transfer(options);
         console.log(result);
 
