@@ -84,7 +84,7 @@ function updatePrices(out)
 {
     Array.prototype.forEach.call(prices, function(el, it)
     {
-        el.textContent = el.dataset.price / out.data.price + ' ' + out.data.symbol;
+        el.textContent = Number.parseFloat(el.dataset.price / out.data.price).toFixed(4) + ' ' + out.data.symbol;
     });
 }
 function error(err)
