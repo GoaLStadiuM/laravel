@@ -216,7 +216,7 @@
             <svg id="close-modal" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-pointer" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
             </svg>
-            <div class="md:w-1/4 w-9/12  py-5 px-8">
+            <div class="md:w-1/4 w-9/12  py-5 px-8 wallet-choice">
                 <p>Choose a provider:</p>
                 <button id="btn-login-metamask">Metamask</button>
                 <button id="btn-login-walletconnect">WalletConnect</button>
