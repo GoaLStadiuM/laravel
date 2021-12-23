@@ -82,7 +82,7 @@ updatePrices();
 
 async function getPrice()
 {
-    fetch(myToken)
+    await fetch(myToken)
         .then(res => res.json())
         .then(out => { goal = out.data })
         .catch(err => error(err));
