@@ -87,7 +87,7 @@ async function updatePrices()
 {
     let response = await fetchPrice();
     goal = response.data;
-console.log(goal);
+
     Array.prototype.forEach.call(prices, function(el, it)
     {
         el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(4) + ' ' + goal.symbol;
@@ -138,12 +138,12 @@ else
 document.querySelectorAll('.card-goal').forEach((card) => {
     card.addEventListener('click', async () => {
 
-        //goal = await fetchPrice();
-        console.log(card.id);
-        const options = {type: 'erc20',
-                        amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
-                        receiver: shopWallet,
-                        contractAddress: tokenAddress}
+        const options = {
+            type: 'erc20',
+            amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
+            receiver: shopWallet,
+            contractAddress: tokenAddress
+        }
         let result = await Moralis.transfer(options);
         console.log(result);
 
