@@ -139,18 +139,23 @@ else
 
 }
 
+async function purchase()
+{
+    goal = (await fetchPrice()).data;
+    const options = {
+        type: 'erc20',
+        amount: Moralis.Units.Token(Number.parseFloat(card.dataset.price / goal.price).toFixed(goal_decimals), goal_decimals),
+        receiver: shopWallet,
+        contractAddress: tokenAddress
+    }
+    let result = await Moralis.transfer(options);
+    console.log(result);
+}
+
 document.querySelectorAll('.card-goal').forEach((card) => {
     card.addEventListener('click', (ev) => {
 
-        const card = ev.target,
-              options = {
-                type: 'erc20',
-                amount: Moralis.Units.Token(Number.parseFloat(card.dataset.price / goal_price).toFixed(goal_decimals), goal_decimals),
-                receiver: shopWallet,
-                contractAddress: tokenAddress
-            }
-        let result = await Moralis.transfer(options);
-        console.log(result);
+purchase(ev.target);
 
 /*
         swiper.autoplay.start();
