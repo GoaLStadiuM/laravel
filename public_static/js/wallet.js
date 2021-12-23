@@ -35,10 +35,10 @@ async function updateBalance()
 {
     const balances = await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' });
 
-    balances.forEach(function(token) {
+    balances.forEach(function(token) {console.log(token)
         if (token.token_address === tokenAddress)
         {
-            goalBalance.textContent = Number.parseFloat(balance / parseInt('1'.padEnd(token.decimals + 1, '0'))).toFixed(4);
+            goalBalance.textContent = Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
         }
     });
 }
