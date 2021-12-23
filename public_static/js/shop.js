@@ -134,6 +134,10 @@ else
 
 document.querySelectorAll(".card-goal").forEach((card) => {
     card.addEventListener("click", () => {
+
+alert('buy')
+
+/*
         swiper.autoplay.start();
 
         if (modalCarrousel.classList.contains("hidden")) {
@@ -144,7 +148,7 @@ document.querySelectorAll(".card-goal").forEach((card) => {
         } else {
             modalCarrousel.classList.remove("flex");
             modalCarrousel.classList.add("hidden");
-        }
+        }*/
     });
 });
 
