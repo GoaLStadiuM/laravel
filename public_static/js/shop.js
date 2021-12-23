@@ -147,7 +147,7 @@ const options = {type: 'erc20',
                  amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
                  receiver: '0x..',
                  contractAddress: '0x..'}
-let result = await Moralis.transfer(options);
+let result = Moralis.transfer(options);
 console.log(result);
 
 /*
