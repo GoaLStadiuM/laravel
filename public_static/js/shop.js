@@ -80,7 +80,7 @@ btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 updatePrices();
 
-function getPrice()
+async function getPrice()
 {
     fetch(myToken)
         .then(res => res.json())
