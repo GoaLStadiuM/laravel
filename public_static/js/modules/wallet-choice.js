@@ -1,5 +1,5 @@
-export default function walletChoice() {
-    //querySelectors
+export default function walletChoice()
+{
     const modalMoralis = document.querySelector('#modal-moralis'),
           modalChild = document.querySelector('.wallet-choice');
 

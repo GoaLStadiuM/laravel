@@ -1,8 +1,10 @@
 import walletChoice from './modules/wallet-choice.js';
+import wallet from './modules/wallet.js';
 import swiperResponsive from './modules/swiper-responsive.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     walletChoice();
+    wallet();
     swiperResponsive();
 });
 
@@ -18,17 +20,19 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       firstDiv = document.querySelector('#first-division'),
       secondDiv = document.querySelector('#second-division'),
       thirdDiv = document.querySelector('#third-division'),
+      products = document.querySelectorAll('.card-goal'),
       prices = document.querySelectorAll('[id ^= "division"]'),
-      contractAddress = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
-      myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + contractAddress,
+      goalBalance = document.getElementById('goal-balance'),
+      myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + tokenAddress,
       shopWallet = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
-      modalCarrousel = document.querySelector("#modal-carrousel"),
-      cardCarousel = document.querySelectorAll(".swiper-slide"),
-      promptCard = document.querySelector("#prompt-card"),
-      closeModal = document.querySelector("#close-modal"),
+      postUrl = 'https://play.goalstadium.com/penalties/shop/purchase',
+      modalCarrousel = document.querySelector('#modal-carrousel'),
+      cardCarousel = document.querySelectorAll('.swiper-slide'),
+      promptCard = document.querySelector('#prompt-card'),
+      closeModal = document.querySelector('#close-carrousel'),
       //Initializing swiper
-      swiper = new Swiper(".mySwiper", {
-          effect: "cards",
+      swiper = new Swiper('.mySwiper', {
+          effect: 'cards',
           loop: true,
           allowTouchMove: false,
           autoplay: 1,
@@ -45,9 +49,128 @@ stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 </svg>`;
 
-let tries = 0, maxTries = 9, goal = null, goal_price = null, goal_decimals = null, response = null;
+let goal = null, response = null;
 
-//Events
+
+
+
+
+
+
+
+
+
+
+const fetchPrice = async () => {
+    response = await fetch(myToken);
+    return await response.json();
+}
+async function getPrice() { return await response.json(); }
+async function updatePrices()
+{
+    goal = (await fetchPrice()).data;
+
+    Array.prototype.forEach.call(prices, function(el, it)
+    {
+        el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(4) + ' ' + goal.symbol;
+    });
+
+    setTimeout(() => updatePrices(), 60000);
+}
+
+updatePrices();
+
+
+
+
+if (Moralis.User.current())
+{
+    goalBalance.textContent = await getBalance();
+    showConnected();
+}
+
+else
+{
+    goalBalance.textContent = 0.0000;
+    showDisconnected();
+}
+
+
+
+
+
+
+
+products.forEach((card) => {
+    card.addEventListener('click', (ev) => { purchase(ev.target.dataset.price, ev.target.dataset.productId); });
+});
+
+const post = (url, options, retries) =>
+    fetch(url, options)
+        .then(res => {
+            if (res.ok)
+                return res.json();
+
+            if (retries > 0)
+                return post(url, options, retries - 1);
+
+            throw new Error(res.status);
+        })
+        .catch(error => console.error(error.message))
+
+async function purchase(price, product_id)
+{
+    await Moralis.enable();
+    goal = (await getPrice()).data;
+    const decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals;
+
+    let transferResult = await Moralis.transfer({
+        type: 'erc20',
+        amount: Moralis.Units.Token(Number.parseFloat(price / goal.price).toFixed(decimals), decimals),
+        receiver: shopWallet,
+        contractAddress: tokenAddress
+    });
+    console.log(transferResult);
+
+    let postResult = await post(postUrl, {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            product_id: product_id,
+            tx_hash: transferResult.transactionHash
+        })
+    });
+    console.log(postResult);
+
+/*
+        swiper.autoplay.start();
+
+        if (modalCarrousel.classList.contains('hidden')) {
+            modalCarrousel.classList.remove('hidden');
+            modalCarrousel.classList.add('flex');
+            //Modal carrousel animation
+            setTimeout(modal, randomTime);
+        } else {
+            modalCarrousel.classList.remove('flex');
+            modalCarrousel.classList.add('hidden');
+        }*/
+}
+
+
+
+
+
+
+
+
+
+/*
+ * products
+ */
 
 btnMenu.addEventListener('click', () => {
     if (menuResponsive.classList.contains('hidden')) {
@@ -79,103 +202,9 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
-const fetchPrice = async () => {
-    response = await fetch(myToken);
-    return await response.json();
-}
-async function getPrice()
-{
-    return await response.json();
-}
-async function updatePrices()
-{
-    goal = (await fetchPrice()).data;
-    goal_price = goal.price;
-
-    Array.prototype.forEach.call(prices, function(el, it)
-    {
-        el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(4) + ' ' + goal.symbol;
-    });
-
-    setTimeout(() => updatePrices(), 60000);
-}
-function error(err)
-{
-    if (tries < maxTries)
-    {
-        console.log('network error, retrying...');
-        updatePrices();
-    }
-
-    else
-    {
-        alert('network error, please contact support.');
-    }
-
-    tries += 1;
-}
-updatePrices();
-
-async function updateBalance()
-{
-    const balances = await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' });
-
-    balances.forEach(function(token) {
-        if (token.token_address === tokenAddress)
-        {
-            goal_decimals = token.decimals;
-            goalBalance.textContent = Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
-        }
-    });
-}
-
-if (user)
-{
-    updateBalance();
-}
-
-else
-{
-
-}
-
-async function purchase(price)
-{
-    await Moralis.enable();
-    goal = (await fetchPrice()).data;
-    //Get metadata for one token
-    const mo = { chain: "bsc", addresses: tokenAddress };
-    const tokenMetadata = await Moralis.Web3API.token.getTokenMetadata(mo);console.log(tokenMetadata);
-    const decimals = tokenMetadata[0].decimals;
-    const options = {
-        type: 'erc20',
-        amount: Moralis.Units.Token(Number.parseFloat(price / goal.price).toFixed(decimals), decimals),
-        receiver: shopWallet,
-        contractAddress: tokenAddress
-    }
-    let result = await Moralis.transfer(options);
-    console.log(result);
-}
-
-document.querySelectorAll('.card-goal').forEach((card) => {
-    card.addEventListener('click', (ev) => {
-
-purchase(ev.target.dataset.price);
-
 /*
-        swiper.autoplay.start();
-
-        if (modalCarrousel.classList.contains('hidden')) {
-            modalCarrousel.classList.remove('hidden');
-            modalCarrousel.classList.add('flex');
-            //Modal carrousel animation
-            setTimeout(modal, randomTime);
-        } else {
-            modalCarrousel.classList.remove('flex');
-            modalCarrousel.classList.add('hidden');
-        }*/
-    });
-});
+ * swiper
+ */
 
 const modal = () => {
     swiper.autoplay.stop();

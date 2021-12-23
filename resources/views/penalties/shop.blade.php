@@ -73,8 +73,8 @@
                     <!-- Top buttons /start -->
                     <div class="flex lg:flex-row flex-col-reverse items-center items-end lg:space-x-5 space-x-0 self-end my-2">
                         <div class="lg:flex items-center lg:space-x-5 space-x-0 space-y-2 lg:space-y-0 m-3">
-                            <button id="connect-wallet">Connect Wallet</button>
-                            <button id="btn-logout">Disconnect</button>
+                            <button id="connect-wallet" class="block">Connect Wallet</button>
+                            <button id="btn-logout" class="hidden">Disconnect</button>
                             <div class="btn-top-goal">
                                 <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
                                 <span id="goal-balance" class="inline-flex pr-4">0</span>
@@ -118,7 +118,7 @@
                                 @foreach ($products[1] as $product)
                                     <li class="card-goal">
                                         <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="w-36 relative">
-                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
+                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-product-id="{{ $product->id }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
                                 </ul>
@@ -154,7 +154,7 @@
                                 @foreach ($products[2] as $product)
                                     <li class="card-goal">
                                         <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="w-36 relative">
-                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
+                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-product-id="{{ $product->id }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
                                 </ul>
@@ -190,7 +190,7 @@
                                 @foreach ($products[3] as $product)
                                     <li class="card-goal">
                                         <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="w-36 relative">
-                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
+                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-product-id="{{ $product->id }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
                                 </ul>
@@ -213,7 +213,7 @@
         </section>
         <!-- Modal Moralis /start -->
         <div id="modal-moralis" class="bg-modal bg-opacity-60 fixed top-0 left-0 w-full h-full hidden items-center justify-center z-40">
-            <svg id="close-modal" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-pointer" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+            <svg id="close-moralis" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-pointer" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
             <div class="md:w-1/4 w-9/12  py-5 px-8 wallet-choice">
@@ -225,7 +225,7 @@
         </div>
         <!-- Modal Shop /start -->
         <div id="modal-carrousel" class="bg-modal bg-opacity-60 fixed top-0 left-0 w-full h-full hidden items-center justify-center z-40">
-            <svg id="close-modal" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-not-allowed" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+            <svg id="close-carrousel" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-not-allowed" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
             <div class="md:w-1/4 w-9/12  py-5 px-8">
@@ -274,7 +274,6 @@
 
 @section('scripts')
     <!-- custom -->
-    <script src="{{ asset('js/wallet.js') }}"></script>
     <script src="{{ asset('js/shop.js') }}" type="module"></script>
 
     <!-- swiper -->
