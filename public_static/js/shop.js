@@ -3,10 +3,10 @@ import wallet from './modules/wallet.js';
 import swiperResponsive from './modules/swiper-responsive.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-    walletChoice();
-    wallet();
     swiperResponsive();
 });
+    walletChoice();
+    wallet();
 
 const menuResponsive = document.querySelector('#bg-menu-responsive'),
       sidebarResponsive = document.querySelector('#sidebar-responsive'),
