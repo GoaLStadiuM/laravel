@@ -4,7 +4,7 @@ Moralis.start({ serverUrl: 'https://9iuhdje4owkr.usemoralis.com:2053/server', ap
 let user = Moralis.User.current();
 
 /* Authentication code */
-async function login(provider) {
+async function login(provider = 'metamask') {
   if (!user) {
     user = await Moralis.authenticate({ provider: provider, signingMessage: 'Log in using Moralis' })
       .then(function (user) {
@@ -22,6 +22,6 @@ async function logOut() {
   console.log('logged out');
 }
 
-document.getElementById('btn-login-metamask').onclick = login('metamask');
+document.getElementById('btn-login-metamask').onclick = login();
 document.getElementById('btn-login-walletconnect').onclick = login('walletconnect');
 document.getElementById('btn-logout').onclick = logOut;
