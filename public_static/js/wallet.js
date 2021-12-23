@@ -1,21 +1,18 @@
 /* Moralis init code */
 Moralis.start({ serverUrl: 'https://9iuhdje4owkr.usemoralis.com:2053/server', appId: 'DTD1H8BKuE2sSM34ppMhV5IlG0DYROpsJRHmnYKl' });
 
-let user = null, provider = 'metamask';
+let user = Moralis.User.current(), provider = 'metamask';
 
 /* Authentication code */
-async function login() {console.log(provider)
-  user = Moralis.User.current();
-  if (!user) {
-    user = await Moralis.authenticate({ provider: provider, signingMessage: 'Log in using Moralis' })
-      .then(function (user) {
-        console.log("logged in user:", user);
-        console.log(user.get("ethAddress"));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+async function login() {
+    if (!user) {
+      user = await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
+        .then(function (user) {
+            const balances = await Moralis.Web3API.account.getTokenBalances();
+            console.log(balances);
+        })
+        .catch(function (error) { console.log(error); });
+    }
 }
 
 async function logOut() {
