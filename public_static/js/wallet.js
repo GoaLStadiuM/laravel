@@ -5,26 +5,34 @@ let user = Moralis.User.current(), provider = 'metamask';
 
 /* Authentication code */
 async function login() {
-    if (!user) {
-      user = await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
+    if (user)
+        return;
+
+    user = await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
         .then(function (user) {
             console.log(Moralis.Web3API.account.getTokenBalances());
         })
         .catch(function (error) { console.log(error); });
-    }
 }
 
 async function logOut() {
-  await Moralis.User.logOut();
-  console.log('logged out');
+    await Moralis.User.logOut();
+    console.log('logged out');
 }
 
 function metamask() {
-  login();
+    if (user)
+        return;
+
+    provider = 'metamask';
+    login();
 }
 function walletconnect() {
-  provider = 'walletconnect';
-  login();
+    if (user)
+        return;
+
+    provider = 'walletconnect';
+    login();
 }
 
 document.getElementById('btn-login-metamask').onclick = metamask;
