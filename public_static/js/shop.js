@@ -141,10 +141,15 @@ else
 
 async function purchase(price)
 {
+    await Moralis.enable();
     goal = (await fetchPrice()).data;
+    //Get metadata for one token
+    const mo = { chain: "bsc", addresses: "0xe...556" };
+    const tokenMetadata = await Moralis.Web3API.token.getTokenMetadata(mo);
+    const decimals = tokenMetadata.decimals;
     const options = {
         type: 'erc20',
-        amount: Moralis.Units.Token(Number.parseFloat(price / goal.price).toFixed(goal_decimals), goal_decimals),
+        amount: Moralis.Units.Token(Number.parseFloat(price / goal.price).toFixed(decimals), decimals),
         receiver: shopWallet,
         contractAddress: tokenAddress
     }
