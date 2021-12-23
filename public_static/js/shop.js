@@ -51,7 +51,12 @@ let goal = null, response = null;
 
 
 
+Moralis.Web3.onAccountsChanged(function(accounts) {
+console.log('account changed');
+    console.log(accounts);
+// your code to run when "accountsChanged" happens
 
+});
 
 
 
