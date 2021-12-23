@@ -54,12 +54,9 @@ Moralis.Web3.onAccountsChanged(function(accounts)
     console.log(accounts);
     // your code to run when "accountsChanged" happens
     updateBalance();
-    goalBalance.textContent = balance;
 });
 
-const updateBalance = async () => { console.log('getting balance...'); balance = await getBalance(); console.log(balance) };
-
-
+const updateBalance = async () => { goalBalance.textContent = await getBalance(); };
 
 const fetchPrice = async () => {
     response = await fetch(myToken);
@@ -84,8 +81,8 @@ updatePrices();
 
 
 if (Moralis.User.current())
-{console.log('user is logged in');console.log(balance)
-    updateBalance();console.log(balance)
+{console.log('user is logged in');
+    updateBalance();
     showConnected();
 }
 

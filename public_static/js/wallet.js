@@ -26,13 +26,13 @@ console.log('authenticating...')
 }
 
 async function getBalance()
-{
+{console.log('getting balance...')
     const balances = await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' });
 
     balances.forEach(function(token)
     {
         if (token.token_address === tokenAddress)
-        {
+        {console.log('got it'); console.log(token.balance)
             return Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
         }
     });
