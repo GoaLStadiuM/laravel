@@ -79,13 +79,10 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
+const fetchPrice = async () => { goal = await fetch(myToken).json(); }
 
 
-const fetchPrice = async () => {
-    const response = await fetch(myToken);
-    goal = await response.json();
-}
-function updatePrices()
+async function updatePrices()
 {
     fetchPrice();
 
