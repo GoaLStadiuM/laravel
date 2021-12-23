@@ -73,9 +73,10 @@
                     <!-- Top buttons /start -->
                     <div class="flex lg:flex-row flex-col-reverse items-center items-end lg:space-x-5 space-x-0 self-end my-2">
                         <div class="lg:flex items-center lg:space-x-5 space-x-0 space-y-2 lg:space-y-0 m-3">
+                            <button id="connect-wallet">Connect Wallet</button>
                             <div class="btn-top-goal">
                                 <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
-                                <span class="inline-flex pr-4">{{ number_format(Auth::user()->goal, 4, '.', '') }}</span>
+                                <span class="inline-flex pr-4">0</span>
                                 <div class="h-8 w-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
                                     <img src="{{ asset('img/penalties/icons/plus-icon.svg') }}" alt="Plus icon" class="w-3/5">
                                 </div>
@@ -209,6 +210,18 @@
                 <!-- Content Shop /end -->
             </div>
         </section>
+        <!-- Modal Moralis /start -->
+        <div id="modal-moralis" class="bg-modal bg-opacity-60 fixed top-0 left-0 w-full h-full hidden items-center justify-center z-40">
+            <svg id="close-modal" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-pointer" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+            </svg>
+            <div class="md:w-1/4 w-9/12  py-5 px-8">
+                <p>Choose a provider:</p>
+                <button id="btn-login-metamask">Metamask</button>
+                <button id="btn-login-walletconnect">WalletConnect</button>
+            </div>
+            <div id="prompt-card" class="absolute bg-slate-100 flex-col h-auto w-28 top-10 right-10 hidden rounded-md shadow-md z-40"></div>
+        </div>
         <!-- Modal Shop /start -->
         <div id="modal-carrousel" class="bg-modal bg-opacity-60 fixed top-0 left-0 w-full h-full hidden items-center justify-center z-40">
             <svg id="close-modal" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-not-allowed" fill="none" viewbox="0 0 24 24" stroke="currentColor">
