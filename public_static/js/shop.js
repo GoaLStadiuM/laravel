@@ -79,8 +79,6 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
-
-
 const fetchPrice = async () => {
     const response = await fetch(myToken);
     return await response.json();
@@ -88,10 +86,7 @@ const fetchPrice = async () => {
 async function updatePrices()
 {
     goal = await fetchPrice();
-
-    if (!goal)
-        alert('unknown error, please contact support.');
-
+console.log(goal);
     Array.prototype.forEach.call(prices, function(el, it)
     {
         el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(4) + ' ' + goal.symbol;
@@ -142,6 +137,7 @@ else
 document.querySelectorAll('.card-goal').forEach((card) => {
     card.addEventListener('click', async () => {
 
+        //goal = await fetchPrice();
         console.log(card.id);
         const options = {type: 'erc20',
                         amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
