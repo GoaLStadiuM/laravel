@@ -85,7 +85,8 @@ const fetchPrice = async () => {
 }
 async function updatePrices()
 {
-    goal = await fetchPrice();
+    let response = await fetchPrice();
+    goal = response.data;
 console.log(goal);
     Array.prototype.forEach.call(prices, function(el, it)
     {
