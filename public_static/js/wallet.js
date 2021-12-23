@@ -32,7 +32,7 @@ async function getBalance()
     balances.forEach(function(token)
     {
         if (token.token_address === tokenAddress)
-        {console.log('got it'); console.log(token.balance)
+        {console.log('got it'); console.log(Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4))
             return Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
         }
     });
