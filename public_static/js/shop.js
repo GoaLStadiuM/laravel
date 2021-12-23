@@ -45,7 +45,7 @@ stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 </svg>`;
 
-let tries = 0, maxTries = 9, goal = null, goal_decimals = null;
+let tries = 0, maxTries = 9, goal = null, goal_decimals = null, response = null;
 
 //Events
 
@@ -80,13 +80,16 @@ btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 const fetchPrice = async () => {
-    const response = await fetch(myToken);
+    response = await fetch(myToken);
+    return await response.json();
+}
+async function getPrice()
+{
     return await response.json();
 }
 async function updatePrices()
 {
-    let response = await fetchPrice();
-    goal = response.data;
+    goal = await fetchPrice().data;
 
     Array.prototype.forEach.call(prices, function(el, it)
     {
@@ -137,7 +140,9 @@ else
 
 document.querySelectorAll('.card-goal').forEach((card) => {
     card.addEventListener('click', async (ev) => {
+
         const card = ev.target;
+        goal = await fetchPrice().data;
 console.log(card.dataset.price);
 console.log(goal.price);
 console.log(card.dataset.price / goal.price);
