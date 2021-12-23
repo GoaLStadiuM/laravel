@@ -86,8 +86,8 @@ const fetchPrice = async () => {
 async function updatePrices()
 {
     data = await fetchPrice();
+console.log(data);
     goal = data.data;
-console.log(goal);
     Array.prototype.forEach.call(prices, function(el, it)
     {
         el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(4) + ' ' + goal.symbol;
