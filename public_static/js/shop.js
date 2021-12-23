@@ -56,7 +56,7 @@ Moralis.Web3.onAccountsChanged(function(accounts)
     updateBalance();
 });
 
-const updateBalance = async () => { goalBalance.textContent = await getBalance(); };
+const updateBalance = async () => { goalBalance.textContent = getBalance(); };
 
 const fetchPrice = async () => {
     response = await fetch(myToken);
