@@ -89,7 +89,7 @@ async function getPrice()
 }
 async function updatePrices()
 {
-    goal = await fetchPrice().data;
+    goal = (await fetchPrice()).data;
 
     Array.prototype.forEach.call(prices, function(el, it)
     {
@@ -142,7 +142,7 @@ document.querySelectorAll('.card-goal').forEach((card) => {
     card.addEventListener('click', async (ev) => {
 
         const card = ev.target;
-        goal = await fetchPrice().data;
+        goal = (await fetchPrice()).data;
 console.log(card.dataset.price);
 console.log(goal.price);
 console.log(card.dataset.price / goal.price);
