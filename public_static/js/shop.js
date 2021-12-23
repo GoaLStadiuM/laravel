@@ -81,11 +81,12 @@ btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 const fetchPrice = async () => {
     const response = await fetch(myToken);
-    return await response.json().data;
+    return await response.json();
 }
 async function updatePrices()
 {
-    goal = await fetchPrice();
+    data = await fetchPrice();
+    goal = data.data;
 console.log(goal);
     Array.prototype.forEach.call(prices, function(el, it)
     {
