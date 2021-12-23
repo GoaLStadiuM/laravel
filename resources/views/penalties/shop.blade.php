@@ -98,6 +98,9 @@
                         <!-- First division /start -->
                         <div class="flex items-center lg:w-auto w-9/12  justify-center relative">
 
+                            <button id="btn-l-first" class="relative lg:block hidden top-5 btn-swiper">
+                                <img src="{{ asset('img/penalties/icons/left-arrow.svg') }}" alt="Left arrow" class="w-16">
+                            </button>
                             <button id="btn-l-first-responsive" class="absolute lg:hidden block top-28 z-10 -left-12 btn-swiper">
                                 <img src="{{ asset('img/penalties/icons/left-arrow.svg') }}" alt="Left arrow" class="w-16">
                             </button>
@@ -120,6 +123,9 @@
                             </div>
 
                             <button id="btn-r-first-responsive" class="absolute lg:hidden block top-28 -right-14 btn-swiper">
+                                <img src="{{ asset('img/penalties/icons/right-arrow.svg') }}" alt="Right arrow" class="w-16">
+                            </button>
+                            <button id="btn-r-first" class="relative lg:block hidden top-5 left-2 btn-swiper">
                                 <img src="{{ asset('img/penalties/icons/right-arrow.svg') }}" alt="Right arrow" class="w-16">
                             </button>
 

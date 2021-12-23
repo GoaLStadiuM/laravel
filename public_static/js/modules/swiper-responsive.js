@@ -13,26 +13,26 @@ export default function swiperResponsive() {
 
     //Event Listeners
     btnLFirstMobile.addEventListener("click", () => {
-        firstDiv.scrollLeft -= 250;
+        firstDiv.scrollLeft -= 151;
     });
 
     btnRFirstMobile.addEventListener("click", () => {
-        firstDiv.scrollLeft += 250;
+        firstDiv.scrollLeft += 151;
     });
 
     btnLSecondMobile.addEventListener("click", () => {
-        secondDiv.scrollLeft -= 250;
+        secondDiv.scrollLeft -= 151;
     });
 
     btnRSecondMobile.addEventListener("click", () => {
-        secondDiv.scrollLeft += 250;
+        secondDiv.scrollLeft += 151;
     });
 
     btnLThirdMobile.addEventListener("click", () => {
-        thirdDiv.scrollLeft -= 250;
+        thirdDiv.scrollLeft -= 151;
     });
 
     btnRThirdMobile.addEventListener("click", () => {
-        thirdDiv.scrollLeft += 250;
+        thirdDiv.scrollLeft += 151;
     });
 }

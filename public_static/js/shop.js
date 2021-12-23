@@ -9,10 +9,13 @@ window.addEventListener("DOMContentLoaded", () => {
 const menuResponsive = document.querySelector("#bg-menu-responsive"),
       sidebarResponsive = document.querySelector("#sidebar-responsive"),
       btnMenu = document.querySelector("#btn-menu"),
+      btnLFirst = document.querySelector("#btn-l-first"),
+      btnRFirst = document.querySelector("#btn-r-first"),
       btnLSecond = document.querySelector("#btn-l-second"),
       btnRSecond = document.querySelector("#btn-r-second"),
       btnLThird = document.querySelector("#btn-l-third"),
       btnRThird = document.querySelector("#btn-r-third"),
+      firstDiv = document.querySelector("#first-division"),
       secondDiv = document.querySelector("#second-division"),
       thirdDiv = document.querySelector("#third-division"),
       prices = document.querySelectorAll('[id ^= "division"]'),
@@ -54,21 +57,14 @@ menuResponsive.addEventListener("click", (ev) => {
     btnMenu.innerHTML = svgMenu;
 });
 
-btnLSecond.addEventListener("click", () => {
-    secondDiv.scrollLeft -= 150;
-});
+btnLFirst.addEventListener("click", () => { firstDiv.scrollLeft -= 152; });
+btnRFirst.addEventListener("click", () => { firstDiv.scrollLeft += 152; });
 
-btnRSecond.addEventListener("click", () => {
-    secondDiv.scrollLeft += 150;
-});
+btnLSecond.addEventListener("click", () => { secondDiv.scrollLeft -= 152; });
+btnRSecond.addEventListener("click", () => { secondDiv.scrollLeft += 152; });
 
-btnLThird.addEventListener("click", () => {
-    thirdDiv.scrollLeft -= 150;
-});
-
-btnRThird.addEventListener("click", () => {
-    thirdDiv.scrollLeft += 150;
-});
+btnLThird.addEventListener("click", () => { thirdDiv.scrollLeft -= 152; });
+btnRThird.addEventListener("click", () => { thirdDiv.scrollLeft += 152; });
 
 currentPrice();
 
