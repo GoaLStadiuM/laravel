@@ -146,7 +146,7 @@ async function purchase(price)
     //Get metadata for one token
     const mo = { chain: "bsc", addresses: tokenAddress };
     const tokenMetadata = await Moralis.Web3API.token.getTokenMetadata(mo);console.log(tokenMetadata);
-    const decimals = tokenMetadata.decimals;
+    const decimals = tokenMetadata[0].decimals;
     const options = {
         type: 'erc20',
         amount: Moralis.Units.Token(Number.parseFloat(price / goal.price).toFixed(decimals), decimals),
