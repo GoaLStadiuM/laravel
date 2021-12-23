@@ -1,10 +1,11 @@
 /* Moralis init code */
 Moralis.start({ serverUrl: 'https://9iuhdje4owkr.usemoralis.com:2053/server', appId: 'DTD1H8BKuE2sSM34ppMhV5IlG0DYROpsJRHmnYKl' });
 
-let user = Moralis.User.current();
+let user = null;
 
 /* Authentication code */
 async function login(provider = 'metamask') {console.log(provider)
+  user = Moralis.User.current();
   if (!user) {
     user = await Moralis.authenticate({ provider: provider, signingMessage: 'Log in using Moralis' })
       .then(function (user) {
