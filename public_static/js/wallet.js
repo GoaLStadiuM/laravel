@@ -14,7 +14,7 @@ async function login(provider = 'metamask')
 {
     if (Moralis.User.current())
         return;
-console.log('authenticating...')
+
     await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
         .then(function (user) {
             // logged in
@@ -25,19 +25,15 @@ console.log('authenticating...')
         .catch(function (error) { console.log(error); });
 }
 
-const getBalance = async () => {
+const getBalance = async () =>
+{
+    const balances = await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' }),
+          token = balances.find((token) => token.token_address === tokenAddress);
 
-    let balance = 0.0000;
+    if (token === undefined)
+        return 0;
 
-    (await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' })).forEach(function(token) {
-        if (token.token_address === tokenAddress)
-        {
-            balance = Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
-            return;
-        }
-    });
-
-    return balance;
+    return Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
 };
 
 function showModal()

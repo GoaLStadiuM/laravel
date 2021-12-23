@@ -51,10 +51,8 @@ let goal = null, response = null;
 Moralis.Web3.onAccountsChanged(function(accounts)
 {
     console.log('account changed');
-    console.log(accounts.length);
-    // your code to run when "accountsChanged" happens
     if (accounts.length === 0)
-        goalBalance.textContent = 0.0000;
+        goalBalance.textContent = 0;
 
     else
         getBalance().then((balance) => { goalBalance.textContent = balance; });
@@ -90,7 +88,7 @@ if (Moralis.User.current())
 
 else
 {console.log('user is not logged in')
-    goalBalance.textContent = 0.0000;
+    goalBalance.textContent = 0;
     showDisconnected();
 }
 

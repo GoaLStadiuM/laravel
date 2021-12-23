@@ -84,7 +84,7 @@
                             </div>
                             <div class="btn-top-goal">
                                 <img src="{{ asset('img/penalties/gls.webp') }}" alt="Goal stadium logo" class="w-12">
-                                <span class="inline-flex pr-4">{{ number_format(Auth::user()->gls, 4, '.', '') }}</span>
+                                <span class="inline-flex pr-4">{{ number_format(Auth::user()->gls, 2, '.', '') }}</span>
                                 <div class="h-8 w-8  rounded-full bg-white flex items-center justify-center cursor-pointer">
                                     <img src="{{ asset('img/penalties/icons/plus-icon.svg') }}" alt="Plus icon" class="w-3/5">
                                 </div>
