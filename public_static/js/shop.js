@@ -139,12 +139,12 @@ else
 
 }
 
-async function purchase()
+async function purchase(price)
 {
     goal = (await fetchPrice()).data;
     const options = {
         type: 'erc20',
-        amount: Moralis.Units.Token(Number.parseFloat(card.dataset.price / goal.price).toFixed(goal_decimals), goal_decimals),
+        amount: Moralis.Units.Token(Number.parseFloat(price / goal.price).toFixed(goal_decimals), goal_decimals),
         receiver: shopWallet,
         contractAddress: tokenAddress
     }
@@ -155,7 +155,7 @@ async function purchase()
 document.querySelectorAll('.card-goal').forEach((card) => {
     card.addEventListener('click', (ev) => {
 
-purchase(ev.target);
+purchase(ev.target.dataset.price);
 
 /*
         swiper.autoplay.start();
