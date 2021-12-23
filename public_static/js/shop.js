@@ -21,6 +21,7 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       prices = document.querySelectorAll('[id ^= "division"]'),
       contractAddress = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
       myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + contractAddress,
+      shopWallet = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
       modalCarrousel = document.querySelector("#modal-carrousel"),
       cardCarousel = document.querySelectorAll(".swiper-slide"),
       promptCard = document.querySelector("#prompt-card"),
@@ -78,18 +79,16 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
+
 updatePrices();
 
-async function getPrice()
-{
-    await fetch(myToken)
-        .then(res => res.json())
-        .then(out => { goal = out.data })
-        .catch(err => error(err));
+const fetchPrice = async () => {
+    const response = await fetch('https://api.com/values/1');
+    goal = await response.json();
 }
 function updatePrices()
 {
-    getPrice();
+    fetchPrice();
 
     if (!goal)
         alert('unknown error, please contact support.');
@@ -141,14 +140,15 @@ else
 }
 
 document.querySelectorAll('.card-goal').forEach((card) => {
-    card.addEventListener('click', async() => {
-console.log(card.id);
-const options = {type: 'erc20',
-                 amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
-                 receiver: '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
-                 contractAddress: tokenAddress}
-let result = await Moralis.transfer(options);
-console.log(result);
+    card.addEventListener('click', async () => {
+
+        console.log(card.id);
+        const options = {type: 'erc20',
+                        amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
+                        receiver: shopWallet,
+                        contractAddress: tokenAddress}
+        let result = await Moralis.transfer(options);
+        console.log(result);
 
 /*
         swiper.autoplay.start();
