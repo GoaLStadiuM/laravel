@@ -274,6 +274,7 @@
 
 @section('scripts')
     <!-- custom -->
+    <script src="{{ asset('js/wallet.js') }}"></script>
     <script src="{{ asset('js/shop.js') }}" type="module"></script>
 
     <!-- swiper -->
