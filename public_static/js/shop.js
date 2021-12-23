@@ -57,7 +57,7 @@ Moralis.Web3.onAccountsChanged(function(accounts)
         goalBalance.textContent = 0.0000;
 
     else
-        getBalance().then((balance) => {console.log(balance); goalBalance.textContent = balance; });
+        getBalance().then((balance) => { goalBalance.textContent = balance; });
 });
 
 const fetchPrice = async () => {

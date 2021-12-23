@@ -25,16 +25,19 @@ console.log('authenticating...')
         .catch(function (error) { console.log(error); });
 }
 
-const getBalance = async () =>
-{console.log('getting balance...');
+const getBalance = async () => {
+
+    let balance = 0.0000;
+
     (await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' })).forEach(function(token) {
         if (token.token_address === tokenAddress)
-        {console.log('got it')
-            return Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
+        {
+            balance = Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
+            return;
         }
     });
 
-    return 0.0000;
+    return balance;
 };
 
 function showModal()
