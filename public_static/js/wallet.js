@@ -29,7 +29,8 @@ async function getBalance()
 {
     const balances = await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' });
 
-    balances.forEach(function(token) {
+    balances.forEach(function(token)
+    {
         if (token.token_address === tokenAddress)
         {
             return Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
@@ -68,7 +69,8 @@ function showDisconnected()
     logoutBtn.classList.add('hidden');
 }
 
-async function logOut() {
+async function logOut()
+{
     await Moralis.User.logOut();
     console.log('logged out');
     showDisconnected();

@@ -42,7 +42,7 @@ stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 </svg>`;
 
-let goal = null, response = null;
+let goal = null, response = null, balance = null;
 
 
 
@@ -54,9 +54,10 @@ Moralis.Web3.onAccountsChanged(function(accounts)
     console.log(accounts);
     // your code to run when "accountsChanged" happens
     updateBalance();
+    goalBalance.textContent = balance;
 });
 
-const updateBalance = async () => { goalBalance.textContent = await getBalance(); };
+const updateBalance = async () => { balance = await getBalance(); };
 
 
 
@@ -83,13 +84,13 @@ updatePrices();
 
 
 if (Moralis.User.current())
-{
-    updateBalance();
+{console.log('user is logged in');console.log(balance)
+    updateBalance();console.log(balance)
     showConnected();
 }
 
 else
-{
+{console.log('user is not logged in')
     goalBalance.textContent = 0.0000;
     showDisconnected();
 }
