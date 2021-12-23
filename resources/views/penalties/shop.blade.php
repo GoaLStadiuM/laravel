@@ -113,7 +113,7 @@
                                 @foreach ($products[1] as $product)
                                     <li class="card-goal">
                                         <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="lg:w-28 w-36 relative">
-                                        <span class="price-card">$ {{ optional($product)->price }}</span>
+                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
                                 </ul>
@@ -146,7 +146,7 @@
                                 @foreach ($products[2] as $product)
                                     <li class="card-goal">
                                         <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="lg:w-28 w-36 relative">
-                                        <span class="price-card">$ {{ optional($product)->price }}</span>
+                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
                                 </ul>
@@ -182,7 +182,7 @@
                                 @foreach ($products[3] as $product)
                                     <li class="card-goal">
                                         <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="lg:w-28 w-36 relative">
-                                        <span class="price-card">$ {{ optional($product)->price }}</span>
+                                        <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
                                 </ul>
