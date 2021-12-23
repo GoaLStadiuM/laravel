@@ -80,7 +80,6 @@ btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 
-updatePrices();
 
 const fetchPrice = async () => {
     const response = await fetch('https://api.com/values/1');
@@ -115,6 +114,7 @@ function error(err)
 
     tries += 1;
 }
+updatePrices();
 
 async function updateBalance()
 {
