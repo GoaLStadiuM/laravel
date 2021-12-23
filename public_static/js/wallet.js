@@ -33,27 +33,6 @@ function walletconnect() {
     provider = 'walletconnect';
     login();
 }
-async function updateBalance()
-{
-    const balances = await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' });
-
-    balances.forEach(function(token) {
-        if (token.token_address === tokenAddress)
-        {
-            goalBalance.textContent = Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
-        }
-    });
-}
-
-if (user)
-{
-    updateBalance();
-}
-
-else
-{
-
-}
 
 document.getElementById('btn-login-metamask').onclick = metamask;
 document.getElementById('btn-login-walletconnect').onclick = walletconnect;

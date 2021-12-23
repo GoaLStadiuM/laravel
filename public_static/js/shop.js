@@ -110,6 +110,28 @@ function error(err)
     tries += 1;
 }
 
+async function updateBalance()
+{
+    const balances = await Moralis.Web3API.account.getTokenBalances({ chain: 'bsc' });
+
+    balances.forEach(function(token) {
+        if (token.token_address === tokenAddress)
+        {
+            goalBalance.textContent = Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
+        }
+    });
+}
+
+if (user)
+{
+    updateBalance();
+}
+
+else
+{
+
+}
+
 document.querySelectorAll(".card-goal").forEach((card) => {
     card.addEventListener("click", () => {
         swiper.autoplay.start();
