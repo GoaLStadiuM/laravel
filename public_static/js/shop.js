@@ -141,13 +141,13 @@ else
 }
 
 document.querySelectorAll('.card-goal').forEach((card) => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', async() => {
 console.log(card.id);
 const options = {type: 'erc20',
                  amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
-                 receiver: '0x..',
-                 contractAddress: '0x..'}
-let result = Moralis.transfer(options);
+                 receiver: '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
+                 contractAddress: tokenAddress}
+let result = await Moralis.transfer(options);
 console.log(result);
 
 /*
