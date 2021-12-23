@@ -1,14 +1,11 @@
 import walletChoice from './modules/wallet-choice.js';
 import swiperResponsive from './modules/swiper-responsive.js';
-import swiper from './modules/swiper.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     walletChoice();
-    swiper();
     swiperResponsive();
 });
 
-//querySelector
 const menuResponsive = document.querySelector('#bg-menu-responsive'),
       sidebarResponsive = document.querySelector('#sidebar-responsive'),
       btnMenu = document.querySelector('#btn-menu'),
@@ -23,12 +20,23 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       thirdDiv = document.querySelector('#third-division'),
       prices = document.querySelectorAll('[id ^= "division"]'),
       myToken = 'https://api.pancakeswap.info/api/v2/tokens/0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
-
-//SVG
+      modalCarrousel = document.querySelector("#modal-carrousel"),
+      cardCarousel = document.querySelectorAll(".swiper-slide"),
+      promptCard = document.querySelector("#prompt-card"),
+      closeModal = document.querySelector("#close-modal"),
+      //Initializing swiper
+      swiper = new Swiper(".mySwiper", {
+          effect: "cards",
+          loop: true,
+          allowTouchMove: false,
+          autoplay: 1,
+          speed: 100,
+      }),
+      //Radnomtime carrousel
+      randomTime = Math.floor(Math.random() * (15000 - 8000)) + 8000,
       svgX = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 </svg>`,
-
       svgMenu = `<svg
 xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewbox="0 0 24 24"
 stroke="currentColor">
@@ -101,3 +109,66 @@ function error(err)
 
     tries += 1;
 }
+
+document.querySelectorAll(".card-goal").forEach((card) => {
+    card.addEventListener("click", () => {
+        swiper.autoplay.start();
+
+        if (modalCarrousel.classList.contains("hidden")) {
+            modalCarrousel.classList.remove("hidden");
+            modalCarrousel.classList.add("flex");
+            //Modal carrousel animation
+            setTimeout(modal, randomTime);
+        } else {
+            modalCarrousel.classList.remove("flex");
+            modalCarrousel.classList.add("hidden");
+        }
+    });
+});
+
+const modal = () => {
+    swiper.autoplay.stop();
+    modalCarrousel.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        modalCarrousel.classList.remove("flex");
+        modalCarrousel.classList.add("hidden");
+        window.location.reload();
+    });
+    //Get card info
+    cardCarousel.forEach((card) => {
+        const swiperIndex = swiper.realIndex;
+        const cardIndex = card.dataset.index;
+        if (swiperIndex === Number(cardIndex)) {
+            //Creating prompt card
+            const img = document.createElement("img");
+            const span = document.createElement("span");
+
+            img.src = card.src;
+            img.alt = card.alt;
+            img.classList.add(
+                "w-full",
+                "h-full",
+                "object-cover",
+                "rounded-t-md"
+            );
+
+            span.innerText = "Added to your team";
+            span.classList.add("text-center", "text-slate-800", "my-2");
+            promptCard.appendChild(img);
+            promptCard.appendChild(span);
+            promptCard.classList.remove("hidden");
+            promptCard.classList.add(
+                "flex",
+                "animate__animated",
+                "animate__fadeInDown",
+                "animate__faster"
+            );
+            closeModal.classList.remove("cursor-not-allowed");
+            closeModal.classList.add("cursor-pointer");
+            setTimeout(() => {
+                promptCard.classList.remove("flex");
+                promptCard.classList.add("hidden");
+            }, 5000);
+        }
+    });
+};
