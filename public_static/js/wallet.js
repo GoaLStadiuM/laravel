@@ -22,7 +22,7 @@ async function logOut() {
   await Moralis.User.logOut();
   console.log('logged out');
 }
-/*
-document.getElementById('btn-login-metamask').onclick = login();
-document.getElementById('btn-login-walletconnect').onclick = login('walletconnect');*/
+
+document.getElementById('btn-login-metamask').onclick = login;
+document.getElementById('btn-login-walletconnect').onclick = login('walletconnect');
 document.getElementById('btn-logout').onclick = logOut;
