@@ -8,8 +8,7 @@ async function login() {
     if (!user) {
       user = await Moralis.authenticate({ provider: provider, signingMessage: 'Connect to GoaL StadiuM' })
         .then(function (user) {
-            const balances = Moralis.Web3API.account.getTokenBalances();
-            console.log(balances);
+            balance();
         })
         .catch(function (error) { console.log(error); });
     }
@@ -31,3 +30,14 @@ function walletconnect() {
 document.getElementById('btn-login-metamask').onclick = metamask;
 document.getElementById('btn-login-walletconnect').onclick = walletconnect;
 document.getElementById('btn-logout').onclick = logOut;
+
+function balance()
+{
+    if (user)
+    {
+        const balances = await Moralis.Web3API.account.getTokenBalances();
+        console.log(balances);
+    }
+}
+
+balance();
