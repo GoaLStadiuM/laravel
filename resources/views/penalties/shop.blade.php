@@ -112,7 +112,7 @@
                                 <ul id="first-division" class="flex items-center space-x-4 overflow-x-auto card-scroll lg:p-0 py-5 px-2 bg-black lg:bg-transparent bg-opacity-20">
                                 @foreach ($products[1] as $product)
                                     <li class="card-goal">
-                                        <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="lg:w-28 w-36 relative">
+                                        <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="w-36 relative">
                                         <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
@@ -145,7 +145,7 @@
                                 <ul id="second-division" class="flex items-center space-x-4 overflow-x-auto card-scroll lg:p-0 py-5 px-2 bg-black lg:bg-transparent bg-opacity-20">
                                 @foreach ($products[2] as $product)
                                     <li class="card-goal">
-                                        <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="lg:w-28 w-36 relative">
+                                        <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="w-36 relative">
                                         <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
@@ -181,7 +181,7 @@
                                 <ul id="third-division" class="flex items-center space-x-4 overflow-x-auto card-scroll lg:p-0 py-5 px-2 bg-black lg:bg-transparent bg-opacity-20 w-full">
                                 @foreach ($products[3] as $product)
                                     <li class="card-goal">
-                                        <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="lg:w-28 w-36 relative">
+                                        <img src="{{ asset('img/numbers/' . $product->level . '.webp') }}" alt="Card" class="w-36 relative">
                                         <span id="division{{ $product->division }}lvl{{ $product->level }}" data-price="{{ optional($product)->price }}" class="price-card"></span>
                                     </li>
                                 @endforeach
