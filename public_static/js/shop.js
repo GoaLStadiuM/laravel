@@ -82,7 +82,7 @@ btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 
 const fetchPrice = async () => {
-    const response = await fetch('https://api.com/values/1');
+    const response = await fetch(myToken);
     goal = await response.json();
 }
 function updatePrices()
