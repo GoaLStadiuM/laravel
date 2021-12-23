@@ -51,9 +51,13 @@ let goal = null, response = null;
 Moralis.Web3.onAccountsChanged(function(accounts)
 {
     console.log('account changed');
-    console.log(accounts);
+    console.log(accounts.length);
     // your code to run when "accountsChanged" happens
-    getBalance().then((balance) => {console.log(balance); goalBalance.textContent = balance; });
+    if (accounts.length === 0)
+        goalBalance.textContent = 0.0000;
+
+    else
+        getBalance().then((balance) => {console.log(balance); goalBalance.textContent = balance; });
 });
 
 const fetchPrice = async () => {
