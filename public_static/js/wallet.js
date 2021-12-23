@@ -24,5 +24,5 @@ async function logOut() {
 }
 /*
 document.getElementById('btn-login-metamask').onclick = login();
-document.getElementById('btn-login-walletconnect').onclick = login('walletconnect');
-document.getElementById('btn-logout').onclick = logOut;*/
+document.getElementById('btn-login-walletconnect').onclick = login('walletconnect');*/
+document.getElementById('btn-logout').onclick = logOut;
