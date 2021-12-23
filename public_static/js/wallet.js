@@ -4,7 +4,7 @@ Moralis.start({ serverUrl: 'https://9iuhdje4owkr.usemoralis.com:2053/server', ap
 let user = Moralis.User.current();
 
 /* Authentication code */
-async function login(provider = 'metamask') {
+async function login(provider = 'metamask') {console.log(provider)
   if (!user) {
     user = await Moralis.authenticate({ provider: provider, signingMessage: 'Log in using Moralis' })
       .then(function (user) {
