@@ -18,6 +18,5 @@ export default function walletChoice() {
         ev.stopPropagation();
         modalMoralis.classList.remove('flex');
         modalMoralis.classList.add('hidden');
-        window.location.reload();
     });
 }
