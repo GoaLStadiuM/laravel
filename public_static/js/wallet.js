@@ -12,7 +12,7 @@ async function login(provider) {
         console.log(user.get("ethAddress"));
       })
       .catch(function (error) {
-        console(error);
+        console.log(error);
       });
   }
 }
