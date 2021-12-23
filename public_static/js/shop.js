@@ -136,13 +136,13 @@ else
 }
 
 document.querySelectorAll('.card-goal').forEach((card) => {
-    card.addEventListener('click', async () => {
-console.log(this.dataset.price);
+    card.addEventListener('click', async (card) => {
+console.log(card.dataset.price);
 console.log(goal.price);
 console.log(goal_decimals);
         const options = {
             type: 'erc20',
-            amount: Moralis.Units.Token(this.dataset.price / goal.price, goal_decimals),
+            amount: Moralis.Units.Token(card.dataset.price / goal.price, goal_decimals),
             receiver: shopWallet,
             contractAddress: tokenAddress
         }
