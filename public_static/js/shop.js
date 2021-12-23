@@ -84,7 +84,7 @@ function updatePrices(out)
 {
     Array.prototype.forEach.call(prices, function(el, it)
     {
-        el.textContent = el.data.price / out.data.price + ' ' + out.data.symbol;
+        el.textContent = el.dataset.price / out.data.price + ' ' + out.data.symbol;
     });
 }
 function error(err)
