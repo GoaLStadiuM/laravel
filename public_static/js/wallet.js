@@ -31,7 +31,7 @@ document.getElementById('btn-login-metamask').onclick = metamask;
 document.getElementById('btn-login-walletconnect').onclick = walletconnect;
 document.getElementById('btn-logout').onclick = logOut;
 
-function balance()
+async function balance()
 {
     if (user)
     {
