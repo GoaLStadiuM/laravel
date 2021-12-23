@@ -75,9 +75,9 @@ currentPrice();
 function currentPrice()
 {
     fetch(myToken)
-    .then(res => res.json())
-    .then(out => updatePrices)
-    .catch(err => error);
+        .then(res => res.json())
+        .then(out => updatePrices(out))
+        .catch(err => error(err));
     setTimeout(() => currentPrice(), 60000);
 }
 function updatePrices(out)
@@ -97,7 +97,7 @@ function error(err)
 
     else
     {
-        console.log('network error, please contact support.');
+        alert('network error, please contact support.');
     }
 
     tries += 1;
