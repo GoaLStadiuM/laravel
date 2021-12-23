@@ -5,7 +5,9 @@ const tokenAddress = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
       connectBtn = document.getElementById('connect-wallet'),
       metamaskBtn = document.getElementById('btn-login-metamask'),
       wcBtn = document.getElementById('btn-login-walletconnect'),
-      logoutBtn = document.getElementById('btn-logout');
+      logoutBtn = document.getElementById('btn-logout'),
+      modalMoralis = document.querySelector('#modal-moralis'),
+      modalChild = document.querySelector('.wallet-choice');
 
 /* Authentication code */
 async function login(provider = 'metamask')
@@ -17,6 +19,7 @@ console.log('authenticating...')
         .then(function (user) {
             // logged in
             console.log('logged in');
+            hideModal();
             showConnected();
         })
         .catch(function (error) { console.log(error); });
@@ -32,6 +35,21 @@ async function getBalance()
             return Number.parseFloat(token.balance / parseInt('1'.padEnd(parseInt(token.decimals) + 1, '0'))).toFixed(4);
         }
     });
+}
+
+function showModal()
+{
+    modalMoralis.classList.remove('hidden');
+    modalMoralis.classList.add('flex');
+}
+
+function hideModal(ev = null)
+{
+    if (ev)
+        ev.stopPropagation();
+
+    modalMoralis.classList.remove('flex');
+    modalMoralis.classList.add('hidden');
 }
 
 function showConnected()
@@ -56,6 +74,9 @@ async function logOut() {
     showDisconnected();
 }
 
+connectBtn.addEventListener('click', () => showModal());
+modalMoralis.addEventListener('click', (ev) => hideModal(ev));
+modalChild.addEventListener('click', (ev) => { ev.stopPropagation(); })
 metamaskBtn.addEventListener('click', () => login());
 wcBtn.addEventListener('click', () => login('walletconnect'));
 logoutBtn.addEventListener('click', () => logOut());

@@ -1,8 +1,5 @@
-import walletChoice from './modules/wallet-choice.js';
 import swiperResponsive from './modules/swiper-responsive.js';
-
 swiperResponsive();
-walletChoice();
 
 const menuResponsive = document.querySelector('#bg-menu-responsive'),
       sidebarResponsive = document.querySelector('#sidebar-responsive'),
@@ -51,14 +48,15 @@ let goal = null, response = null;
 
 
 
-Moralis.Web3.onAccountsChanged(function(accounts) {
-console.log('account changed');
+Moralis.Web3.onAccountsChanged(function(accounts)
+{
+    console.log('account changed');
     console.log(accounts);
-// your code to run when "accountsChanged" happens
-
+    // your code to run when "accountsChanged" happens
+    updateBalance();
 });
 
-
+const updateBalance = async () => { goalBalance.textContent = await getBalance(); };
 
 
 
@@ -86,7 +84,7 @@ updatePrices();
 
 if (Moralis.User.current())
 {
-    goalBalance.textContent = await getBalance();
+    updateBalance();
     showConnected();
 }
 
