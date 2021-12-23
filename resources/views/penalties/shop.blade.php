@@ -6,7 +6,7 @@
             <!-- Sidebar responsive /start -->
             <button id="btn-menu" class="text-slate-50 bg-goal-blue-200 bg-opacity-50 p-2 z-30 absolute lg:hidden flex">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
 
@@ -77,7 +77,7 @@
                             <button id="btn-logout">Disconnect</button>
                             <div class="btn-top-goal">
                                 <img src="{{ asset('img/penalties/logo.webp') }}" alt="Goal stadium logo" class="w-12">
-                                <span class="inline-flex pr-4">0</span>
+                                <span id="goal-balance" class="inline-flex pr-4">0</span>
                                 <div class="h-8 w-8 rounded-full bg-white flex items-center justify-center cursor-pointer">
                                     <img src="{{ asset('img/penalties/icons/plus-icon.svg') }}" alt="Plus icon" class="w-3/5">
                                 </div>
@@ -214,7 +214,7 @@
         <!-- Modal Moralis /start -->
         <div id="modal-moralis" class="bg-modal bg-opacity-60 fixed top-0 left-0 w-full h-full hidden items-center justify-center z-40">
             <svg id="close-modal" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-pointer" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
             <div class="md:w-1/4 w-9/12  py-5 px-8 wallet-choice">
                 <p>Choose a provider:</p>
@@ -226,7 +226,7 @@
         <!-- Modal Shop /start -->
         <div id="modal-carrousel" class="bg-modal bg-opacity-60 fixed top-0 left-0 w-full h-full hidden items-center justify-center z-40">
             <svg id="close-modal" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-100 font-black absolute top-10 left-10 cursor-not-allowed" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
             <div class="md:w-1/4 w-9/12  py-5 px-8">
                 <div class="swiper mySwiper">
