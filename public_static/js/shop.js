@@ -19,7 +19,8 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       secondDiv = document.querySelector('#second-division'),
       thirdDiv = document.querySelector('#third-division'),
       prices = document.querySelectorAll('[id ^= "division"]'),
-      myToken = 'https://api.pancakeswap.info/api/v2/tokens/0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
+      contractAddress = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
+      myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + contractAddress,
       modalCarrousel = document.querySelector("#modal-carrousel"),
       cardCarousel = document.querySelectorAll(".swiper-slide"),
       promptCard = document.querySelector("#prompt-card"),
@@ -43,7 +44,7 @@ stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
 </svg>`;
 
-let tries = 0, maxTries = 9;
+let tries = 0, maxTries = 9, goal = null;
 
 //Events
 
@@ -77,29 +78,35 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
-currentPrice();
+updatePrices();
 
-function currentPrice()
+function getPrice()
 {
     fetch(myToken)
         .then(res => res.json())
-        .then(out => updatePrices(out))
+        .then(out => { goal = out.data })
         .catch(err => error(err));
-    setTimeout(() => currentPrice(), 60000);
 }
-function updatePrices(out)
+function updatePrices()
 {
+    getPrice();
+
+    if (!goal)
+        alert('unknown error, please contact support.');
+
     Array.prototype.forEach.call(prices, function(el, it)
     {
-        el.textContent = Number.parseFloat(el.dataset.price / out.data.price).toFixed(4) + ' ' + out.data.symbol;
+        el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(4) + ' ' + goal.symbol;
     });
+
+    setTimeout(() => updatePrices(), 60000);
 }
 function error(err)
 {
     if (tries < maxTries)
     {
         console.log('network error, retrying...');
-        currentPrice();
+        updatePrices();
     }
 
     else
@@ -135,7 +142,13 @@ else
 document.querySelectorAll(".card-goal").forEach((card) => {
     card.addEventListener("click", () => {
 
-alert('buy')
+// sending 0.5 tokens with 18 decimals
+const options = {type: "erc20",
+                 amount: Moralis.Units.Token("0.5", "18"),
+                 receiver: "0x..",
+                 contractAddress: "0x.."}
+let result = await Moralis.transfer(options);
+console.log(result);
 
 /*
         swiper.autoplay.start();
