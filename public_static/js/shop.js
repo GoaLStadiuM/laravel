@@ -83,11 +83,11 @@ btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 const fetchPrice = async () => {
     const response = await fetch(myToken);
-    goal = await response.json();
+    return await response.json();
 }
 async function updatePrices()
 {
-    fetchPrice();
+    goal = await fetchPrice();
 
     if (!goal)
         alert('unknown error, please contact support.');
