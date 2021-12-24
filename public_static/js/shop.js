@@ -16,7 +16,6 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       products = document.querySelectorAll('.card-goal'),
       prices = document.querySelectorAll('[id ^= "division"]'),
       modalCarrousel = document.querySelector('#modal-carrousel'),
-      cardCarousel = document.querySelectorAll('.swiper-slide'),
       promptCard = document.querySelector('#prompt-card'),
       closeModal = document.querySelector('#close-carrousel'),
       myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + tokenAddress,
@@ -55,7 +54,7 @@ stroke="currentColor">
 
                 throw new Error(res.status);
             })
-            .catch(error => console.error(error.message))
+            .catch(error => console.error(error.message));
 
 // product prices
 async function updatePrices()
@@ -69,8 +68,6 @@ async function updatePrices()
 
     setTimeout(() => updatePrices(), 60000);
 }
-
-updatePrices();
 
 async function purchase(product)
 {
@@ -86,8 +83,8 @@ async function purchase(product)
         receiver: shopWallet,
         contractAddress: tokenAddress
     });
-    console.log(transferResult);
-/*
+console.log(transferResult);
+//throw new Error('errorabc');
     let postResult = await postPurchase(postUrl, {
         method: 'post',
         headers: {
@@ -99,24 +96,20 @@ async function purchase(product)
             product_id: product.dataset.productId,
             tx_hash: transferResult.transactionHash
         })
-    });
-    console.log(postResult);
-
+    }, 10);
+console.log(postResult);
+    if (postResult.ok)
+    {
+        modalCarrousel.classList.remove('hidden');
+        modalCarrousel.classList.add('flex');
 
         swiper.autoplay.start();
 
-        if (modalCarrousel.classList.contains('hidden')) {
-            modalCarrousel.classList.remove('hidden');
-            modalCarrousel.classList.add('flex');
-            //Modal carrousel animation
-            setTimeout(modal, randomTime);
-        } else {
-            modalCarrousel.classList.remove('flex');
-            modalCarrousel.classList.add('hidden');
-        }*/
+        setTimeout(showCharacter(postResult.characterIndex), randomTime);
+    }
 }
 
-
+updatePrices();
 
 /*
  * shop ux
@@ -158,49 +151,49 @@ products.forEach((card) => { card.addEventListener('click', (e) => { purchase(e.
  * swiper
  */
 
-const modal = () => {
-    swiper.autoplay.stop();
+const showCharacter = (characterIndex) => {
+
+    swiper.slideTo(characterIndex, 40, false);
+    // in case it doesn't stop
+    //swiper.autoplay.stop();
+
+    const img = document.createElement('img'),
+          span = document.createElement('span'),
+          card = document.querySelector('[data-index]');
+
+    img.src = card.src;
+    img.alt = card.alt;
+    img.classList.add(
+        'w-full',
+        'h-full',
+        'object-cover',
+        'rounded-t-md'
+    );
+
+    span.innerText = 'Added to your team';
+    span.classList.add('text-center', 'text-slate-800', 'my-2');
+
+    promptCard.appendChild(img);
+    promptCard.appendChild(span);
+    promptCard.classList.remove('hidden');
+    promptCard.classList.add(
+        'flex',
+        'animate__animated',
+        'animate__fadeInDown',
+        'animate__faster'
+    );
+
+    closeModal.classList.remove('cursor-not-allowed');
+    closeModal.classList.add('cursor-pointer');
+
+    setTimeout(() => {
+        promptCard.classList.remove('flex');
+        promptCard.classList.add('hidden');
+    }, 10000);
+
     modalCarrousel.addEventListener('click', (e) => {
         e.stopPropagation();
         modalCarrousel.classList.remove('flex');
         modalCarrousel.classList.add('hidden');
-        window.location.reload();
-    });
-    //Get card info
-    cardCarousel.forEach((card) => {
-        const swiperIndex = swiper.realIndex;
-        const cardIndex = card.dataset.index;
-        if (swiperIndex === Number(cardIndex)) {
-            //Creating prompt card
-            const img = document.createElement('img');
-            const span = document.createElement('span');
-
-            img.src = card.src;
-            img.alt = card.alt;
-            img.classList.add(
-                'w-full',
-                'h-full',
-                'object-cover',
-                'rounded-t-md'
-            );
-
-            span.innerText = 'Added to your team';
-            span.classList.add('text-center', 'text-slate-800', 'my-2');
-            promptCard.appendChild(img);
-            promptCard.appendChild(span);
-            promptCard.classList.remove('hidden');
-            promptCard.classList.add(
-                'flex',
-                'animate__animated',
-                'animate__fadeInDown',
-                'animate__faster'
-            );
-            closeModal.classList.remove('cursor-not-allowed');
-            closeModal.classList.add('cursor-pointer');
-            setTimeout(() => {
-                promptCard.classList.remove('flex');
-                promptCard.classList.add('hidden');
-            }, 5000);
-        }
     });
 };

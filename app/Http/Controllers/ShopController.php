@@ -14,20 +14,50 @@ class ShopController extends Controller
                   DIVISION_3 = 3,
                   DIV1_STARTING_STATS = 95,
                   DIV2_STARTING_STATS = 76,
-                  DIV3_STARTING_STATS = 57;
+                  DIV3_STARTING_STATS = 57,
+                  BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX',
+                  BNB_WALLET = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA',
+                  SHOP_WALLET = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D';
+
+    private stdClass $currentTx;
 
     public function shop()
     {
         return view('penalties.shop', [
             'products' => Product::get()->groupBy('division')
         ]);
-    } // TODO: shop
+    }
 
-    private function createCharacter(NftPayment $nft_payment): void
+    public function purchase(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $tx_hash = $request->input('tx_hash');
+
+        $product = Product::findOrFail($product_id);
+
+        // todo validate Tx
+
+        $nft_payment = new NftPayment;
+        $nft_payment->product_id = $product_id;
+        $nft_payment->tx_hash = $tx_hash;
+        $nft_payment->save();
+
+        // todo random base_character
+        $base_character = BaseCharacter::findOrFail(8);
+
+        $this->createCharacter($nft_payment, $base_character);
+
+        return response()->json([
+            'ok' => true,
+            'characterIndex' => $base_character->id - 1
+        ]);
+    }
+
+    private function createCharacter(NftPayment $nft_payment, BaseCharacter $base_character): void
     {
         $character = new Character;
         $character->user_id = Auth::user()->id;
-        $character->base_id = 'calculate which base_character.id'; // todo
+        $character->base_id = $base_character->id;
         $character->payment_id = $nft_payment->id;
         $character->division = $nft_payment->product->division;
         $character->level = $nft_payment->product->level;
@@ -46,15 +76,36 @@ class ShopController extends Controller
         $character->save();
     }
 
-
 /*
+    private function validateTx(string $txHash, string $address): bool
+    {
+        $valid = false;
+
+        foreach ($this->getTransactionList($address)->result as $tx)
+        {
+            if ($txHash !== $tx->hash)
+                continue;
+
+            $this->currentTx = $tx;
+            $valid = true;
+        }
+
+        return $valid;
+    }
+
+    private function getTransactionList(string $address): Object
+    {
+        // todo cache for a few seconds
+        $response = file_get_contents("https://api.bscscan.com/api?module=account&action=txlist&address=$address&apikey=" . self::BSCSCAN_API_KEY);
+        return json_decode($response);
+    }
+
+
     const BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX',
-          WALLET_BNB = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA',
+          WALLET_BNB = '',
           TOKEN_PRICE_PRIVATE = .04,
           TOKEN_PRICE_PUBLIC = .06,
           WEI_VALUE = 1000000000000000000;
-
-    private stdClass $currentTx;
 
     public function manualHash(Request $request)
     {
@@ -84,29 +135,6 @@ class ShopController extends Controller
         }
 
         return redirect()->route('purchases');
-    }
-
-    private function validateTx(string $txHash): bool
-    {
-        $valid = false;
-
-        foreach ($this->getTransactionList(self::WALLET_BNB)->result as $tx)
-        {
-            if ($txHash !== $tx->hash)
-                continue;
-
-            $this->currentTx = $tx;
-            $valid = true;
-        }
-
-        return $valid;
-    }
-
-    private function getTransactionList(string $address): Object
-    {
-        // todo cache for a few seconds
-        $response = file_get_contents("https://api.bscscan.com/api?module=account&action=txlist&address=$address&apikey=" . self::BSCSCAN_API_KEY);
-        return json_decode($response);
     }
 
     private function createNftPayment(string $txHash, string $value, int $productId): void
