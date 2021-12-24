@@ -94,10 +94,11 @@ Moralis.Web3.onAccountsChanged(function(accounts)
         getBalance().then((balance) => { goalBalance.textContent = balance; });
 });
 
-async function purchase(product)
+async function purchase(ev)
 {
     const goal = (await fetchToken()).data,
-          decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals;
+          decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
+          product = ev.target;
 
     await Moralis.enable();
 
@@ -174,7 +175,7 @@ btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 products.forEach((card) => {
-    card.addEventListener('click', (ev) => { purchase(ev.target); });
+    card.addEventListener('click', (ev) => { purchase(ev); });
 });
 
 /*
