@@ -99,7 +99,7 @@ async function purchase(ev)
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product = ev.target;
-console.log(decimals);console.log(product);
+console.log(decimals);console.log(product);console.log(goal);
     await Moralis.enable();
 
     let transferResult = await Moralis.transfer({
