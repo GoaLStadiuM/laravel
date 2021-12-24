@@ -175,7 +175,7 @@ btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 products.forEach((card) => {
-    card.addEventListener('click', (ev) => { purchase(ev); });
+    card.addEventListener('click', () => { purchase(card); });
 });
 
 /*
