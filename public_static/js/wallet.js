@@ -5,6 +5,7 @@ const tokenAddress = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
       connectBtn = document.getElementById('connect-wallet'),
       metamaskBtn = document.getElementById('btn-login-metamask'),
       wcBtn = document.getElementById('btn-login-walletconnect'),
+      goalBalance = document.getElementById('goal-balance'),
       logoutBtn = document.getElementById('btn-logout'),
       modalMoralis = document.querySelector('#modal-moralis'),
       modalChild = document.querySelector('.wallet-choice');
@@ -57,6 +58,7 @@ function showConnected()
     connectBtn.classList.add('hidden');
     logoutBtn.classList.remove('hidden');
     logoutBtn.classList.add('block');
+    setBalanceToCurrent();
 }
 
 function showDisconnected()
@@ -65,6 +67,7 @@ function showDisconnected()
     connectBtn.classList.add('block');
     logoutBtn.classList.remove('block');
     logoutBtn.classList.add('hidden');
+    setBalanceToZero();
 }
 
 async function logOut()
@@ -74,9 +77,38 @@ async function logOut()
     showDisconnected();
 }
 
+function setBalanceToZero()
+{
+    goalBalance.textContent = 0;
+}
+function setBalanceToCurrent()
+{
+    getBalance().then((balance) => { goalBalance.textContent = balance; }); // todo: rework this
+}
+
+if (Moralis.User.current())
+{
+    showConnected();
+}
+
+else
+{
+    showDisconnected();
+}
+
+Moralis.Web3.onAccountsChanged(function(accounts)
+{
+    console.log('account changed');
+    if (accounts.length === 0)
+        showDisconnected();
+
+    else
+        setBalanceToCurrent();
+});
+
 connectBtn.addEventListener('click', () => showModal());
-modalMoralis.addEventListener('click', (ev) => hideModal(ev));
-modalChild.addEventListener('click', (ev) => { ev.stopPropagation(); })
+modalMoralis.addEventListener('click', (e) => hideModal(e));
+modalChild.addEventListener('click', (e) => { e.stopPropagation(); })
 metamaskBtn.addEventListener('click', () => login());
 wcBtn.addEventListener('click', () => login('walletconnect'));
 logoutBtn.addEventListener('click', () => logOut());

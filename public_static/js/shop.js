@@ -15,14 +15,13 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       thirdDiv = document.querySelector('#third-division'),
       products = document.querySelectorAll('.card-goal'),
       prices = document.querySelectorAll('[id ^= "division"]'),
-      goalBalance = document.getElementById('goal-balance'),
-      myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + tokenAddress,
-      shopWallet = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
-      postUrl = 'https://play.goalstadium.com/penalties/shop/purchase',
       modalCarrousel = document.querySelector('#modal-carrousel'),
       cardCarousel = document.querySelectorAll('.swiper-slide'),
       promptCard = document.querySelector('#prompt-card'),
       closeModal = document.querySelector('#close-carrousel'),
+      myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + tokenAddress,
+      shopWallet = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
+      postUrl = 'https://play.goalstadium.com/penalties/shop/purchase',
       //Initializing swiper
       swiper = new Swiper('.mySwiper', {
           effect: 'cards',
@@ -44,7 +43,7 @@ stroke="currentColor">
 
       fetchToken = async () => { return await (await fetch(myToken)).json(); },
 
-      post = (url, options, retries) =>
+      postPurchase = (url, options, retries) =>
 
         fetch(url, options)
             .then(res => {
@@ -52,12 +51,13 @@ stroke="currentColor">
                     return res.json();
 
                 if (retries > 0)
-                    return post(url, options, retries - 1);
+                    return postPurchase(url, options, retries - 1);
 
                 throw new Error(res.status);
             })
             .catch(error => console.error(error.message))
 
+// product prices
 async function updatePrices()
 {
     const goal = (await fetchToken()).data;
@@ -72,33 +72,11 @@ async function updatePrices()
 
 updatePrices();
 
-if (Moralis.User.current())
-{
-    getBalance().then((balance) => { goalBalance.textContent = balance; });
-    showConnected();
-}
-
-else
-{
-    goalBalance.textContent = 0;
-    showDisconnected();
-}
-
-Moralis.Web3.onAccountsChanged(function(accounts)
-{
-    console.log('account changed');
-    if (accounts.length === 0)
-        goalBalance.textContent = 0;
-
-    else
-        getBalance().then((balance) => { goalBalance.textContent = balance; });
-});
-
 async function purchase(product)
 {
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals;
-console.log(product);
+console.log(product);//get last child
     await Moralis.enableWeb3();
 
     let transferResult = await Moralis.transfer({
@@ -109,7 +87,7 @@ console.log(product);
     });
     console.log(transferResult);
 /*
-    let postResult = await post(postUrl, {
+    let postResult = await postPurchase(postUrl, {
         method: 'post',
         headers: {
             'Accept': 'application/json',
@@ -140,7 +118,7 @@ console.log(product);
 
 
 /*
- * products
+ * shop ux
  */
 
 btnMenu.addEventListener('click', () => {
