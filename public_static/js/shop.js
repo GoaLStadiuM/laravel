@@ -174,7 +174,7 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
-products.forEach((card) => { card.addEventListener('click', (e) => { e.preventDefault(); purchase(e); }); });
+products.forEach((card) => { card.addEventListener('click', (e) => { e.preventDefault(); e.stopImmediatePropagation(); purchase(e); }); });
 
 /*
  * swiper
