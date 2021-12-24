@@ -94,11 +94,11 @@ Moralis.Web3.onAccountsChanged(function(accounts)
         getBalance().then((balance) => { goalBalance.textContent = balance; });
 });
 
-async function purchase(ev)
+async function purchase(e)
 {
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
-          product = ev.currentTarget;
+          product = e.currentTarget;
 console.log(decimals);console.log(product);console.log(goal);
     await Moralis.enable();
 
@@ -159,8 +159,8 @@ btnMenu.addEventListener('click', () => {
     }
 });
 
-menuResponsive.addEventListener('click', (ev) => {
-    ev.stopPropagation();
+menuResponsive.addEventListener('click', (e) => {
+    e.stopPropagation();
     menuResponsive.classList.add('hidden');
     btnMenu.innerHTML = svgMenu;
 });
@@ -174,9 +174,7 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
-products.forEach((card) => {
-    card.addEventListener('click', (ev) => { purchase(ev); });
-});
+products.forEach((card) => { card.addEventListener('click', (e) => { purchase(e); }); });
 
 /*
  * swiper
@@ -184,8 +182,8 @@ products.forEach((card) => {
 
 const modal = () => {
     swiper.autoplay.stop();
-    modalCarrousel.addEventListener('click', (ev) => {
-        ev.stopPropagation();
+    modalCarrousel.addEventListener('click', (e) => {
+        e.stopPropagation();
         modalCarrousel.classList.remove('flex');
         modalCarrousel.classList.add('hidden');
         window.location.reload();
