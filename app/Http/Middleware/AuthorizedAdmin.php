@@ -18,6 +18,6 @@ class AuthorizedAdmin
 
     protected function isAdmin($request)
     {
-        return $request->user()->id === 2;
+        return optional($request->user())->id === 2;
     }
 }
