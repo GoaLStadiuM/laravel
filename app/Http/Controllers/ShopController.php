@@ -35,7 +35,7 @@ class ShopController extends Controller
 
         $product = Product::findOrFail($product_id);
 
-        // todo validate Tx
+        // TODO IMPORTANT setup task scheduling to validate txs
 
         $nft_payment = new NftPayment;
         $nft_payment->product_id = $product_id;
