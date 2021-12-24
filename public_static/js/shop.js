@@ -98,7 +98,7 @@ async function purchase(ev)
 {
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
-          product = ev.target;
+          product = ev.currentTarget;
 console.log(decimals);console.log(product);console.log(goal);
     await Moralis.enable();
 
@@ -175,7 +175,7 @@ btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 products.forEach((card) => {
-    card.addEventListener('click', () => { purchase(card); });
+    card.addEventListener('click', (ev) => { purchase(ev); });
 });
 
 /*
