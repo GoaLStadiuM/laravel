@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::domain('play.' . config('app.domain'))->group(function ()
 {
-    if (optional(Auth::user())->id === 2)
-    {
+    Route::middleware('admin')->group(function () {
         Route::get('/penalties', [ GameController::class, 'menu' ])->name('menu')->middleware(['auth']);
         Route::get('/penalties/shop', [ ShopController::class, 'shop' ])->name('shop')->middleware(['auth']);
-    }
+    });
 });
