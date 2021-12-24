@@ -88,7 +88,7 @@ function setBalanceToCurrent()
 {
     getBalance().then((balance) => { goalBalance.textContent = balance; }); // todo: rework this
 }
-
+/*
 if (Moralis.User.current())
 {
     showConnected();
@@ -97,7 +97,7 @@ if (Moralis.User.current())
 else
 {
     showDisconnected();
-}
+}*/
 
 Moralis.Web3.onAccountsChanged(function(accounts)
 {
