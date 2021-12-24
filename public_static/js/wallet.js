@@ -10,6 +10,9 @@ const tokenAddress = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
       modalMoralis = document.querySelector('#modal-moralis'),
       modalChild = document.querySelector('.wallet-choice');
 
+// tmp fix
+logOut();
+
 /* Authentication code */
 async function login(provider = 'metamask')
 {
@@ -98,6 +101,9 @@ else
 
 Moralis.Web3.onAccountsChanged(function(accounts)
 {
+    if (!Moralis.User.current())
+        return;
+
     console.log('account changed');
     if (accounts.length === 0)
         showDisconnected();
