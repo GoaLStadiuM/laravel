@@ -40,32 +40,27 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
 xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewbox="0 0 24 24"
 stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-</svg>`;
+</svg>`,
 
-let goal = null, response = null;
+      fetchToken = async () => { return await (await fetch(myToken)).json(); },
 
+      post = (url, options, retries) =>
 
+        fetch(url, options)
+            .then(res => {
+                if (res.ok)
+                    return res.json();
 
+                if (retries > 0)
+                    return post(url, options, retries - 1);
 
+                throw new Error(res.status);
+            })
+            .catch(error => console.error(error.message))
 
-Moralis.Web3.onAccountsChanged(function(accounts)
-{
-    console.log('account changed');
-    if (accounts.length === 0)
-        goalBalance.textContent = 0;
-
-    else
-        getBalance().then((balance) => { goalBalance.textContent = balance; });
-});
-
-const fetchPrice = async () => {
-    response = await fetch(myToken);
-    return await response.json();
-}
-async function getPrice() { return await response.json(); }
 async function updatePrices()
 {
-    goal = (await fetchPrice()).data;
+    const goal = (await fetchToken()).data;
 
     Array.prototype.forEach.call(prices, function(el, it)
     {
@@ -77,58 +72,43 @@ async function updatePrices()
 
 updatePrices();
 
-
-
-
 if (Moralis.User.current())
-{console.log('user is logged in');
+{
     getBalance().then((balance) => { goalBalance.textContent = balance; });
     showConnected();
 }
 
 else
-{console.log('user is not logged in')
+{
     goalBalance.textContent = 0;
     showDisconnected();
 }
 
+Moralis.Web3.onAccountsChanged(function(accounts)
+{
+    console.log('account changed');
+    if (accounts.length === 0)
+        goalBalance.textContent = 0;
 
-
-
-
-
-
-products.forEach((card) => {
-    card.addEventListener('click', (ev) => { purchase(ev.target.dataset.price, ev.target.dataset.productId); });
+    else
+        getBalance().then((balance) => { goalBalance.textContent = balance; });
 });
 
-const post = (url, options, retries) =>
-    fetch(url, options)
-        .then(res => {
-            if (res.ok)
-                return res.json();
-
-            if (retries > 0)
-                return post(url, options, retries - 1);
-
-            throw new Error(res.status);
-        })
-        .catch(error => console.error(error.message))
-
-async function purchase(price, product_id)
+async function purchase(product)
 {
+    const goal = (await fetchToken()).data,
+          decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals;
+
     await Moralis.enable();
-    goal = (await getPrice()).data;
-    const decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals;
 
     let transferResult = await Moralis.transfer({
         type: 'erc20',
-        amount: Moralis.Units.Token(Number.parseFloat(price / goal.price).toFixed(decimals), decimals),
+        amount: Moralis.Units.Token(Number.parseFloat(product.dataset.price / goal.price).toFixed(decimals), decimals),
         receiver: shopWallet,
         contractAddress: tokenAddress
     });
     console.log(transferResult);
-
+/*
     let postResult = await post(postUrl, {
         method: 'post',
         headers: {
@@ -137,13 +117,13 @@ async function purchase(price, product_id)
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
         body: JSON.stringify({
-            product_id: product_id,
+            product_id: product.dataset.productId,
             tx_hash: transferResult.transactionHash
         })
     });
     console.log(postResult);
 
-/*
+
         swiper.autoplay.start();
 
         if (modalCarrousel.classList.contains('hidden')) {
@@ -156,12 +136,6 @@ async function purchase(price, product_id)
             modalCarrousel.classList.add('hidden');
         }*/
 }
-
-
-
-
-
-
 
 
 
@@ -198,6 +172,10 @@ btnRSecond.addEventListener('click', () => { secondDiv.scrollLeft += 152; });
 
 btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
+
+products.forEach((card) => {
+    card.addEventListener('click', (ev) => { purchase(ev.target); });
+});
 
 /*
  * swiper
