@@ -42,7 +42,7 @@ Route::middleware('admin')->group(function ()
         $list = [];
         $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
 
-        echo 'List of people who purchased in presales:<br><br>';
+        echo 'List of people who purchased in presales (380):<br><br>';
 
         foreach ($result as $tx)
         {
@@ -64,5 +64,7 @@ Route::middleware('admin')->group(function ()
             $amount = $test[1]->goal_tokens / 4;
             echo "$address,$to,$amount<br>";
         }
+
+        //$stakings = DB::table('stakings')->get();
     });
 });
