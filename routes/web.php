@@ -49,7 +49,7 @@ $sent = [];
 foreach ($paid as $payment)
 {
     foreach ($sent as $send)
-    {
+    {echo $payment->from, ' ', $sent->to;
         if ($payment->from === $send->to)
             $sent[] = $payment;
     }
