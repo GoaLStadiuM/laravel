@@ -58,18 +58,21 @@ Route::middleware('admin')->group(function ()
 
         $stakings = DB::table('stakings')->get();
         $users_staking = [];
-
+$stake_dupe=[];
         foreach ($stakings as $staking)
-        {
+        {$stake_dupe[]=$staking->user_id;
             $users_staking[$staking->user_id] = 0;
-        }
-
+	}
+	//dump(array_count_values($stake_dupe));
+$dupes = [];
         foreach ($list as $test)
         {
-            if (array_key_exists($test->payment->user_id, $users_staking))
-                $list2[] = $test;
+            if (array_key_exists($test->payment->user_id, $users_staking)){
+		    $list2[] = $test;
+		    $dupes[] = $test->payment->user_id;
+	    }
         }
-
+//dd(array_count_values($dupes));
         $need_reward = array_udiff($list2, $result2, fn ($a, $b) => strtolower($a->from) <=> ($b->to));
 //dd(array_udiff($list2,$need_reward, fn ($a, $b) => $a->from <=> $b->to));
 	echo 'all payments: ', count($list), ' ',
@@ -81,7 +84,7 @@ $count=0;
         foreach ($need_reward as $tx)
         {$count++;
             $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
-            echo "$count: $address,$tx->from,$amount<br>";
+            echo "$address,$tx->from,$amount<br>";
         }
 echo "count: $count";
         // replace 0xFB2B954d045733C084eC9beBe9e01176929f5F84 with 0xfef5F1dE0a6f6b5E5243548C0951823AFC9fE499
