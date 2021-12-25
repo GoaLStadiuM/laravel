@@ -62,16 +62,16 @@ Route::middleware('admin')->group(function ()
         echo 'verified txs: <br><br>';
         $listCount = 0;
         foreach ($list as $test)
-        {$listCount++;$tokens = $test->payment->goal_tokens / 4;
-            echo "$listCount: $test->hash, $test->from, $tokens and (bnb) $test->amount<br>";
+        {$listCount++;$tokens = $test->payment->goal_tokens / 4;$value = $test->value / 1000000000000000000;
+            echo "$listCount: $test->hash, $test->from, (goal) $tokens and (bnb) $value<br>";
         }
 
         echo '<br><br>not sent: <br><br>';
         $notSent = array_udiff($list, $resul2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
         $notSentCount = 0;
         foreach ($notSent as $test)
-        {$notSentCount++;$tokens = $test->payment->goal_tokens / 4;
-            echo "$notSentCount: $test->hash, $test->from, $tokens and $test->amount<br>";
+        {$notSentCount++;$tokens = $test->payment->goal_tokens / 4;$value = $test->value / 10000000;
+            echo "$notSentCount: $test->hash, $test->from, (goal) $tokens and (goal) $value<br>";
         }
 
         $users_staking = [];
