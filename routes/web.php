@@ -48,7 +48,7 @@ Route::middleware('admin')->group(function ()
         {
             foreach ($payments as $payment)
             {
-                if ($payment->txHash === $tx->hash)
+                if (strtolower($payment->txHash) === strtolower($tx->hash))
                 {
                     $tx->payment = $payment;
                     $list[] = $tx;
@@ -70,18 +70,20 @@ Route::middleware('admin')->group(function ()
                 $list2[] = $test;
         }
 
-        $need_reward = array_udiff($list2, $result2, fn ($a, $b) => $a->from <=> $b->to);
-
-        echo 'missing payments: ', count($need_reward), '<br><br>';
-
-        echo 'staking count: ', count($users_staking), '<br><br>staking users:<br><br>';
-
+        $need_reward = array_udiff($list2, $result2, fn ($a, $b) => strtolower($a->from) <=> ($b->to));
+//dd(array_udiff($list2,$need_reward, fn ($a, $b) => $a->from <=> $b->to));
+	echo 'all payments: ', count($list), ' ',
+	     'blab is back: ', count($list2), ' ',
+	     'missing payments: ', count($need_reward), ' ',
+	     'staking count: ', count($users_staking), '<br><br>',
+	     'staking users:<br><br>';
+$count=0;
         foreach ($need_reward as $tx)
-        {
+        {$count++;
             $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
-            echo "$address,$tx->to,$amount<br>";
+            echo "$count: $address,$tx->from,$amount<br>";
         }
-
+echo "count: $count";
         // replace 0xFB2B954d045733C084eC9beBe9e01176929f5F84 with 0xfef5F1dE0a6f6b5E5243548C0951823AFC9fE499
     });
 });
