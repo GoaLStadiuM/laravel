@@ -101,7 +101,7 @@ Route::middleware('admin')->group(function ()
 
         echo 'staking users1:<br><br>';
         $count1=0;
-        foreach ($need_reward as $tx)
+        foreach ($need_reward1 as $tx)
         {$count1++;
             $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
             echo "$address,$tx->from,$amount<br>";
@@ -110,7 +110,7 @@ Route::middleware('admin')->group(function ()
 
         echo 'staking users2:<br><br>';
         $count2=0;
-        foreach ($need_reward as $tx)
+        foreach ($need_reward2 as $tx)
         {$count2++;
             $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
             echo "$address,$tx->from,$amount<br>";
