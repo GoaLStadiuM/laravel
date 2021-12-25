@@ -38,14 +38,27 @@ Route::middleware('admin')->group(function ()
     Route::get('/test', function()
     {
         $payments = DB::table('tokenpayments')->get();
-        $result = json_decode(file_get_contents("https://api.bscscan.com/api?module=account&action=txlist&address=0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA&apikey=C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX"))->result;
-        $result2 = json_decode(file_get_contents("https://api.bscscan.com/api?module=account&action=tokentx&address=0x7f27Ddb0159B8433571D990d24271DDbe345286E&apikey=C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX"))->result;
-
+        $paid = json_decode(file_get_contents('./paid.json'))->result;
+        $sent = json_decode(file_get_contents('./sent.json'))->result;
+dump($paid);dump($sent);
         $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
-        $duplicatedPayment = [];
 
+
+        $notSent = array_udiff($paid, $sent, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+
+dump($notSent);
+
+
+
+
+
+
+/*
+
+
+        $duplicatedPayment = [];
         $list = [];
-        foreach ($result as $tx)
+        foreach ($paid as $tx)
         {
             foreach ($payments as $payment)
             {
@@ -67,7 +80,7 @@ Route::middleware('admin')->group(function ()
         }
 
         echo '<br><br>not sent: <br><br>';
-        $notSent = array_udiff($list, $result2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+        $notSent = array_udiff($list, $sent, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
         $notSentCount = 0;
         foreach ($notSent as $test)
         {$notSentCount++;$tokens = $test->payment->goal_tokens / 4;$value = $test->value / 10000000;
@@ -96,8 +109,8 @@ Route::middleware('admin')->group(function ()
                 $list3[] = $test;
         }
 
-        $need_reward1 = array_udiff($list2, $result2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
-        $need_reward2 = array_udiff($list3, $result2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+        $need_reward1 = array_udiff($list2, $sent, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+        $need_reward2 = array_udiff($list3, $sent, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
 
         echo 'staking users1:<br><br>';
         $count1=0;
@@ -115,7 +128,7 @@ Route::middleware('admin')->group(function ()
             $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
             echo "$address,$tx->from,$amount<br>";
         }
-        echo "count2: $count2";
+        echo "count2: $count2";*/
         // replace 0xFB2B954d045733C084eC9beBe9e01176929f5F84 with 0xfef5F1dE0a6f6b5E5243548C0951823AFC9fE499
     });
 });
