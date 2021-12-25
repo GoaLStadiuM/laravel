@@ -67,7 +67,7 @@ Route::middleware('admin')->group(function ()
         }
 
         echo '<br><br>not sent: <br><br>';
-        $notSent = array_udiff($list, $resul2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+        $notSent = array_udiff($list, $result2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
         $notSentCount = 0;
         foreach ($notSent as $test)
         {$notSentCount++;$tokens = $test->payment->goal_tokens / 4;$value = $test->value / 10000000;
