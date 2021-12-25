@@ -56,28 +56,6 @@ Route::middleware('admin')->group(function ()
             }
         }
 
-        $need_reward = array_udiff($list, $result2, fn ($a, $b) => $a->id <=> $b->id);
-/*
-        $missing_payments = 0;
-
-        foreach ($result2 as $tx)
-        {
-            foreach ($list as $test)
-            {
-                if ($tx->to === $test[0]->from)
-                    continue;
-
-                $list2[] = [
-                    'gnosis_tx' => $tx,
-                    'bnb_tx' => $test[1],
-                    'payment' => $test[0]
-                ];
-                $missing_payments++;
-            }
-        }
-*/
-        echo "missing payments: $need_reward<br><br>";
-
         $stakings = DB::table('stakings')->get();
         $users_staking = [];
 
@@ -86,14 +64,24 @@ Route::middleware('admin')->group(function ()
             $users_staking[$staking->user_id] = 0;
         }
 
+        foreach ($list as $test)
+        {
+            if (array_key_exists($test->payment->user_id, $users_staking))
+                $list2[] = $test;
+        }
+
+        $need_reward = array_udiff($list2, $result2, fn ($a, $b) => $a->from <=> $b->to);
+
+        echo 'missing payments: ', count($need_reward), '<br><br>';
+
         echo 'staking count: ', count($users_staking), '<br><br>staking users:<br><br>';
 
-        $final_count = 0;
-
-        foreach ($list2 as $test)
+        foreach ($need_reward as $tx)
         {
-
+            $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
+            echo "$address,$tx->to,$amount<br>";
         }
+
         // replace 0xFB2B954d045733C084eC9beBe9e01176929f5F84 with 0xfef5F1dE0a6f6b5E5243548C0951823AFC9fE499
     });
 });
@@ -101,9 +89,9 @@ Route::middleware('admin')->group(function ()
 /*
 $count2++;
                 $to = $test[0]->from;
-                $amount = $test[1]->goal_tokens / 4;
+
                 $total2 += $amount;
-                echo "$address,$to,$amount<br>";
+
         echo "count1: $count1, count2: $count2, goal total: $total1, total to send: $total2";
 */
 
