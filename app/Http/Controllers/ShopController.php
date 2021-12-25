@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
 use App\Models\Product;
@@ -42,22 +43,39 @@ class ShopController extends Controller
         $nft_payment->tx_hash = $tx_hash;
         $nft_payment->save();
 
-        // todo random base_character
-        $base_character = BaseCharacter::findOrFail(8);
+        $base_id = $this->lottery(BaseCharacter::get()->pluck('probability', 'id')->toArray());
 
-        $this->createCharacter($nft_payment, $base_character);
+        $this->createCharacter($nft_payment, $base_id);
 
         return response()->json([
             'ok' => true,
-            'characterIndex' => $base_character->id - 1
+            'characterIndex' => $base_id - 1
         ]);
     }
 
-    private function createCharacter(NftPayment $nft_payment, BaseCharacter $base_character): void
+    private function lottery(array $items): int
+    {
+        $max = 0;
+        foreach ($items as $key => $value)
+        {
+            $max += $value;
+            $items[$key] = $max;
+        }
+
+        $random = mt_rand(1, $max);
+
+        foreach ($items as $item => $max)
+        {
+            if ($random <= $max)
+                return $item;
+        }
+    }
+
+    private function createCharacter(NftPayment $nft_payment, int $base_id): void
     {
         $character = new Character;
         $character->user_id = Auth::user()->id;
-        $character->base_id = $base_character->id;
+        $character->base_id = $base_id;
         $character->payment_id = $nft_payment->id;
         $character->division = $nft_payment->product->division;
         $character->level = $nft_payment->product->level;

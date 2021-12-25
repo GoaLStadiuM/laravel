@@ -49,11 +49,15 @@ Route::middleware('admin')->group(function ()
             foreach ($payments as $payment)
             {
                 if ($payment->txHash === $tx->hash)
-                    $list[] = [ $tx, $payment ];
+                {
+                    $tx->payment = $payment;
+                    $list[] = $tx;
+                }
             }
         }
 
-        echo '<br><br>Excel:<br><br>';
+        $need_reward = array_udiff($list, $result2, fn ($a, $b) => $a->id <=> $b->id);
+/*
         $missing_payments = 0;
 
         foreach ($result2 as $tx)
@@ -71,8 +75,8 @@ Route::middleware('admin')->group(function ()
                 $missing_payments++;
             }
         }
-dd('hi');
-        echo "missing payments: $missing_payments<br><br>";
+*/
+        echo "missing payments: $need_reward<br><br>";
 
         $stakings = DB::table('stakings')->get();
         $users_staking = [];
@@ -82,7 +86,14 @@ dd('hi');
             $users_staking[$staking->user_id] = 0;
         }
 
-        echo 'staking count: ', count($users_staking), '<br>';
+        echo 'staking count: ', count($users_staking), '<br><br>staking users:<br><br>';
+
+        $final_count = 0;
+
+        foreach ($list2 as $test)
+        {
+
+        }
         // replace 0xFB2B954d045733C084eC9beBe9e01176929f5F84 with 0xfef5F1dE0a6f6b5E5243548C0951823AFC9fE499
     });
 });
