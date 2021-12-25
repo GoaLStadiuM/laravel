@@ -40,53 +40,82 @@ Route::middleware('admin')->group(function ()
         $payments = DB::table('tokenpayments')->get();
         $result = json_decode(file_get_contents("https://api.bscscan.com/api?module=account&action=txlist&address=0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA&apikey=C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX"))->result;
         $result2 = json_decode(file_get_contents("https://api.bscscan.com/api?module=account&action=tokentx&address=0x7f27Ddb0159B8433571D990d24271DDbe345286E&apikey=C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX"))->result;
-        $list = [];
-        $list2 = [];
-        $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
 
+        $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
+        $duplicatedPayment = [];
+
+        $list = [];
         foreach ($result as $tx)
         {
             foreach ($payments as $payment)
             {
                 if (strtolower($payment->txHash) === strtolower($tx->hash))
-                {
+                {$duplicatedPayment[] = strtolower($tx->hash);
                     $tx->payment = $payment;
                     $list[] = $tx;
                 }
             }
         }
 
-        $stakings = DB::table('stakings')->get();
+        dump(array_count_values($duplicatedPayment));
+
+        echo 'verified txs: <br><br>';
+        $listCount = 0;
+        foreach ($list as $test)
+        {$listCount++;$tokens = $test->payment->goal_tokens / 4;
+            echo "$listCount: $test->hash, $test->from, $tokens and (bnb) $test->amount<br>";
+        }
+
+        echo '<br><br>not sent: <br><br>';
+        $notSent = array_udiff($list, $resul2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+        $notSentCount = 0;
+        foreach ($notSent as $test)
+        {$notSentCount++;$tokens = $test->payment->goal_tokens / 4;
+            echo "$notSentCount: $test->hash, $test->from, $tokens and $test->amount<br>";
+        }
+
         $users_staking = [];
-$stake_dupe=[];
+
+        $stakings = DB::table('stakings')->get();
         foreach ($stakings as $staking)
-        {$stake_dupe[]=$staking->user_id;
+        {
             $users_staking[$staking->user_id] = 0;
-	}
-	//dump(array_count_values($stake_dupe));
-$dupes = [];
+        }
+
+        $list2 = [];
         foreach ($list as $test)
         {
-            if (array_key_exists($test->payment->user_id, $users_staking)){
-		    $list2[] = $test;
-		    $dupes[] = $test->payment->user_id;
-	    }
+            if (array_key_exists($test->payment->user_id, $users_staking))
+                $list2[] = $test;
         }
-//dd(array_count_values($dupes));
-        $need_reward = array_udiff($list2, $result2, fn ($a, $b) => strtolower($a->from) <=> ($b->to));
-//dd(array_udiff($list2,$need_reward, fn ($a, $b) => $a->from <=> $b->to));
-	echo 'all payments: ', count($list), ' ',
-	     'blab is back: ', count($list2), ' ',
-	     'missing payments: ', count($need_reward), ' ',
-	     'staking count: ', count($users_staking), '<br><br>',
-	     'staking users:<br><br>';
-$count=0;
+
+        $list3 = [];
+        foreach ($list as $test)
+        {
+            if (array_key_exists($test->payment->user_id, $users_staking))
+                $list3[] = $test;
+        }
+
+        $need_reward1 = array_udiff($list2, $result2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+        $need_reward2 = array_udiff($list3, $result2, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+
+        echo 'staking users1:<br><br>';
+        $count1=0;
         foreach ($need_reward as $tx)
-        {$count++;
+        {$count1++;
             $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
             echo "$address,$tx->from,$amount<br>";
         }
-echo "count: $count";
+        echo "count1: $count1<br><br>";
+
+        echo 'staking users2:<br><br>';
+        $count2=0;
+        foreach ($need_reward as $tx)
+        {$count2++;
+            $amount = (($tx->payment->goal_tokens / 4) * 1.2) + 50;
+            echo "$address,$tx->from,$amount<br>";
+        }
+        echo "count2: $count2";
         // replace 0xFB2B954d045733C084eC9beBe9e01176929f5F84 with 0xfef5F1dE0a6f6b5E5243548C0951823AFC9fE499
     });
 });
