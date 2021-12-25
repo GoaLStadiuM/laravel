@@ -38,8 +38,8 @@ Route::middleware('admin')->group(function ()
     Route::get('/test', function()
     {
         $payments = DB::table('tokenpayments')->get();
-        $paid = json_decode(file_get_contents(__DIR__.'paid.json'))->result;
-        $sent = json_decode(file_get_contents(__DIR__.'sent.json'))->result;
+        $paid = json_decode(file_get_contents(__DIR__.'/paid.json'))->result;
+        $sent = json_decode(file_get_contents(__DIR__.'/sent.json'))->result;
 dump($paid);dump($sent);
         $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
 
