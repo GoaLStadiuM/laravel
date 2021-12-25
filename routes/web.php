@@ -44,7 +44,7 @@ dump($paid);dump($sent);
         $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
 
 
-        $notSent = array_udiff($paid, $sent, fn ($a, $b) => strtolower($a->from) <=> strtolower($b->to));
+        $notSent = array_udiff($paid, $sent, fn ($a, $b) => $a->from <=> $b->to);
 
 dump($notSent);
 
