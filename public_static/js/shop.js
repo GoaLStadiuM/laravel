@@ -158,8 +158,14 @@ const showCharacter = (characterIndex) => {
     closeModal.classList.add('cursor-pointer');
 
     setTimeout(() => {
-        promptCard.classList.remove('flex');
+        promptCard.classList.remove(
+            'flex',
+            'animate__animated',
+            'animate__fadeInDown',
+            'animate__faster'
+        );
         promptCard.classList.add('hidden');
+        promptCard.replaceChildren();
     }, 5000);
 
     modalCarrousel.addEventListener('click', hideCarrousel);
