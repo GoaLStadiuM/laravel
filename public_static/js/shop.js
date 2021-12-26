@@ -30,7 +30,7 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
           speed: 100,
       }),
       //Radnomtime carrousel
-      randomTime = Math.floor(Math.random() * (15000 - 8000)) + 8000,
+      randomTime = 5000,//Math.floor(Math.random() * (15000 - 8000)) + 8000,
       svgX = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 </svg>`,
@@ -113,9 +113,8 @@ console.log(postResult);
     modalCarrousel.classList.remove('hidden');
     modalCarrousel.classList.add('flex');
 
-    swiper.autoplay.start();
-console.log(randomTime);
-    setTimeout(showCharacter(7), randomTime);
+    swiper.autoplay.start();console.log('autoplay started');
+    setTimeout(showCharacter, 5000);
 }
 
 updatePrices();
@@ -160,14 +159,14 @@ products.forEach((card) => { card.addEventListener('click', (e) => { purchase(e.
  * swiper
  */
 
-const showCharacter = (characterIndex) => {
+const showCharacter = () => {
 
     swiper.autoplay.stop();
-    swiper.slideTo(characterIndex, 40, false);
+    swiper.slideToLoop(7, 1, false);
 
     const img = document.createElement('img'),
           span = document.createElement('span'),
-          card = document.querySelector('[data-index]');
+          card = document.querySelector('[data-index="' + 7 + '"]');
 
     img.src = card.src;
     img.alt = card.alt;
@@ -197,11 +196,13 @@ const showCharacter = (characterIndex) => {
     setTimeout(() => {
         promptCard.classList.remove('flex');
         promptCard.classList.add('hidden');
+        swiper.slideToLoop(0, 1, false);
     }, 10000);
 
     modalCarrousel.addEventListener('click', (e) => {
         e.stopPropagation();
         modalCarrousel.classList.remove('flex');
         modalCarrousel.classList.add('hidden');
+        swiper.slideToLoop(0, 1, false);
     });
 };

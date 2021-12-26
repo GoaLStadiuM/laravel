@@ -37,8 +37,6 @@ Route::middleware('admin')->group(function ()
 {
     Route::get('/test', function()
     {
-        //$payments = DB::table('tokenpayments')->get();
-
         $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
 
 $purchases = json_decode(file_get_contents(__DIR__.'/paid.json'))->result;
@@ -48,14 +46,29 @@ foreach ($purchases as $purchase)
 {
     foreach ($sent as $send)
     {
-        if ($purchase->from == $send->to)
-            $already[] = $purchase;
+        if (strtolower($purchase->from) === strtolower($send->to))
+            $already[] = $send;
     }
 }
-$presaleCount = count($purchases);$sentCount=count($sent);$alreadyCount=count($already);$others=$sentCount-$alreadyCount;
-echo "presale purchases: $presaleCount<br>txs sent using gnosis safe: $sentCount<br>from which only $alreadyCount were sent to presale buyers<br>txs sent to others: $others";
+$presaleCount = count($purchases);$sentCount=count($sent);$alreadyCount=count($already);$othersCount=$sentCount-$alreadyCount;$missing=$presaleCount-$alreadyCount;
+echo "<p>presale purchases: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$presaleCount = $alreadyCount (received 25% + 50 tokens) + $missing (received nothing)</p>",
+     "<p>txs sent using gnosis safe: $sentCount = 218 (received 25% + 50 tokens) + 84 (received by mistake minus 3 jasper)</p>";
+
+$others = $sent;
+foreach ($sent as $send)
+{
+    foreach ($already as $test)
+    {
+        if (strtolower($send->to) === strtolower($test->to))
+            unset($others[array_search($test,$others)]);
+    }
+}
 
 dump($already);
+dump($others);
+
+
+
 /*
 $count=0;
 foreach (array_diff($purchases,$already) as $missing)
