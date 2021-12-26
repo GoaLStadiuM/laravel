@@ -47,16 +47,16 @@ echo '2nd 3rd and 4th airdrop (2nd minus 2 wallets who got twice in first airdro
 $allPurchases = [];
 foreach ($purchases as $purchase)
 {
-    $estimatedAmount = 585 * (intval($purchase->value) / self::WEI_VALUE);
+    $estimatedAmount = 585 * (intval($purchase->value) / $wei_value);
     $estimatedGoals = 0;
 
     // days 19 and 21 (nov 2021)
     switch (date('d', $tx->timeStamp))
     {
         case '19':
-        case '20': $estimatedGoals = $estimatedAmount / self::TOKEN_PRICE_PRIVATE; break;
+        case '20': $estimatedGoals = $estimatedAmount / 0.04; break;
         case '21':
-        case '22': $estimatedGoals = $estimatedAmount / self::TOKEN_PRICE_PUBLIC; break;
+        case '22': $estimatedGoals = $estimatedAmount / 0.06; break;
         default: dd('Transaction date mismatch (2). Please, contact support.');
     }
 
