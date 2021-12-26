@@ -48,7 +48,7 @@ foreach ($purchases as $purchase)
 {
     foreach ($sent as $send)
     {
-        if ($purchase->from === $send->to)
+        if (strtolower($purchase->from) === strtolower($send->to))
             $already[] = $purchase;
     }
 }
