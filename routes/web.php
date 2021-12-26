@@ -76,7 +76,7 @@ foreach ($purchases as $purchase)
         if (strtolower($purchase->from) === strtolower($send->to)/* && abs(($value - intval($send->value)) / intval($send->value)) < 0.1*/)
         {
             $already[] = $send;
-            //continue;
+            continue;
         }
     }
 }
