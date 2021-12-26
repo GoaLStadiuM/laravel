@@ -41,13 +41,42 @@ Route::middleware('admin')->group(function ()
 
 $purchases = json_decode(file_get_contents(__DIR__.'/paid.json'))->result;
 $sent = json_decode(file_get_contents(__DIR__.'/sent.json'))->result;
+$wei_value = 1000000000000000000;
+
+echo '2nd 3rd and 4th airdrop (2nd minus 2 wallets who got twice in first airdrop):<br><br>';
+$allPurchases = [];
+foreach ($purchases as $purchase)
+{
+    $estimatedAmount = 585 * (intval($purchase->value) / self::WEI_VALUE);
+    $estimatedGoals = 0;
+
+    // days 19 and 21 (nov 2021)
+    switch (date('d', $tx->timeStamp))
+    {
+        case '19':
+        case '20': $estimatedGoals = $estimatedAmount / self::TOKEN_PRICE_PRIVATE; break;
+        case '21':
+        case '22': $estimatedGoals = $estimatedAmount / self::TOKEN_PRICE_PUBLIC; break;
+        default: dd('Transaction date mismatch (2). Please, contact support.');
+    }
+
+    $purchase->goal_tokens = $estimatedGoals;
+    $allPurchases[] = $purchase;
+    $amountToSend = $purchase->goal_tokens / 4;
+    echo "$address,$purchase->from,$amountToSend<br>";
+}
+
 $already = [];
 foreach ($purchases as $purchase)
 {
+    //$value = ($purchase->goal_tokens / 4) + 50;
     foreach ($sent as $send)
     {
-        if (strtolower($purchase->from) === strtolower($send->to))
+        if (strtolower($purchase->from) === strtolower($send->to)/* && abs(($value - intval($send->value)) / intval($send->value)) < 0.1*/)
+        {
             $already[] = $send;
+            //continue;
+        }
     }
 }
 $presaleCount = count($purchases);$sentCount=count($sent);$alreadyCount=count($already);$othersCount=$sentCount-$alreadyCount;$missing=$presaleCount-$alreadyCount;
@@ -59,7 +88,7 @@ foreach ($sent as $send)
 {
     foreach ($already as $test)
     {
-        if (strtolower($send->to) === strtolower($test->to))
+        if (strtolower($send->to) === strtolower($test->to)/* && $send->value === $test->value*/)
             unset($others[array_search($test,$others)]);
     }
 }

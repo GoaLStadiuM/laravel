@@ -3,27 +3,6 @@
   "message": "OK",
   "result": [
     {
-      "blockNumber": "13564389",
-      "timeStamp": "1639775923",
-      "hash": "0x0b6bf9327c2d47a9586caff0fd5c2f133d3a5e4e01c0fcea4bae5d48e1aeda5e",
-      "nonce": "4",
-      "blockHash": "0x8dc886eb0535c6d8375899624a59463f584c50c1bdfdf48a45e6754e295c5948",
-      "from": "0x7f27ddb0159b8433571d990d24271ddbe345286e",
-      "contractAddress": "0xbf4013ca1d3d34873a3f02b5d169e593185b0204",
-      "to": "0x7b499865fa5e1c1ce9380639958cbb0d99ee9617",
-      "value": "1000000000",
-      "tokenName": "GoaL StadiuM",
-      "tokenSymbol": "GOAL",
-      "tokenDecimal": "7",
-      "transactionIndex": "80",
-      "gas": "139871",
-      "gasPrice": "5000000000",
-      "gasUsed": "133936",
-      "cumulativeGasUsed": "10645249",
-      "input": "deprecated",
-      "confirmations": "227477"
-    },
-    {
       "blockNumber": "13564438",
       "timeStamp": "1639776070",
       "hash": "0xab06b8a48951ac491e101d6c1ccd3f84e5b118432a7705250093a2234584f341",
