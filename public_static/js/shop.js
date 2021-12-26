@@ -70,7 +70,7 @@ async function updatePrices()
 }
 
 async function purchase(product)
-{
+{/*
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product_price = product.lastElementChild;
@@ -108,7 +108,14 @@ console.log(postResult);
         swiper.autoplay.start();
 
         setTimeout(showCharacter(postResult.characterIndex), randomTime);
-    }
+    }*/
+
+    modalCarrousel.classList.remove('hidden');
+    modalCarrousel.classList.add('flex');
+
+    swiper.autoplay.start();
+console.log(randomTime);
+    setTimeout(showCharacter(postResult.characterIndex), randomTime);
 }
 
 updatePrices();
