@@ -63,7 +63,7 @@ async function updatePrices()
 
     Array.prototype.forEach.call(prices, function(el, it)
     {
-        el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(4) + ' ' + goal.symbol;
+        el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(2) + ' ' + goal.symbol;
     });
 
     setTimeout(() => updatePrices(), 60000);
