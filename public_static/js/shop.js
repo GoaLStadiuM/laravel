@@ -74,7 +74,7 @@ async function updatePrices()
 }
 
 async function purchase(product)
-{/*
+{
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product_price = product.lastElementChild;
@@ -87,7 +87,7 @@ async function purchase(product)
         receiver: shopWallet,
         contractAddress: tokenAddress
     });
-console.log(transferResult);
+
     if (!transferResult.status)
         return; // todo show error message
 
@@ -103,17 +103,9 @@ console.log(transferResult);
             tx_hash: transferResult.transactionHash
         })
     }, 10);
-console.log(postResult);
-    if (postResult.ok)
-    {
-        modalCarrousel.classList.remove('hidden');
-        modalCarrousel.classList.add('flex');
 
-        swiper = new Swiper(swiperClass, swiperOptions);
-        swiper.autoplay.start();
-
-        setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
-    }*/
+    if (!postResult.ok)
+        return; // todo show error message
 
     modalCarrousel.classList.remove('hidden');
     modalCarrousel.classList.add('flex');
@@ -121,7 +113,7 @@ console.log(postResult);
     swiper = new Swiper(swiperClass, swiperOptions);
     swiper.autoplay.start();
 
-    setTimeout(() => showCharacter(7), 5000);
+    setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
 }
 
 /*
@@ -182,6 +174,8 @@ function hideCarrousel(event)
     modalCarrousel.classList.remove('flex');
     modalCarrousel.classList.add('hidden');
     modalCarrousel.removeEventListener('click', hideCarrousel);
+    closeModal.classList.remove('cursor-pointer');
+    closeModal.classList.add('cursor-not-allowed');
     swiper = null;
 }
 
