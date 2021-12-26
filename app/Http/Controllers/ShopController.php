@@ -41,6 +41,8 @@ class ShopController extends Controller
         // TODO IMPORTANT setup task scheduling to validate txs
 
         $nft_payment = new NftPayment;
+        $nft_payment->user_id = Auth::user()->id;
+        $nft_payment->status_id = 1;
         $nft_payment->product_id = $product->id;
         $nft_payment->tx_hash = $request->input('tx_hash');
         $nft_payment->save();

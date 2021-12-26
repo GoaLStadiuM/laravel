@@ -84,7 +84,9 @@ async function purchase(product)
         contractAddress: tokenAddress
     });
 console.log(transferResult);
-//throw new Error('errorabc');
+    if (!transferResult.status)
+        return; // todo show error message
+
     let postResult = await postPurchase(postUrl, {
         method: 'post',
         headers: {
