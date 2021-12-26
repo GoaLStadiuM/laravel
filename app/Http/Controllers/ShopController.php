@@ -87,9 +87,9 @@ class ShopController extends Controller
         // character starting stats
         switch ($character->division)
         {
-            case DIVISION_1: $stats = self::DIV1_STARTING_STATS; break;
-            case DIVISION_2: $stats = self::DIV2_STARTING_STATS; break;
-            case DIVISION_3: $stats = self::DIV3_STARTING_STATS; break;
+            case self::DIVISION_1: $stats = self::DIV1_STARTING_STATS; break;
+            case self::DIVISION_2: $stats = self::DIV2_STARTING_STATS; break;
+            case self::DIVISION_3: $stats = self::DIV3_STARTING_STATS; break;
             default: abort('404', 'Unknown error. Please, contact support.');
         }
 
