@@ -162,16 +162,16 @@ const showCharacter = (characterIndex) => {
         promptCard.classList.add('hidden');
     }, 5000);
 
-    modalCarrousel.addEventListener('click', (e) => hideCarrousel(e));
+    modalCarrousel.addEventListener('click', hideCarrousel);
 };
 
-function hideCarrousel(e)
+function hideCarrousel(event)
 {
-    e.stopPropagation();
+    event.stopPropagation();
     modalCarrousel.classList.remove('flex');
     modalCarrousel.classList.add('hidden');
     swiper.slideToLoop(0, 1, false);
-    modalCarrousel.removeEventListener('click', (e) => hideCarrousel(e));
+    modalCarrousel.removeEventListener('click', hideCarrousel);
 }
 
 /*
