@@ -155,9 +155,8 @@ products.forEach((card) => { card.addEventListener('click', (e) => { purchase(e.
 
 const showCharacter = (characterIndex) => {
 
+    swiper.autoplay.stop();
     swiper.slideTo(characterIndex, 40, false);
-    // in case it doesn't stop
-    //swiper.autoplay.stop();
 
     const img = document.createElement('img'),
           span = document.createElement('span'),
