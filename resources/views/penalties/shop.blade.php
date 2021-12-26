@@ -221,7 +221,6 @@
                 <button id="btn-login-metamask">Metamask</button>
                 <button id="btn-login-walletconnect">WalletConnect</button>
             </div>
-            <div id="prompt-card" class="absolute bg-slate-100 flex-col h-auto w-28 top-10 right-10 hidden rounded-md shadow-md z-40"></div>
         </div>
         <!-- Modal Shop /start -->
         <div id="modal-carrousel" class="bg-modal bg-opacity-60 fixed top-0 left-0 w-full h-full hidden items-center justify-center z-40">

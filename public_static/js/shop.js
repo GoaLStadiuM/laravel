@@ -131,7 +131,7 @@ const showCharacter = (characterIndex) => {
     const img = document.createElement('img'),
           span = document.createElement('span'),
           card = document.querySelector('[data-index="' + characterIndex + '"]');
-console.log(card);
+
     img.src = card.src;
     img.alt = card.alt;
     img.classList.add(
@@ -143,7 +143,7 @@ console.log(card);
 
     span.innerText = 'Added to your team';
     span.classList.add('text-center', 'text-slate-800', 'my-2');
-console.log(promptCard);
+
     promptCard.appendChild(img);
     promptCard.appendChild(span);
     promptCard.classList.remove('hidden');
