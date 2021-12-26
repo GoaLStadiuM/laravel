@@ -56,6 +56,8 @@ stroke="currentColor">
             })
             .catch(error => console.error(error.message));
 
+updatePrices();
+
 // product prices
 async function updatePrices()
 {
@@ -107,17 +109,70 @@ console.log(postResult);
 
         swiper.autoplay.start();
 
-        setTimeout(showCharacter(postResult.characterIndex), randomTime);
+        setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
     }*/
 
     modalCarrousel.classList.remove('hidden');
     modalCarrousel.classList.add('flex');
 
     swiper.autoplay.start();console.log('autoplay started');
-    setTimeout(showCharacter, 5000);
+    setTimeout(() => showCharacter(7), 5000);
 }
 
-updatePrices();
+/*
+ * swiper
+ */
+
+const showCharacter = (characterIndex) => {
+
+    swiper.autoplay.stop();
+    swiper.slideToLoop(characterIndex, 1, false);
+
+    const img = document.createElement('img'),
+          span = document.createElement('span'),
+          card = document.querySelector('[data-index="' + characterIndex + '"]');
+console.log(card);
+    img.src = card.src;
+    img.alt = card.alt;
+    img.classList.add(
+        'w-full',
+        'h-full',
+        'object-cover',
+        'rounded-t-md'
+    );
+
+    span.innerText = 'Added to your team';
+    span.classList.add('text-center', 'text-slate-800', 'my-2');
+console.log(promptCard);
+    promptCard.appendChild(img);
+    promptCard.appendChild(span);
+    promptCard.classList.remove('hidden');
+    promptCard.classList.add(
+        'flex',
+        'animate__animated',
+        'animate__fadeInDown',
+        'animate__faster'
+    );
+
+    closeModal.classList.remove('cursor-not-allowed');
+    closeModal.classList.add('cursor-pointer');
+
+    setTimeout(() => {
+        promptCard.classList.remove('flex');
+        promptCard.classList.add('hidden');
+    }, 5000);
+
+    modalCarrousel.addEventListener('click', (e) => hideCarrousel(e));
+};
+
+function hideCarrousel(e)
+{
+    e.stopPropagation();
+    modalCarrousel.classList.remove('flex');
+    modalCarrousel.classList.add('hidden');
+    swiper.slideToLoop(0, 1, false);
+    modalCarrousel.removeEventListener('click', (e) => hideCarrousel(e));
+}
 
 /*
  * shop ux
@@ -154,55 +209,3 @@ btnLThird.addEventListener('click', () => { thirdDiv.scrollLeft -= 152; });
 btnRThird.addEventListener('click', () => { thirdDiv.scrollLeft += 152; });
 
 products.forEach((card) => { card.addEventListener('click', (e) => { purchase(e.currentTarget); }); });
-
-/*
- * swiper
- */
-
-const showCharacter = () => {
-
-    swiper.autoplay.stop();
-    swiper.slideToLoop(7, 1, false);
-
-    const img = document.createElement('img'),
-          span = document.createElement('span'),
-          card = document.querySelector('[data-index="' + 7 + '"]');
-
-    img.src = card.src;
-    img.alt = card.alt;
-    img.classList.add(
-        'w-full',
-        'h-full',
-        'object-cover',
-        'rounded-t-md'
-    );
-
-    span.innerText = 'Added to your team';
-    span.classList.add('text-center', 'text-slate-800', 'my-2');
-
-    promptCard.appendChild(img);
-    promptCard.appendChild(span);
-    promptCard.classList.remove('hidden');
-    promptCard.classList.add(
-        'flex',
-        'animate__animated',
-        'animate__fadeInDown',
-        'animate__faster'
-    );
-
-    closeModal.classList.remove('cursor-not-allowed');
-    closeModal.classList.add('cursor-pointer');
-
-    setTimeout(() => {
-        promptCard.classList.remove('flex');
-        promptCard.classList.add('hidden');
-        swiper.slideToLoop(0, 1, false);
-    }, 10000);
-
-    modalCarrousel.addEventListener('click', (e) => {
-        e.stopPropagation();
-        modalCarrousel.classList.remove('flex');
-        modalCarrousel.classList.add('hidden');
-        swiper.slideToLoop(0, 1, false);
-    });
-};
