@@ -48,10 +48,12 @@ foreach ($purchases as $purchase)
 {
     foreach ($sent as $send)
     {
-        if (strtolower($purchase->from) === strtolower($send->to))
+        if ($purchase->from == $send->to)
             $already[] = $purchase;
     }
 }
+$presaleCount = count($purchases);$sentCount=count($sent);$alreadyCount=count($already);$others=$sentCount-$alreadyCount;
+echo "presale purchases: $presaleCount<br>txs sent using gnosis safe: $sentCount<br>from which only $alreadyCount were sent to presale buyers<br>txs sent to others: $others";
 
 dump($already);
 /*
