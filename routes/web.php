@@ -51,7 +51,7 @@ foreach ($purchases as $purchase)
     $estimatedGoals = 0;
 
     // days 19 and 21 (nov 2021)
-    switch (date('d', $tx->timeStamp))
+    switch (date('d', $purchase->timeStamp))
     {
         case '19':
         case '20': $estimatedGoals = $estimatedAmount / 0.04; break;
