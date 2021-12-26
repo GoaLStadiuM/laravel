@@ -115,7 +115,7 @@ console.log(postResult);
 
     swiper.autoplay.start();
 console.log(randomTime);
-    setTimeout(showCharacter(postResult.characterIndex), randomTime);
+    setTimeout(showCharacter(7), randomTime);
 }
 
 updatePrices();
