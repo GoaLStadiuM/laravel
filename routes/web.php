@@ -89,7 +89,7 @@ foreach ($sent as $send)
 {
     foreach ($already as $test)
     {
-        if (strtolower($send->to) === strtolower($test->to)/* && $send->value === $test->value*/)
+        if (strtolower($send->to) === strtolower($test->to) && $send->value === $test->value)
             unset($others[array_search($test,$others)]);
     }
 }
