@@ -21,14 +21,14 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + tokenAddress,
       shopWallet = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
       postUrl = 'https://play.goalstadium.com/penalties/shop/purchase',
-      //Initializing swiper
-      swiper = new Swiper('.mySwiper', {
+      swiperOptions = {
           effect: 'cards',
           loop: true,
           allowTouchMove: false,
           autoplay: 1,
           speed: 100,
-      }),
+      },
+      swiperClass = '.mySwiper',
       //Radnomtime carrousel
       randomTime = 5000,//Math.floor(Math.random() * (15000 - 8000)) + 8000,
       svgX = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,6 +55,8 @@ stroke="currentColor">
                 throw new Error(res.status);
             })
             .catch(error => console.error(error.message));
+
+    let swiper = null;
 
 updatePrices();
 
@@ -107,6 +109,7 @@ console.log(postResult);
         modalCarrousel.classList.remove('hidden');
         modalCarrousel.classList.add('flex');
 
+        swiper = new Swiper(swiperClass, swiperOptions);
         swiper.autoplay.start();
 
         setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
@@ -115,7 +118,9 @@ console.log(postResult);
     modalCarrousel.classList.remove('hidden');
     modalCarrousel.classList.add('flex');
 
-    swiper.autoplay.start();console.log('autoplay started');
+    swiper = new Swiper(swiperClass, swiperOptions);
+    swiper.autoplay.start();
+
     setTimeout(() => showCharacter(7), 5000);
 }
 
@@ -176,8 +181,8 @@ function hideCarrousel(event)
     event.stopPropagation();
     modalCarrousel.classList.remove('flex');
     modalCarrousel.classList.add('hidden');
-    swiper.slideToLoop(0, 1, false);
     modalCarrousel.removeEventListener('click', hideCarrousel);
+    swiper = null;
 }
 
 /*
