@@ -33,9 +33,10 @@ class ShopController extends Controller
     public function purchase(Request $request)
     {
         if (!$request->filled('product_id') || !$request->filled('tx_hash'))
-            abort(404);
+            abort(404, 'Missing params.');
 
         $product = Product::findOrFail($request->input('product_id'));
+        $base_id = $this->lottery(BaseCharacter::get()->pluck('probability', 'id')->toArray());
 
         // TODO IMPORTANT setup task scheduling to validate txs
 
@@ -43,8 +44,6 @@ class ShopController extends Controller
         $nft_payment->product_id = $product->id;
         $nft_payment->tx_hash = $request->input('tx_hash');
         $nft_payment->save();
-
-        $base_id = $this->lottery(BaseCharacter::get()->pluck('probability', 'id')->toArray());
 
         $this->createCharacter($nft_payment, $base_id);
 
@@ -70,6 +69,8 @@ class ShopController extends Controller
             if ($random <= $max)
                 return $item;
         }
+
+        abort(500, 'Please, contact support.');
     }
 
     private function createCharacter(NftPayment $nft_payment, int $base_id): void

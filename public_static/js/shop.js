@@ -70,7 +70,7 @@ async function updatePrices()
 }
 
 async function purchase(product)
-{console.log($product);
+{
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product_price = product.lastElementChild;
@@ -93,7 +93,7 @@ console.log(transferResult);
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
         body: JSON.stringify({
-            product_id: product.dataset.productId,
+            product_id: product_price.dataset.productId,
             tx_hash: transferResult.transactionHash
         })
     }, 10);
