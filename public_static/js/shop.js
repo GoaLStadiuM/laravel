@@ -70,7 +70,7 @@ async function updatePrices()
 }
 
 async function purchase(product)
-{
+{console.log($product);
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product_price = product.lastElementChild;

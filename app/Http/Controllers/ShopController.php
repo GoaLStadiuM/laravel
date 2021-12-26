@@ -6,6 +6,7 @@ use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -31,16 +32,16 @@ class ShopController extends Controller
 
     public function purchase(Request $request)
     {
-        $product_id = $request->input('product_id');
-        $tx_hash = $request->input('tx_hash');
+        if (!$request->filled('product_id') || !$request->filled('tx_hash'))
+            abort(404);
 
-        $product = Product::findOrFail($product_id);
+        $product = Product::findOrFail($request->input('product_id'));
 
         // TODO IMPORTANT setup task scheduling to validate txs
 
         $nft_payment = new NftPayment;
-        $nft_payment->product_id = $product_id;
-        $nft_payment->tx_hash = $tx_hash;
+        $nft_payment->product_id = $product->id;
+        $nft_payment->tx_hash = $request->input('tx_hash');
         $nft_payment->save();
 
         $base_id = $this->lottery(BaseCharacter::get()->pluck('probability', 'id')->toArray());
