@@ -61,7 +61,7 @@ foreach ($purchases as $purchase)
         default: dd('Transaction date mismatch (2). Please, contact support.');
     }
 
-    $purchase->goal_tokens = round($estimatedGoals, 2);
+    $purchase->goal_tokens = number_format($estimatedGoals, 2, '.', '');
     $allPurchases[] = $purchase;
     $amountToSend = $purchase->goal_tokens / 4;
     echo "$address,$purchase->from,$amountToSend<br>";
