@@ -54,7 +54,7 @@ foreach ($purchases as $purchase)
 }
 
 dump($already);
-
+/*
 $count=0;
 foreach (array_diff($purchases,$already) as $missing)
 {
@@ -62,7 +62,7 @@ foreach (array_diff($purchases,$already) as $missing)
     echo "$count: $missing->from<br>";
 }
 
-
+*/
 /*
 
 
