@@ -44,7 +44,7 @@ $sent = json_decode(file_get_contents(__DIR__.'/sent.json'))->result;
 $wei_value1 = 1000000000000000000;
 $wei_value2 = 10000000;
 
-echo '2nd 3rd and 4th airdrop (2nd minus 2 wallets who got twice in first airdrop):<br><br>';
+//echo '2nd 3rd and 4th airdrop (2nd minus 2 wallets who got twice in first airdrop):<br><br>';
 $allPurchases = [];
 foreach ($purchases as $purchase)
 {
@@ -75,7 +75,7 @@ foreach ($purchases as $purchase)
     {
         if (strtolower($purchase->from) === strtolower($send->to))
         {$value = intval($send->value) / $wei_value2;
-            echo "$purchase->from purchased $purchase->goal_tokens and already got $value<br>";
+            echo "$purchase->from purchased <b>$purchase->goal_tokens</b> and already got <b>$value</b><br>";
             $already[] = $send;
             continue;
         }
