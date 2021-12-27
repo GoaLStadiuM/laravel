@@ -6603,26 +6603,6 @@
         "confirmations": "949695"
       },
       {
-        "blockNumber": "12842135",
-        "timeStamp": "1637523349",
-        "hash": "0x880de9f9f36d257dd7d3a1c34c9495c51362684e7b118ab2aab8a30df5ae7290",
-        "nonce": "5419",
-        "blockHash": "0xf688cecb9de455f6bd0c113deab586bd1e81f86b511e31ab819319160fddc6f2",
-        "transactionIndex": "147",
-        "from": "0x9ccb19f3099e7037d5a7e4ad0eca47132e26654a",
-        "to": "0x55b42bbb7cc8c531bd4fe42c5067de487cde45ca",
-        "value": "169319336268201824",
-        "gas": "31500",
-        "gasPrice": "5000000000",
-        "isError": "0",
-        "txreceipt_status": "1",
-        "input": "0x",
-        "contractAddress": "",
-        "cumulativeGasUsed": "23341200",
-        "gasUsed": "21000",
-        "confirmations": "949691"
-      },
-      {
         "blockNumber": "12842157",
         "timeStamp": "1637523415",
         "hash": "0x1ddf37bd20c4dfefaf1760c82b21e43aa94a4d5819102f15c595b309695a26f1",

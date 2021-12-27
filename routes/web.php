@@ -64,17 +64,17 @@ foreach ($purchases as $purchase)
     $purchase->goal_tokens = number_format($estimatedGoals, 2, '.', '');
     $allPurchases[] = $purchase;
     $amountToSend = $purchase->goal_tokens / 4;
-    echo "$address,$purchase->from,$amountToSend<br>";
+    //echo "$address,$purchase->from,$amountToSend<br>";
 }
 
 $already = [];
 foreach ($purchases as $purchase)
 {
-    $value = ($purchase->goal_tokens / 4) + 50;
     foreach ($sent as $send)
-    {echo abs(($value - intval($send->value)) / intval($send->value)), '<br>';
-        if (strtolower($purchase->from) === strtolower($send->to) && abs(($value - intval($send->value)) / intval($send->value)) < 0.1)
-        {
+    {
+        if (strtolower($purchase->from) === strtolower($send->to))
+        {$value = $send->value / $wei_value;
+            echo "$purchase->from purchased $purchase->goal_tokens and already got $value";
             $already[] = $send;
             continue;
         }
