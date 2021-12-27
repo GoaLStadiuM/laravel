@@ -64,10 +64,10 @@ foreach ($purchases as $purchase)
 
     $purchase->goal_tokens = number_format($estimatedGoals, 2, '.', '');
     $allPurchases[] = $purchase;
-    $amountToSend = $purchase->goal_tokens / 4;
-    //echo "$address,$purchase->from,$amountToSend<br>";
+    $amountToSend = ((($purchase->goal_tokens / 4) * 1.2) + 50) + ($purchase->goal_tokens / 4);
+    echo "$address,$purchase->from,$amountToSend<br>";
 }
-
+/*
 $already = [];$count=0;
 foreach ($purchases as $purchase)
 {
