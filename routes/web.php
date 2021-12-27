@@ -75,7 +75,7 @@ foreach ($purchases as $purchase)
     {
         if (strtolower($purchase->from) === strtolower($send->to))
         {$value = intval($send->value) / $wei_value2;$count++;$val = ($value - 50) * 4;
-            echo "$count: $purchase->from purchased <b>$purchase->goal_tokens</b> and already got (<b>$value</b> - 50) * 5 = <b>$val</b><br>";
+            echo "$count: $purchase->from purchased <b>$purchase->goal_tokens</b> and already got (<b>$value</b> - 50) * 4 = <b>$val</b><br>";
             $already[] = $send;
             continue;
         }
