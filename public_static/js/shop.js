@@ -19,7 +19,7 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       promptCard = document.querySelector('#prompt-card'),
       closeModal = document.querySelector('#close-carrousel'),
       myToken = 'https://api.pancakeswap.info/api/v2/tokens/' + tokenAddress,
-      shopWallet = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D',
+      shopWallet = '0x4e68EBbB3cf4e107315996a960e2437301563859',
       postUrl = 'https://play.goalstadium.com/penalties/shop/purchase',
       swiperOptions = {
           effect: 'cards',
@@ -30,7 +30,7 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       },
       swiperClass = '.mySwiper',
       //Radnomtime carrousel
-      randomTime = 5000,//Math.floor(Math.random() * (15000 - 8000)) + 8000,
+      randomTime = Math.floor(Math.random() * (15000 - 8000)) + 8000,
       svgX = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 </svg>`,

@@ -19,7 +19,7 @@ class ShopController extends Controller
                   DIV3_STARTING_STATS = 57,
                   BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX',
                   BNB_WALLET = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA',
-                  SHOP_WALLET = '0x695BB7828F8FF8804F593F6DE63c474DDfAD6c3D';
+                  SHOP_WALLET = '0x4e68EBbB3cf4e107315996a960e2437301563859';
 
     private stdClass $currentTx;
 

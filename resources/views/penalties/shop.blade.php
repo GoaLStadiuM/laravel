@@ -218,7 +218,7 @@
             </svg>
             <div class="md:w-1/4 w-9/12  py-5 px-8 wallet-choice">
                 <p>Choose a provider:</p>
-                <button id="btn-login-metamask">Metamask</button>
+                <button id="btn-login-metamask">Metamask</button><br>
                 <button id="btn-login-walletconnect">WalletConnect</button>
             </div>
         </div>

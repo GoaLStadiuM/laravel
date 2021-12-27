@@ -15,7 +15,7 @@
             @include('layouts.svg.soccerball')
             <span>0.00 GLS</span>
         </a>
-        <a class="fs-p earn-btn menu-top-btn-big position-relative" href="">Play2Earn</a>
+        <a class="fs-p earn-btn menu-top-btn-big position-relative" href="{{ route('menu') }}">Play2Earn</a>
         <a class="fs-p wallet-btn menu-top-btn-big" href="">
             <span>WALLET</span>
             @include('layouts.svg.wallet')

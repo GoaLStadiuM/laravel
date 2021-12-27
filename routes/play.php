@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::domain('play.' . config('app.domain'))->group(function ()
 {
-    Route::middleware('admin')->group(function () {
-        Route::get('/penalties', [ GameController::class, 'menu' ])->name('menu')->middleware(['auth']);
-        Route::get('/penalties/shop', [ ShopController::class, 'shop' ])->name('shop')->middleware(['auth']);
-        Route::post('/penalties/shop/purchase', [ ShopController::class, 'purchase' ])->middleware(['auth']);
+    Route::middleware('auth')->group(function () {
+        Route::get('/penalties', [ GameController::class, 'menu' ])->name('menu');
+        Route::get('/penalties/shop', [ ShopController::class, 'shop' ])->name('shop');
+        Route::post('/penalties/shop/purchase', [ ShopController::class, 'purchase' ]);
     });
 });
