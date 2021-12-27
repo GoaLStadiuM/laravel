@@ -40,7 +40,7 @@ Route::middleware('admin')->group(function ()
 $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
 $purchases = json_decode(file_get_contents(__DIR__.'/paid.json'))->result;
 $sent = json_decode(file_get_contents(__DIR__.'/sent.json'))->result;
-$test = json_decode(file_get_contents(__DIR__.'/test.json'))->result;
+$test = json_decode(file_get_contents(__DIR__.'/test.json'));
 $wei_value1 = 1000000000000000000;
 $wei_value2 = 10000000;
 
