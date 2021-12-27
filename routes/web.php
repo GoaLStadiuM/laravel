@@ -41,13 +41,14 @@ Route::middleware('admin')->group(function ()
 
 $purchases = json_decode(file_get_contents(__DIR__.'/paid.json'))->result;
 $sent = json_decode(file_get_contents(__DIR__.'/sent.json'))->result;
-$wei_value = 1000000000000000000;
+$wei_value1 = 1000000000000000000;
+$wei_value2 = 10000000;
 
 echo '2nd 3rd and 4th airdrop (2nd minus 2 wallets who got twice in first airdrop):<br><br>';
 $allPurchases = [];
 foreach ($purchases as $purchase)
 {
-    $estimatedAmount = 585 * (intval($purchase->value) / $wei_value);
+    $estimatedAmount = 585 * (intval($purchase->value) / $wei_value1);
     $estimatedGoals = 0;
 
     // days 19 and 21 (nov 2021)
@@ -73,7 +74,7 @@ foreach ($purchases as $purchase)
     foreach ($sent as $send)
     {
         if (strtolower($purchase->from) === strtolower($send->to))
-        {$value = intval($send->value) / $wei_value;
+        {$value = intval($send->value) / $wei_value2;
             echo "$purchase->from purchased $purchase->goal_tokens and already got $value<br>";
             $already[] = $send;
             continue;
