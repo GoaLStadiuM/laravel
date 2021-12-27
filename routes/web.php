@@ -37,13 +37,23 @@ Route::middleware('admin')->group(function ()
 {
     Route::get('/test', function()
     {
-        $address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
-
+$address = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204';
 $purchases = json_decode(file_get_contents(__DIR__.'/paid.json'))->result;
 $sent = json_decode(file_get_contents(__DIR__.'/sent.json'))->result;
+$test = json_decode(file_get_contents(__DIR__.'/test.json'))->result;
 $wei_value1 = 1000000000000000000;
 $wei_value2 = 10000000;
 
+foreach ($sent as $send)
+{
+    foreach ($test as $abc)
+    {
+        if ($send->to === $abc->address)
+            echo 'already sent';
+    }
+}
+
+/*
 //echo '2nd 3rd and 4th airdrop (2nd minus 2 wallets who got twice in first airdrop):<br><br>';
 $allPurchases = [];
 foreach ($purchases as $purchase)
