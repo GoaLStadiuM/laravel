@@ -72,7 +72,7 @@ foreach ($purchases as $purchase)
 {
     $value = ($purchase->goal_tokens / 4) + 50;
     foreach ($sent as $send)
-    {dump(abs(($value - intval($send->value)) / intval($send->value)));
+    {echo abs(($value - intval($send->value)) / intval($send->value)), '<br>';
         if (strtolower($purchase->from) === strtolower($send->to) && abs(($value - intval($send->value)) / intval($send->value)) < 0.1)
         {
             $already[] = $send;
