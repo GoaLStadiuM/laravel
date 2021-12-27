@@ -68,14 +68,14 @@ foreach ($purchases as $purchase)
     //echo "$address,$purchase->from,$amountToSend<br>";
 }
 
-$already = [];
+$already = [];$count=0;
 foreach ($purchases as $purchase)
 {
     foreach ($sent as $send)
     {
         if (strtolower($purchase->from) === strtolower($send->to))
-        {$value = intval($send->value) / $wei_value2;
-            echo "$purchase->from purchased <b>$purchase->goal_tokens</b> and already got <b>$value</b><br>";
+        {$value = intval($send->value) / $wei_value2;$count++;
+            echo "$count: $purchase->from purchased <b>$purchase->goal_tokens</b> and already got <b>$value</b><br>";
             $already[] = $send;
             continue;
         }
