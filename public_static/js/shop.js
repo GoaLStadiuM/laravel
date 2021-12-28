@@ -111,9 +111,9 @@ async function purchase(product)
         contractAddress: tokenAddress
     })
 
-        .catch(error => hideCarrousel());
+        .catch(() => hideCarrousel());
 
-    if (!transferResult.status)
+    if (!transferResult?.status)
         return showError('Purchase failed.');
 
     let postResult = await postPurchase(postUrl, {
