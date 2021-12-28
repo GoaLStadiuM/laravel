@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Character;
 use App\Models\NftPayment;
 use App\Models\Training;
 use App\Models\TrainingSession;
