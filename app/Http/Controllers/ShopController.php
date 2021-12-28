@@ -17,13 +17,8 @@ class ShopController extends Controller
                   DIV1_STARTING_STATS = 95,
                   DIV2_STARTING_STATS = 76,
                   DIV3_STARTING_STATS = 57,
-                  BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX',
-                  BNB_WALLET = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA',
-                  SHOP_WALLET = '0x4e68EBbB3cf4e107315996a960e2437301563859',
                   CONTRACT = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
                   PRICE_API = 'https://api.pancakeswap.info/api/v2/tokens/';
-
-    private stdClass $currentTx;
 
     public function shop()
     {
@@ -67,7 +62,7 @@ class ShopController extends Controller
             $items[$key] = $max;
         }
 
-        $random = mt_rand(1, $max);
+        $random = random_int(1, $max);
 
         foreach ($items as $item => $max)
         {
@@ -96,7 +91,7 @@ class ShopController extends Controller
             default: abort('404', 'Unknown error. Please, contact support.');
         }
 
-        $character->strength = rand($stats * .48, $stats * .52);
+        $character->strength = random_int(($stats * .48), ($stats * .52));
         $character->accuracy = $stats - $character->strength;
         $character->save();
     }
@@ -137,10 +132,13 @@ class ShopController extends Controller
 
 
     const BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX',
-          WALLET_BNB = '',
+          BNB_WALLET = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA',
+          SHOP_WALLET = '0x4e68EBbB3cf4e107315996a960e2437301563859',
           TOKEN_PRICE_PRIVATE = .04,
           TOKEN_PRICE_PUBLIC = .06,
           WEI_VALUE = 1000000000000000000;
+
+    private stdClass $currentTx;
 
     public function manualHash(Request $request)
     {

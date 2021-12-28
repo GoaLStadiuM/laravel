@@ -12,9 +12,28 @@ use DateTimeZone;
 
 class GameController extends Controller
 {
+    private const STATS_CAP = 171, // a
+                  STATS_CAP_PERCENTAGE = 90; // b
+
     public function menu()
     {
         return view('penalties.menu');
+    }
+
+    public function kick(int $character_id): string
+    {
+        $character = Character::where([
+            'id' => $character_id,
+            'user_id' => Auth::user()->id
+        ])->firstOrFail();
+
+        // x        = c                                              * b                     / a
+        $percentage = (($character->strength + $character->accuracy) * STATS_CAP_PERCENTAGE) / STATS_CAP;
+
+        return response()->json([
+            'ok' => true,
+            'result' => (random_int(1, 100) <= $percentage)
+        ]);
     }
 
     public function characterList()
