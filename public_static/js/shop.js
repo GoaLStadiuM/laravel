@@ -103,7 +103,7 @@ async function purchase(product)
           product_price = product.lastElementChild,
           amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(decimals),
           bnTokens = Moralis.Units.Token(amount.toString(), decimals.toString());
-console.log(bnTokens)
+console.log(amount.toString())
     let transferResult = await Moralis.transfer({
         type: 'erc20',
         amount: bnTokens,
