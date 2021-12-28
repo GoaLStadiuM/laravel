@@ -25,6 +25,8 @@ async function login(provider = 'metamask')
             console.log('logged in');
             hideModal();
             showConnected();
+
+            await Moralis.enableWeb3({ provider: provider });
         })
         .catch(function (error) { console.log(error); });
 }
