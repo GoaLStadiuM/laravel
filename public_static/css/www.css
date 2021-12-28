@@ -826,6 +826,8 @@ footer {
         padding: 3rem;
     }
 
+    nav#wallet-btns { top: 1.8rem; width: 50% }
+
     .menu-open, .menu-close { top: 35px; right: 35px }
 
     section#goal_video_section { margin-top: 9rem }
@@ -1024,6 +1026,8 @@ footer {
         padding: 3rem;
     }
 
+    nav#wallet-btns { top: 1.8rem; width: 60% }
+
     .menu-open, .menu-close { top: 35px }
 
     .section-home,
@@ -1166,6 +1170,8 @@ footer {
     .menu-item-link {
         padding: 3rem;
     }
+
+    nav#wallet-btns { top: 3rem; }
 
     .menu-open, .menu-close { top: 48px }
 
