@@ -4,13 +4,13 @@ const video =
 {
     url: '',
     //background: true,
-    //autopause: true,
-    responsive: true,
     autoplay: true,
-    loop: true
+    loop: true,
+    autopause: false,
+    responsive: true
 };
 
-video.url = 'https://player.vimeo.com/video/642664731?h=0da8240066';
+video.url = 'https://player.vimeo.com/video/642664731'; // h=0da8240066
 new Vimeo.Player('goal_video', video);
 //new Vimeo.Player('training_video', video);
 //video.url = 'https://player.vimeo.com/video/642662417?h=b611e3141e';
