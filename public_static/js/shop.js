@@ -105,7 +105,7 @@ async function purchase(product)
 console.log(amount)
     let transferResult = await Moralis.transfer({
         type: 'erc20',
-        amount: Moralis.Units.Token(amount, decimals),
+        amount: amount,//Moralis.Units.Token(amount, decimals),
         receiver: shopWallet,
         contractAddress: tokenAddress
     })
