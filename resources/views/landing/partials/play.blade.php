@@ -16,24 +16,4 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <script>
-    var e = document.getElementById("ball-translation");
-    e.addEventListener("animationstart", listener, false);
-    e.addEventListener("animationend", listener, false);
-
-    e.className = "transition";
-
-    function listener(e)
-    {
-        switch(e.type) {
-            case "animationstart":
-            console.log("start");
-              break;
-            case "animationend":
-              console.log("end");
-              break;
-        }
-    }
-  </script>
+</section>
