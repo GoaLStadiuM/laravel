@@ -18,6 +18,7 @@ class CreateNftPaymentTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedTinyInteger('status_id');
             $table->unsignedTinyInteger('product_id');
+            $table->decimal('price_in_goal', 16, 7)->default(0.0000000);
             $table->string('tx_hash')->unique();
             $table->timestamps();
 

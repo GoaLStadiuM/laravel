@@ -19,7 +19,9 @@ class ShopController extends Controller
                   DIV3_STARTING_STATS = 57,
                   BSCSCAN_API_KEY = 'C3J2T5UV3WKW2B54HUKKS61JIVV7B6TBBX',
                   BNB_WALLET = '0x55b42BbB7CC8C531bd4fe42C5067de487Cde45CA',
-                  SHOP_WALLET = '0x4e68EBbB3cf4e107315996a960e2437301563859';
+                  SHOP_WALLET = '0x4e68EBbB3cf4e107315996a960e2437301563859',
+                  CONTRACT = '0xbf4013ca1d3d34873a3f02b5d169e593185b0204',
+                  PRICE_API = 'https://api.pancakeswap.info/api/v2/tokens/';
 
     private stdClass $currentTx;
 
@@ -44,6 +46,7 @@ class ShopController extends Controller
         $nft_payment->user_id = Auth::user()->id;
         $nft_payment->status_id = 1;
         $nft_payment->product_id = $product->id;
+        $nft_payment->price_in_goal = $this->getPriceInGoal($product->price);
         $nft_payment->tx_hash = $request->input('tx_hash');
         $nft_payment->save();
 
@@ -96,6 +99,16 @@ class ShopController extends Controller
         $character->strength = rand($stats * .48, $stats * .52);
         $character->accuracy = $stats - $character->strength;
         $character->save();
+    }
+
+    private function getPriceInGoal(int $price)
+    {
+        return $price / $this->getJsonObject(self::PRICE_API . self::CONTRACT)->data->price;
+    }
+
+    private function getJsonObject(string $url)
+    {
+        return json_decode(file_get_contents($url));
     }
 
 /*
