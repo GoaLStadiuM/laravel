@@ -42,7 +42,9 @@ stroke="currentColor">
 
       fetchToken = async () => { return await (await fetch(myToken)).json(); },
 
-      postPurchase = (url, options, retries) =>
+      wait = (delay) => new Promise((resolve) => setTimeout(resolve, delay)),
+
+      postPurchase = (url, options, retries = 0, delay = 0) =>
 
         fetch(url, options)
             .then(res => {
@@ -50,11 +52,18 @@ stroke="currentColor">
                     return res.json();
 
                 if (retries > 0)
-                    return postPurchase(url, options, retries - 1);
+                    return wait(delay).then(() => postPurchase(url, options, retries - 1, delay));
 
                 throw new Error(res.status);
             })
-            .catch(error => console.error(error.message));
+            .catch(error => {
+                console.error(error.message);
+
+                if (retries > 0)
+                    return wait(delay).then(() => postPurchase(url, options, retries - 1, delay));
+
+                throw new Error(error.message);
+            });
 
     let swiper = null;
 
@@ -73,10 +82,21 @@ async function updatePrices()
     setTimeout(() => updatePrices(), 60000);
 }
 
+function showError(error)
+{
+    alert(error);
+    hideCarrousel();
+}
+
 async function purchase(product)
 {
     if (!Moralis.User.current())
         return;
+
+    modalCarrousel.classList.remove('hidden');
+    modalCarrousel.classList.add('flex');
+
+    // todo show waiting animation
 
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
@@ -92,7 +112,7 @@ async function purchase(product)
     });
 
     if (!transferResult.status)
-        return; // todo show error message
+        return showError('Purchase failed.');
 
     let postResult = await postPurchase(postUrl, {
         method: 'post',
@@ -105,13 +125,10 @@ async function purchase(product)
             product_id: product_price.dataset.productId,
             tx_hash: transferResult.transactionHash
         })
-    }, 10);
+    }, 10, 3000);
 
     if (!postResult.ok)
-        return; // todo show error message
-
-    modalCarrousel.classList.remove('hidden');
-    modalCarrousel.classList.add('flex');
+        return showError('Network error. Please, contact support with your tx hash.');
 
     swiper = new Swiper(swiperClass, swiperOptions);
     swiper.autoplay.start();
@@ -171,15 +188,19 @@ const showCharacter = (characterIndex) => {
     modalCarrousel.addEventListener('click', hideCarrousel);
 };
 
-function hideCarrousel(event)
+function hideCarrousel(event = null)
 {
-    event.stopPropagation();
+    if (event)
+    {
+        event.stopPropagation();
+        modalCarrousel.removeEventListener('click', hideCarrousel);
+        closeModal.classList.remove('cursor-pointer');
+        closeModal.classList.add('cursor-not-allowed');
+        swiper = null;
+    }
+
     modalCarrousel.classList.remove('flex');
     modalCarrousel.classList.add('hidden');
-    modalCarrousel.removeEventListener('click', hideCarrousel);
-    closeModal.classList.remove('cursor-pointer');
-    closeModal.classList.add('cursor-not-allowed');
-    swiper = null;
 }
 
 /*
