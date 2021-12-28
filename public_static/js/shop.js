@@ -109,7 +109,9 @@ async function purchase(product)
         amount: Moralis.Units.Token(Number.parseFloat(product_price.dataset.price / goal.price).toFixed(decimals), decimals),
         receiver: shopWallet,
         contractAddress: tokenAddress
-    });
+    })
+
+        .catch(() => hideCarrousel());
 
     if (!transferResult.status)
         return showError('Purchase failed.');
@@ -196,6 +198,7 @@ function hideCarrousel(event = null)
         modalCarrousel.removeEventListener('click', hideCarrousel);
         closeModal.classList.remove('cursor-pointer');
         closeModal.classList.add('cursor-not-allowed');
+        swiper.slideToLoop(0, 1, false);
         swiper = null;
     }
 
