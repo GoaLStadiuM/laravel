@@ -826,6 +826,8 @@ footer {
         padding: 3rem;
     }
 
+    .menu-open, .menu-close { top: 35px; right: 35px }
+
     section#goal_video_section { margin-top: 9rem }
 
     .section-home,
@@ -1022,6 +1024,8 @@ footer {
         padding: 3rem;
     }
 
+    .menu-open, .menu-close { top: 35px }
+
     .section-home,
     .section-canvas-animation,
     .section-video-trailer,
@@ -1163,7 +1167,7 @@ footer {
         padding: 3rem;
     }
 
-    here
+    .menu-open, .menu-close { top: 48px }
 
     .section-home,
     .section-canvas-animation,
