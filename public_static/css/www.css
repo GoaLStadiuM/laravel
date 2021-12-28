@@ -107,7 +107,7 @@ nav#wallet-btns {
     display: flex;
     align-items: center
 }
-.earn-btn { padding: 1.8rem 6rem }
+.earn-btn { padding: 18px 60px }
 .earn-btn::after,.earn-btn::before {
     position: absolute;
     content: url(../img/opiver-icon.webp);
