@@ -3,8 +3,8 @@
 const video =
 {
     url: '',
-    background: true,
-    autopause: true,
+    //background: true,
+    //autopause: true,
     responsive: true,
     autoplay: true,
     loop: true
