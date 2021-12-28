@@ -28,8 +28,8 @@ class GameController extends Controller
             'user_id' => Auth::user()->id
         ])->firstOrFail();
 
-        // x        = c                                              * b                     / a
-        $percentage = (($character->strength + $character->accuracy) * STATS_CAP_PERCENTAGE) / STATS_CAP;
+        // x        = c                                              * b                           / a
+        $percentage = (($character->strength + $character->accuracy) * self::STATS_CAP_PERCENTAGE) / self::STATS_CAP;
 
         return response()->json([
             'ok' => true,
