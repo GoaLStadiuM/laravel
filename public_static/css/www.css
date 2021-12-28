@@ -1281,7 +1281,7 @@ footer {
     }
 }
 
-.aux-mobile-bar { display: none!important }
+.aux-mobile-bar { display: none }
 
 @media only screen and (max-width: 1026px) {
     .menu-top-btn-big { display: none }
