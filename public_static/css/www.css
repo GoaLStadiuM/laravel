@@ -79,7 +79,7 @@ header {
 }
 
 a#brand-logo {
-    margin-top: 3rem;
+    margin: 3rem 0 0 1rem;
     display: block;
     width: 122px;
     height: 148px;
@@ -116,8 +116,6 @@ nav#wallet-btns {
 .earn-btn::before { transform: scale(.3); left: -30px }
 .earn-btn::after { transform: scale(.3) scaleX(-1); left: 85px }
 .wb { color:#ee1240 }
-
-.menu-svg { color: #fff; transform: scale(3.5) }
 .nav-container {
     position: absolute;
     top: 0;
@@ -142,12 +140,16 @@ nav#wallet-btns {
     flex-direction: column;
     justify-content: space-around;
 }
+
 .menu-open,
 .menu-close {
     position: absolute;
     top: 62px;
     right: 50px;
-    cursor: pointer
+    cursor: pointer;
+    color: #fff;
+    transform: scale(3.5);
+    z-index: 1;
 }
 
 /* cursor */
@@ -1160,6 +1162,8 @@ footer {
     .menu-item-link {
         padding: 3rem;
     }
+
+    here
 
     .section-home,
     .section-canvas-animation,
