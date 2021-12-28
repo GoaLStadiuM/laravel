@@ -99,14 +99,14 @@ async function purchase(product)
     // todo show waiting animation
 
     const goal = (await fetchToken()).data,
-          decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals + '',
+          decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product_price = product.lastElementChild,
-          amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(2) + '',
-          amountToken = Moralis.Units.Token(amount, decimals);
-console.log(amountToken)
+          amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(decimals),
+          bnTokens = Moralis.Units.Token(amount.toString(), decimals.toString());
+console.log(bnTokens)
     let transferResult = await Moralis.transfer({
         type: 'erc20',
-        amount: amountToken,
+        amount: bnTokens,
         receiver: shopWallet,
         contractAddress: tokenAddress
     })
