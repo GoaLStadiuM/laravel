@@ -3,9 +3,7 @@
         <img src="{{ asset('img/logo.webp') }}" alt="goalstadium logo">
     </a>
     <nav id="wallet-btns">
-        <div class="aux-mobile-bar">
-            <a class="fs-p earn-btn position-relative" href="{{ route('menu') }}">Play2Earn</a>
-        </div>
+        <a class="fs-p earn-btn aux-mobile-bar position-relative" href="{{ route('menu') }}">Play2Earn</a>
         <a class="fs-p balance-btn menu-top-btn-big" href="">
             <img class="me-3" src="{{ asset('img/logo.webp') }}" width=24 alt="goal icon">
             <span>0.00 GoaL</span>

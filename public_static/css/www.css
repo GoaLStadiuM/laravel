@@ -1281,21 +1281,10 @@ footer {
     }
 }
 
-.aux-mobile-bar {
-    display: none;
-}
-
+.aux-mobile-bar { display: none!important }
 
 @media only screen and (max-width: 1026px) {
-    .menu-top-btn-big {
-        display: none;
-    }
+    .menu-top-btn-big { display: none }
 
-    .aux-mobile-bar {
-        display: inline;
-        color: white;
-        text-align: right;
-        font-size: large;
-        width: 100%;
-    }
+    .aux-mobile-bar { display: flex; }
 }
