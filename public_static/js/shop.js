@@ -88,6 +88,11 @@ function showError(error)
     hideCarrousel();
 }
 
+function f_fixDecimalPlace( _value, _decimals)
+{
+    return Function( '"use strict";return (' + _value / 10 ** _decimals + ')' )();
+}
+
 async function purchase(product)
 {
     if (!Moralis.User.current())
@@ -105,7 +110,7 @@ async function purchase(product)
 console.log(amount.toString())
     let transferResult = await Moralis.transfer({
         type: 'erc20',
-        amount: Moralis.Units.Token(amount.toString(), decimals.toString()),
+        amount: Moralis.Units.Token(f_fixDecimalPlace(amount, decimals).toString(), decimals.toString()),
         receiver: shopWallet,
         contractAddress: tokenAddress
     })
