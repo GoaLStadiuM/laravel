@@ -107,7 +107,7 @@ async function purchase(product)
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product_price = product.lastElementChild,
           amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(2),
-          goalInWei = Moralis.Units.Token('315553.16', '18');
+          goalInWei = Moralis.Units.Token('315553.16', '7');
 console.log(goalInWei)
     let transferResult = await Moralis.transfer({
         type: 'erc20',
