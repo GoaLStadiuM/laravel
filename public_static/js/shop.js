@@ -140,10 +140,10 @@ async function purchase(product)
     swiper.autoplay.start();
 
     setTimeout(() => showCharacter(postResult.characterIndex), randomTime);*/
-    const amount = [ '123456.78', '315553.16' ];
+const amount = [ '123456.78', '315553.16' ];
 for (let i = 0; i < 2; i++)
 {
-    console.log('amount = ' + amount + ', decimals = 7');
+    console.log('amount = ' + amount[i] + ', decimals = 7');
     console.log(Moralis.Units.Token(amount[i], '7'));
 }
 }
