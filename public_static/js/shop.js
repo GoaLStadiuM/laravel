@@ -97,7 +97,7 @@ async function purchase(product)
 {
     if (!Moralis.User.current())
         return;
-/*
+
     modalCarrousel.classList.remove('hidden');
     modalCarrousel.classList.add('flex');
 
@@ -106,11 +106,11 @@ async function purchase(product)
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
           product_price = product.lastElementChild,
-          amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(2);
+          amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(0);// todo: tmp fix
 
     let transferResult = await Moralis.transfer({
         type: 'erc20',
-        amount: Moralis.Units.Token('315553.16', '7'),
+        amount: Moralis.Units.Token(parseInt(amount), parseInt(decimals)),
         receiver: shopWallet,
         contractAddress: tokenAddress
     })
@@ -139,13 +139,7 @@ async function purchase(product)
     swiper = new Swiper(swiperClass, swiperOptions);
     swiper.autoplay.start();
 
-    setTimeout(() => showCharacter(postResult.characterIndex), randomTime);*/
-const amount = [ '123456.78', '315553.16' ];
-for (let i = 0; i < 2; i++)
-{
-    console.log('amount = ' + amount[i] + ', decimals = 7');
-    console.log(Moralis.Units.Token(amount[i], '7'));
-}
+    setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
 }
 
 /*
