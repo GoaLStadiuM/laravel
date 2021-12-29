@@ -75,8 +75,8 @@ async function updatePrices()
     const goal = (await fetchToken()).data;
 
     Array.prototype.forEach.call(prices, function(el, it)
-    {
-        el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(2) + ' ' + goal.symbol;
+    { //                                                                  todo tmp fix
+        el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(0) + ' ' + goal.symbol;
     });
 
     setTimeout(() => updatePrices(), 60000);
@@ -109,7 +109,7 @@ async function purchase(product)
           amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(0);// todo: tmp fix
 
     let transferResult = await Moralis.transfer({
-        type: 'erc20',
+        type: 'erc20',              // todo tmp fix
         amount: Moralis.Units.Token(parseInt(amount), parseInt(decimals)),
         receiver: shopWallet,
         contractAddress: tokenAddress
