@@ -44,10 +44,10 @@
                 <a class="underline text-sm text-white hover:text-white" href="{{ route('verification.notice') }}">
                     {{ __('Resend email') }}
                 </a>
-                <a class="underline text-sm text-white hover:text-white" href="{{ route('password.request') }}">
+                <a class="underline text-sm text-white hover:text-white" style="margin-left: 10px;" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
-                <a class="underline text-sm text-white hover:text-white" style="padding-left: 10px;" href="{{ route('register') }}">
+                <a class="underline text-sm text-white hover:text-white" style="margin-left: 10px;" href="{{ route('register') }}">
                     {{ __('Register') }}
                 </a>
             </div>
