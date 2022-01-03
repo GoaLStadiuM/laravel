@@ -58,4 +58,6 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
     });
+
+    Route::permanentRedirect('/landing', route('landing'));
 });
