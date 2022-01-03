@@ -146,14 +146,6 @@
           </div>
           <div class="col-lg-4 mb-5">
               @component('partner.components.team')
-              @slot('img') {{ asset('img/partner/youtuber_theni.webp') }} @endslot
-              @slot('name') Theni @endslot
-              @slot('designation') Youtuber @endslot
-              @slot('flag') es @endslot
-              @endcomponent
-          </div>
-          <div class="col-lg-4 mb-5">
-              @component('partner.components.team')
               @slot('img') {{ asset('img/partner/youtuber_junglecryptos.webp') }} @endslot
               @slot('name') JungleCryptos @endslot
               @slot('designation') Youtuber @endslot
