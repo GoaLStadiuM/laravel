@@ -41,6 +41,12 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+                <x-button class="ml-3">
+                    {{ __('Log in') }}
+                </x-button>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-white hover:text-white" href="{{ route('verification.notice') }}">
                     {{ __('Resend email') }}
                 </a>
@@ -50,12 +56,6 @@
                 <a class="underline text-sm text-white hover:text-white" style="margin-left: 10px;" href="{{ route('register') }}">
                     {{ __('Register') }}
                 </a>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
             </div>
         </form>
     </x-auth-card>
