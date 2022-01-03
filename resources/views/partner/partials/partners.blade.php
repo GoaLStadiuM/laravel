@@ -43,11 +43,6 @@
                             <img class="partner-img" src="{{ asset('img/partner/partner_sukry.webp') }}" alt="sukry logo">
                         </a>
                     </li>
-                    <li class="list-group-item c-link cursor-content">
-                        <a href="https://www.coconut-games.com/" target="_blank">
-                            <img class="partner-img" src="{{ asset('img/partner/partner_coconut.webp') }}" alt="coconut logo">
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
