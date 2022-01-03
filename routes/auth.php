@@ -59,5 +59,5 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
                 ->name('logout');
     });
 
-    Route::permanentRedirect('/landing', route('landing'));
+    //Route::permanentRedirect('/landing', route('landing'));
 });
