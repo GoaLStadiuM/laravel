@@ -28,6 +28,7 @@ class GameController extends Controller
                                     'character.base_id as model',
                                     'character.name as character_name',
                                     'base_character.name as base_name',
+                                    'character.division',
                                     'character.level',
                                     'character.strength',
                                     'character.accuracy'
@@ -109,7 +110,7 @@ class GameController extends Controller
 
             // Goal Reward
             $user = Auth::user();
-            $user->goal += ((($character->payment->product->price * $gameConfig['CHARACTER_REWARD_PERCENTAGE']) * $hours) / $gameConfig['GOAL_PRICE_IN_BUSD']) * .4;
+            $user->goal += ((($character->payment->product->price * $gameConfig['CHARACTER_REWARD_PERCENTAGE']) * $hours) / $gameConfig['GOAL_PRICE_IN_BUSD']) * .2;
             $user->save();
         }
 
