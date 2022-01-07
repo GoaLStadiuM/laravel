@@ -21,7 +21,18 @@ class GameController extends Controller
         return response()->json([
             'ok' => true,
             'version' => 1,
-            'result' => Auth::user()->characters()->get()
+            'result' => Auth::user()
+                                ->characters()
+                                ->join('base_character', 'character.base_id', '=', 'base_character.id')
+                                ->select(
+                                    'character.base_id as model',
+                                    'character.name as character_name',
+                                    'base_character.name as base_name',
+                                    'character.level',
+                                    'character.strength',
+                                    'character.accuracy'
+                                )
+                                ->get()
         ]);
     }
 
