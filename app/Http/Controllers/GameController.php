@@ -16,9 +16,13 @@ class GameController extends Controller
     private const STATS_CAP = 171, // a
                   STATS_CAP_PERCENTAGE = 90; // b
 
-    public function menu()
+    public function characterList(): string
     {
-        return view('penalties.menu');
+        return response()->json([
+            'ok' => true,
+            'version' => 1,
+            'result' => Auth::user()->characters()->get()
+        ]);
     }
 
     public function kick(int $character_id): string
@@ -33,11 +37,17 @@ class GameController extends Controller
 
         return response()->json([
             'ok' => true,
+            'version' => 1,
             'result' => (random_int(1, 100) <= $percentage)
         ]);
     }
 
-    public function characterList()
+    public function menu()
+    {
+        return view('penalties.menu');
+    }
+
+    public function farmingWeb()
     {
         return view('farming.index', [
             'characters' => Auth::user()->characters()->get()
