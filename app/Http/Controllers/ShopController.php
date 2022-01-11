@@ -6,6 +6,7 @@ use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,7 @@ class ShopController extends Controller
         ]);
     }
 
-    public function purchase(Request $request)
+    public function purchase(Request $request): JsonResponse
     {
         if (!$request->filled('product_id') || !$request->filled('tx_hash'))
             abort(404, 'Missing params.');

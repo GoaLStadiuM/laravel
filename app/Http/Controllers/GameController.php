@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\Kick;
 use App\Models\NftPayment;
 use App\Models\Training;
 use App\Models\TrainingSession;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use DateInterval;
 use DateTime;
@@ -16,7 +18,7 @@ class GameController extends Controller
     private const STATS_CAP = 171, // a
                   STATS_CAP_PERCENTAGE = 90; // b
 
-    public function characterList()
+    public function characterList(): JsonResponse
     {
         return response()->json([
             'ok' => true,
@@ -44,7 +46,7 @@ class GameController extends Controller
         ]);
     }
 
-    public function kick(int $character_id): string
+    public function kick(int $character_id): JsonResponse
     {
         $character = Character::where([
             'id' => $character_id,
@@ -69,7 +71,7 @@ class GameController extends Controller
         ]);
     }
 
-    public function reward(int $kick_id): string
+    public function reward(int $kick_id): JsonResponse
     {
         $kick = Kick::join('character', 'character.id', '=', 'kick.character_id')
                     ->join('user', 'character.user_id', '=', Auth::user()->id)
