@@ -23,6 +23,7 @@ class CreateCharacterTable extends Migration
             $table->unsignedTinyInteger('level');
             $table->decimal('strength', 5, 2);
             $table->decimal('accuracy', 5, 2);
+            $table->unsignedSmallInteger('xp')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user');

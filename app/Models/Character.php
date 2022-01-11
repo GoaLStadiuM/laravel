@@ -52,4 +52,20 @@ class Character extends Model
     {
         return $this->hasOne(Training::class)->latestOfMany();
     }
+
+    /**
+     * Get the kicks for the character.
+     */
+    public function kicks()
+    {
+        return $this->hasMany(Kick::class);
+    }
+
+    /**
+     * Get the character's most recent kick.
+     */
+    public function latestKick()
+    {
+        return $this->hasOne(Kick::class)->latestOfMany();
+    }
 }

@@ -16,22 +16,29 @@ class GameController extends Controller
     private const STATS_CAP = 171, // a
                   STATS_CAP_PERCENTAGE = 90; // b
 
-    public function characterList(): string
+    public function characterList()
     {
         return response()->json([
             'ok' => true,
-            'version' => 1,
+            'version' => 0,
             'result' => Auth::user()
                                 ->characters()
                                 ->join('base_character', 'character.base_id', '=', 'base_character.id')
+                                ->join('xp_for_level', function($join) {
+                                    $join->on('character.division', '=', 'xp_for_level.division')
+                                         ->on('character.level', '=', 'xp_for_level.level');
+                                })
                                 ->select(
-                                    'character.base_id as model',
-                                    'character.name as character_name',
-                                    'base_character.name as base_name',
+                                    'character.id as character_id',
+                                    'character.base_id as model_id',
+                                    'character.name as character_name', // could be null
+                                    'base_character.name as base_name', // in such case use default
                                     'character.division',
                                     'character.level',
                                     'character.strength',
-                                    'character.accuracy'
+                                    'character.accuracy',
+                                    'character.xp',
+                                    'xp_for_level.xp_for_next_level'
                                 )
                                 ->get()
         ]);
@@ -47,10 +54,34 @@ class GameController extends Controller
         // x        = c                                              * b                           / a
         $percentage = (($character->strength + $character->accuracy) * self::STATS_CAP_PERCENTAGE) / self::STATS_CAP;
 
+        $kick = new Kick;
+        $kick->character_id = $character->id;
+        $kick->result = (random_int(1, 100) <= $percentage);
+        $kick->save();
+
         return response()->json([
             'ok' => true,
             'version' => 1,
-            'result' => (random_int(1, 100) <= $percentage)
+            'kick' => [
+                'id' => $kick->id,
+                'result' => $kick->result
+            ]
+        ]);
+    }
+
+    public function reward(int $kick_id): string
+    {
+        $kick = Kick::join('character', 'character.id', '=', 'kick.character_id')
+                    ->join('user', 'character.user_id', '=', Auth::user()->id)
+                    ->findOrFail($kick_id);
+
+        $kick->reward = $kick->result ? 123.456 : 0; // todo reward formula
+        $kick->save();
+
+        return response()->json([
+            'ok' => true,
+            'version' => 0,
+            'reward' => $kick->reward
         ]);
     }
 

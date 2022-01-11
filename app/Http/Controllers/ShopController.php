@@ -33,9 +33,9 @@ class ShopController extends Controller
             abort(404, 'Missing params.');
 
         $product = Product::findOrFail($request->input('product_id'));
-        $base_id = $this->lottery(BaseCharacter::where('id', '!=', 8)->get()->pluck('probability', 'id')->toArray());
+        $base_id = $this->lottery(BaseCharacter::get()->pluck('probability', 'id')->toArray());
 
-        // TODO IMPORTANT setup task scheduling to validate txs
+        // TODO IMPORTANT! setup task scheduling to validate txs
 
         $nft_payment = new NftPayment;
         $nft_payment->user_id = Auth::user()->id;
