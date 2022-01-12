@@ -105,9 +105,12 @@ class GameController extends Controller
             abort(403, "You don't have any kicks left.");
 
         $kick = $character->latestKick(/* '30 minutes ago' */)->firstOrCreate(
-            [ 'kick.character_id' => $character->id ],
-            //                                   c                                              * b                           / a
-            [ 'result' => (random_int(1, 100) <= (($character->strength + $character->accuracy) * self::STATS_CAP_PERCENTAGE) / self::STATS_CAP) ]
+            [],
+            [
+                'kick.character_id' => $character->id,
+                //                                 c                                              * b                           / a
+                'result' => (random_int(1, 100) <= (($character->strength + $character->accuracy) * self::STATS_CAP_PERCENTAGE) / self::STATS_CAP)
+            ]
         );
 
         return response()->json([
