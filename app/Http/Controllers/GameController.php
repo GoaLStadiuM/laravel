@@ -27,10 +27,10 @@ class GameController extends Controller
             'characters' => Auth::user()
                             ->characters()
                             ->join('base_character', 'character.base_id', '=', 'base_character.id')
-                            ->join('xp_for_level', function($join) {
+                            ->join('xp_for_level', fn($join) =>
                                 $join->on('character.division', '=', 'xp_for_level.division')
-                                     ->on('character.level', '=', 'xp_for_level.level');
-                            })
+                                     ->on('character.level', '=', 'xp_for_level.level')
+                            )
                             ->select(
                                 'character.id as character_id',
                                 'character.base_id as model_id',
@@ -54,11 +54,6 @@ class GameController extends Controller
         $currentHour = $now->format('H');
         $currentMinute = $now->format('i');
 
-        $window = [
-            $now->modify("$currentHour:00:00"),
-            $now->modify("$currentHour:30:00")
-        ];
-
         return response()->json([
             'ok' => true,
             'version' => 0,
@@ -66,11 +61,14 @@ class GameController extends Controller
                 'is_it_time_to_kick' => $this->isItTimeToKick($currentHour, $currentMinute),
                 'kicks_left' => Auth::user()
                             ->characters()
-                            ->leftJoin('kick', function($join) {
+                            ->leftJoin('kick', fn($join) =>
                                 $join->on('kick.character_id', '=', 'character.id')
                                      ->whereNotNull('reward')
-                                     ->whereBetween('created_at', $window);
-                            })
+                                     ->whereBetween('created_at', [
+                                        $now->modify("$currentHour:00:00"),
+                                        $now->modify("$currentHour:30:00")
+                                    ])
+                            )
                             ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
                             ->select(
                                 'character.id',
