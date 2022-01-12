@@ -75,9 +75,9 @@ class GameController extends Controller
                                 DB::raw('kicks_per_division.kicks - COUNT(`kick`.reward) as kicks_left')
                             )
                             ->groupBy('character.id', 'kicks_per_division.kicks')
-                            ->having('kicks_left', '>', '-1')->toSql()
-                            //->get()
-                            //->pluck('kicks_left', 'id')
+                            ->having('kicks_left', '>', '-1')
+                            ->get()
+                            ->pluck('kicks_left', 'id')
             ]
         ]);
     }
