@@ -29,7 +29,7 @@ class GameController extends Controller
                             ->join('base_character', 'character.base_id', '=', 'base_character.id')
                             ->join('xp_for_level', function($join) {
                                 $join->on('character.division', '=', 'xp_for_level.division')
-                                        ->on('character.level', '=', 'xp_for_level.level');
+                                     ->on('character.level', '=', 'xp_for_level.level');
                             })
                             ->select(
                                 'character.id as character_id',
@@ -66,13 +66,15 @@ class GameController extends Controller
                 'is_it_time_to_kick' => $this->isItTimeToKick($currentHour, $currentMinute),
                 'kicks_left' => Auth::user()
                             ->characters()
-                            ->leftJoin('kick', 'kick.character_id', 'character.id')
+                            ->leftJoin('kick', function($join) {
+                                $join->on('kick.character_id', '=', 'character.id')
+                                     ->whereNotNull('reward');
+                            })
                             ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
                             ->select(
                                 'character.id',
                                 DB::raw('kicks_per_division.kicks - COUNT(`kick`.reward) as kicks_left')
                             )
-                            ->whereNotNull('kick.reward')
                             ->whereBetween('kick.created_at', $window)
                             ->groupBy('character.id', 'kicks_per_division.kicks')
                             ->having('kicks_left', '>', '-1')->toSql()
