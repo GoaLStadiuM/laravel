@@ -108,7 +108,7 @@ class Character extends Model
      */
     public function latestKick(string $ago = '30 minutes ago')
     {
-        $latest = $this->hasOne(Kick::class)->whereNull('reward')->latestOfMany();
+        $latest = $this->hasOne(Kick::class)/*->whereNull('reward')*/->latestOfMany();
 
         if (empty($ago))
             return $latest;
