@@ -40,6 +40,7 @@ class GameController extends Controller
                                     'character.level',
                                     'character.strength',
                                     'character.accuracy',
+                                    DB::raw('(character.strength + character.accuracy) * 90 / 171 as percentage'),
                                     'character.xp',
                                     'xp_for_level.xp_for_next_level'
                                 )
@@ -67,7 +68,7 @@ class GameController extends Controller
                                         ->characters()
                                         ->join('kick', 'kick.character_id', 'character.id')
                                         ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
-                                        ->select('character.id', DB::raw('kicks_per_division.kicks - COUNT(kick.*) as kicks_left'))
+                                        ->select('character.id', DB::raw('`kicks_per_division`.`kicks` - COUNT(`kick`.*) as kicks_left'))
                                         ->whereNotNull('kick.reward')
                                         ->whereBetween('kick.created_at', $window)
                                         ->groupBy('character.id')
