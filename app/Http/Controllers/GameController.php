@@ -135,7 +135,7 @@ class GameController extends Controller
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
-        return in_array($currentHour, [ '00', '04', '08', '13', '16', '20' ]) && intval($currentMinute) < 30;
+        return in_array($currentHour, [ '00', '04', '08', '11', '16', '20' ]) && intval($currentMinute) < 30;
     }
 
     public function menu()
