@@ -77,7 +77,7 @@ class GameController extends Controller
                             ->groupBy('character.id', 'kicks_per_division.kicks')
                             ->having('kicks_left', '>', '-1')
                             ->get()
-                            ->pluck('kicks_left', 'id')
+                            //->pluck('kicks_left', 'id')
             ]
         ]);
     }
