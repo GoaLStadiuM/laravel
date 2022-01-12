@@ -55,8 +55,8 @@ class GameController extends Controller
         $currentMinute = $now->format('i');
 
         $window = [
-            $now->modify("$currentHour:00:00"),
-            $now->modify("$currentHour:30:00")
+            $now->modify("$currentHour:00:00")->format('Y-m-d H:i:s'),
+            $now->modify("$currentHour:30:00")->format('Y-m-d H:i:s')
         ];
 
         return response()->json([
