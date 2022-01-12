@@ -72,7 +72,7 @@ class GameController extends Controller
                                         //->whereNotNull('kick.reward')
                                         //->whereBetween('kick.created_at', $window)
                                         ->groupBy('kick.character_id')
-                                        //->having('kicks_left', '>', '-1')
+                                        ->having('kicks_left', '>', '-1')
                                         ->get()
                                         //->pluck('kicks_left', 'id')
             ]
