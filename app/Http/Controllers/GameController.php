@@ -112,14 +112,18 @@ class GameController extends Controller
 
     public function reward(int $character_id): JsonResponse
     {
+        $user = Auth::user();
         $character = Character::where([
             'id' => $character_id,
-            'user_id' => Auth::user()->id
+            'user_id' => $user->id
         ])->firstOrFail();
 
         $kick = $character->latestKick(/* '30 minutes ago' */)->firstOrFail();
         $kick->reward = $kick->result ? 123.456 : 0; // todo reward formula
         $kick->save();
+
+        $user->gls += $kick->reward;
+        $user->save();
 
         return response()->json([
             'ok' => true,
