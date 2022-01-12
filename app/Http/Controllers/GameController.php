@@ -77,7 +77,7 @@ class GameController extends Controller
                             ->groupBy('character.id', 'kicks_per_division.kicks')
                             ->having('kicks_left', '>', '-1')
                             ->get()
-                            //->pluck('kicks_left', 'id')
+                            ->pluck('kicks_left', 'id')
             ]
         ]);
     }
@@ -115,7 +115,7 @@ class GameController extends Controller
         return response()->json([
             'ok' => true,
             'version' => 0,
-            'kick' => $kick->result
+            'kick' => boolval($kick->result)
         ]);
     }
 
@@ -128,7 +128,7 @@ class GameController extends Controller
         ])->firstOrFail();
 
         $kick = $character->latestKick()->firstOrFail();
-        $kick->reward = $kick->result ? 123.456 : 0; // todo reward formula
+        $kick->reward = boolval($kick->result) ? 123.456 : 0; // todo reward formula
         $kick->save();
 
         $user->gls += $kick->reward;
