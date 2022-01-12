@@ -72,9 +72,9 @@ class GameController extends Controller
                                 'character.id',
                                 DB::raw('kicks_per_division.kicks - COUNT(`kick`.character_id) as kicks_left')
                             )
-                            //->whereNotNull('kick.reward')
-                            //->whereBetween('kick.created_at', $window)
-                            ->groupBy('character.id')
+                            ->whereNotNull('kick.reward')
+                            ->whereBetween('kick.created_at', $window)
+                            ->groupBy('character.id', 'kicks_per_division.kicks')
                             ->having('kicks_left', '>', '-1')
                             ->get()
                             ->pluck('kicks_left', 'id')
