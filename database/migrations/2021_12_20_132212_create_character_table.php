@@ -30,6 +30,8 @@ class CreateCharacterTable extends Migration
             $table->foreign('base_id')->references('id')->on('base_character');
             $table->foreign('payment_id')->references('id')->on('nft_payment');
             $table->foreign('division')->references('division')->on('kicks_per_division');
+            $table->foreign('division')->references('division')->on('xp_for_level');
+            $table->foreign('level')->references('level')->on('xp_for_level');
         });
     }
 

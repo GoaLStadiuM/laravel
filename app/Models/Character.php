@@ -48,6 +48,14 @@ class Character extends Model
     }
 
     /**
+     * Get the xp for level that owns the character.
+     */
+    public function xpForLevel()
+    {
+        return $this->belongsTo(XpForLevel::class, 'division', 'division');
+    }
+
+    /**
      * Get the trainings for the character.
      */
     public function trainings()

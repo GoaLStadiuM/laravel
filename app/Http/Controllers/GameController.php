@@ -67,14 +67,14 @@ class GameController extends Controller
                 'kicks_left' => Auth::user()
                                         ->characters()
                                         ->join('kick', 'kick.character_id', 'character.id')
-                                        //->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
-                                        ->select('kick.character_id', DB::raw('COUNT(`kick`.*) as kicks_left'))
-                                        //->whereNotNull('kick.reward')
-                                        //->whereBetween('kick.created_at', $window)
+                                        ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
+                                        ->select('kick.character_id', DB::raw('kicks_per_division.kicks - COUNT(`kick`.character_id) as kicks_left'))
+                                        ->whereNotNull('kick.reward')
+                                        ->whereBetween('kick.created_at', $window)
                                         ->groupBy('kick.character_id')
                                         ->having('kicks_left', '>', '-1')
                                         ->get()
-                                        //->pluck('kicks_left', 'id')
+                                        ->pluck('kicks_left', 'id')
             ]
         ]);
     }

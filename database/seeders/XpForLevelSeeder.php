@@ -76,6 +76,11 @@ class XpForLevelSeeder extends Seeder
                 'xp_for_next_level' => 67
             ],
             [
+                'division' => 1,
+                'level' => 5,
+                'xp_for_next_level' => 0
+            ],
+            [
                 'division' => 2,
                 'level' => 5,
                 'xp_for_next_level' => 182
@@ -106,6 +111,11 @@ class XpForLevelSeeder extends Seeder
                 'xp_for_next_level' => 76
             ],
             [
+                'division' => 2,
+                'level' => 8,
+                'xp_for_next_level' => 0
+            ],
+            [
                 'division' => 3,
                 'level' => 8,
                 'xp_for_next_level' => 79
@@ -114,6 +124,11 @@ class XpForLevelSeeder extends Seeder
                 'division' => 3,
                 'level' => 9,
                 'xp_for_next_level' => 82
+            ],
+            [
+                'division' => 3,
+                'level' => 10,
+                'xp_for_next_level' => 0
             ]
         ]);
     }

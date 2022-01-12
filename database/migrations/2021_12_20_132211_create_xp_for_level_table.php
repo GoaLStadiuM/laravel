@@ -21,7 +21,8 @@ class CreateXpForLevelTable extends Migration
             $table->unsignedSmallInteger('xp_for_next_level');
             $table->timestamps();
 
-            $table->index(['division', 'level']);
+            $table->index('division');
+            $table->index('level');
         });
 
         (new XpForLevelSeeder)->run();
