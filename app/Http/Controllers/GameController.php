@@ -9,6 +9,7 @@ use App\Models\Training;
 use App\Models\TrainingSession;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
@@ -66,7 +67,7 @@ class GameController extends Controller
                                         ->characters()
                                         ->join('kick', 'kick.character_id', 'character.id')
                                         ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
-                                        ->select('character.id', 'kicks_per_division.kicks - COUNT(kick.*) as kicks_left')
+                                        ->select('character.id', DB::raw('kicks_per_division.kicks - COUNT(kick.*) as kicks_left'))
                                         ->whereNotNull('kick.reward')
                                         ->whereBetween('kick.created_at', $window)
                                         ->groupBy('character.id')
