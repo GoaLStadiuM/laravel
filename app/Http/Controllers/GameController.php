@@ -68,14 +68,14 @@ class GameController extends Controller
                             ->characters()
                             ->leftJoin('kick', function($join) {
                                 $join->on('kick.character_id', '=', 'character.id')
-                                     ->whereNotNull('reward');
+                                     ->whereNotNull('reward')
+                                     ->whereBetween('created_at', $window);
                             })
                             ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
                             ->select(
                                 'character.id',
                                 DB::raw('kicks_per_division.kicks - COUNT(`kick`.reward) as kicks_left')
                             )
-                            ->whereBetween('kick.created_at', $window)
                             ->groupBy('character.id', 'kicks_per_division.kicks')
                             ->having('kicks_left', '>', '-1')->toSql()
                             //->get()
