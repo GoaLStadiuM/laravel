@@ -63,8 +63,8 @@ class GameController extends Controller
                             ->characters()
                             ->leftJoin('kick', fn($join) =>
                                 $join->on('kick.character_id', '=', 'character.id')
-                                     ->whereNotNull('reward')
-                                     ->whereBetween('created_at', [
+                                     ->whereNotNull('kick.reward')
+                                     ->whereBetween('kick.created_at', [
                                         $now->modify("$currentHour:00:00"),
                                         $now->modify("$currentHour:30:00")
                                     ])
