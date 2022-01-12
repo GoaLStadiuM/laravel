@@ -61,14 +61,14 @@ class GameController extends Controller
                 'is_it_time_to_kick' => $this->isItTimeToKick($currentHour, $currentMinute),
                 'kicks_left' => Auth::user()
                             ->characters()
-                            ->leftJoin('kick', function($join) {
+                            ->leftJoin('kick', fn($join) =>
                                 $join->on('kick.character_id', '=', 'character.id')
                                      ->whereNotNull('reward')
                                      ->whereBetween('created_at', [
                                         $now->modify("$currentHour:00:00"),
                                         $now->modify("$currentHour:30:00")
-                                    ]);
-                            })
+                                    ])
+                            )
                             ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
                             ->select(
                                 'character.id',
