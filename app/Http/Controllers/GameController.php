@@ -25,26 +25,26 @@ class GameController extends Controller
             'ok' => true,
             'version' => 0,
             'characters' => Auth::user()
-                                ->characters()
-                                ->join('base_character', 'character.base_id', '=', 'base_character.id')
-                                ->join('xp_for_level', function($join) {
-                                    $join->on('character.division', '=', 'xp_for_level.division')
-                                         ->on('character.level', '=', 'xp_for_level.level');
-                                })
-                                ->select(
-                                    'character.id as character_id',
-                                    'character.base_id as model_id',
-                                    'character.name as character_name', // could be null
-                                    'base_character.name as base_name', // in such case use default
-                                    'character.division',
-                                    'character.level',
-                                    'character.strength',
-                                    'character.accuracy',
-                                    DB::raw('(character.strength + character.accuracy) * 90 / 171 as percentage'),
-                                    'character.xp',
-                                    'xp_for_level.xp_for_next_level'
-                                )
-                                ->get()
+                            ->characters()
+                            ->join('base_character', 'character.base_id', '=', 'base_character.id')
+                            ->join('xp_for_level', function($join) {
+                                $join->on('character.division', '=', 'xp_for_level.division')
+                                        ->on('character.level', '=', 'xp_for_level.level');
+                            })
+                            ->select(
+                                'character.id as character_id',
+                                'character.base_id as model_id',
+                                'character.name as character_name', // could be null
+                                'base_character.name as base_name', // in such case use default
+                                'character.division',
+                                'character.level',
+                                'character.strength',
+                                'character.accuracy',
+                                DB::raw('(character.strength + character.accuracy) * 90 / 171 as percentage'),
+                                'character.xp',
+                                'xp_for_level.xp_for_next_level'
+                            )
+                            ->get()
         ]);
     }
 
@@ -65,16 +65,19 @@ class GameController extends Controller
             'play' => [
                 'is_it_time_to_kick' => $this->isItTimeToKick($currentHour, $currentMinute),
                 'kicks_left' => Auth::user()
-                                        ->characters()
-                                        ->join('kick', 'kick.character_id', 'character.id')
-                                        ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
-                                        ->select('kick.character_id', DB::raw('kicks_per_division.kicks - COUNT(`kick`.character_id) as kicks_left'))
-                                        ->whereNotNull('kick.reward')
-                                        ->whereBetween('kick.created_at', $window)
-                                        ->groupBy('kick.character_id')
-                                        ->having('kicks_left', '>', '-1')
-                                        ->get()
-                                        ->pluck('kicks_left', 'id')
+                            ->characters()
+                            ->join('kick', 'kick.character_id', 'character.id')
+                            ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
+                            ->select(
+                                'character.character_id',
+                                DB::raw('kicks_per_division.kicks - COUNT(`kick`.character_id) as kicks_left')
+                            )
+                            ->whereNotNull('kick.reward')
+                            ->whereBetween('kick.created_at', $window)
+                            ->groupBy('character.character_id')
+                            ->having('kicks_left', '>', '-1')
+                            ->get()
+                            ->pluck('kicks_left', 'id')
             ]
         ]);
     }
