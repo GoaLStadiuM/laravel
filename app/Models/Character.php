@@ -18,7 +18,7 @@ class Character extends Model
     /**
      * Get the user that owns the character.
      */
-    public function user()
+    public function user(): belongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -26,7 +26,7 @@ class Character extends Model
     /**
      * Get the base character that owns the character.
      */
-    public function base()
+    public function base(): belongsTo
     {
         return $this->belongsTo(BaseCharacter::class, 'base_id');
     }
@@ -34,7 +34,7 @@ class Character extends Model
     /**
      * Get the nft payment that owns the character.
      */
-    public function payment()
+    public function payment(): belongsTo
     {
         return $this->belongsTo(NftPayment::class, 'payment_id');
     }
@@ -42,7 +42,7 @@ class Character extends Model
     /**
      * Get the kicks per division that owns the character.
      */
-    public function kicksPerDivision()
+    public function kicksPerDivision(): belongsTo
     {
         return $this->belongsTo(KicksPerDivision::class, 'division', 'division');
     }
@@ -50,7 +50,7 @@ class Character extends Model
     /**
      * Get the xp for level that owns the character.
      */
-    public function xpForLevel()
+    public function xpForLevel(): belongsTo
     {
         return $this->belongsTo(XpForLevel::class, 'division', 'division');
     }
@@ -58,7 +58,7 @@ class Character extends Model
     /**
      * Get the trainings for the character.
      */
-    public function trainings()
+    public function trainings(): hasMany
     {
         return $this->hasMany(Training::class);
     }
@@ -66,7 +66,7 @@ class Character extends Model
     /**
      * Get the character's most recent training.
      */
-    public function latestTraining()
+    public function latestTraining(): hasOne
     {
         return $this->hasOne(Training::class)->latestOfMany();
     }
@@ -74,7 +74,7 @@ class Character extends Model
     /**
      * Get the kicks for the character.
      */
-    public function kicks()
+    public function kicks(): hasMany
     {
         return $this->hasMany(Kick::class);
     }
@@ -106,14 +106,30 @@ class Character extends Model
     /**
      * Get the character's most recent kick.
      */
-    public function latestKick(string $ago = '30 minutes ago')
+    public function latestKick(): hasOne
     {
-        return $this->hasOne(Kick::class)->latestOfMany();
-        $latest = $this->whereNull('reward');
+        return $this->hasOne(Kick::class)->latestOfMany()->whereNull('reward');
+    }
 
-        if (empty($ago))
-            return $latest;
+    /**
+     * Get the character's most recent kick or create a new one.
+     */
+    public function latestKickOrCreate(array $stuff): Kick
+    {
+        $kick = $this->latestKick();
 
-        return $latest/*->where('created_at', '>', new DateTime($ago, new DateTimeZone('UTC') ))*/;
+        if (is_null($kick))
+        {
+            $kick = new Kick;
+
+            foreach ($stuff as $key => $value)
+            {
+                $kick->$key = $value;
+            }
+
+            $kick->save();
+        }
+
+        return $kick;
     }
 }

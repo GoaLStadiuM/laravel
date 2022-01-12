@@ -104,8 +104,7 @@ class GameController extends Controller
         if (!$character->canKick($window))
             abort(403, "You don't have any kicks left.");
 
-        $kick = $character->latestKick(/* '30 minutes ago' */)->firstOrCreate(
-            [],
+        $kick = $character->latestKickOrCreate(
             [
                 'kick.character_id' => $character->id,
                 //                                 c                                              * b                           / a
@@ -128,7 +127,7 @@ class GameController extends Controller
             'user_id' => $user->id
         ])->firstOrFail();
 
-        $kick = $character->latestKick(/* '30 minutes ago' */)->firstOrFail();
+        $kick = $character->latestKick()->firstOrFail();
         $kick->reward = $kick->result ? 123.456 : 0; // todo reward formula
         $kick->save();
 
