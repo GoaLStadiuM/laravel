@@ -113,6 +113,6 @@ class Character extends Model
         if (empty($ago))
             return $latest;
 
-        return $latest->where('created_at', '>', new DateTime($ago, new DateTimeZone('UTC') ));
+        return $latest/*->where('created_at', '>', new DateTime($ago, new DateTimeZone('UTC') ))*/;
     }
 }
