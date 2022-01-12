@@ -119,9 +119,9 @@ class Character extends Model
      */
     public function latestKickOrCreate(array $stuff): Kick
     {
-        $kick = $this->latestKick();
+        $kick = $this->latestKick()->first();
 
-        if (is_null($kick))
+        if (!$kick)
         {
             $kick = new Kick;
 
