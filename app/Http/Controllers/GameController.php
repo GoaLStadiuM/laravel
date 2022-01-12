@@ -50,6 +50,7 @@ class GameController extends Controller
     {
         $now = new DateTime(null, new DateTimeZone('UTC'));
         $currentHour = $now->format('H');
+        $currentMinute = $now->format('i');
 
         $window = [
             $now->modify("$currentHour:00:00"),
@@ -60,7 +61,7 @@ class GameController extends Controller
             'ok' => true,
             'version' => 0,
             'play' => [
-                'is_it_time_to_kick' => $this->isItTimeToKick(),
+                'is_it_time_to_kick' => $this->isItTimeToKick($currentHour, $currentMinute),
                 'kicks_left' => Auth::user()
                                         ->characters()
                                         ->join('kick', 'kick.character_id', 'character.id')
