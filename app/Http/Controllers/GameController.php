@@ -69,8 +69,8 @@ class GameController extends Controller
                                         ->join('kick', 'kick.character_id', 'character.id')
                                         //->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
                                         ->select('character.id', DB::raw('COUNT(`kick`.*) as kicks_left'))
-                                        ->whereNotNull('kick.reward')
-                                        ->whereBetween('kick.created_at', $window)
+                                        //->whereNotNull('kick.reward')
+                                        //->whereBetween('kick.created_at', $window)
                                         ->groupBy('character.id')
                                         ->get()
                                         ->pluck('kicks_left', 'id')
@@ -137,7 +137,7 @@ class GameController extends Controller
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
-        return in_array($currentHour, [ '00', '04', '08', '11', '16', '20' ]) && intval($currentMinute) < 30;
+        return true;//in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
     }
 
     public function menu()
