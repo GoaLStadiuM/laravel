@@ -55,10 +55,8 @@ class GameController extends Controller
         $currentMinute = $now->format('i');
 
         $window = [
-            //$now->modify("$currentHour:00:00")->format('Y-m-d H:i:s'),
-            //$now->modify("$currentHour:30:00")->format('Y-m-d H:i:s')
-            '2022-01-12 17:00:00',
-            '2022-01-12 17:30:00'
+            $now->modify("$currentHour:00:00"),
+            $now->modify("$currentHour:30:00")
         ];
 
         return response()->json([
@@ -69,10 +67,10 @@ class GameController extends Controller
                 'kicks_left' => Auth::user()
                             ->characters()
                             ->leftJoin('kick', 'kick.character_id', 'character.id')
-                            ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
+                            //->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
                             ->select(
                                 'character.id',
-                                DB::raw('kicks_per_division.kicks - COUNT(`kick`.character_id) as kicks_left')
+                                DB::raw('COUNT(`kick`.character_id) as kicks_left')
                             )
                             ->whereNotNull('kick.reward')
                             ->whereBetween('kick.created_at', $window)
