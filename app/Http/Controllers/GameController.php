@@ -23,7 +23,7 @@ class GameController extends Controller
         return response()->json([
             'ok' => true,
             'version' => 0,
-            'result' => Auth::user()
+            'characters' => Auth::user()
                                 ->characters()
                                 ->join('base_character', 'character.base_id', '=', 'base_character.id')
                                 ->join('xp_for_level', function($join) {
@@ -46,37 +46,77 @@ class GameController extends Controller
         ]);
     }
 
+    public function play(): JsonResponse
+    {
+        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $currentHour = $now->format('H');
+
+        $window = [
+            $now->modify("$currentHour:00:00"),
+            $now->modify("$currentHour:30:00")
+        ];
+
+        return response()->json([
+            'ok' => true,
+            'version' => 0,
+            'play' => [
+                'is_it_time_to_kick' => $this->isItTimeToKick(),
+                'kicks_left' => Auth::user()
+                                        ->characters()
+                                        ->join('kick', 'kick.character_id', 'character.id')
+                                        ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
+                                        ->select('character.id', 'kicks_per_division.kick - COUNT(kick.*) as kicks_left')
+                                        ->whereNotNull('kick.reward')
+                                        ->whereBetween('kick.created_at', $window)
+                                        ->get()
+                                        ->pluck('kicks_left', 'id')
+            ]
+        ]);
+    }
+
     public function kick(int $character_id): JsonResponse
+    {
+        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $currentHour = $now->format('H');
+        $currentMinute = $now->format('i');
+
+        if (!$this->isItTimeToKick($currentHour, $currentMinute))
+            abort(403, "Sorry, you're late (or early).");
+
+        $character = Character::where([
+            'id' => $character_id,
+            'user_id' => Auth::user()->id
+        ])->firstOrFail();
+
+        $window = [
+            $now->modify("$currentHour:00:00"),
+            $now->modify("$currentHour:30:00")
+        ];
+
+        if (!$character->canKick($window))
+            abort(403, "You don't have any kicks left.");
+
+        $kick = $character->latestKick(/* '30 minutes ago' */)->firstOrCreate(
+            [ 'character_id' => $character->id ],
+            //                                   c                                              * b                           / a
+            [ 'result' => (random_int(1, 100) <= (($character->strength + $character->accuracy) * self::STATS_CAP_PERCENTAGE) / self::STATS_CAP) ]
+        );
+
+        return response()->json([
+            'ok' => true,
+            'version' => 0,
+            'kick' => $kick->result
+        ]);
+    }
+
+    public function reward(int $character_id): JsonResponse
     {
         $character = Character::where([
             'id' => $character_id,
             'user_id' => Auth::user()->id
         ])->firstOrFail();
 
-        // x        = c                                              * b                           / a
-        $percentage = (($character->strength + $character->accuracy) * self::STATS_CAP_PERCENTAGE) / self::STATS_CAP;
-
-        $kick = new Kick;
-        $kick->character_id = $character->id;
-        $kick->result = (random_int(1, 100) <= $percentage);
-        $kick->save();
-
-        return response()->json([
-            'ok' => true,
-            'version' => 1,
-            'kick' => [
-                'id' => $kick->id,
-                'result' => $kick->result
-            ]
-        ]);
-    }
-
-    public function reward(int $kick_id): JsonResponse
-    {
-        $kick = Kick::join('character', 'character.id', '=', 'kick.character_id')
-                    ->join('user', 'character.user_id', '=', Auth::user()->id)
-                    ->findOrFail($kick_id);
-
+        $kick = $character->latestKick(/* '30 minutes ago' */)->firstOrFail();
         $kick->reward = $kick->result ? 123.456 : 0; // todo reward formula
         $kick->save();
 
@@ -85,6 +125,11 @@ class GameController extends Controller
             'version' => 0,
             'reward' => $kick->reward
         ]);
+    }
+
+    private function isItTimeToKick(string $currentHour, string $currentMinute): bool
+    {
+        return in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
     }
 
     public function menu()

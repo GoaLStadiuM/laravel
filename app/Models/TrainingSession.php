@@ -20,11 +20,13 @@ class TrainingSession extends Model
      */
     protected $fillable = [
         'name',
-        'max_hours'
+        'max_hours',
+        'created_at',
+        'updated_at'
     ];
 
     /**
-     * Get the trainings for the training_session.
+     * Get the trainings for the training session.
      */
     public function trainings()
     {

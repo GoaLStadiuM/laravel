@@ -4,14 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseCharacter extends Model
+class KicksPerDivision extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'base_character';
+    protected $table = 'kicks_per_division';
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'division';
 
     /**
      * The attributes that are mass assignable.
@@ -19,19 +26,16 @@ class BaseCharacter extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'probability',
-        'video_url',
-        'img_url',
+        'kicks',
         'created_at',
         'updated_at'
     ];
 
     /**
-     * Get the characters for the base character.
+     * Get the characters for the kicks per divivion.
      */
     public function characters()
     {
-        return $this->hasMany(Character::class, 'id', 'base_id');
+        return $this->hasMany(Characters::class, 'division', 'division');
     }
 }

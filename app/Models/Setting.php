@@ -20,6 +20,8 @@ class Setting extends Model
      */
     protected $fillable = [
         'code',
-        'value'
+        'value',
+        'created_at',
+        'updated_at'
     ];
 }

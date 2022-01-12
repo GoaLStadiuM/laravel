@@ -22,7 +22,7 @@ class Character extends Model
     }
 
     /**
-     * Get the base_character that owns the character.
+     * Get the base character that owns the character.
      */
     public function base()
     {
@@ -30,11 +30,19 @@ class Character extends Model
     }
 
     /**
-     * Get the nft_payment that owns the character.
+     * Get the nft payment that owns the character.
      */
     public function payment()
     {
         return $this->belongsTo(NftPayment::class, 'payment_id');
+    }
+
+    /**
+     * Get the kicks per division that owns the character.
+     */
+    public function kicksPerDivision()
+    {
+        return $this->belongsTo(KicksPerDivision::class, 'division', 'division');
     }
 
     /**
@@ -62,10 +70,39 @@ class Character extends Model
     }
 
     /**
+     * Get the number of kicks per window for the character.
+     */
+    public function kicksPerWindow(): int
+    {
+        return $this->kicksPerDivision()->first()->kicks;
+    }
+
+    /**
+     * Get the number of current window kicks for the character.
+     */
+    public function currentKicks(array $window): int
+    {
+        return $this->hasMany(Kick::class)->whereNotNull('reward')->whereBetween('created_at', $window)->count();
+    }
+
+    /**
+     * Detemines whether the character can kick or not.
+     */
+    public function canKick(array $window): bool
+    {
+        return $this->kicksPerWindow() > $this->currentKicks($window);
+    }
+
+    /**
      * Get the character's most recent kick.
      */
-    public function latestKick()
+    public function latestKick(string $ago = '30 minutes ago')
     {
-        return $this->hasOne(Kick::class)->latestOfMany();
+        $latest = $this->hasOne(Kick::class)->latestOfMany()->whereNull('reward');
+
+        if (empty($ago))
+            return $latest;
+
+        return $latest->where('created_at', '>', new DateTime($ago, new DateTimeZone('UTC') ));
     }
 }

@@ -22,7 +22,7 @@ class Training extends Model
     }
 
     /**
-     * Get the training_session that owns the training.
+     * Get the training session that owns the training.
      */
     public function session()
     {

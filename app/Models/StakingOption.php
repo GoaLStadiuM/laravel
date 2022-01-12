@@ -20,6 +20,8 @@ class StakingOption extends Model
      */
     protected $fillable = [
         'vesting_period',
-        'bonus_percentage'
+        'bonus_percentage',
+        'created_at',
+        'updated_at'
     ];
 }

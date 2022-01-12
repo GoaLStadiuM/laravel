@@ -20,17 +20,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $table = 'user';
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array
@@ -50,7 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the nft_payments for the user.
+     * Get the nft payments for the user.
      */
     public function nftPayments()
     {

@@ -22,7 +22,7 @@ class Staking extends Model
     }
 
     /**
-     * Get the staking_option that owns the staking.
+     * Get the staking option that owns the staking.
      */
     public function option()
     {

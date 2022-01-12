@@ -19,6 +19,8 @@ class Status extends Model
      * @var string[]
      */
     protected $fillable = [
-        'code'
+        'code',
+        'created_at',
+        'updated_at'
     ];
 }

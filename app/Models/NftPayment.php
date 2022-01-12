@@ -14,7 +14,7 @@ class NftPayment extends Model
     protected $table = 'nft_payment';
 
     /**
-     * Get the user that owns the nft_payment.
+     * Get the user that owns the nft payment.
      */
     public function user()
     {
@@ -22,7 +22,7 @@ class NftPayment extends Model
     }
 
     /**
-     * Get the status that owns the nft_payment.
+     * Get the status that owns the nft payment.
      */
     public function status()
     {
@@ -30,7 +30,7 @@ class NftPayment extends Model
     }
 
     /**
-     * Get the product that owns the nft_payment.
+     * Get the product that owns the nft payment.
      */
     public function product()
     {
@@ -38,7 +38,7 @@ class NftPayment extends Model
     }
 
     /**
-     * Get the character associated with the nft_payment.
+     * Get the character associated with the nft payment.
      */
     public function character()
     {

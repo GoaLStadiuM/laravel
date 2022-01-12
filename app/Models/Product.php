@@ -25,6 +25,8 @@ class Product extends Model
         'level',
         'price',
         'video_url',
-        'img_url'
+        'img_url',
+        'created_at',
+        'updated_at'
     ];
 }
