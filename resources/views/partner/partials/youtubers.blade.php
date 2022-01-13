@@ -153,6 +153,30 @@
               @endcomponent
           </div>
           <div class="col-lg-4 mb-5">
+              @component('partner.components.team')
+              @slot('img') {{ asset('img/partner/youtuber_drumer702.webp') }} @endslot
+              @slot('name') Drumer702 @endslot
+              @slot('designation') Youtuber @endslot
+              @slot('flag') ar @endslot
+              @endcomponent
+          </div>
+          <div class="col-lg-4 mb-5">
+              @component('partner.components.team')
+              @slot('img') {{ asset('img/partner/youtuber_laugaming.webp') }} @endslot
+              @slot('name') Laugaming @endslot
+              @slot('designation') Youtuber @endslot
+              @slot('flag') ar @endslot
+              @endcomponent
+          </div>
+          <div class="col-lg-4 mb-5">
+              @component('partner.components.team')
+              @slot('img') {{ asset('img/partner/youtuber_juanpold.webp') }} @endslot
+              @slot('name') JuanPold @endslot
+              @slot('designation') Youtuber @endslot
+              @slot('flag') ar @endslot
+              @endcomponent
+          </div>
+          <div class="col-lg-4 mb-5">
             <div class="row">
                 <div class="col-md-12 position-relative" style="text-align: center; height: 200px">
                     <img src="{{ asset('img/partner/who-1.webp') }}" alt="wrapkit" class="img-fluid rounded-circle position-absolute" style="left: 5%">
