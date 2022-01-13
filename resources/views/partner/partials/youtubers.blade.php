@@ -154,16 +154,16 @@
           </div>
           <div class="col-lg-4 mb-5">
               @component('partner.components.team')
-              @slot('img') {{ asset('img/partner/youtuber_drumer702.webp') }} @endslot
-              @slot('name') Drumer702 @endslot
+              @slot('img') {{ asset('img/partner/youtuber_laugaming.webp') }} @endslot
+              @slot('name') Laugaming @endslot
               @slot('designation') Youtuber @endslot
-              @slot('flag') ar @endslot
+              @slot('flag') ve @endslot
               @endcomponent
           </div>
           <div class="col-lg-4 mb-5">
               @component('partner.components.team')
-              @slot('img') {{ asset('img/partner/youtuber_laugaming.webp') }} @endslot
-              @slot('name') Laugaming @endslot
+              @slot('img') {{ asset('img/partner/youtuber_drumer702.webp') }} @endslot
+              @slot('name') Drumer702 @endslot
               @slot('designation') Youtuber @endslot
               @slot('flag') ar @endslot
               @endcomponent
