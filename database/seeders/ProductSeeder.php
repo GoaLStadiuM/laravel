@@ -14,6 +14,8 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        $now = new DateTime(null, new DateTimeZone('UTC'));
+
         DB::table('product')->insert([
             [
                 'name' => 'Random Character Level 1 Division 1',
@@ -22,7 +24,9 @@ class ProductSeeder extends Seeder
                 'level' => 1,
                 'price' => 4000,
                 'video_url' => '',
-                'img_url' => 'img/numbers/1'
+                'img_url' => 'img/numbers/1',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 1 Division 2',
@@ -31,7 +35,9 @@ class ProductSeeder extends Seeder
                 'level' => 1,
                 'price' => 1300,
                 'video_url' => '',
-                'img_url' => 'img/numbers/1'
+                'img_url' => 'img/numbers/1',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 1 Division 3',
@@ -40,7 +46,9 @@ class ProductSeeder extends Seeder
                 'level' => 1,
                 'price' => 30,
                 'video_url' => '',
-                'img_url' => 'img/numbers/1'
+                'img_url' => 'img/numbers/1',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 2 Division 1',
@@ -49,7 +57,9 @@ class ProductSeeder extends Seeder
                 'level' => 2,
                 'price' => 5000,
                 'video_url' => '',
-                'img_url' => 'img/numbers/2'
+                'img_url' => 'img/numbers/2',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 2 Division 2',
@@ -58,7 +68,9 @@ class ProductSeeder extends Seeder
                 'level' => 2,
                 'price' => 1400,
                 'video_url' => '',
-                'img_url' => 'img/numbers/2'
+                'img_url' => 'img/numbers/2',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 2 Division 3',
@@ -67,7 +79,9 @@ class ProductSeeder extends Seeder
                 'level' => 2,
                 'price' => 60,
                 'video_url' => '',
-                'img_url' => 'img/numbers/2'
+                'img_url' => 'img/numbers/2',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 3 Division 1',
@@ -76,7 +90,9 @@ class ProductSeeder extends Seeder
                 'level' => 3,
                 'price' => 7000,
                 'video_url' => '',
-                'img_url' => 'img/numbers/3'
+                'img_url' => 'img/numbers/3',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 3 Division 2',
@@ -85,7 +101,9 @@ class ProductSeeder extends Seeder
                 'level' => 3,
                 'price' => 1500,
                 'video_url' => '',
-                'img_url' => 'img/numbers/3'
+                'img_url' => 'img/numbers/3',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 3 Division 3',
@@ -94,7 +112,9 @@ class ProductSeeder extends Seeder
                 'level' => 3,
                 'price' => 120,
                 'video_url' => '',
-                'img_url' => 'img/numbers/3'
+                'img_url' => 'img/numbers/3',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 4 Division 1',
@@ -103,7 +123,9 @@ class ProductSeeder extends Seeder
                 'level' => 4,
                 'price' => 9000,
                 'video_url' => '',
-                'img_url' => 'img/numbers/4'
+                'img_url' => 'img/numbers/4',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 4 Division 2',
@@ -112,7 +134,9 @@ class ProductSeeder extends Seeder
                 'level' => 4,
                 'price' => 1700,
                 'video_url' => '',
-                'img_url' => 'img/numbers/4'
+                'img_url' => 'img/numbers/4',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 4 Division 3',
@@ -121,7 +145,9 @@ class ProductSeeder extends Seeder
                 'level' => 4,
                 'price' => 150,
                 'video_url' => '',
-                'img_url' => 'img/numbers/4'
+                'img_url' => 'img/numbers/4',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 5 Division 1',
@@ -130,7 +156,9 @@ class ProductSeeder extends Seeder
                 'level' => 5,
                 'price' => 12000,
                 'video_url' => '',
-                'img_url' => 'img/numbers/5'
+                'img_url' => 'img/numbers/5',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 5 Division 2',
@@ -139,7 +167,9 @@ class ProductSeeder extends Seeder
                 'level' => 5,
                 'price' => 1900,
                 'video_url' => '',
-                'img_url' => 'img/numbers/5'
+                'img_url' => 'img/numbers/5',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 5 Division 3',
@@ -148,7 +178,9 @@ class ProductSeeder extends Seeder
                 'level' => 5,
                 'price' => 300,
                 'video_url' => '',
-                'img_url' => 'img/numbers/5'
+                'img_url' => 'img/numbers/5',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 6 Division 2',
@@ -157,7 +189,9 @@ class ProductSeeder extends Seeder
                 'level' => 6,
                 'price' => 2100,
                 'video_url' => '',
-                'img_url' => 'img/numbers/6'
+                'img_url' => 'img/numbers/6',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 6 Division 3',
@@ -166,7 +200,9 @@ class ProductSeeder extends Seeder
                 'level' => 6,
                 'price' => 450,
                 'video_url' => '',
-                'img_url' => 'img/numbers/6'
+                'img_url' => 'img/numbers/6',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 7 Division 2',
@@ -175,7 +211,9 @@ class ProductSeeder extends Seeder
                 'level' => 7,
                 'price' => 2500,
                 'video_url' => '',
-                'img_url' => 'img/numbers/7'
+                'img_url' => 'img/numbers/7',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 7 Division 3',
@@ -184,7 +222,9 @@ class ProductSeeder extends Seeder
                 'level' => 7,
                 'price' => 600,
                 'video_url' => '',
-                'img_url' => 'img/numbers/7'
+                'img_url' => 'img/numbers/7',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 8 Division 2',
@@ -193,7 +233,9 @@ class ProductSeeder extends Seeder
                 'level' => 8,
                 'price' => 3000,
                 'video_url' => '',
-                'img_url' => 'img/numbers/8'
+                'img_url' => 'img/numbers/8',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 8 Division 3',
@@ -202,7 +244,9 @@ class ProductSeeder extends Seeder
                 'level' => 8,
                 'price' => 750,
                 'video_url' => '',
-                'img_url' => 'img/numbers/8'
+                'img_url' => 'img/numbers/8',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 9 Division 3',
@@ -211,7 +255,9 @@ class ProductSeeder extends Seeder
                 'level' => 9,
                 'price' => 900,
                 'video_url' => '',
-                'img_url' => 'img/numbers/9'
+                'img_url' => 'img/numbers/9',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Random Character Level 10 Division 3',
@@ -220,7 +266,9 @@ class ProductSeeder extends Seeder
                 'level' => 10,
                 'price' => 1200,
                 'video_url' => '',
-                'img_url' => 'img/numbers/10'
+                'img_url' => 'img/numbers/10',
+                'created_at' => $now,
+                'updated_at' => $now
             ]
         ]);
     }

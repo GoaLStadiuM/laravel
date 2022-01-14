@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -97,9 +97,9 @@ class ShopController extends Controller
         $character->save();
     }
 
-    private function getPriceInGoal(int $price)
+    private function getPriceInGoal(int $price): float
     {
-        return $price / $this->getJsonObject(self::PRICE_API . self::CONTRACT)->data->price;
+        return $price / floatval($this->getJsonObject(self::PRICE_API . self::CONTRACT)->data->price);
     }
 
     private function getJsonObject(string $url)
@@ -107,7 +107,7 @@ class ShopController extends Controller
         return json_decode(file_get_contents($url));
     }
 
-/*
+/* TODO: move this to user account tools
     private function validateTx(string $txHash, string $address): bool
     {
         $valid = false;

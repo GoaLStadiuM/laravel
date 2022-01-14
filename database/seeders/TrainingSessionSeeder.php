@@ -14,22 +14,32 @@ class TrainingSessionSeeder extends Seeder
      */
     public function run()
     {
+        $now = new DateTime(null, new DateTimeZone('UTC'));
+
         DB::table('training_session')->insert([
             [
                 'name' => 'Head Training',
-                'max_hours' => 6
+                'max_hours' => 6,
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Shoulders Training',
-                'max_hours' => 6
+                'max_hours' => 6,
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Knees Training',
-                'max_hours' => 6
+                'max_hours' => 6,
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'name' => 'Feet Training',
-                'max_hours' => 6
+                'max_hours' => 6,
+                'created_at' => $now,
+                'updated_at' => $now
             ],
         ]);
     }

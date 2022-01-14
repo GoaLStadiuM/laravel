@@ -1,14 +1,34 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use DateTime;
 use DateTimeZone;
 
+/**
+ * The Character model.
+ *
+ * Based on a soccer player (BaseCharacter).
+ *
+ * @property int    $id         The PK that identifies the instance.
+ * @property int    $user_id    The foreign key to the owner.
+ * @property int    $base_id    The foreign key to the base character.
+ * @property int    $payment_id The foreign key to the purchase.
+ * @property string $name       The character's custom name.
+ * @property int    $division   The character's division. Also FK to:
+ *                              kicks_per_division and xp_for_level.
+ * @property int    $level      The character's level. Also the FK to:
+ *                              xp_for_level.
+ * @property float  $strength   The character's strength.
+ * @property float  $accuracy   The character's accuracy.
+ * @property int    $xp         The character's experience points.
+ * @property string $created_at When the character was purchased.
+ * @property string $updated_at When the character was last updated.
+ */
 class Character extends Model
 {
     /**
@@ -16,10 +36,12 @@ class Character extends Model
      *
      * @var string
      */
-    protected $table = 'character';
+    protected string $table = 'character';
 
     /**
      * Get the user that owns the character.
+     *
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -28,6 +50,8 @@ class Character extends Model
 
     /**
      * Get the base character that owns the character.
+     *
+     * @return BelongsTo
      */
     public function base(): BelongsTo
     {
@@ -36,6 +60,8 @@ class Character extends Model
 
     /**
      * Get the nft payment that owns the character.
+     *
+     * @return BelongsTo
      */
     public function payment(): BelongsTo
     {
@@ -44,6 +70,8 @@ class Character extends Model
 
     /**
      * Get the kicks per division that owns the character.
+     *
+     * @return BelongsTo
      */
     public function kicksPerDivision(): BelongsTo
     {
@@ -52,6 +80,8 @@ class Character extends Model
 
     /**
      * Get the xp for level that owns the character.
+     *
+     * @return BelongsTo
      */
     public function xpForLevel(): BelongsTo
     {
@@ -60,6 +90,8 @@ class Character extends Model
 
     /**
      * Get the trainings for the character.
+     *
+     * @return HasMany
      */
     public function trainings(): HasMany
     {
@@ -68,6 +100,8 @@ class Character extends Model
 
     /**
      * Get the character's most recent training.
+     *
+     * @return HasOne
      */
     public function latestTraining(): HasOne
     {
@@ -76,6 +110,8 @@ class Character extends Model
 
     /**
      * Get the kicks for the character.
+     *
+     * @return HasMany
      */
     public function kicks(): HasMany
     {
@@ -84,6 +120,10 @@ class Character extends Model
 
     /**
      * Get the number of kicks per window for the character.
+     *
+     * @return int The number of kicks the character is allowed to perform in
+     *             every window. As it is now, this number is determined by
+     *             the division of the character.
      */
     public function kicksPerWindow(): int
     {
@@ -92,6 +132,9 @@ class Character extends Model
 
     /**
      * Get the number of current window kicks for the character.
+     *
+     * @return int The number of kicks performed by the character in the
+     *             current window. [Reason for excluding where reward is not null.]
      */
     public function currentKicks(array $window): int
     {
@@ -100,6 +143,8 @@ class Character extends Model
 
     /**
      * Detemines whether the character can kick or not.
+     *
+     * @return true|false If the character can kick or not.
      */
     public function canKick(array $window): bool
     {
@@ -108,6 +153,8 @@ class Character extends Model
 
     /**
      * Get the character's most recent kick.
+     *
+     * @return HasOne
      */
     public function latestKick(): HasOne
     {
@@ -116,6 +163,8 @@ class Character extends Model
 
     /**
      * Get the character's most recent kick or create a new one.
+     *
+     * @return Kick The instance of the latest or new kick.
      */
     public function latestKickOrCreate(array $stuff): Kick
     {

@@ -1,9 +1,19 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * The Kicks per division model.
+ *
+ * @property int    $division   The PK that identifies the instance.
+ * @property int    $kicks      The number of kicks characters in this division
+ *                              can perform (for every window).
+ * @property string $created_at When the kicks per division was created.
+ * @property string $updated_at When the Kicks per division was last updated.
+ */
 class KicksPerDivision extends Model
 {
     /**
@@ -11,21 +21,21 @@ class KicksPerDivision extends Model
      *
      * @var string
      */
-    protected $table = 'kicks_per_division';
+    protected string $table = 'kicks_per_division';
 
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'division';
+    protected string $primaryKey = 'division';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected $fillable = [
+    protected array $fillable = [
         'kicks',
         'created_at',
         'updated_at'
@@ -33,8 +43,10 @@ class KicksPerDivision extends Model
 
     /**
      * Get the characters for the kicks per divivion.
+     *
+     * @return HasMany
      */
-    public function characters()
+    public function characters(): HasMany
     {
         return $this->hasMany(Characters::class, 'division', 'division');
     }

@@ -1,9 +1,21 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * The XP for level model.
+ *
+ * @property int    $id                The PK that identifies the instance.
+ * @property int    $division          The Character's division.
+ * @property int    $level             The Character's current level.
+ * @property int    $xp_for_next_level The xp needed to advance to $level + 1
+ *                                     (if 0 then $level is the maximum level).
+ * @property string $created_at        When the xp for level was added.
+ * @property string $updated_at        When the xp for level was last updated.
+ */
 class XpForLevel extends Model
 {
     private const GOLD_DIVISION = 1,
@@ -15,14 +27,14 @@ class XpForLevel extends Model
      *
      * @var string
      */
-    protected $table = 'xp_for_level';
+    protected string $table = 'xp_for_level';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected $fillable = [
+    protected array $fillable = [
         'division',
         'level',
         'xp_for_next_level',
@@ -32,41 +44,63 @@ class XpForLevel extends Model
 
     /**
      * Get the characters for the xp for level.
+     *
+     * @return HasMany
      */
-    public function characters() // todo fix composite relationship
+    public function characters(): HasMany
     {
         return $this->hasMany(Character::class, 'division', 'division');
     }
 
     /**
      * Get the xp for the next level for the gold division.
+     *
+     * @param int $division The division used in the where clause.
+     *
+     * @return int[] An array with the xp for next level for every level (key)
+     *               associated with the gold division.
      */
-    public function gold()
+    public function gold(): array
     {
-        return $this->where('division', self::GOLD_DIVISION);
+        return $this->where('division', self::GOLD_DIVISION)->get()->pluck('xp_for_next_level', 'level');
     }
 
     /**
      * Get the xp for the next level for the silver division.
+     *
+     * @param int $division The division used in the where clause.
+     *
+     * @return int[] An array with the xp for next level for every level (key)
+     *               associated with the silver division.
      */
-    public function silver()
+    public function silver(): array
     {
-        return $this->where('division', self::SILVER_DIVISION);
+        return $this->where('division', self::SILVER_DIVISION)->get()->pluck('xp_for_next_level', 'level');
     }
 
     /**
      * Get the xp for the next level for the bronze division.
+     *
+     * @param int $division The division used in the where clause.
+     *
+     * @return int[] An array with the xp for next level for every level (key)
+     *               associated with the bronze division.
      */
-    public function bronze()
+    public function bronze(): array
     {
-        return $this->where('division', self::BRONZE_DIVISION);
+        return $this->where('division', self::BRONZE_DIVISION)->get()->pluck('xp_for_next_level', 'level');
     }
 
     /**
      * Get the xp for the next level for the specified division.
+     *
+     * @param int $division The division used in the where clause.
+     *
+     * @return int[] An array with the xp for next level for every level (key)
+     *               associated with the specified division.
      */
-    public function byDivision(int $division)
+    public function byDivision(int $division): array
     {
-        return $this->where('division', $division);
+        return $this->where('division', $division)->get()->pluck('xp_for_next_level', 'level');
     }
 }

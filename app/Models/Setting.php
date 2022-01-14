@@ -1,9 +1,18 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * The Setting model.
+ *
+ * @property int    $id         The PK that identifies the instance.
+ * @property string $code       The setting code.
+ * @property string $value      The setting value.
+ * @property string $created_at When the setting was created.
+ * @property string $updated_at When the setting was last updated.
+ */
 class Setting extends Model
 {
     /**
@@ -11,14 +20,14 @@ class Setting extends Model
      *
      * @var string
      */
-    protected $table = 'setting';
+    protected string $table = 'setting';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected $fillable = [
+    protected array $fillable = [
         'code',
         'value',
         'created_at',

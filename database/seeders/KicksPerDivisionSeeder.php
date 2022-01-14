@@ -14,15 +14,23 @@ class KicksPerDivisionSeeder extends Seeder
      */
     public function run()
     {
+        $now = new DateTime(null, new DateTimeZone('UTC'));
+
         DB::table('kicks_per_division')->insert([
             [
-                'kicks' => 4
+                'kicks' => 4,
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'kicks' => 2
+                'kicks' => 2,
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'kicks' => 1
+                'kicks' => 1,
+                'created_at' => $now,
+                'updated_at' => $now
             ]
         ]);
     }

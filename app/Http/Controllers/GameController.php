@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -150,6 +150,8 @@ class GameController extends Controller
     {
         return view('penalties.menu');
     }
+
+    // more work todo down here
 
     public function farmingWeb()
     {
