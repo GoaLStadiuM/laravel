@@ -11,4 +11,5 @@ require __DIR__ . '/play.php';
 //tmp routes
 Route::middleware('admin')->group(function ()
 {
+    Route::get('/test', fn() => phpinfo());
 });
