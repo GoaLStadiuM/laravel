@@ -23,14 +23,14 @@ class Training extends Model
      *
      * @var string
      */
-    protected string $table = 'training';
+    protected $table = 'training';
 
     /**
      * The attributes that should be cast.
      *
      * @var array
      */
-    protected array $casts = [
+    protected $casts = [
         'stopped' => 'boolean',
         'done'    => 'boolean'
     ];

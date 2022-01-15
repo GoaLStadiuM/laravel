@@ -22,7 +22,7 @@ class Staking extends Model
      *
      * @var string
      */
-    protected string $table = 'staking';
+    protected $table = 'staking';
 
     /**
      * Get the staker.

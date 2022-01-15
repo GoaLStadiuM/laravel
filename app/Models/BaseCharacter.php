@@ -26,14 +26,14 @@ class BaseCharacter extends Model
      *
      * @var string
      */
-    protected string $table = 'base_character';
+    protected $table = 'base_character';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected array $fillable = [
+    protected $fillable = [
         'name',
         'probability',
         'video_url',

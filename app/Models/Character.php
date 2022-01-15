@@ -36,7 +36,7 @@ class Character extends Model
      *
      * @var string
      */
-    protected string $table = 'character';
+    protected $table = 'character';
 
     /**
      * Get the owner.

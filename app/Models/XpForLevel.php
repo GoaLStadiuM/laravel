@@ -27,14 +27,14 @@ class XpForLevel extends Model
      *
      * @var string
      */
-    protected string $table = 'xp_for_level';
+    protected $table = 'xp_for_level';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected array $fillable = [
+    protected $fillable = [
         'division',
         'level',
         'xp_for_next_level',

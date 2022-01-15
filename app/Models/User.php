@@ -32,14 +32,14 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var string
      */
-    protected string $table = 'user';
+    protected $table = 'user';
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var string[]
      */
-    protected array $hidden = [
+    protected $hidden = [
         'password',
         'remember_token',
     ];
@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var string[]
      */
-    protected array $casts = [
+    protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 

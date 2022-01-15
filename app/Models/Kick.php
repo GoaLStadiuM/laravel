@@ -22,14 +22,14 @@ class Kick extends Model
      *
      * @var string
      */
-    protected string $table = 'kick';
+    protected $table = 'kick';
 
     /**
      * The attributes that should be cast.
      *
      * @var array
      */
-    protected array $casts = [
+    protected $casts = [
         'result' => 'boolean'
     ];
 

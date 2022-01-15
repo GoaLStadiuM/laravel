@@ -20,14 +20,14 @@ class Setting extends Model
      *
      * @var string
      */
-    protected string $table = 'setting';
+    protected $table = 'setting';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected array $fillable = [
+    protected $fillable = [
         'code',
         'value',
         'created_at',

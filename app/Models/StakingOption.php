@@ -20,14 +20,14 @@ class StakingOption extends Model
      *
      * @var string
      */
-    protected string $table = 'staking_option';
+    protected $table = 'staking_option';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected array $fillable = [
+    protected $fillable = [
         'vesting_period',
         'bonus_percentage',
         'created_at',

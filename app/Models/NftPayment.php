@@ -25,7 +25,7 @@ class NftPayment extends Model
      *
      * @var string
      */
-    protected string $table = 'nft_payment';
+    protected $table = 'nft_payment';
 
     /**
      * Get the buyer.

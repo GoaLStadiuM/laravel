@@ -21,21 +21,21 @@ class KicksPerDivision extends Model
      *
      * @var string
      */
-    protected string $table = 'kicks_per_division';
+    protected $table = 'kicks_per_division';
 
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected string $primaryKey = 'division';
+    protected $primaryKey = 'division';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected array $fillable = [
+    protected $fillable = [
         'kicks',
         'created_at',
         'updated_at'

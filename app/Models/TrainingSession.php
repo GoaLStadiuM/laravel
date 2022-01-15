@@ -21,14 +21,14 @@ class TrainingSession extends Model
      *
      * @var string
      */
-    protected string $table = 'training_session';
+    protected $table = 'training_session';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected array $fillable = [
+    protected $fillable = [
         'name',
         'max_hours',
         'created_at',

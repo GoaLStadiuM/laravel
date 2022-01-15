@@ -19,14 +19,14 @@ class Status extends Model
      *
      * @var string
      */
-    protected string $table = 'status';
+    protected $table = 'status';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    protected array $fillable = [
+    protected $fillable = [
         'code',
         'created_at',
         'updated_at'
