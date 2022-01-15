@@ -50,7 +50,7 @@ class GameController extends Controller
 
     public function play(): JsonResponse
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = new DateTime('now', new DateTimeZone('UTC'));
         $currentHour = $now->format('H');
         $currentMinute = $now->format('i');
 
@@ -135,7 +135,7 @@ class GameController extends Controller
 
     private function timeCheck(int $character_id): Character
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = new DateTime('now', new DateTimeZone('UTC'));
         $currentHour = $now->format('H');
         $currentMinute = $now->format('i');
 
@@ -219,7 +219,7 @@ class GameController extends Controller
         $maxHours = $training->session->max_hours;
         $timezone = new DateTimeZone('UTC');
         $start = new DateTime(strval($training->created_at), $timezone);
-        $now = new DateTime(null, $timezone);
+        $now = new DateTime('now', $timezone);
 
         $diff = $start->diff($now);
         if (!is_numeric($diff->h))
