@@ -218,7 +218,7 @@ class GameController extends Controller
         $gameConfig = config('game');
         $maxHours = $training->session->max_hours;
         $timezone = new DateTimeZone('UTC');
-        $start = new DateTime($training->created_at, $timezone);
+        $start = new DateTime(strval($training->created_at), $timezone);
         $now = new DateTime(null, $timezone);
 
         $diff = $start->diff($now);
@@ -298,7 +298,7 @@ class GameController extends Controller
             $data = [
                 'character' => $character,
                 'training' => $training,
-                'end_time' => (new DateTime($training->created_at, new DateTimeZone('UTC')))->add(new DateInterval("PT{$training->session->max_hours}H"))->format('Y-m-d H:i:s')
+                'end_time' => (new DateTime(strval($training->created_at), new DateTimeZone('UTC')))->add(new DateInterval("PT{$training->session->max_hours}H"))->format('Y-m-d H:i:s')
             ];
         }
 
