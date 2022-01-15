@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int    $user_id       The FK to the buyer.
  * @property int    $status_id     The FK to the status.
  * @property int    $product_id    The FK to the purchased item.
- * @property float  $price_in_goal The item price at the time of purchase.
+ * @property string $price_in_goal The item price at the time of purchase.
  * @property string $tx_hash       The transaction hash.
  * @property string $created_at    When the purchase took place.
  * @property string $updated_at    When the purchase was last updated.
@@ -28,7 +28,7 @@ class NftPayment extends Model
     protected string $table = 'nft_payment';
 
     /**
-     * Get the user that owns the nft payment.
+     * Get the buyer.
      *
      * @return BelongsTo
      */
@@ -38,7 +38,7 @@ class NftPayment extends Model
     }
 
     /**
-     * Get the status that owns the nft payment.
+     * Get the purchase status.
      *
      * @return BelongsTo
      */
@@ -48,7 +48,7 @@ class NftPayment extends Model
     }
 
     /**
-     * Get the product that owns the nft payment.
+     * Get the purchased product.
      *
      * @return BelongsTo
      */
@@ -58,7 +58,7 @@ class NftPayment extends Model
     }
 
     /**
-     * Get the character associated with the nft payment.
+     * Get the purchased character.
      *
      * @return HasOne
      */

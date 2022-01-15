@@ -84,25 +84,7 @@ class GameController extends Controller
 
     public function kick(int $character_id): JsonResponse
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
-        $currentHour = $now->format('H');
-        $currentMinute = $now->format('i');
-
-        if (!$this->isItTimeToKick($currentHour, $currentMinute))
-            abort(403, "Sorry, you're late (or early).");
-
-        $character = Character::where([
-            'id' => $character_id,
-            'user_id' => Auth::user()->id
-        ])->firstOrFail();
-
-        $window = [
-            $now->modify("$currentHour:00:00"),
-            $now->modify("$currentHour:30:00")
-        ];
-
-        if (!$character->canKick($window))
-            abort(403, "You don't have any kicks left.");
+        $character = $this->timeCheck($character_id);
 
         $kick = $character->latestKickOrCreate(
             [
@@ -115,24 +97,34 @@ class GameController extends Controller
         return response()->json([
             'ok' => true,
             'version' => 0,
-            'kick' => boolval($kick->result)
+            'kick' => $kick->result
         ]);
     }
 
     public function reward(int $character_id): JsonResponse
     {
-        $user = Auth::user();
-        $character = Character::where([
-            'id' => $character_id,
-            'user_id' => $user->id
-        ])->firstOrFail();
+        $character = $this->timeCheck($character_id);
 
         $kick = $character->latestKick()->firstOrFail();
-        $kick->reward = boolval($kick->result) ? 123.456 : 0; // todo reward formula
-        $kick->save();
+        $kick->reward = 0;
 
-        $user->gls += $kick->reward;
-        $user->save();
+        if ($kick->result)
+        {
+            // +1 xp (hardcoded)
+            $character->xp++;
+            $this->lvlUp($character);
+            $character->save();
+
+            // set the reward
+            $kick->reward = 123.456; // todo reward formula
+
+            // add the reward to the user balance
+            $user = Auth::user();
+            $user->gls = gmp_add($user->gls, $kick->reward);
+            $user->save();
+        }
+
+        $kick->save();
 
         return response()->json([
             'ok' => true,
@@ -141,9 +133,62 @@ class GameController extends Controller
         ]);
     }
 
+    private function timeCheck(int $character_id): Character
+    {
+        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $currentHour = $now->format('H');
+        $currentMinute = $now->format('i');
+
+        if (!$this->isItTimeToKick($currentHour, $currentMinute))
+            abort(403, "Sorry, you're late (or early).");
+
+        $character = Character::where([
+            'id' => $character_id,
+            'user_id' => Auth::user()->id
+        ])->firstOrFail();
+
+        if (!$character->canKick([
+            $now->modify("$currentHour:00:00"),
+            $now->modify("$currentHour:30:00")
+        ]))
+            abort(403, "You don't have any kicks left.");
+
+        return $character;
+    }
+
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
         return true;//in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
+    }
+
+    private function lvlUp(Character $character): void
+    {
+        $xpForLevel = $character->xpForLevel();
+        $startingLvl = $character->payment->product->level;
+        $currentXp = $character->xp;
+
+        foreach ($xpForLevel as $lvl => $xpForNextLvl)
+        {
+            // ignore lower levels
+            if ($lvl < $startingLvl)
+                continue;
+
+            // stop at current level
+            if ($lvl === $character->level)
+                break;
+
+            // subtract the xp already used for lvlup
+            $currentXp -= $xpForNextLvl;
+        }
+
+        // if it's time then lvl up the character
+        if ($currentXp >= $xpForLevel[$character->level])
+            $character->level++;
+    }
+
+    private function getReward()
+    {
+        return '';
     }
 
     public function menu()
@@ -204,7 +249,7 @@ class GameController extends Controller
 
             // Goal Reward
             $user = Auth::user();
-            $user->goal += ((($character->payment->product->price * $gameConfig['CHARACTER_REWARD_PERCENTAGE']) * $hours) / $gameConfig['GOAL_PRICE_IN_BUSD']) * .2;
+            $user->goal += ((($character->payment->product->price * $gameConfig['CHARACTER_REWARD_PERCENTAGE']) * $hours) / $gameConfig['GOAL_PRICE_IN_BUSD']) * .1;
             $user->save();
         }
 

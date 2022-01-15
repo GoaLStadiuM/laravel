@@ -42,7 +42,7 @@ class KicksPerDivision extends Model
     ];
 
     /**
-     * Get the characters for the kicks per divivion.
+     * Get all the characters that belong to this divivion.
      *
      * @return HasMany
      */

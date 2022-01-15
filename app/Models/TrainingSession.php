@@ -36,7 +36,7 @@ class TrainingSession extends Model
     ];
 
     /**
-     * Get the trainings for the training session.
+     * Get all the trainings of this type.
      *
      * @return HasMany
      */

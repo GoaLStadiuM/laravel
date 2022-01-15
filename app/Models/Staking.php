@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * The Staking model.
  *
  * @property int    $id         The PK that identifies the instance.
- * @property int    $user_id    The foreign key to the staker.
- * @property int    $option_id  The foreign key to the chosen option.
+ * @property int    $user_id    The FK to the staker.
+ * @property int    $option_id  The FK to the chosen option.
  * @property string $tx_hash    The transaction hash.
  * @property string $created_at When the staking started.
  * @property string $updated_at When the staking was last updated.
@@ -25,7 +25,7 @@ class Staking extends Model
     protected string $table = 'staking';
 
     /**
-     * Get the user that owns the staking.
+     * Get the staker.
      *
      * @return BelongsTo
      */
@@ -35,7 +35,7 @@ class Staking extends Model
     }
 
     /**
-     * Get the staking option that owns the staking.
+     * Get the chosen option.
      *
      * @return BelongsTo
      */

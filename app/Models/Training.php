@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * The Training model.
  *
  * @property int    $id           The PK that identifies the instance.
- * @property int    $character_id The foreign key to the trainee.
- * @property int    $session_id   The foreign key to the training session.
+ * @property int    $character_id The FK to the trainee.
+ * @property int    $session_id   The FK to the training session.
  * @property bool   $stopped      If the training is currently stopped or in progress.
  * @property bool   $done         If the training has ended or not.
  * @property string $created_at   When the training started.
@@ -26,7 +26,17 @@ class Training extends Model
     protected string $table = 'training';
 
     /**
-     * Get the character that owns the training.
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected array $casts = [
+        'stopped' => 'boolean',
+        'done'    => 'boolean'
+    ];
+
+    /**
+     * Get the trainee.
      *
      * @return BelongsTo
      */
@@ -36,7 +46,7 @@ class Training extends Model
     }
 
     /**
-     * Get the training session that owns the training.
+     * Get the trainee training session.
      *
      * @return BelongsTo
      */

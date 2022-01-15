@@ -15,16 +15,16 @@ use DateTimeZone;
  * Based on a soccer player (BaseCharacter).
  *
  * @property int    $id         The PK that identifies the instance.
- * @property int    $user_id    The foreign key to the owner.
- * @property int    $base_id    The foreign key to the base character.
- * @property int    $payment_id The foreign key to the purchase.
+ * @property int    $user_id    The FK to the owner.
+ * @property int    $base_id    The FK to the base character.
+ * @property int    $payment_id The FK to the purchase.
  * @property string $name       The character's custom name.
  * @property int    $division   The character's division. Also FK to:
  *                              kicks_per_division and xp_for_level.
  * @property int    $level      The character's level. Also the FK to:
  *                              xp_for_level.
- * @property float  $strength   The character's strength.
- * @property float  $accuracy   The character's accuracy.
+ * @property string $strength   The character's strength.
+ * @property string $accuracy   The character's accuracy.
  * @property int    $xp         The character's experience points.
  * @property string $created_at When the character was purchased.
  * @property string $updated_at When the character was last updated.
@@ -39,7 +39,7 @@ class Character extends Model
     protected string $table = 'character';
 
     /**
-     * Get the user that owns the character.
+     * Get the owner.
      *
      * @return BelongsTo
      */
@@ -49,7 +49,7 @@ class Character extends Model
     }
 
     /**
-     * Get the base character that owns the character.
+     * Get the base character.
      *
      * @return BelongsTo
      */
@@ -59,7 +59,7 @@ class Character extends Model
     }
 
     /**
-     * Get the nft payment that owns the character.
+     * Get the character's purchase information.
      *
      * @return BelongsTo
      */
@@ -69,7 +69,7 @@ class Character extends Model
     }
 
     /**
-     * Get the kicks per division that owns the character.
+     * Get the kicks per division for the character.
      *
      * @return BelongsTo
      */
@@ -79,17 +79,17 @@ class Character extends Model
     }
 
     /**
-     * Get the xp for level that owns the character.
+     * Get the xp for level for the character.
      *
-     * @return BelongsTo
+     * @return int[] An array with the xp for next level for every level (key).
      */
-    public function xpForLevel(): BelongsTo
+    public function xpForLevel(): array
     {
-        return $this->belongsTo(XpForLevel::class, 'division', 'division');
+        return $this->belongsTo(XpForLevel::class, 'division', 'division')->get()->pluck('xp_for_next_level', 'level');
     }
 
     /**
-     * Get the trainings for the character.
+     * Get the character's trainings.
      *
      * @return HasMany
      */
@@ -109,7 +109,7 @@ class Character extends Model
     }
 
     /**
-     * Get the kicks for the character.
+     * Get the character's kicks.
      *
      * @return HasMany
      */

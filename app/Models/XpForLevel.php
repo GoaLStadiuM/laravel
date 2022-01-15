@@ -53,7 +53,7 @@ class XpForLevel extends Model
     }
 
     /**
-     * Get the xp for the next level for the gold division.
+     * Get the xp for next level for the gold division.
      *
      * @param int $division The division used in the where clause.
      *
@@ -66,7 +66,7 @@ class XpForLevel extends Model
     }
 
     /**
-     * Get the xp for the next level for the silver division.
+     * Get the xp for next level for the silver division.
      *
      * @param int $division The division used in the where clause.
      *
@@ -79,7 +79,7 @@ class XpForLevel extends Model
     }
 
     /**
-     * Get the xp for the next level for the bronze division.
+     * Get the xp for next level for the bronze division.
      *
      * @param int $division The division used in the where clause.
      *
@@ -89,18 +89,5 @@ class XpForLevel extends Model
     public function bronze(): array
     {
         return $this->where('division', self::BRONZE_DIVISION)->get()->pluck('xp_for_next_level', 'level');
-    }
-
-    /**
-     * Get the xp for the next level for the specified division.
-     *
-     * @param int $division The division used in the where clause.
-     *
-     * @return int[] An array with the xp for next level for every level (key)
-     *               associated with the specified division.
-     */
-    public function byDivision(int $division): array
-    {
-        return $this->where('division', $division)->get()->pluck('xp_for_next_level', 'level');
     }
 }

@@ -17,8 +17,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $email             The user email.
  * @property string $email_verified_at When the current email was verified.
  * @property string $password          The user password.
- * @property float  $goal              GOAL balance.
- * @property float  $gls               GLS balance.
+ * @property string $goal              GOAL balance.
+ * @property string $gls               GLS balance.
  * @property string $remember_token    Remember password token.
  * @property string $created_at        When the user signed up.
  * @property string $updated_at        When the user was last updated.
@@ -54,7 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the nft payments for the user.
+     * Get the user purchases.
      *
      * @return HasMany
      */
@@ -64,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the characters for the user.
+     * Get the user characters.
      *
      * @return HasMany
      */
@@ -74,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the stakings for the user.
+     * Get the user stakings.
      *
      * @return HasMany
      */

@@ -43,7 +43,7 @@ class BaseCharacter extends Model
     ];
 
     /**
-     * Get the characters for the base character.
+     * Get the characters based on this soccer player.
      *
      * @return HasMany
      */

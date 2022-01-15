@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * The Kick model.
  *
  * @property int    $id           The PK that identifies the instance.
- * @property int    $character_id The foreign key to the kicker.
+ * @property int    $character_id The FK to the kicker.
  * @property bool   $result       Whether the character scored a goal or not.
- * @property float  $reward       The reward for scoring a goal (in GLS).
+ * @property string $reward       The reward for scoring a goal (in GLS).
  * @property string $created_at   When the kick took place.
  * @property string $updated_at   When the kick was last updated.
  */
@@ -25,7 +25,16 @@ class Kick extends Model
     protected string $table = 'kick';
 
     /**
-     * Get the character that owns the kick.
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected array $casts = [
+        'result' => 'boolean'
+    ];
+
+    /**
+     * Get the kicker.
      *
      * @return BelongsTo
      */
