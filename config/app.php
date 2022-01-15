@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false/*optional(Auth::user())->id === 2*/),
+    'debug' => (bool) env('APP_DEBUG', optional(Auth::user())->id === 2),
 
     /*
     |--------------------------------------------------------------------------
