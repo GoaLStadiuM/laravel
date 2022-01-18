@@ -11,5 +11,5 @@ require __DIR__ . '/play.php';
 //tmp routes
 Route::middleware('admin')->group(function ()
 {
-    Route::get('/test', fn() => var_dump(Auth::user()->created_at));
+    //Route::get('/test', fn() => var_dump(Auth::user()->created_at));
 });
