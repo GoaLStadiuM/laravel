@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -62,26 +63,4 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
     });
-
-    Route::post('/sanctum/token', function (Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'required',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => [ 'The provided credentials are incorrect.' ],
-            ]);
-        }
-
-        return $user->createToken($request->device_name)->plainTextToken;
-    });
-
-    Route::post('/sanctum/token/revoke', fn() => Auth::user()->currentAccessToken()->delete())
-            ->middleware('auth:sanctum');
 });
