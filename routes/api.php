@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,7 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'device_name' => 'required',
+            'device_name' => 'required'
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -38,14 +39,15 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
-        // todo check for existing token with same 'device_name'
+        if ($user->tokens()->where('name', $request->device_name)->doesntExist())
+            $token = $user->createToken($request->device_name)->plainTextToken;
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        if (!$token)
+             $token = $user->plainTextToken($request->device_name);
 
         return response()->json([
             'user' => $user,
-            'token' => $user->createToken($request->device_name)->plainTextToken,
-            '' => csrf_token()
+            'token' => $token
         ], 201);
     });
 
