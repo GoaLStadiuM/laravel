@@ -39,11 +39,11 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
-        if ($user->tokens()->where('name', $request->device_name)->doesntExist())
-            $token = $user->createToken($request->device_name)->plainTextToken;
+        if ($user->tokens()->where('name', $request->device_name)->exists())
+            $token = $user->plainTextToken($request->device_name);
 
-        if (!$token)
-             $token = $user->plainTextToken($request->device_name);
+        else
+            $token = $user->createToken($request->device_name)->plainTextToken;
 
         return response()->json([
             'user' => $user,
