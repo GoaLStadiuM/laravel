@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //$this->configureRateLimiting();
+        $this->configureRateLimiting();
 
         $this->routes(function () {
             Route::prefix('api')
@@ -53,14 +53,15 @@ class RouteServiceProvider extends ServiceProvider
      * Configure the rate limiters for the application.
      *
      * @return void
-     *//*
+     */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('bscscanApi', function (Request $request) {
+        /*RateLimiter::for('bscscanApi', function (Request $request) {
             return [
                 Limit::perMinute(299),
                 Limit::perMinute(5)->by(optional($request->user())->id)
             ];
-        });
-    }*/
+        });*/
+        RateLimiter::for('api', fn () => Limit::none());
+    }
 }
