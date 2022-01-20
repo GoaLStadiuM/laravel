@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::domain('auth.' . config('app.domain'))->group(function ()
 {
-    Route::post('/sanctum/token', function (Request $request): JsonResponse
+    Route::post('/sanctum/token', function (Request $request): string
     {
         $request->validate([
             'email' => 'required|email',
@@ -38,7 +38,9 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
+        // todo check for existing token with same 'device_name'
 
+        return $user->createToken($request->device_name)->plainTextToken;
 
         return response()->json([
             'user' => $user,
