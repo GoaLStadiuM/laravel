@@ -20,9 +20,9 @@ class ShopController extends Controller
                   THIRD_DIVISION = 3;
 
     private array $starting_stats = [
-        FIRST_DIVISION => 95,
-        SECOND_DIVISION => 76,
-        THIRD_DIVISION => 57
+        self::FIRST_DIVISION => 95,
+        self::SECOND_DIVISION => 76,
+        self::THIRD_DIVISION => 57
     ];
 
     public function shop()
