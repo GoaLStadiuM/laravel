@@ -92,16 +92,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Staking::class);
     }
-
-    /**
-     * Get a user token by name or create a new one.
-     *
-     * @return string The token for the specified device.
-     */
-    public function findTokenOrCreate(string $name): string
-    {
-        $token = $this->tokens()->where('name', $name);
-
-        return $token->exists() ? $token->first()->token : $this->createToken($name)->plainTextToken;
-    }
 }

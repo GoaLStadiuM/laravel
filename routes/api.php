@@ -39,9 +39,12 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
+        // if another token exists revoke it
+        $user->tokens()->where('name', $request->device_name)->delete();
+
         return response()->json([
             'user' => $user,
-            'token' => $user->findTokenOrCreate($request->device_name)
+            'token' => $user->createToken($request->device_name)->plainTextToken
         ], 201);
     });
 
