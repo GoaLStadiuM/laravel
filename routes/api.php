@@ -40,7 +40,8 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
 
         return response()->json([
             'user' => $user,
-            'token' => $user->createToken($request->device_name)->plainTextToken
+            'token' => $user->createToken($request->device_name)->plainTextToken,
+            '' => csrf_token()
         ], 201);
     });
 
