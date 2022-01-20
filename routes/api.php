@@ -48,7 +48,7 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ->middleware('auth:sanctum');
 });
 
-Route::domain('play.' . config('app.domain'))->middleware('auth:sanctum|validated')->group(function ()
+Route::domain('play.' . config('app.domain'))->middleware(['auth:sanctum','validated'])->group(function ()
 {
     Route::get('/penalties/play', [ GameController::class, 'play' ]);
     Route::get('/penalties/characterlist', [ GameController::class, 'characterList' ]);
