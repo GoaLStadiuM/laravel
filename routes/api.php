@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::domain('auth.' . config('app.domain'))->group(function ()
 {
-    Route::post('/sanctum/token', function (Request $request): string
+    Route::post('/sanctum/token', function (Request $request): JsonResponse
     {
         $request->validate([
             'email' => 'required|email',
