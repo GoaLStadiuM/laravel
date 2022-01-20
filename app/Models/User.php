@@ -102,6 +102,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $token = $this->tokens()->where('name', $name);
 
-        return $token->exists() ? $token->first()->name : $this->createToken($name)->plainTextToken;
+        return $token->exists() ? $token->first()->token : $this->createToken($name)->plainTextToken;
     }
 }
