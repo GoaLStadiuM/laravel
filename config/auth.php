@@ -39,7 +39,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users'
-        ],
+        ]/*,
 
         'api' => [
             'driver'   => 'token',
@@ -54,7 +54,7 @@ return [
         'administrator' => [
             'driver'   => 'session',
             'provider' => 'users'
-        ]
+        ]*/
     ],
 
     /*
