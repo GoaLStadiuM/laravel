@@ -74,6 +74,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the user characters by division.
+     *
+     * @return HasMany
+     */
+    public function charactersByDivision(int $division): HasMany
+    {
+        return $this->hasMany(Character::class)->where('division', $division);
+    }
+
+    /**
      * Get the user stakings.
      *
      * @return HasMany
