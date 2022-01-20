@@ -38,6 +38,11 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
+        return response()->json([
+            'user' => $user,
+            'token' => $user->createToken($request->device_name)->plainTextToken
+        ], Response::HTTP_CREATED);
+
         return response([
             'user' => $user,
             'token' => $user->createToken($request->device_name)->plainTextToken
