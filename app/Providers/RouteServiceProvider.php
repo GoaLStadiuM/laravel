@@ -53,7 +53,7 @@ class RouteServiceProvider extends ServiceProvider
      * Configure the rate limiters for the application.
      *
      * @return void
-     */
+     *//*
     protected function configureRateLimiting()
     {
         RateLimiter::for('bscscanApi', function (Request $request) {
@@ -62,5 +62,5 @@ class RouteServiceProvider extends ServiceProvider
                 Limit::perMinute(5)->by(optional($request->user())->id)
             ];
         });
-    }
+    }*/
 }
