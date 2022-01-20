@@ -4,7 +4,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
-Route::domain('play.' . config('app.domain'))->middleware('verified')->group(function ()
+Route::domain('play.' . config('app.domain'))->middleware(['verified', 'admin'])->group(function ()
 {
     Route::get('/penalties', [ GameController::class, 'menu' ])->name('menu');
     Route::get('/penalties/shop', [ ShopController::class, 'shop' ])->name('shop');
