@@ -98,7 +98,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return string The token for the specified device.
      */
-    public function getTokenOrCreate(string $name): string
+    public function findTokenOrCreate(string $name): string
     {
         $token = $this->tokens()->where('name', $name);
 
