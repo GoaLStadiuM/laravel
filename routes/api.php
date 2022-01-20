@@ -39,15 +39,9 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
-        if ($user->tokens()->where('name', $request->device_name)->exists())
-            $token = $user->plainTextToken($request->device_name);
-
-        else
-            $token = $user->createToken($request->device_name)->plainTextToken;
-
         return response()->json([
             'user' => $user,
-            'token' => $token
+            'token' => $user->findTokenOrCreate($request->device_name)
         ], 201);
     });
 
