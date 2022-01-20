@@ -38,6 +38,8 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
+
+
         return response()->json([
             'user' => $user,
             'token' => $user->createToken($request->device_name)->plainTextToken,
@@ -56,3 +58,5 @@ Route::domain('play.' . config('app.domain'))->middleware(['auth:sanctum','valid
     Route::get('/penalties/kick/{character_id}', [ GameController::class, 'kick' ]);
     Route::get('/penalties/kick/reward/{character_id}', [ GameController::class, 'reward' ]);
 });
+
+Route::middleware('auth:sanctum')->get('/test', fn()=>'hi');
