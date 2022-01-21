@@ -105,6 +105,8 @@ class GameController extends Controller
     {
         $character = $this->timeCheck($character_id);
 
+        $currentLvl = $character->level;
+
         $kick = $character->latestKick()->firstOrFail();
         $kick->reward = 0;
 
@@ -129,7 +131,8 @@ class GameController extends Controller
         return response()->json([
             'ok' => true,
             'version' => 0,
-            'reward' => $kick->reward
+            'reward' => $kick->reward,
+            'level_up' => $currentLvl === $character->level
         ]);
     }
 

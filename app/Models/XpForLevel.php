@@ -55,8 +55,6 @@ class XpForLevel extends Model
     /**
      * Get the xp for next level for the first division.
      *
-     * @param int $division The division used in the where clause.
-     *
      * @return int[] An array with the xp for next level for every level (key)
      *               associated with the first division.
      */
@@ -68,8 +66,6 @@ class XpForLevel extends Model
     /**
      * Get the xp for next level for the second division.
      *
-     * @param int $division The division used in the where clause.
-     *
      * @return int[] An array with the xp for next level for every level (key)
      *               associated with the second division.
      */
@@ -80,8 +76,6 @@ class XpForLevel extends Model
 
     /**
      * Get the xp for next level for the third division.
-     *
-     * @param int $division The division used in the where clause.
      *
      * @return int[] An array with the xp for next level for every level (key)
      *               associated with the third division.

@@ -39,13 +39,17 @@ class ShopController extends Controller
 
         $product = Product::findOrFail($request->input('product_id'));
         $base_characters = BaseCharacter::get()->pluck('probability', 'id')->toArray();
+        $characters = Auth::user()->charactersByDivision($product->division);
+
+        if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
+            abort(403, 'You already have the maximum number of characters for this division.');
+
         $base_id = $this->lottery($base_characters);
 
         // check if one of the user's owned characters already have the base_id
-        $characters = Auth::user()->charactersByDivision($product->division);
         if ($characters->count() > 0)
         {
-            $owned_ids = $characters->join('base_character')
+            $owned_ids = $characters->join('base_character', 'character.base_id', '=', 'base_character.id')
                                     ->get()
                                     ->pluck('base_character.probability', 'base_character.id')
                                     ->toArray();

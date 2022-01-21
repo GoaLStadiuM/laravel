@@ -59,5 +59,3 @@ Route::domain('play.' . config('app.domain'))->middleware(['auth:sanctum','verif
     Route::get('/penalties/kick/{character_id}', [ GameController::class, 'kick' ]);
     Route::get('/penalties/kick/reward/{character_id}', [ GameController::class, 'reward' ]);
 });
-
-Route::domain('play.' . config('app.domain'))->middleware('auth:sanctum')->get('/test', fn()=>'hi');
