@@ -152,7 +152,7 @@ class GameController extends Controller
 
         if (!$character->canKick([
             $now->modify("$currentHour:00:00"),
-            $now->modify("$currentHour:30:00")
+            $now->modify("$currentHour:14:59")
         ]))
             abort(403, "You don't have any kicks left.");
 
