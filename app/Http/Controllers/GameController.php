@@ -156,6 +156,8 @@ class GameController extends Controller
         $now = new DateTime('now', new DateTimeZone('UTC'));
         $currentHour = $now->format('H');
         $currentMinute = $now->format('i');
+        $begin = new DateTime('now', new DateTimeZone('UTC'));
+        $end = new DateTime('now', new DateTimeZone('UTC'));
 
         if (!$this->isItTimeToKick($currentHour, $currentMinute))
             abort(403, "Sorry, you're late (or early).");
@@ -166,8 +168,8 @@ class GameController extends Controller
         ])->firstOrFail();
 
         $window = [
-            $now->modify("$currentHour:00:00"),
-            $now->modify("$currentHour:14:59")
+            $begin->modify("$currentHour:00:00"),
+            $end->modify("$currentHour:59:59")
         ];
 
         if (!$character->canKick($window))
