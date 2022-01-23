@@ -151,7 +151,7 @@ class GameController extends Controller
         ]);
     }
 
-    private function timeCheck(int $character_id): Character
+    private function timeCheck(int $character_id): array
     {
         $now = new DateTime('now', new DateTimeZone('UTC'));
         $currentHour = $now->format('H');
