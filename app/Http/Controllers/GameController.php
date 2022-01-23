@@ -265,9 +265,9 @@ class GameController extends Controller
         if ($hours > 0)
         {
             $gameConfig = config('game');
+            $character = $training->character;
             $max_stats = (new Division($character->division))->getMaxStats();
 
-            $character = $training->character;
             if ($this->checkMaxStats($character, $max_stats))
             {
                 // Goal Reward
