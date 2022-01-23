@@ -31,6 +31,10 @@ use DateTimeZone;
  */
 class Character extends Model
 {
+    public const FIRST_DIVISION = 1,
+                 SECOND_DIVISION = 2,
+                 THIRD_DIVISION = 3;
+
     /**
      * The table associated with the model.
      *
@@ -85,7 +89,7 @@ class Character extends Model
      */
     public function xpForLevel(): array
     {
-        return $this->belongsTo(XpForLevel::class, 'division', 'division')->get()->pluck('xp_for_next_level', 'level');
+        return $this->belongsTo(XpForLevel::class, 'division', 'division')->get()->pluck('xp_for_next_level', 'level')->toArray();
     }
 
     /**
@@ -152,23 +156,23 @@ class Character extends Model
     }
 
     /**
-     * Get the character's most recent kick.
+     * Get the current kick for the specified window.
      *
      * @return HasOne
      */
-    public function latestKick(): HasOne
+    public function currentKick(array $window): HasOne
     {
-        return $this->hasOne(Kick::class)->latestOfMany()->whereNull('reward');
+        return $this->hasOne(Kick::class)->whereNull('reward')->whereBetween('created_at', $window);
     }
 
     /**
-     * Get the character's most recent kick or create a new one.
+     * Get the current kick or create a new one.
      *
-     * @return Kick The instance of the latest or new kick.
+     * @return Kick The instance of the current or new kick.
      */
-    public function latestKickOrCreate(array $stuff): Kick
+    public function currentKickOrCreate(array $cond, array $stuff): Kick
     {
-        $kick = $this->latestKick()->first();
+        $kick = $this->currentKick($cond)->first();
 
         if (!$kick)
         {

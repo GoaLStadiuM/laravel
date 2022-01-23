@@ -75,7 +75,7 @@ async function updatePrices()
     const goal = (await fetchToken()).data;
 
     Array.prototype.forEach.call(prices, function(el, it)
-    { //                                                                  todo tmp fix
+    {
         el.textContent = Number.parseFloat(el.dataset.price / goal.price).toFixed(0) + ' ' + goal.symbol;
     });
 
@@ -86,11 +86,6 @@ function showError(error)
 {
     alert(error);
     hideCarrousel();
-}
-
-function f_fixDecimalPlace( _value, _decimals)
-{
-    return Function( '"use strict";return (' + _value / 10 ** _decimals + ')' )();
 }
 
 async function purchase(product)
@@ -105,12 +100,15 @@ async function purchase(product)
 
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
-          product_price = product.lastElementChild,
-          amount = Number.parseFloat(product_price.dataset.price / goal.price).toFixed(0);// todo: tmp fix
+          product_price = product.lastElementChild;
+
+    let amount = Number.parseFloat(product_price.dataset.price / goal.price);
+    if (amount.toString().split('.')[1].length > 7)
+        amount = amount.toFixed(7);
 
     let transferResult = await Moralis.transfer({
         type: 'erc20',              // todo tmp fix
-        amount: Moralis.Units.Token(parseInt(amount), parseInt(decimals)),
+        amount: Moralis.Units.Token(amount.toString(), decimals),
         receiver: shopWallet,
         contractAddress: tokenAddress
     })

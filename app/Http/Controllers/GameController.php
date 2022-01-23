@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MaxPercentage;
+use App\Enums\MaxStats;
+use App\Enums\StartingPercentage;
 use App\Models\Character;
 use App\Models\Kick;
 use App\Models\NftPayment;
 use App\Models\Training;
 use App\Models\TrainingSession;
+use App\Models\Product;
+use App\Traits\GLSToken;
+use App\Traits\GoalToken;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,35 +22,37 @@ use DateTimeZone;
 
 class GameController extends Controller
 {
-    private const STATS_CAP = 171, // a
-                  STATS_CAP_PERCENTAGE = 90; // b
+    use GLSToken, GoalToken;
 
     public function characterList(): JsonResponse
     {
+        $max_percentage = MaxPercentage::from(Character::FIRST_DIVISION)->value;
+        $max_stats = MaxStats::from(Character::FIRST_DIVISION)->value;
+
         return response()->json([
             'ok' => true,
             'version' => 0,
             'characters' => Auth::user()
-                            ->characters()
-                            ->join('base_character', 'character.base_id', '=', 'base_character.id')
-                            ->join('xp_for_level', fn($join) =>
-                                $join->on('character.division', '=', 'xp_for_level.division')
-                                     ->on('character.level', '=', 'xp_for_level.level')
-                            )
-                            ->select(
-                                'character.id as character_id',
-                                'character.base_id as model_id',
-                                'character.name as character_name', // could be null
-                                'base_character.name as base_name', // in such case use default
-                                'character.division',
-                                'character.level',
-                                'character.strength',
-                                'character.accuracy',
-                                DB::raw('(character.strength + character.accuracy) * 90 / 171 as percentage'),
-                                'character.xp',
-                                'xp_for_level.xp_for_next_level'
-                            )
-                            ->get()
+                ->characters()
+                ->join('base_character', 'character.base_id', '=', 'base_character.id')
+                ->join('xp_for_level', fn($join) =>
+                    $join->on('character.division', '=', 'xp_for_level.division')
+                            ->on('character.level', '=', 'xp_for_level.level')
+                )
+                ->select(
+                    'character.id as character_id',
+                    'character.base_id as model_id',
+                    'character.name as character_name', // could be null
+                    'base_character.name as base_name', // in such case use default
+                    'character.division',
+                    'character.level',
+                    'character.strength',
+                    'character.accuracy',
+                    DB::raw("(character.strength + character.accuracy) * $max_percentage / $max_stats as percentage"),
+                    'character.xp',
+                    'xp_for_level.xp_for_next_level'
+                )
+                ->get()
         ]);
     }
 
@@ -84,13 +92,17 @@ class GameController extends Controller
 
     public function kick(int $character_id): JsonResponse
     {
-        $character = $this->timeCheck($character_id);
+        $stuff = $this->timeCheck($character_id);
+        $character = $stuff[0];
+        $max_percentage = MaxPercentage::from(Character::FIRST_DIVISION)->value;
+        $max_stats = MaxStats::from(Character::FIRST_DIVISION)->value;
 
-        $kick = $character->latestKickOrCreate(
+        $kick = $character->currentKickOrCreate(
+            $stuff[1],
             [
                 'kick.character_id' => $character->id,
-                //                                 c                                              * b                           / a
-                'result' => (random_int(1, 100) <= (($character->strength + $character->accuracy) * self::STATS_CAP_PERCENTAGE) / self::STATS_CAP)
+                //                                 c                                              * b                / a
+                'result' => (random_int(1, 100) <= (($character->strength + $character->accuracy) * $max_percentage) / $max_stats)
             ]
         );
 
@@ -103,26 +115,29 @@ class GameController extends Controller
 
     public function reward(int $character_id): JsonResponse
     {
-        $character = $this->timeCheck($character_id);
+        $stuff = $this->timeCheck($character_id);
+        $character = $stuff[0];
+
+        $kick = $character->currentKick($stuff[1])->firstOrFail();
+        $kick->reward = 0;
 
         $currentLvl = $character->level;
 
-        $kick = $character->latestKick()->firstOrFail();
-        $kick->reward = 0;
-
         if ($kick->result)
         {
+            $product = $character->payment->product;
+
             // +1 xp (hardcoded)
             $character->xp++;
-            $this->lvlUp($character);
+            $this->lvlUp($character, $product);
             $character->save();
 
             // set the reward
-            $kick->reward = 123.456; // todo reward formula
+            $kick->reward = $this->calculateReward($character, $product);
 
             // add the reward to the user balance
             $user = Auth::user();
-            $user->gls = gmp_add($user->gls, $kick->reward);
+            $user->gls = bcadd($user->gls, $kick->reward);
             $user->save();
         }
 
@@ -150,13 +165,15 @@ class GameController extends Controller
             'user_id' => Auth::user()->id
         ])->firstOrFail();
 
-        if (!$character->canKick([
+        $window = [
             $now->modify("$currentHour:00:00"),
             $now->modify("$currentHour:14:59")
-        ]))
+        ];
+
+        if (!$character->canKick($window))
             abort(403, "You don't have any kicks left.");
 
-        return $character;
+        return [ $character, $window ];
     }
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
@@ -164,10 +181,10 @@ class GameController extends Controller
         return true;//in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
     }
 
-    private function lvlUp(Character $character): void
+    private function lvlUp(Character $character, Product $product): void
     {
         $xpForLevel = $character->xpForLevel();
-        $startingLvl = $character->payment->product->level;
+        $startingLvl = $product->level;
         $currentXp = $character->xp;
 
         foreach ($xpForLevel as $lvl => $xpForNextLvl)
@@ -189,9 +206,16 @@ class GameController extends Controller
             $character->level++;
     }
 
-    private function getReward()
+    private function calculateReward(Character $character, Product $product): string
     {
-        return '';
+        //                       product_price_in_busd / goal_price_in_busd
+        $product_price_in_goal = bcdiv($product->price, $this->goalPrice(), self::DECIMALS);
+        $product_price_in_gls = bcmul($product_price_in_goal, $this->GOAL_PRICE_IN_GLS, self::DECIMALS);
+        $roi = 45; // days
+        // 6 = 24 hours in a day / 4 hours (every window starts 4 hours after the previous one started)
+        $wins_per_day = (6 * $character->kicksPerWindow()) * StartingPercentage::from($character->division)->value;
+
+        return bcdiv(bcdiv($product_price_in_gls, $roi, self::DECIMALS), $wins_per_day, self::DECIMALS);
     }
 
     public function menu()

@@ -18,10 +18,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class XpForLevel extends Model
 {
-    private const FIRST_DIVISION = 1,
-                  SECOND_DIVISION = 2,
-                  THIRD_DIVISION = 3;
-
     /**
      * The table associated with the model.
      *
@@ -50,38 +46,5 @@ class XpForLevel extends Model
     public function characters(): HasMany
     {
         return $this->hasMany(Character::class, 'division', 'division');
-    }
-
-    /**
-     * Get the xp for next level for the first division.
-     *
-     * @return int[] An array with the xp for next level for every level (key)
-     *               associated with the first division.
-     */
-    public function first(): array
-    {
-        return $this->where('division', self::FIRST_DIVISION)->get()->pluck('xp_for_next_level', 'level');
-    }
-
-    /**
-     * Get the xp for next level for the second division.
-     *
-     * @return int[] An array with the xp for next level for every level (key)
-     *               associated with the second division.
-     */
-    public function second(): array
-    {
-        return $this->where('division', self::SECOND_DIVISION)->get()->pluck('xp_for_next_level', 'level');
-    }
-
-    /**
-     * Get the xp for next level for the third division.
-     *
-     * @return int[] An array with the xp for next level for every level (key)
-     *               associated with the third division.
-     */
-    public function third(): array
-    {
-        return $this->where('division', self::THIRD_DIVISION)->get()->pluck('xp_for_next_level', 'level');
     }
 }

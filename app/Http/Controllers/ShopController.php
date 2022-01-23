@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StartingStats;
 use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
@@ -14,16 +15,6 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
     use GoalToken;
-
-    private const FIRST_DIVISION = 1,
-                  SECOND_DIVISION = 2,
-                  THIRD_DIVISION = 3;
-
-    private array $starting_stats = [
-        self::FIRST_DIVISION => 95,
-        self::SECOND_DIVISION => 76,
-        self::THIRD_DIVISION => 57
-    ];
 
     public function shop()
     {
@@ -44,6 +35,14 @@ class ShopController extends Controller
         if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
             abort(403, 'You already have the maximum number of characters for this division.');
 
+        $nft_payment = new NftPayment;
+        $nft_payment->user_id = Auth::user()->id;
+        $nft_payment->status_id = 1;
+        $nft_payment->product_id = $product->id;
+        $nft_payment->price_in_goal = $this->getPriceInGoal($product->price);
+        $nft_payment->tx_hash = $request->input('tx_hash'); // TODO IMPORTANT! setup task scheduling to validate txs
+        $nft_payment->save();
+
         $base_id = $this->lottery($base_characters);
 
         // check if one of the user's owned characters already have the base_id
@@ -61,17 +60,18 @@ class ShopController extends Controller
             }
         }
 
-        // TODO IMPORTANT! setup task scheduling to validate txs
+        // character starting stats
+        $stats = StartingStats::from($product->division)->value;
 
-        $nft_payment = new NftPayment;
-        $nft_payment->user_id = Auth::user()->id;
-        $nft_payment->status_id = 1;
-        $nft_payment->product_id = $product->id;
-        $nft_payment->price_in_goal = $this->getPriceInGoal($product->price);
-        $nft_payment->tx_hash = $request->input('tx_hash');
-        $nft_payment->save();
-
-        $this->createCharacter($nft_payment, $base_id);
+        $character = new Character;
+        $character->user_id = Auth::user()->id;
+        $character->base_id = $base_id;
+        $character->payment_id = $nft_payment->id;
+        $character->division = $product->division;
+        $character->level = $product->level;
+        $character->strength = random_int(($stats * .48), ($stats * .52));
+        $character->accuracy = $stats - $character->strength;
+        $character->save();
 
         return response()->json([
             'ok' => true,
@@ -97,25 +97,6 @@ class ShopController extends Controller
         }
 
         abort(500, 'Please, contact support.');
-    }
-
-    private function createCharacter(NftPayment $nft_payment, int $base_id): void
-    {
-        $character = new Character;
-        $character->user_id = Auth::user()->id;
-        $character->base_id = $base_id;
-        $character->payment_id = $nft_payment->id;
-        $character->division = $nft_payment->product->division;
-        $character->level = $nft_payment->product->level;
-
-        // character starting stats
-        $stats = $this->starting_stats[$character->division] ?? null;
-        if (!$stats)
-            abort('404', 'Unknown error. Please, contact support.');
-
-        $character->strength = random_int(($stats * .48), ($stats * .52));
-        $character->accuracy = $stats - $character->strength;
-        $character->save();
     }
 
 /* TODO: move this to user account tools
