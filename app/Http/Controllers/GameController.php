@@ -217,7 +217,7 @@ class GameController extends Controller
         // 6 = 24 hours in a day / 4 hours (every window starts 4 hours after the previous one started)
         $wins_per_day = (6 * $character->kicksPerWindow()) * (new Division($character->division))->getStartingPercentage();
 
-        return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), $wins_per_day, self::$DECIMALS);
+        return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), strval($wins_per_day), self::$DECIMALS);
     }
 
     public function menu()
