@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\StartingStats;
 use App\Models\BaseCharacter;
 use App\Models\Character;
+use App\Models\Division;
 use App\Models\NftPayment;
 use App\Models\Product;
 use App\Traits\GoalToken;
@@ -61,7 +61,7 @@ class ShopController extends Controller
         }
 
         // character starting stats
-        $stats = StartingStats::from($product->division)->value;
+        $stats = (new Division($product->division))->getStartingStats();
 
         $character = new Character;
         $character->user_id = Auth::user()->id;

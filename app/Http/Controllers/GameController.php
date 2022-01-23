@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\MaxPercentage;
-use App\Enums\MaxStats;
-use App\Enums\StartingPercentage;
 use App\Models\Character;
+use App\Models\Division;
 use App\Models\Kick;
 use App\Models\NftPayment;
 use App\Models\Training;
@@ -26,8 +24,9 @@ class GameController extends Controller
 
     public function characterList(): JsonResponse
     {
-        $max_percentage = MaxPercentage::from(Character::FIRST_DIVISION)->value;
-        $max_stats = MaxStats::from(Character::FIRST_DIVISION)->value;
+        $div = new Division(Division::FIRST_DIVISION);
+        $max_percentage = $div->getMaxPercentage();
+        $max_stats = $div->getMaxStats();
 
         return response()->json([
             'ok' => true,
@@ -94,8 +93,9 @@ class GameController extends Controller
     {
         $stuff = $this->timeCheck($character_id);
         $character = $stuff[0];
-        $max_percentage = MaxPercentage::from(Character::FIRST_DIVISION)->value;
-        $max_stats = MaxStats::from(Character::FIRST_DIVISION)->value;
+        $div = new Division(Division::FIRST_DIVISION);
+        $max_percentage = $div->getMaxPercentage();
+        $max_stats = $div->getMaxStats();
 
         $kick = $character->currentKickOrCreate(
             $stuff[1],
@@ -213,7 +213,7 @@ class GameController extends Controller
         $product_price_in_gls = bcmul($product_price_in_goal, $this->GOAL_PRICE_IN_GLS, self::DECIMALS);
         $roi = 45; // days
         // 6 = 24 hours in a day / 4 hours (every window starts 4 hours after the previous one started)
-        $wins_per_day = (6 * $character->kicksPerWindow()) * StartingPercentage::from($character->division)->value;
+        $wins_per_day = (6 * $character->kicksPerWindow()) * (new Division($character->division))->getStartingPercentage();
 
         return bcdiv(bcdiv($product_price_in_gls, $roi, self::DECIMALS), $wins_per_day, self::DECIMALS);
     }

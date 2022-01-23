@@ -31,10 +31,6 @@ use DateTimeZone;
  */
 class Character extends Model
 {
-    public const FIRST_DIVISION = 1,
-                 SECOND_DIVISION = 2,
-                 THIRD_DIVISION = 3;
-
     /**
      * The table associated with the model.
      *
