@@ -101,7 +101,7 @@ else
     showDisconnected();
 }*/
 
-Moralis.onAccountsChanged(function(accounts)
+Moralis.onAccountsChanged( async (accounts) =>
 {
     if (!Moralis.User.current())
         return;
