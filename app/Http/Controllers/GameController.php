@@ -147,7 +147,7 @@ class GameController extends Controller
             'ok' => true,
             'version' => 0,
             'reward' => $kick->reward,
-            'level_up' => $currentLvl === $character->level
+            'level_up' => $currentLvl !== $character->level
         ]);
     }
 
