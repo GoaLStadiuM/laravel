@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use stdClass;
+
 trait GoalToken
 {
     public static int $DECIMALS = 7;
