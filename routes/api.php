@@ -40,8 +40,8 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
         }
 
         // tmp hack
-        $whitelist = [ 1351, 1282, 1287, 937, 1350, 1353 ];
-        if ($user->id > 654 || !in_array($user->id, $whitelist)/* && $user->characters()->doesntExist()*/)
+        $whitelist = [ 1351, 1282, 1287, 1350, 1353 ];
+        if ($user->id > 654 && !in_array($user->id, $whitelist)/* && $user->characters()->doesntExist()*/)
             abort(403);
 
         // if another token exists revoke it

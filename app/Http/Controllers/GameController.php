@@ -135,11 +135,11 @@ class GameController extends Controller
             $character->save();
 
             // set the reward
-            $kick->reward = $this->calculateReward($character, $product);
+            $kick->reward = $this->calculateKickReward($character, $product);
 
             // add the reward to the user balance
             $user = Auth::user();
-            $user->gls = bcadd($user->gls, $kick->reward);
+            $user->gls = bcadd($user->gls, $kick->reward, self::$DECIMALS);
             $user->save();
         }
 
@@ -210,14 +210,14 @@ class GameController extends Controller
             $character->level++;
     }
 
-    private function calculateReward(Character $character, Product $product): string
+    private function calculateKickReward(Character $character, Product $product): string
     {
         //                       product_price_in_busd / goal_price_in_busd
         $product_price_in_goal = bcdiv(strval($product->price), $this->goalPrice(), self::$DECIMALS);
         $product_price_in_gls = bcmul($product_price_in_goal, strval($this->GOAL_PRICE_IN_GLS), self::$DECIMALS);
         $roi = '45'; // days
         // 6 = 24 hours in a day / 4 hours (every window starts 4 hours after the previous one started)
-        $wins_per_day = (6 * $character->kicksPerWindow()) * (new Division($character->division))->getStartingPercentage();
+        $wins_per_day = (6 * $character->kicksPerWindow()) * ((new Division($character->division))->getStartingPercentage() / 100);
 
         return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), strval($wins_per_day), self::$DECIMALS);
     }
@@ -246,7 +246,6 @@ class GameController extends Controller
         if ($training->character->user->id !== Auth::user()->id)
             abort(403, 'You are not authorized to perform this action.');
 
-        $gameConfig = config('game');
         $maxHours = $training->session->max_hours;
         $timezone = new DateTimeZone('UTC');
         $start = new DateTime(strval($training->created_at), $timezone);
@@ -256,35 +255,61 @@ class GameController extends Controller
         if (!is_numeric($diff->h))
             abort(403, 'Unknown error. Please, contact support.');
 
-        if (intval($diff->y) > 0 || intval($diff->m) > 0 || intval($diff->d) > 0 || intval($diff->h) >= $maxHours)
-        {
-            $hours = $maxHours;
-        }
-
-        else
-        {
-            $hours = intval($diff->h);
-        }
+        $hours = intval($diff->y) > 0 || intval($diff->m) > 0 || intval($diff->d) > 0 || intval($diff->h) >= $maxHours
+                    ? $maxHours
+                    : intval($diff->h);
 
         $training->done = true;
         $training->save();
 
         if ($hours > 0)
         {
-            // Stats Reward
-            $pip = $gameConfig['CHARACTER_INCREASE_PERCENTAGE'];
-            $character = $training->character;
-            $character->strength += ($character->strength * $pip) * $hours;
-            $character->accuracy += ($character->accuracy * $pip) * $hours;
-            $character->save();
+            $gameConfig = config('game');
+            $max_stats = (new Division($character->division))->getMaxStats();
 
-            // Goal Reward
-            $user = Auth::user();
-            $user->goal += ((($character->payment->product->price * $gameConfig['CHARACTER_REWARD_PERCENTAGE']) * $hours) / $gameConfig['GOAL_PRICE_IN_BUSD']) * .1;
-            $user->save();
+            $character = $training->character;
+            if ($this->checkMaxStats($character, $max_stats))
+            {
+                // Goal Reward
+                $user = Auth::user();
+                $user->goal += $this->calculateFarmingReward($character->payment->product->price, $gameConfig['CHARACTER_REWARD_PERCENTAGE']) * $hours;
+                $user->save();
+            }
+
+            else
+            {
+                // Stats Reward
+                $cip = $gameConfig['CHARACTER_INCREASE_PERCENTAGE'];
+                $character->strength += ($character->strength * $cip) * $hours;
+                $character->accuracy += ($character->accuracy * $cip) * $hours;
+
+                if (($character->strength + $character->accuracy) > $max_stats)
+                    $this->setStatsToMax($character, $max_stats);
+
+                $character->save();
+            }
         }
 
         return redirect()->route('farming');
+    }
+
+    // true if character hit max stats, false otherwise
+    private function checkMaxStats(Character $character, int $max_stats): bool
+    {
+        return ($character->strength + $character->accuracy) === $max_stats;
+    }
+
+    private function calculateFarmingReward(int $product_price, int $reward_percentage): string
+    {
+        return bcdiv(bcmul($product_price, $reward_percentage, self::$DECIMALS), $this->goalPrice(), self::$DECIMALS);
+    }
+
+    private function setStatsToMax(Character $character, int $max_stats): void
+    {
+        $x = (($character->strength + $character->accuracy) - $max_stats) / 2;
+
+        $character->strength -= $x;
+        $character->accuracy -= $x;
     }
 
     public function selectTraining(int $payment_id, int $session_id)
