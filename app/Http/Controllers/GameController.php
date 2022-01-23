@@ -180,7 +180,7 @@ class GameController extends Controller
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
-        return true;//in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
+        return in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
     }
 
     private function lvlUp(Character $character, Product $product): void
