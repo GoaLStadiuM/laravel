@@ -60,6 +60,8 @@ class GameController extends Controller
         $now = new DateTime('now', new DateTimeZone('UTC'));
         $currentHour = $now->format('H');
         $currentMinute = $now->format('i');
+        $begin = new DateTime('now', new DateTimeZone('UTC'));
+        $end = new DateTime('now', new DateTimeZone('UTC'));
 
         return response()->json([
             'ok' => true,
@@ -72,8 +74,8 @@ class GameController extends Controller
                                 $join->on('kick.character_id', '=', 'character.id')
                                      ->whereNotNull('kick.reward')
                                      ->whereBetween('kick.created_at', [
-                                        $now->modify("$currentHour:00:00"),
-                                        $now->modify("$currentHour:30:00")
+                                        $begin->modify("$currentHour:00:00"),
+                                        $end->modify("$currentHour:29:59")
                                     ])
                             )
                             ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
@@ -169,7 +171,7 @@ class GameController extends Controller
 
         $window = [
             $begin->modify("$currentHour:00:00"),
-            $end->modify("$currentHour:59:59")
+            $end->modify("$currentHour:29:59")
         ];
 
         if (!$character->canKick($window))
