@@ -211,13 +211,13 @@ class GameController extends Controller
     private function calculateReward(Character $character, Product $product): string
     {
         //                       product_price_in_busd / goal_price_in_busd
-        $product_price_in_goal = bcdiv($product->price, $this->goalPrice(), GoalToken::DECIMALS);
-        $product_price_in_gls = bcmul($product_price_in_goal, $this->GOAL_PRICE_IN_GLS, GoalToken::DECIMALS);
+        $product_price_in_goal = bcdiv($product->price, $this->goalPrice(), self::$DECIMALS);
+        $product_price_in_gls = bcmul($product_price_in_goal, $this->GOAL_PRICE_IN_GLS, self::$DECIMALS);
         $roi = 45; // days
         // 6 = 24 hours in a day / 4 hours (every window starts 4 hours after the previous one started)
         $wins_per_day = (6 * $character->kicksPerWindow()) * (new Division($character->division))->getStartingPercentage();
 
-        return bcdiv(bcdiv($product_price_in_gls, $roi, GoalToken::DECIMALS), $wins_per_day, GoalToken::DECIMALS);
+        return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), $wins_per_day, self::$DECIMALS);
     }
 
     public function menu()
