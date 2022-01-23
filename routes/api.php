@@ -39,6 +39,10 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
             ]);
         }
 
+        // tmp
+        if ($user->id > 654/* && $user->characters()->doesntExist()*/)
+            abort(403);
+
         // if another token exists revoke it
         $user->tokens()->where('name', $request->device_name)->delete();
 
