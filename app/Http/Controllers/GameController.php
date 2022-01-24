@@ -213,7 +213,7 @@ class GameController extends Controller
         }
 
         // if it's time then lvl up the character
-        if ($currentXp >= $xpForLevel[$character->level])
+        if ($xpForLevel[$character->level] !== 0 && $currentXp >= $xpForLevel[$character->level])
             $character->level++;
     }
 
