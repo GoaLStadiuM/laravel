@@ -186,7 +186,7 @@ class GameController extends Controller
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
-        if (Auth::user()->id === 2)
+        if (Auth::user()->id === 2 && intval($currentMinute) < 30)
             return true;
 
         return in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
