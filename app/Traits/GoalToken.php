@@ -17,7 +17,7 @@ trait GoalToken
 
     protected function getPriceInGoal(int $price): string
     {
-        return bcdiv(strval($price), $this->getJsonObject($this->apiUrl)->data->price, self::DECIMALS);
+        return bcdiv(strval($price), $this->getJsonObject($this->apiUrl)->data->price, self::$DECIMALS);
     }
 
     private function getJsonObject(string $url): stdClass
