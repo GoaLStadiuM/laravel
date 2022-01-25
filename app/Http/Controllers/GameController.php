@@ -171,6 +171,27 @@ class GameController extends Controller
         return [ $character, $timeChecks[1] ];
     }
 
+    private function getTimeChecks(): array
+    {
+        $timezone = new DateTimeZone('UTC');
+        $now = new DateTime('now', $timezone);
+        $currentHour = $now->format('H');
+        $currentMinute = $now->format('i');
+        $begin = new DateTime('now', $timezone);
+        $end = new DateTime('now', $timezone);
+
+        return [
+            [
+                $currentHour,
+                $currentMinute
+            ],
+            [
+                $begin->modify("$currentHour:00:00"),
+                $end->modify("$currentHour:$this->minutes:$this->seconds")
+            ]
+        ];
+    }
+
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
         if (Auth::user()->id === 2 && intval($currentMinute) <= $this->minutes)
@@ -214,26 +235,6 @@ class GameController extends Controller
         $wins_per_day = (6 * $character->kicksPerWindow()) * ((new Division($character->division))->getStartingPercentage() / 100);
 
         return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), strval($wins_per_day), self::$DECIMALS);
-    }
-
-    private function getTimeChecks(): array
-    {
-        $now = new DateTime('now', new DateTimeZone('UTC'));
-        $currentHour = $now->format('H');
-        $currentMinute = $now->format('i');
-        $begin = new DateTime('now', new DateTimeZone('UTC'));
-        $end = new DateTime('now', new DateTimeZone('UTC'));
-
-        return [
-            [
-                $currentHour,
-                $currentMinute
-            ],
-            [
-                $begin->modify("$currentHour:00:00"),
-                $end->modify("$currentHour:$this->minutes:$this->seconds")
-            ]
-        ];
     }
 
     public function menu()
