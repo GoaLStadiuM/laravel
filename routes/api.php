@@ -50,7 +50,7 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
         return response()->json([
             'user' => $user,
             'token' => $user->createToken($request->device_name)->plainTextToken
-        ], JsonResponse::HTTTP_CREATED);
+        ], JsonResponse::HTTP_CREATED);
     });
 
     Route::post('/sanctum/token/revoke', fn() => Auth::user()->currentAccessToken()->delete())

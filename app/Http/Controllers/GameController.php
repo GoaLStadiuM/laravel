@@ -112,7 +112,7 @@ class GameController extends Controller
             'ok' => true,
             'version' => 0,
             'kick' => $kick->result
-        ], JsonResponse::HTTTP_CREATED);
+        ], JsonResponse::HTTP_CREATED);
     }
 
     public function kickReward(int $character_id): JsonResponse
@@ -173,10 +173,10 @@ class GameController extends Controller
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
-        if (Auth::user()->id === 2 && intval($currentMinute) < 30)
+        if (Auth::user()->id === 2 && intval($currentMinute) <= $this->minutes)
             return true;
 
-        return in_array($currentHour, $this->allowed_hours) && intval($currentMinute) < 30;
+        return in_array($currentHour, $this->allowed_hours) && intval($currentMinute) <= $this->minutes;
     }
 
     private function lvlUp(Character $character, Product $product): void
