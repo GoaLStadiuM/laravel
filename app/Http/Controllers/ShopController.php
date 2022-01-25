@@ -69,7 +69,7 @@ class ShopController extends Controller
         $character->payment_id = $nft_payment->id;
         $character->division = $product->division;
         $character->level = $product->level;
-        $character->strength = random_int(($stats * .48), ($stats * .52));
+        $character->strength = random_int(intval($stats * .48), intval($stats * .52));
         $character->accuracy = $stats - $character->strength;
         $character->save();
 
