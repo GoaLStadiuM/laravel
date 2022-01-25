@@ -50,7 +50,7 @@ Route::domain('auth.' . config('app.domain'))->group(function ()
         return response()->json([
             'user' => $user,
             'token' => $user->createToken($request->device_name)->plainTextToken
-        ], 201);
+        ], JsonResponse::HTTTP_CREATED);
     });
 
     Route::post('/sanctum/token/revoke', fn() => Auth::user()->currentAccessToken()->delete())
@@ -62,5 +62,5 @@ Route::domain('play.' . config('app.domain'))->middleware(['auth:sanctum','verif
     Route::get('/penalties/play', [ GameController::class, 'play' ]);
     Route::get('/penalties/characterlist', [ GameController::class, 'characterList' ]);
     Route::get('/penalties/kick/{character_id}', [ GameController::class, 'kick' ]);
-    Route::get('/penalties/kick/reward/{character_id}', [ GameController::class, 'reward' ]);
+    Route::get('/penalties/kick/reward/{character_id}', [ GameController::class, 'kickReward' ]);
 });

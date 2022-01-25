@@ -22,6 +22,9 @@ class GameController extends Controller
 {
     use GLSToken, GoalToken;
 
+    private int $minutes = 29, $seconds = 59;
+    private array $allowed_hours = [ '00', '04', '08', '12', '16', '20' ];
+
     public function characterList(): JsonResponse
     {
         $div = new Division(Division::FIRST_DIVISION);
@@ -47,7 +50,7 @@ class GameController extends Controller
                     'character.level',
                     'character.strength',
                     'character.accuracy',
-                    DB::raw("(character.strength + character.accuracy) * $max_percentage / $max_stats as percentage"),
+                    DB::raw("(`character`.`strength` + `character`.`accuracy`) * $max_percentage / $max_stats as percentage"),
                     'character.xp',
                     'xp_for_level.xp_for_next_level'
                 )
@@ -57,26 +60,19 @@ class GameController extends Controller
 
     public function play(): JsonResponse
     {
-        $now = new DateTime('now', new DateTimeZone('UTC'));
-        $currentHour = $now->format('H');
-        $currentMinute = $now->format('i');
-        $begin = new DateTime('now', new DateTimeZone('UTC'));
-        $end = new DateTime('now', new DateTimeZone('UTC'));
+        $timeChecks = $this->getTimeChecks();
 
         return response()->json([
             'ok' => true,
             'version' => 0,
             'play' => [
-                'is_it_time_to_kick' => $this->isItTimeToKick($currentHour, $currentMinute),
+                'is_it_time_to_kick' => $this->isItTimeToKick(...$timeChecks[0]),
                 'kicks_left' => Auth::user()
                             ->characters()
                             ->leftJoin('kick', fn($join) =>
                                 $join->on('kick.character_id', '=', 'character.id')
                                      ->whereNotNull('kick.reward')
-                                     ->whereBetween('kick.created_at', [
-                                        $begin->modify("$currentHour:00:00"),
-                                        $end->modify("$currentHour:29:59")
-                                    ])
+                                     ->whereBetween('kick.created_at', $timeChecks[1])
                             )
                             ->join('kicks_per_division', 'kicks_per_division.division', 'character.division')
                             ->select(
@@ -116,10 +112,10 @@ class GameController extends Controller
             'ok' => true,
             'version' => 0,
             'kick' => $kick->result
-        ]);
+        ], JsonResponse::HTTTP_CREATED);
     }
 
-    public function reward(int $character_id): JsonResponse
+    public function kickReward(int $character_id): JsonResponse
     {
         $stuff = $this->timeCheck($character_id);
         $character = $stuff[0];
@@ -159,13 +155,9 @@ class GameController extends Controller
 
     private function timeCheck(int $character_id): array
     {
-        $now = new DateTime('now', new DateTimeZone('UTC'));
-        $currentHour = $now->format('H');
-        $currentMinute = $now->format('i');
-        $begin = new DateTime('now', new DateTimeZone('UTC'));
-        $end = new DateTime('now', new DateTimeZone('UTC'));
+        $timeChecks = $this->getTimeChecks();
 
-        if (!$this->isItTimeToKick($currentHour, $currentMinute))
+        if (!$this->isItTimeToKick(...$timeChecks[0]))
             abort(403, "Sorry, you're late (or early).");
 
         $character = Character::where([
@@ -173,15 +165,10 @@ class GameController extends Controller
             'user_id' => Auth::user()->id
         ])->firstOrFail();
 
-        $window = [
-            $begin->modify("$currentHour:00:00"),
-            $end->modify("$currentHour:29:59")
-        ];
-
-        if (!$character->canKick($window))
+        if (!$character->canKick($timeChecks[1]))
             abort(403, "You don't have any kicks left.");
 
-        return [ $character, $window ];
+        return [ $character, $timeChecks[1] ];
     }
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
@@ -189,7 +176,7 @@ class GameController extends Controller
         if (Auth::user()->id === 2 && intval($currentMinute) < 30)
             return true;
 
-        return in_array($currentHour, [ '00', '04', '08', '12', '16', '20' ]) && intval($currentMinute) < 30;
+        return in_array($currentHour, $this->allowed_hours) && intval($currentMinute) < 30;
     }
 
     private function lvlUp(Character $character, Product $product): void
@@ -212,7 +199,7 @@ class GameController extends Controller
             $currentXp -= $xpForNextLvl;
         }
 
-        // if it's time then lvl up the character
+        // if it's time then lvl up the character (unless it's already maxed out)
         if ($xpForLevel[$character->level] !== 0 && $currentXp >= $xpForLevel[$character->level])
             $character->level++;
     }
@@ -227,6 +214,26 @@ class GameController extends Controller
         $wins_per_day = (6 * $character->kicksPerWindow()) * ((new Division($character->division))->getStartingPercentage() / 100);
 
         return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), strval($wins_per_day), self::$DECIMALS);
+    }
+
+    private function getTimeChecks(): array
+    {
+        $now = new DateTime('now', new DateTimeZone('UTC'));
+        $currentHour = $now->format('H');
+        $currentMinute = $now->format('i');
+        $begin = new DateTime('now', new DateTimeZone('UTC'));
+        $end = new DateTime('now', new DateTimeZone('UTC'));
+
+        return [
+            [
+                $currentHour,
+                $currentMinute
+            ],
+            [
+                $begin->modify("$currentHour:00:00"),
+                $end->modify("$currentHour:$this->minutes:$this->seconds")
+            ]
+        ];
     }
 
     public function menu()
@@ -290,6 +297,7 @@ class GameController extends Controller
                 $character->strength += ($character->strength * $cip) * $hours;
                 $character->accuracy += ($character->accuracy * $cip) * $hours;
 
+                // not sure about this but just in case
                 if (($character->strength + $character->accuracy) > $max_stats)
                     $this->setStatsToMax($character, $max_stats);
 
@@ -317,6 +325,7 @@ class GameController extends Controller
 
         $character->strength -= $x;
         $character->accuracy -= $x;
+        // from now on checkMaxStats will always return true
     }
 
     public function selectTraining(int $payment_id, int $session_id)

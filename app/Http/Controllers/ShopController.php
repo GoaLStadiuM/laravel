@@ -76,7 +76,7 @@ class ShopController extends Controller
         return response()->json([
             'ok' => true,
             'characterIndex' => $base_id - 1
-        ]);
+        ], JsonResponse::HTTP_CREATED);
     }
 
     private function lottery(array $items): int

@@ -14,6 +14,6 @@ Route::domain('play.' . config('app.domain'))->middleware(['verified'])->group(f
         Route::get('/penalties/play', [ GameController::class, 'play' ]);
         Route::get('/penalties/characterlist', [ GameController::class, 'characterList' ]);
         Route::get('/penalties/kick/{character_id}', [ GameController::class, 'kick' ]);
-        Route::get('/penalties/kick/reward/{character_id}', [ GameController::class, 'reward' ]);
+        Route::get('/penalties/kick/reward/{character_id}', [ GameController::class, 'kickReward' ]);
     });
 });

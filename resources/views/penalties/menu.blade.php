@@ -14,7 +14,7 @@
 
         <!-- Menu /start -->
         <div class="self-center space-y-4 flex flex-col md:w-1/3 w-9/12 z-20">
-            <a href="https://we.tl/t-n9lsyaPx4G" target="_blank" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Play game</a>
+            <a href="https://we.tl/t-cZBXAegzRt" target="_blank" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Play game</a>
             <a href="#characters" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Character List</a>
             <a href="#marketplace" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Marketplace</a>
             <a href="{{ route('shop') }}" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Shop</a>
