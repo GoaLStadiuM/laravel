@@ -26,13 +26,15 @@ Route::middleware('admin')->group(function ()
             'blockchainexplica@gmail.com' => 120
         ];
 
+        // create characters for the above youtubers
+        $base_characters = BaseCharacter::lotteryArray();
+
         foreach ($array as $email => $price)
         {
             $user = User::where('email', $email)->first();
             $product = Product::where('price', $price)->firstOrFail();
             echo "found product where price = $price<br>\n";
-            continue;
-            $base_characters = BaseCharacter::lotteryArray();
+            //continue;
             $characters = $user->charactersByDivision($product->division);
 
             if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
@@ -45,9 +47,11 @@ Route::middleware('admin')->group(function ()
                 NftPayment::create(
                     $product->id,
                     $this->getPriceInGoal($product->price),
-                    $request->input('tx_hash')
+                    "$user->id purchased at " . time() . 'using busd balance',
+                    $user->id
                 ),
-                $product
+                $product,
+                $user->id
             );
         }
 

@@ -46,7 +46,7 @@ class ShopController extends Controller
             NftPayment::create(
                 $product->id,
                 $this->getPriceInGoal($product->price),
-                $request->input('tx_hash')
+                $request->input('tx_hash') // TODO come up with a unique string for purchases in busd and gls
             ),
             $product
         );
