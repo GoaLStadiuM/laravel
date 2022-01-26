@@ -10,8 +10,8 @@ use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
 
 
 //tmp routes
@@ -33,7 +33,7 @@ Route::middleware('admin')->group(function ()
             echo "found product where price = $price<br>\n";
             continue;
             $base_characters = BaseCharacter::lotteryArray();
-            $characters = Auth::user()->charactersByDivision($product->division);
+            $characters = $user->charactersByDivision($product->division);
 
             if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
                 abort(403, 'You already have the maximum number of characters for this division.');
