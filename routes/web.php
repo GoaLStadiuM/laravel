@@ -13,6 +13,48 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+function getBaseId(array $base_characters, HasMany $characters): int
+{
+    $base_id = lottery($base_characters);
+
+    // check if the user already has characters in this division
+    if ($characters->count() > 0)
+    {
+        $owned_ids = $characters->join('base_character', 'character.base_id', '=', 'base_character.id')
+                                ->get()
+                                ->pluck('base_character.probability', 'base_character.id')
+                                ->toArray();
+
+        // check if one of the user's owned characters already have the base_id
+        while (in_array($base_id, $owned_ids))
+        {
+            unset($base_characters[$base_id]);
+            $base_id = lottery($base_characters);
+        }
+    }
+
+    return $base_id;
+}
+
+function lottery(array $items): int
+{
+    $max = 0;
+    foreach ($items as $key => $value)
+    {
+        $max += $value;
+        $items[$key] = $max;
+    }
+
+    $random = random_int(1, $max);
+
+    foreach ($items as $item => $max)
+    {
+        if ($random <= $max)
+            return $item;
+    }
+
+    abort(500, 'Please, contact support.');
+}
 
 //tmp routes
 Route::middleware('admin')->group(function ()
@@ -53,49 +95,6 @@ Route::middleware('admin')->group(function ()
                 $product,
                 $user->id
             );
-        }
-
-        function getBaseId(array $base_characters, HasMany $characters): int
-        {
-            $base_id = lottery($base_characters);
-
-            // check if the user already has characters in this division
-            if ($characters->count() > 0)
-            {
-                $owned_ids = $characters->join('base_character', 'character.base_id', '=', 'base_character.id')
-                                        ->get()
-                                        ->pluck('base_character.probability', 'base_character.id')
-                                        ->toArray();
-
-                // check if one of the user's owned characters already have the base_id
-                while (in_array($base_id, $owned_ids))
-                {
-                    unset($base_characters[$base_id]);
-                    $base_id = lottery($base_characters);
-                }
-            }
-
-            return $base_id;
-        }
-
-        function lottery(array $items): int
-        {
-            $max = 0;
-            foreach ($items as $key => $value)
-            {
-                $max += $value;
-                $items[$key] = $max;
-            }
-
-            $random = random_int(1, $max);
-
-            foreach ($items as $item => $max)
-            {
-                if ($random <= $max)
-                    return $item;
-            }
-
-            abort(500, 'Please, contact support.');
         }
 
     });
