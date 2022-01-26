@@ -69,6 +69,36 @@ class Character extends Model
     }
 
     /**
+     * Get the character's starting stats.
+     *
+     * @return int
+     */
+    public function startingStats(): int
+    {
+        return (new Division($this->division))->getStartingStats();
+    }
+
+    /**
+     * Get the character's starting percentage.
+     *
+     * @return int
+     */
+    public function startingPercentage(): int
+    {
+        return (new Division($this->division))->getStartingPercentage();
+    }
+
+    /**
+     * Get the character's max stats.
+     *
+     * @return int
+     */
+    public function maxStats(): int
+    {
+        return (new Division($character->division))->getMaxStats();
+    }
+
+    /**
      * Get the kicks per division for the character.
      *
      * @return BelongsTo
@@ -183,5 +213,24 @@ class Character extends Model
         }
 
         return $kick;
+    }
+
+    /**
+     * Create a new entity of Character.
+     *
+     * @return int The PK that identifies the instance.
+     */
+    public static function create(int $base_id, int $nft_payment_id, Product $product, int $user_id = null): void
+    {
+        $character = new Character;
+        $character->user_id = $user_id ?? Auth::user()->id;
+        $character->base_id = $base_id;
+        $character->payment_id = $nft_payment_id;
+        $character->division = $product->division;
+        $character->level = $product->level;
+        $stats = $character->startingStats();
+        $character->strength = random_int(intval($stats * .48), intval($stats * .52));
+        $character->accuracy = $stats - $character->strength;
+        $character->save();
     }
 }

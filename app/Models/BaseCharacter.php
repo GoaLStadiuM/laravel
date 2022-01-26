@@ -51,4 +51,9 @@ class BaseCharacter extends Model
     {
         return $this->hasMany(Character::class, 'id', 'base_id');
     }
+
+    public static function lotteryArray(): array
+    {
+        return self::get()->pluck('probability', 'id')->toArray();
+    }
 }

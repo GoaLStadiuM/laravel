@@ -66,4 +66,22 @@ class NftPayment extends Model
     {
         return $this->hasOne(Character::class, 'payment_id');
     }
+
+    /**
+     * Create a new entity of NFT Payment.
+     *
+     * @return int The PK that identifies the instance.
+     */
+    public static function create(int $product_id, string $price_in_goal, string $tx_hash, $user_id = null): int
+    {
+        $nft_payment = new NftPayment;
+        $nft_payment->user_id = $user_id ?? Auth::user()->id;
+        $nft_payment->status_id = Status::OK; // TODO
+        $nft_payment->product_id = $product_id;
+        $nft_payment->price_in_goal = $price_in_goal;
+        $nft_payment->tx_hash = $tx_hash; // TODO IMPORTANT! setup task scheduling to validate txs
+        $nft_payment->save();
+
+        return $nft_payment->id;
+    }
 }

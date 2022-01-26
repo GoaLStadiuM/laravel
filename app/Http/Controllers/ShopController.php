@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\BaseCharacter;
 use App\Models\Character;
-use App\Models\Division;
 use App\Models\NftPayment;
 use App\Models\Product;
 use App\Traits\GoalToken;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,24 +28,50 @@ class ShopController extends Controller
         if (!$request->filled('product_id') || !$request->filled('tx_hash'))
             abort(404, 'Missing params.');
 
+        // TODO: finish this
+        if (!str_starts_with($request->input('tx_hash'), '0x') && $this->checkStuff($request->input('tx_hash')))
+            $this->payWithBalance();
+
         $product = Product::findOrFail($request->input('product_id'));
-        $base_characters = BaseCharacter::get()->pluck('probability', 'id')->toArray();
+        $base_characters = BaseCharacter::lotteryArray();
         $characters = Auth::user()->charactersByDivision($product->division);
 
         if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
             abort(403, 'You already have the maximum number of characters for this division.');
 
-        $nft_payment = new NftPayment;
-        $nft_payment->user_id = Auth::user()->id;
-        $nft_payment->status_id = 1;
-        $nft_payment->product_id = $product->id;
-        $nft_payment->price_in_goal = $this->getPriceInGoal($product->price);
-        $nft_payment->tx_hash = $request->input('tx_hash'); // TODO IMPORTANT! setup task scheduling to validate txs
-        $nft_payment->save();
+        $base_id = $this->getBaseId($base_characters, $characters);
 
+        Character::create(
+            $base_id,
+            NftPayment::create(
+                $product->id,
+                $this->getPriceInGoal($product->price),
+                $request->input('tx_hash')
+            ),
+            $product
+        );
+
+        return response()->json([
+            'ok' => true,
+            'characterIndex' => $base_id - 1
+        ], JsonResponse::HTTP_CREATED);
+    }
+
+    private function checkStuff(string $stuff): bool
+    {
+        abort(403, 'Not implemented yet.');
+    }
+
+    private function payWithBalance(): void
+    {
+        abort(403, "You don't have enough balance.");
+    }
+
+    private function getBaseId(array $base_characters, HasMany $characters): int
+    {
         $base_id = $this->lottery($base_characters);
 
-        // check if one of the user's owned characters already have the base_id
+        // check if the user already has characters in this division
         if ($characters->count() > 0)
         {
             $owned_ids = $characters->join('base_character', 'character.base_id', '=', 'base_character.id')
@@ -53,6 +79,7 @@ class ShopController extends Controller
                                     ->pluck('base_character.probability', 'base_character.id')
                                     ->toArray();
 
+            // check if one of the user's owned characters already have the base_id
             while (in_array($base_id, $owned_ids))
             {
                 unset($base_characters[$base_id]);
@@ -60,23 +87,7 @@ class ShopController extends Controller
             }
         }
 
-        // character starting stats
-        $stats = (new Division($product->division))->getStartingStats();
-
-        $character = new Character;
-        $character->user_id = Auth::user()->id;
-        $character->base_id = $base_id;
-        $character->payment_id = $nft_payment->id;
-        $character->division = $product->division;
-        $character->level = $product->level;
-        $character->strength = random_int(intval($stats * .48), intval($stats * .52));
-        $character->accuracy = $stats - $character->strength;
-        $character->save();
-
-        return response()->json([
-            'ok' => true,
-            'characterIndex' => $base_id - 1
-        ], JsonResponse::HTTP_CREATED);
+        return $base_id;
     }
 
     private function lottery(array $items): int

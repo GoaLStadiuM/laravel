@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Status extends Model
 {
+    public const OK = 1;
+
     /**
      * The table associated with the model.
      *

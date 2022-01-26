@@ -232,7 +232,7 @@ class GameController extends Controller
         $product_price_in_gls = bcmul($product_price_in_goal, strval($this->GOAL_PRICE_IN_GLS), self::$DECIMALS);
         $roi = '45'; // days
         // 6 = 24 hours in a day / 4 hours (every window starts 4 hours after the previous one started)
-        $wins_per_day = (6 * $character->kicksPerWindow()) * ((new Division($character->division))->getStartingPercentage() / 100);
+        $wins_per_day = (6 * $character->kicksPerWindow()) * ($character->startingPercentage() / 100);
 
         return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), strval($wins_per_day), self::$DECIMALS);
     }
@@ -281,7 +281,7 @@ class GameController extends Controller
         {
             $gameConfig = config('game');
             $character = $training->character;
-            $max_stats = (new Division($character->division))->getMaxStats();
+            $max_stats = $character->maxStats();
 
             if ($this->checkMaxStats($character, $max_stats))
             {
