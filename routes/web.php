@@ -40,13 +40,13 @@ Route::middleware('admin')->group(function ()
             if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
                 abort(403, 'You already have the maximum number of characters for this division.');
 
-            $base_id = $this->getBaseId($base_characters, $characters);
+            $base_id = getBaseId($base_characters, $characters);
 
             Character::create(
                 $base_id,
                 NftPayment::create(
                     $product->id,
-                    $this->getPriceInGoal($product->price),
+                    0,
                     "$user->id purchased at " . time() . 'using busd balance',
                     $user->id
                 ),
@@ -57,7 +57,7 @@ Route::middleware('admin')->group(function ()
 
         function getBaseId(array $base_characters, HasMany $characters): int
         {
-            $base_id = $this->lottery($base_characters);
+            $base_id = lottery($base_characters);
 
             // check if the user already has characters in this division
             if ($characters->count() > 0)
@@ -71,7 +71,7 @@ Route::middleware('admin')->group(function ()
                 while (in_array($base_id, $owned_ids))
                 {
                     unset($base_characters[$base_id]);
-                    $base_id = $this->lottery($base_characters);
+                    $base_id = lottery($base_characters);
                 }
             }
 
