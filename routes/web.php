@@ -29,7 +29,7 @@ Route::middleware('admin')->group(function ()
         foreach ($array as $email => $price)
         {
             $user = User::where('email', $email)->first();
-            $product = Product::where('price', $price)->findOrFail();
+            $product = Product::where('price', $price)->firstOrFail();
             echo "found product where price = $price<br>\n";
             continue;
             $base_characters = BaseCharacter::lotteryArray();
