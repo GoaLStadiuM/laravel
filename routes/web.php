@@ -5,7 +5,7 @@ require __DIR__ . '/www.php';
 require __DIR__ . '/play.php';
 
 
-
+/*
 use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
@@ -98,4 +98,4 @@ Route::middleware('admin')->group(function ()
         }
 
     });
-});
+});*/
