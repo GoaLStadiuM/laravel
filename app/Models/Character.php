@@ -95,7 +95,7 @@ class Character extends Model
      */
     public function maxStats(): int
     {
-        return (new Division($character->division))->getMaxStats();
+        return (new Division($this->division))->getMaxStats();
     }
 
     /**
