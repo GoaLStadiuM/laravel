@@ -6,11 +6,11 @@
                     <h1 class="card-title fs-1 mb-5 cursor-content">{{ __('web.partners') }}</h1>
                 </div>
                 <ul class="list-group list-group-horizontal d-flex justify-content-center partner-top4">
-                    <li class="list-group-item c-link cursor-content">
+                   <!-- <li class="list-group-item c-link cursor-content">
                         <a href="https://hyperchainx.com/" target="_blank">
                             <img class="partner-img" src="{{ asset('img/partner/partner_hyperchainx.webp') }}" alt="hyperchain x logo">
                         </a>
-                    </li>
+                    </li> -->
                     <li class="list-group-item c-link cursor-content">
                         <a href="https://cibinar.com/" target="_blank">
                             <img class="partner-img" src="{{ asset('img/partner/partner_cibinar.webp') }}" alt="cibinar logo">

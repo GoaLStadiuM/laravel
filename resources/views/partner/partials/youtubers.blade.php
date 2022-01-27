@@ -177,6 +177,14 @@
               @endcomponent
           </div>
           <div class="col-lg-4 mb-5">
+              @component('partner.components.team')
+              @slot('img') {{ asset('img/partner/youtuber_mundocripto.webp') }} @endslot
+              @slot('name') Mundo Cripto @endslot
+              @slot('designation') Youtuber @endslot
+              @slot('flag') es @endslot
+              @endcomponent
+          </div>
+          <div class="col-lg-4 mb-5">
             <div class="row">
                 <div class="col-md-12 position-relative" style="text-align: center; height: 200px">
                     <img src="{{ asset('img/partner/who-1.webp') }}" alt="wrapkit" class="img-fluid rounded-circle position-absolute" style="left: 5%">
