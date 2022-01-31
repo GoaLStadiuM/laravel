@@ -79,7 +79,6 @@ async function play(character_id)
     if (playStatus.kicks_left[character_id] === 0)
     {
         alert('No kicks left.');
-        window.location.replace('/penalties');
         return;
     }
 
