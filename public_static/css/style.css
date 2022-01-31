@@ -1379,7 +1379,6 @@ ul.minicart .cart-price .new {
     background-size: cover;
     position: relative;
     padding: 150px 0 130px;
-    margin-top: -20px;
 }
 .rotated-btn {
     font-size: 16px;
@@ -2553,7 +2552,6 @@ ul.minicart .cart-price .new {
 	background-position: center;
 	background-size: cover;
   height: 100vh;
-  margin-top: -20px;
 }
 .latest-match-box {
 	display: flex;
