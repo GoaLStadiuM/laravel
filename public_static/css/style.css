@@ -1374,7 +1374,7 @@ ul.minicart .cart-price .new {
 	left: auto;
 }
 .third-banner-bg {
-    background-image: url(../img/slider/third_banner_bg.jpg);
+    background-image: url(../img/bg/bg-goalstadium.webp);
     background-position: center center;
     background-size: cover;
     position: relative;
@@ -2549,7 +2549,7 @@ ul.minicart .cart-price .new {
 }
 
 .play-bg {
-	background-image: url(../img/bg/porteria.jpg);
+	background-image: url(../img/bg/click2earn.jpg);
 	background-position: center;
 	background-size: cover;
   height: 100vh;
