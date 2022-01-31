@@ -84,7 +84,7 @@ async function loadData()
             <div class="product-meta2">
                 <p>STRENGHT: <span>${character.strength}</span></p>
                 <p>ACCURACY: <span>${character.accuracy}</span></p>
-                <p>SCORE CHANCE: <span>${character.percentage}%</span></p>
+                <p>SCORE CHANCE: <span>${parseFloat(character.percentage).toFixed(3)}%</span></p>
                 <h4>LEVEL ${character.level}</h4>
                 <button onclick="play(${character.character_id})" class="btn rotated-btn">Play</button>
             </div>
