@@ -5,7 +5,7 @@ require __DIR__ . '/www.php';
 require __DIR__ . '/play.php';
 
 
-
+/*
 use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
@@ -61,7 +61,7 @@ function lottery(array $items): int
 Route::middleware('admin')->group(function ()
 {
     Route::get('/test', function() {
-/*
+
         $array = [
             'lauramillanousa@gmail.com' => 60,
             'drumer702@gmail.com' => 150,
@@ -70,7 +70,7 @@ Route::middleware('admin')->group(function ()
         ];
 
         foreach ($array as $email => $price)
-        {*/
+        {
 
         // create characters for the above youtubers
         $base_characters = BaseCharacter::lotteryArray();
@@ -99,4 +99,4 @@ Route::middleware('admin')->group(function ()
         //}
 
     });
-});
+});*/
