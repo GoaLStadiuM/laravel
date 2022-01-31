@@ -24,7 +24,7 @@ let data = false, playStatus = null, kick = null, reward = null;
 
 async function loadData()
 {
-    fetchCharacters().then(res => {
+    await fetchCharacters().then(res => {
 
         res.characters.forEach(character => {
 
@@ -64,15 +64,10 @@ async function showCharacters(division)
     showElement(characters);
 }
 
-function reloadPlayStatus()
-{
-    fetchPlay().then(playResult => playStatus = playResult.play);
-}
-
 async function play(character_id)
 {
     if (!playStatus)
-        await reloadPlayStatus();
+        await fetchPlay().then(playResult => playStatus = playResult.play);
 
     if (!playStatus.is_it_time_to_kick)
     {
