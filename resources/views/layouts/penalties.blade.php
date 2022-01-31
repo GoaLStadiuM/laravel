@@ -23,7 +23,7 @@
             gtag('config', 'G-P226HL4B0H');
         </script>
 
-        <title>{{ config('app.name') }}@yield('title')</title>
+        <title>{{ config('app.name') }} Penalties | @yield('title')</title>
 
         @include('layouts.partials.penalties_styles')
         @yield('styles')

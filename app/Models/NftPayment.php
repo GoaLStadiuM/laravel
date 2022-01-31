@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * The NFT Payment model.
@@ -70,6 +71,10 @@ class NftPayment extends Model
     /**
      * Create a new entity of NFT Payment.
      *
+     * @param int $product_id
+     * @param string $price_in_goal
+     * @param string $tx_hash
+     * @param null $user_id
      * @return int The PK that identifies the instance.
      */
     public static function create(int $product_id, string $price_in_goal, string $tx_hash, $user_id = null): int

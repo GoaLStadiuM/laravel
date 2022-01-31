@@ -7,6 +7,7 @@ use App\Models\Character;
 use App\Models\NftPayment;
 use App\Models\Product;
 use App\Traits\GoalToken;
+use Exception;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class ShopController extends Controller
     public function shop()
     {
         return view('penalties.shop', [
-            'products' => Product::get()->groupBy('division')
+            'products' => Product::get()->groupBy('division'),
+            'base_characters' => BaseCharacter::get()
         ]);
     }
 
@@ -90,6 +92,9 @@ class ShopController extends Controller
         return $base_id;
     }
 
+    /**
+     * @throws Exception
+     */
     private function lottery(array $items): int
     {
         $max = 0;

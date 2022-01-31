@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use DateTime;
-use DateTimeZone;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * The Character model.
@@ -21,7 +21,7 @@ use DateTimeZone;
  * @property string $name       The character's custom name.
  * @property int    $division   The character's division. Also FK to:
  *                              kicks_per_division and xp_for_level.
- * @property int    $level      The character's level. Also the FK to:
+ * @property int    $level      The character's level. Also, the FK to:
  *                              xp_for_level.
  * @property string $strength   The character's strength.
  * @property string $accuracy   The character's accuracy.
@@ -31,6 +31,9 @@ use DateTimeZone;
  */
 class Character extends Model
 {
+    public const INCREASE_PERCENTAGE = '.00027',
+                 REWARD_PERCENTAGE = '.000173';
+
     /**
      * The table associated with the model.
      *
@@ -111,7 +114,7 @@ class Character extends Model
     /**
      * Get the xp for level for the character.
      *
-     * @return int[] An array with the xp for next level for every level (key).
+     * @return array<int, int> An array with the xp for next level for every level (key).
      */
     public function xpForLevel(): array
     {
@@ -163,6 +166,7 @@ class Character extends Model
     /**
      * Get the number of current window kicks for the character.
      *
+     * @param array $window
      * @return int The number of kicks performed by the character in the
      *             current window. [Reason for excluding where reward is not null.]
      */
@@ -174,7 +178,8 @@ class Character extends Model
     /**
      * Detemines whether the character can kick or not.
      *
-     * @return true|false If the character can kick or not.
+     * @param array $window
+     * @return bool If the character can kick or not.
      */
     public function canKick(array $window): bool
     {
@@ -184,6 +189,7 @@ class Character extends Model
     /**
      * Get the current kick for the specified window.
      *
+     * @param array $window
      * @return HasOne
      */
     public function currentKick(array $window): HasOne
@@ -194,6 +200,8 @@ class Character extends Model
     /**
      * Get the current kick or create a new one.
      *
+     * @param array $cond
+     * @param array $stuff
      * @return Kick The instance of the current or new kick.
      */
     public function currentKickOrCreate(array $cond, array $stuff): Kick
@@ -216,9 +224,14 @@ class Character extends Model
     }
 
     /**
-     * Create a new entity of Character.
+     * Create a new entity of type Character.
      *
-     * @return int The PK that identifies the instance.
+     * @param int $base_id
+     * @param int $nft_payment_id
+     * @param Product $product
+     * @param int|null $user_id
+     * @return void The PK that identifies the instance.
+     * @throws Exception
      */
     public static function create(int $base_id, int $nft_payment_id, Product $product, int $user_id = null): void
     {

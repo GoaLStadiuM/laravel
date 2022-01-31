@@ -1,5 +1,17 @@
 @extends('layouts.penalties')
 
+@section('title', 'Shop')
+
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- swiper -->
+    <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+
+    <!-- custom -->
+    <link rel="stylesheet" href="{{ asset('css/penalties.css') }}">
+@endsection
+
 @section('content')
     <main class="min-h-screen h-full bg-cover bg-center" style="background-image: url({{ asset('img/bg/bg-goalstadium.webp') }})">
         <section class="container mx-auto">
@@ -230,32 +242,9 @@
             <div class="md:w-1/4 w-9/12  py-5 px-8">
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        <img src="{{ asset('img/character/1.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="0">
-                        <img src="{{ asset('img/character/2.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="1">
-                        <img src="{{ asset('img/character/3.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="2">
-                        <img src="{{ asset('img/character/4.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="3">
-                        <img src="{{ asset('img/character/5.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="4">
-                        <img src="{{ asset('img/character/6.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="5">
-                        <img src="{{ asset('img/character/7.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="6">
-                        <img src="{{ asset('img/character/8.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="7">
-                        <img src="{{ asset('img/character/9.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="8">
-                        <img src="{{ asset('img/character/10.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="9">
-                        <img src="{{ asset('img/character/11.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="10">
-                        <img src="{{ asset('img/character/12.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="11">
-                        <img src="{{ asset('img/character/13.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="12">
-                        <img src="{{ asset('img/character/14.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="13">
-                        <img src="{{ asset('img/character/15.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="14">
-                        <img src="{{ asset('img/character/16.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="15">
-                        <img src="{{ asset('img/character/17.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="16">
-                        <img src="{{ asset('img/character/18.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="17">
-                        <img src="{{ asset('img/character/19.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="18">
-                        <img src="{{ asset('img/character/20.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="19">
-                        <img src="{{ asset('img/character/21.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="20">
-                        <img src="{{ asset('img/character/22.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="21">
-                        <img src="{{ asset('img/character/23.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="22">
-                        <img src="{{ asset('img/character/24.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="23">
-                        <img src="{{ asset('img/character/25.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="24">
-                        <img src="{{ asset('img/character/26.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="25">
+                        @foreach($base_character as $model)
+                            <img src="{{ asset($model->img_url . '.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="{{ $model->id - 1 }}">
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -264,14 +253,9 @@
     </main>
 @endsection
 
-@section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
-    <!-- swiper -->
-    <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
-@endsection
-
 @section('scripts')
+    @include('layouts.partials.moralis')
+
     <!-- custom -->
     <script src="{{ asset('js/wallet.js') }}"></script>
     <script src="{{ asset('js/shop.js') }}" type="module"></script>

@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use App\Models\Division;
-use App\Models\Kick;
 use App\Models\NftPayment;
 use App\Models\Training;
 use App\Models\TrainingSession;
 use App\Models\Product;
 use App\Traits\GLSToken;
 use App\Traits\GoalToken;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +58,9 @@ class GameController extends Controller
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function play(): JsonResponse
     {
         $timeChecks = $this->getTimeChecks();
@@ -171,6 +174,9 @@ class GameController extends Controller
         return [ $character, $timeChecks[1] ];
     }
 
+    /**
+     * @throws Exception
+     */
     private function getTimeChecks(): array
     {
         $timezone = new DateTimeZone('UTC');
@@ -237,11 +243,6 @@ class GameController extends Controller
         return bcdiv(bcdiv($product_price_in_gls, $roi, self::$DECIMALS), strval($wins_per_day), self::$DECIMALS);
     }
 
-    public function menu()
-    {
-        return view('penalties.menu');
-    }
-
     // more work todo down here
 
     public function farmingWeb()
@@ -251,6 +252,9 @@ class GameController extends Controller
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function claim(int $training_id)
     {
         $training = Training::where('id', $training_id)->where('done', false);
@@ -279,7 +283,6 @@ class GameController extends Controller
 
         if ($hours > 0)
         {
-            $gameConfig = config('game');
             $character = $training->character;
             $max_stats = $character->maxStats();
 
@@ -287,16 +290,18 @@ class GameController extends Controller
             {
                 // Goal Reward
                 $user = Auth::user();
-                $user->goal += $this->calculateFarmingReward($character->payment->product->price, $gameConfig['CHARACTER_REWARD_PERCENTAGE']) * $hours;
+                $user->goal += $this->calculateFarmingReward(
+                                    strval($character->payment->product->price),
+                                    Character::REWARD_PERCENTAGE
+                                ) * $hours;
                 $user->save();
             }
 
             else
             {
                 // Stats Reward
-                $cip = $gameConfig['CHARACTER_INCREASE_PERCENTAGE'];
-                $character->strength += ($character->strength * $cip) * $hours;
-                $character->accuracy += ($character->accuracy * $cip) * $hours;
+                $character->strength += ($character->strength * Character::INCREASE_PERCENTAGE) * $hours;
+                $character->accuracy += ($character->accuracy * Character::INCREASE_PERCENTAGE) * $hours;
 
                 // not sure about this but just in case
                 if (($character->strength + $character->accuracy) > $max_stats)
@@ -312,17 +317,17 @@ class GameController extends Controller
     // true if character hit max stats, false otherwise
     private function checkMaxStats(Character $character, int $max_stats): bool
     {
-        return ($character->strength + $character->accuracy) === $max_stats;
+        return intval(bcadd($character->strength, $character->accuracy, self::$DECIMALS)) === $max_stats;
     }
 
-    private function calculateFarmingReward(int $product_price, int $reward_percentage): string
+    private function calculateFarmingReward(string $product_price, string $reward_percentage): string
     {
         return bcdiv(bcmul($product_price, $reward_percentage, self::$DECIMALS), $this->goalPrice(), self::$DECIMALS);
     }
 
     private function setStatsToMax(Character $character, int $max_stats): void
     {
-        $x = (($character->strength + $character->accuracy) - $max_stats) / 2;
+        $x = (intval(bcadd($character->strength, $character->accuracy, self::$DECIMALS)) - $max_stats) / 2;
 
         $character->strength -= $x;
         $character->accuracy -= $x;

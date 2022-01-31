@@ -48,6 +48,6 @@ class KicksPerDivision extends Model
      */
     public function characters(): HasMany
     {
-        return $this->hasMany(Characters::class, 'division', 'division');
+        return $this->hasMany(Character::class, 'division', 'division');
     }
 }

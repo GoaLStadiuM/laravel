@@ -1,1 +1,1 @@
-@include('layouts.partials.moralis')
+
