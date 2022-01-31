@@ -1,4 +1,5 @@
 const divisions = document.getElementById('divisions'),
+      divSpan = document.getElementById('division'),
       characters = document.getElementById('characters'),
       click2earn = document.getElementById('click2earn'),
       firstDiv = document.getElementById('first-division'),
@@ -151,6 +152,7 @@ async function showCharacters(division)
     if (!data)
         await loadData();
 
+    divSpan.textContent = division;
     characters.querySelector('div.product-active').innerHTML = htmlData[division];
     hideElement(divisions);
     showElement(characters);
@@ -160,9 +162,9 @@ hideElement(characters);
 hideElement(click2earn);
 
 backToDiv.addEventListener('click', () => showDivisions());
-firstDiv.addEventListener('click', () => showCharacters(1));
-secondDiv.addEventListener('click', () => showCharacters(2));
-thirdDiv.addEventListener('click', () => showCharacters(3));
+firstDiv.addEventListener('click', () => showCharacters(1)); // TODO get from json
+secondDiv.addEventListener('click', () => showCharacters(2)); // TODO get from json
+thirdDiv.addEventListener('click', () => showCharacters(3)); // TODO get from json
 click2earn.addEventListener('click', (e) => click(e.currentTarget));
 
 (function ($) {

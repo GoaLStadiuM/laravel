@@ -317,7 +317,7 @@ class GameController extends Controller
     // true if character hit max stats, false otherwise
     private function checkMaxStats(Character $character, int $max_stats): bool
     {
-        return intval(bcadd($character->strength, $character->accuracy, self::$DECIMALS)) === $max_stats;
+        return intval(floatval($character->strength) + floatval($character->accuracy)) === $max_stats;
     }
 
     private function calculateFarmingReward(string $product_price, string $reward_percentage): string
@@ -327,7 +327,7 @@ class GameController extends Controller
 
     private function setStatsToMax(Character $character, int $max_stats): void
     {
-        $x = (intval(bcadd($character->strength, $character->accuracy, self::$DECIMALS)) - $max_stats) / 2;
+        $x = ((floatval($character->strength) + floatval($character->accuracy)) - $max_stats) / 2;
 
         $character->strength -= $x;
         $character->accuracy -= $x;

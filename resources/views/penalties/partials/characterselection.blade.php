@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8">
                 <div class="section-title text-center mb-35">
-                    <h2>DIVISION <span id="division"></span>: SELECT <span>PLAYER</span></h2>
+                    <h2>DIVISION <span id="division"></span>: SELECT <span>CHARACTER</span></h2>
                 </div>
             </div>
         </div>
