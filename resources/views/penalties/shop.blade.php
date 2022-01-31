@@ -242,7 +242,7 @@
             <div class="md:w-1/4 w-9/12  py-5 px-8">
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        @foreach($base_character as $model)
+                        @foreach($base_characters as $model)
                             <img src="{{ asset($model->img_url . '.webp') }}" alt="Goal Stadium Character" class="swiper-slide" data-index="{{ $model->id - 1 }}">
                         @endforeach
                     </div>
