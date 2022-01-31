@@ -1130,7 +1130,7 @@ ul.minicart .cart-price .new {
 .fw-title h5::before,
 .features-item .product-tag a::before,
 .shop-area.black-bg .product-cart-action a:hover,
-.latest-match-box .tournament-schedule-meta a:hover,
+.latest-match-box .tournament-schedule-meta button:hover,
 .features-item .features-list-content .product-tag a:hover::before {
 	background: #EE1240;
 }
