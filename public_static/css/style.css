@@ -1130,7 +1130,7 @@ ul.minicart .cart-price .new {
 .fw-title h5::before,
 .features-item .product-tag a::before,
 .shop-area.black-bg .product-cart-action a:hover,
-.latest-match-box .tournament-schedule-meta button:hover,
+button:hover,
 .features-item .features-list-content .product-tag a:hover::before {
 	background: #EE1240;
 }
@@ -2527,7 +2527,7 @@ ul.minicart .cart-price .new {
 .tournament-schedule-meta h5 span {
 	margin-left: 5px;
 }
-.tournament-schedule-meta button {
+.tournament-schedule-meta button, button {
 	display: block;
 	border: 1px dashed #383838;
 	font-size: 12px;
@@ -2537,7 +2537,7 @@ ul.minicart .cart-price .new {
 	line-height: 1;
 	margin-left: 18px;
 }
-.tournament-schedule-meta button:hover {
+.tournament-schedule-meta button:hover, button:hover {
 	border: 1px solid #EE1240;
 	color: #1c1121;
 }
@@ -2569,11 +2569,11 @@ ul.minicart .cart-price .new {
 	line-height: 2;
 	padding-right: 20px;
 }
-.latest-match-box .tournament-schedule-meta button {
+.latest-match-box .tournament-schedule-meta button, button {
 	color: #d7d5d5;
 	background: #222225;
 }
-.latest-match-box .tournament-schedule-meta button:hover {
+.latest-match-box .tournament-schedule-meta button:hover, button:hover {
 	color: #1c1121;
 }
 .team-member-thumb {
