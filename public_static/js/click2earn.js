@@ -18,7 +18,51 @@ const divisions = document.getElementById('divisions'),
       fetchReward = async (character_id) => await (await fetch(rewardEndPoint + character_id)).json(),
       htmlData = { 1: '', 2: '', 3: '' },
       result = document.querySelector('input[name=result]'),
-      score = document.querySelector('input[name=score]');
+      score = document.querySelector('input[name=score]'),
+      slickOptions = {
+          dots: false,
+          infinite: true,
+          speed: 1000,
+          autoplay: false,
+          arrows: true,
+          prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+          nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          responsive: [
+              {
+                  breakpoint: 1200,
+                  settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 1,
+                      infinite: true,
+                  }
+              },
+              {
+                  breakpoint: 992,
+                  settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1
+                  }
+              },
+              {
+                  breakpoint: 767,
+                  settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                      arrows: false,
+                  }
+              },
+              {
+                  breakpoint: 575,
+                  settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                      arrows: false,
+                  }
+              },
+          ]
+      };
 
 let data = false, playStatus = null, kick = null, reward = null;
 
@@ -60,6 +104,7 @@ async function showCharacters(division)
 
     divSpan.textContent = division;
     characters.querySelector('div.product-active').innerHTML = htmlData[division];
+    $('.product-active').slick(slickOptions);
     hideElement(divisions);
     showElement(characters);
 }
@@ -161,52 +206,3 @@ secondDiv.addEventListener('click', () => showCharacters(2)); // TODO get from j
 thirdDiv.addEventListener('click', () => showCharacters(3)); // TODO get from json
 click2earn.addEventListener('click', (e) => click(e.currentTarget));
 
-(function ($) {
-"use strict";
-
-$('.product-active').slick({
-  dots: false,
-  infinite: true,
-  speed: 1000,
-  autoplay: false,
-  arrows: true,
-  prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
-  nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>',
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        infinite: true,
-      }
-    },
-    {
-      breakpoint: 992,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 767,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-      }
-    },
-    {
-      breakpoint: 575,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-      }
-    },
-  ]
-});
-
-})(jQuery);
