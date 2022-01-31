@@ -104,7 +104,7 @@ async function showCharacters(division)
 
     divSpan.textContent = division;
     characters.querySelector('div.product-active').innerHTML = htmlData[division];
-    $('.product-active').slick(slickOptions);
+    //$('.product-active').slick(slickOptions);
     hideElement(divisions);
     showElement(characters);
 }
@@ -205,4 +205,3 @@ firstDiv.addEventListener('click', () => showCharacters(1)); // TODO get from js
 secondDiv.addEventListener('click', () => showCharacters(2)); // TODO get from json
 thirdDiv.addEventListener('click', () => showCharacters(3)); // TODO get from json
 click2earn.addEventListener('click', (e) => click(e.currentTarget));
-
