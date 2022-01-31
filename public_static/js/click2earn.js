@@ -78,7 +78,7 @@ async function loadData()
             <img src="${assetsUrl + character.model_id + '.webp'}" alt="goal stadium character">
         </div>
         <div class="product-content">
-            <div class="product-tag">${character.character_name ?? character.base_name}</div>
+            <div class="product-tag"><a>${character.character_name ?? character.base_name}</a></div>
             <h4>Character Stats</h4>
             <div class="product-meta2">
                 <p>STRENGHT: <span>${character.strength}</span></p>
