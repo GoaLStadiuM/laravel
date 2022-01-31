@@ -10,6 +10,6 @@
         <div class="row">
             <button id="back-division">Back</button>
         </div>
-        <div class="row product-active"></div>
+        <div class="row product-active justify-content-around"></div>
     </div>
 </section>

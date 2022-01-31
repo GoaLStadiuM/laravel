@@ -6,6 +6,7 @@ const divisions = document.getElementById('divisions'),
       secondDiv = document.getElementById('second-division'),
       thirdDiv = document.getElementById('third-division'),
       backToDiv = document.getElementById('back-division'),
+      backToMenu = document.getElementById('back-menu'),
       assetsUrl = 'https://static.goalstadium.com/img/character/',
       gameUrl = 'https://play.goalstadium.com/penalties/',
       charactersEndPoint = gameUrl + 'characterlist',
@@ -200,6 +201,7 @@ function showElement(el) {
 hideElement(characters);
 hideElement(click2earn);
 
+backToMenu.addEventListener('click', () => window.location.replace('/penalties'))
 backToDiv.addEventListener('click', () => showDivisions());
 firstDiv.addEventListener('click', () => showCharacters(1)); // TODO get from json
 secondDiv.addEventListener('click', () => showCharacters(2)); // TODO get from json
