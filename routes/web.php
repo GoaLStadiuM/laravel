@@ -5,13 +5,14 @@ require __DIR__ . '/www.php';
 require __DIR__ . '/play.php';
 
 
-/*
+
 use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Route;
 
 function getBaseId(array $base_characters, HasMany $characters): int
 {
@@ -60,7 +61,7 @@ function lottery(array $items): int
 Route::middleware('admin')->group(function ()
 {
     Route::get('/test', function() {
-
+/*
         $array = [
             'lauramillanousa@gmail.com' => 60,
             'drumer702@gmail.com' => 150,
@@ -68,14 +69,13 @@ Route::middleware('admin')->group(function ()
             'blockchainexplica@gmail.com' => 120
         ];
 
+        foreach ($array as $email => $price)
+        {*/
+
         // create characters for the above youtubers
         $base_characters = BaseCharacter::lotteryArray();
-
-        foreach ($array as $email => $price)
-        {
-            $user = User::where('email', $email)->first();
-            $product = Product::where('price', $price)->firstOrFail();
-            echo "found product where price = $price<br>\n";
+            $user = User::where('email', 'buttrich.gaming@gmail.com')->firstOrFail();
+            $product = Product::find(3);
             //continue;
             $characters = $user->charactersByDivision($product->division);
 
@@ -89,13 +89,14 @@ Route::middleware('admin')->group(function ()
                 NftPayment::create(
                     $product->id,
                     0,
-                    "$user->id purchased at " . time() . 'using busd balance',
+                    '0xc3a1e2fa3e4b526b4620d0eedcd3f27c59539fc80262e7832f7c66c97bdf307c',
+                    //"$user->id purchased at " . time() . 'using busd balance',
                     $user->id
                 ),
                 $product,
                 $user->id
             );
-        }
+        //}
 
     });
-});*/
+});

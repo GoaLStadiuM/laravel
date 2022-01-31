@@ -68,7 +68,7 @@ const divisions = document.getElementById('divisions'),
 let data = false, playStatus = null, kick = null, reward = null;
 
 async function loadData()
-{
+{ // todo: handle network errors
     await fetchCharacters().then(res => {
 
         res.characters.forEach(character => {
@@ -111,7 +111,7 @@ async function showCharacters(division)
 }
 
 async function play(character_id)
-{
+{ // todo: handle network errors
     if (!playStatus)
         await fetchPlay().then(playResult => playStatus = playResult.play);
 
@@ -141,7 +141,7 @@ async function click(iclick2earn)
         return;
 
     const id = iclick2earn.dataset.id;
-
+    // todo: handle network errors
     reward = await fetchReward(id);
 
     result.value = kick ? 'GOAL!!! GG!!!' : 'Fuck me! FML!';
@@ -201,9 +201,9 @@ function showElement(el) {
 hideElement(characters);
 hideElement(click2earn);
 
-backToMenu.addEventListener('click', () => window.location.replace('/penalties'))
+backToMenu.addEventListener('click', () => window.location.replace('/penalties'));
 backToDiv.addEventListener('click', () => showDivisions());
-firstDiv.addEventListener('click', () => showCharacters(1)); // TODO get from json
-secondDiv.addEventListener('click', () => showCharacters(2)); // TODO get from json
-thirdDiv.addEventListener('click', () => showCharacters(3)); // TODO get from json
+firstDiv.addEventListener('click', () => showCharacters(1));
+secondDiv.addEventListener('click', () => showCharacters(2));
+thirdDiv.addEventListener('click', () => showCharacters(3));
 click2earn.addEventListener('click', (e) => click(e.currentTarget));

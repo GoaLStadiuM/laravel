@@ -74,10 +74,10 @@ class NftPayment extends Model
      * @param int $product_id
      * @param string $price_in_goal
      * @param string $tx_hash
-     * @param null $user_id
+     * @param int|null $user_id
      * @return int The PK that identifies the instance.
      */
-    public static function create(int $product_id, string $price_in_goal, string $tx_hash, $user_id = null): int
+    public static function create(int $product_id, string $price_in_goal, string $tx_hash, int $user_id = null): int
     {
         $nft_payment = new NftPayment;
         $nft_payment->user_id = $user_id ?? Auth::user()->id;

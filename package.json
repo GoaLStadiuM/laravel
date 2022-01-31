@@ -35,5 +35,8 @@
         "rangetouch": "^2.0.1",
         "ssr-window": "^4.0.0",
         "url-polyfill": "^1.1.12"
+    },
+    "jshintConfig": {
+        "esversion": 11
     }
 }
