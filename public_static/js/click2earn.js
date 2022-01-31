@@ -53,6 +53,17 @@ async function loadData()
     });
 }
 
+async function showCharacters(division)
+{
+    if (!data)
+        await loadData();
+
+    divSpan.textContent = division;
+    characters.querySelector('div.product-active').innerHTML = htmlData[division];
+    hideElement(divisions);
+    showElement(characters);
+}
+
 function reloadPlayStatus()
 {
     fetchPlay().then(playResult => playStatus = playResult.play);
@@ -145,17 +156,6 @@ function hideElement(el) {
 function showElement(el) {
     el.classList.remove('none');
     el.classList.add('block');
-}
-
-async function showCharacters(division)
-{
-    if (!data)
-        await loadData();
-
-    divSpan.textContent = division;
-    characters.querySelector('div.product-active').innerHTML = htmlData[division];
-    hideElement(divisions);
-    showElement(characters);
 }
 
 hideElement(characters);

@@ -6709,3 +6709,7 @@ ul.minicart .cart-price .new {
 .home-six-footer .copyright-wrap {
     padding: 31px 0;
 }
+
+
+.none { display: none!important; }
+.block { display: block!important; }
