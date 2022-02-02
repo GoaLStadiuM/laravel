@@ -43,8 +43,8 @@
         </div>
         <div class="col-lg-6 mb-4">
           @component('partner.components.team')
-            @slot('img') {{ asset('img/partner/colab_andrea.webp') }} @endslot
-            @slot('name') Andrea Gómez @endslot
+            @slot('img') {{ asset('img/partner/colab_yuraimaalastre.webp') }} @endslot
+            @slot('name') Yuraima Alastre @endslot
             @slot('designation') Telegram Mod @endslot
             @slot('flag') ve @endslot
           @endcomponent
