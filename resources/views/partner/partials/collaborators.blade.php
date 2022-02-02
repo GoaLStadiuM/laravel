@@ -15,32 +15,6 @@
             @slot('flag') es @endslot
           @endcomponent
         </div>
-        <div class="col-lg-4 mb-4">
-          @component('partner.components.team')
-            @slot('img') {{ asset('img/partner/colab_fabian.webp') }} @endslot
-            @slot('name') Fabian Camacho @endslot
-            @slot('designation') Telegram Mod @endslot
-            @slot('flag') mx @endslot
-          @endcomponent
-        </div>
-        <div class="col-lg-4 mb-4">
-          @component('partner.components.team')
-            @slot('img') {{ asset('img/partner/colab_cesar.webp') }} @endslot
-            @slot('name') César Villaroya @endslot
-            @slot('designation') Telegram Mod @endslot
-            @slot('flag') es @endslot
-          @endcomponent
-        </div>
-      </div>
-      <div class="row" style="text-align: center">
-        <div class="col-lg-6 mb-4">
-          @component('partner.components.team')
-            @slot('img') {{ asset('img/partner/colab_diego.webp') }} @endslot
-            @slot('name') Diego Zanni @endslot
-            @slot('designation') Telegram Mod @endslot
-            @slot('flag') ar @endslot
-          @endcomponent
-        </div>
         <div class="col-lg-6 mb-4">
           @component('partner.components.team')
             @slot('img') {{ asset('img/partner/colab_yuraimaalastre.webp') }} @endslot
