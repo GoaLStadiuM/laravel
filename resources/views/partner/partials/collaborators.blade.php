@@ -57,14 +57,22 @@
             @slot('flag') ve @endslot
           @endcomponent
         </div>
-        <div class="col-lg-6 mb-4">
-          @component('partner.components.team')
-            @slot('img') {{ asset('img/partner/tiktoker_viverdejogo.webp') }} @endslot
-            @slot('name') Viverdejogo @endslot
-            @slot('designation') TikToker @endslot
-            @slot('flag') br @endslot
-          @endcomponent
-        </div>
+          <div class="col-lg-6 mb-4">
+              @component('partner.components.team')
+                  @slot('img') {{ asset('img/partner/tiktoker_viverdejogo.webp') }} @endslot
+                  @slot('name') Viverdejogo @endslot
+                  @slot('designation') TikToker @endslot
+                  @slot('flag') br @endslot
+              @endcomponent
+          </div>
+          <div class="col-lg-6 mb-4">
+              @component('partner.components.team')
+                  @slot('img') {{ asset('img/partner/tiktoker_cryptoaddict.webp') }} @endslot
+                  @slot('name') Crypto Addict @endslot
+                  @slot('designation') TikToker | Youtuber @endslot
+                  @slot('flag') br @endslot
+              @endcomponent
+          </div>
       </div>
     </div>
   </div>
