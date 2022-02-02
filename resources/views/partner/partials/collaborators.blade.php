@@ -11,7 +11,7 @@
                     @component('partner.components.team')
                         @slot('img') {{ asset('img/partner/colab_manel.webp') }}  @endslot
                         @slot('name') Manel Nuñez @endslot
-                        @slot('designation') Discord Manager @endslot
+                        @slot('designation') Discord y Telegram Manager @endslot
                         @slot('flag') es @endslot
                     @endcomponent
                 </div>
