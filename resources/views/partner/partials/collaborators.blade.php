@@ -36,7 +36,7 @@
                         @slot('img') {{ asset('img/partner/colab_oscarluna.webp') }} @endslot
                         @slot('name') Oscar Luna @endslot
                         @slot('designation') Discord y Telegram Mod @endslot
-                        @slot('flag') ph @endslot
+                        @slot('flag') ar @endslot
                     @endcomponent
                 </div>
                 <div class="col-lg-6 mb-4">
@@ -44,7 +44,7 @@
                         @slot('img') {{ asset('img/partner/colab_lautarocanale.webp') }} @endslot
                         @slot('name') Lautaro Canale @endslot
                         @slot('designation') Discord y Telegram Mod @endslot
-                        @slot('flag') ph @endslot
+                        @slot('flag') ar @endslot
                     @endcomponent
                 </div>
                 <div class="col-lg-6 mb-4">
