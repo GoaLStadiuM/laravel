@@ -70,7 +70,7 @@
                   @slot('img') {{ asset('img/partner/tiktoker_cryptoaddict.webp') }} @endslot
                   @slot('name') Crypto Addict @endslot
                   @slot('designation') TikToker | Youtuber @endslot
-                  @slot('flag') br @endslot
+                  @slot('flag') ph @endslot
               @endcomponent
           </div>
       </div>
