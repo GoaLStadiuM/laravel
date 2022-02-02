@@ -21,7 +21,7 @@
 
         <!-- Menu /start -->
         <div class="self-center space-y-4 flex flex-col md:w-1/3 w-9/12 z-20">
-            <a href="https://we.tl/t-cZBXAegzRt" target="_blank" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Download game</a>
+            <a href="{{ asset('game/penalties/GOALSTADIUM_v1.1_winx64.zip') }}" target="_blank" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Download game</a>
             <a href="{{ route('click2earn') }}" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Click2Earn</a>
             <a href="#characters" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Character List</a>
             <a href="#marketplace" class="text-slate-50 text-4xl text-center uppercase tracking-wider bg-gradient p-4 btn-svg">Marketplace</a>
