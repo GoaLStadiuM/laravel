@@ -15,6 +15,7 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       thirdDiv = document.querySelector('#third-division'),
       products = document.querySelectorAll('.card-goal'),
       prices = document.querySelectorAll('[id ^= "division"]'),
+      paymentOption = document.querySelector('.payment-option'),
       modalCarrousel = document.querySelector('#modal-carrousel'),
       promptCard = document.querySelector('#prompt-card'),
       closeModal = document.querySelector('#close-carrousel'),
@@ -90,17 +91,57 @@ function showError(error)
 
 async function purchase(product)
 {
+    const product_price = product.lastElementChild;
+    let hash = null;
+
+    try {
+        hash = abc;
+    } catch(e) {
+        console.log('detected: variable not exists');
+    }
+
+    if (paymentOption.value === 'goal')
+        hash = await goalPayment(product_price);
+
+    else if (paymentOption.value === 'gls')
+        hash = 'gls';
+
+    if (hash === null)
+        return;
+
+    let postResult = await postPurchase(postUrl, {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            product_id: product_price.dataset.productId,
+            tx_hash: hash
+        })
+    }, 10, 3000);
+
+    if (!postResult.ok)
+        return showError('Network error. Please, contact support with your tx hash.');
+
+    swiper = new Swiper(swiperClass, swiperOptions);
+    swiper.autoplay.start();
+
+    setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
+}
+
+async function goalPayment(product_price)
+{
     if (!Moralis.User.current())
         return;
 
+    // todo show waiting animation
     modalCarrousel.classList.remove('hidden');
     modalCarrousel.classList.add('flex');
 
-    // todo show waiting animation
-
     const goal = (await fetchToken()).data,
-          decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals,
-          product_price = product.lastElementChild;
+          decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals;
 
     let amount = Number.parseFloat(product_price.dataset.price / goal.price)/*;
     if (amount.toString().split('.')[1].length > 7)
@@ -118,26 +159,7 @@ async function purchase(product)
     if (!transferResult?.status)
         return showError('Purchase failed.');
 
-    let postResult = await postPurchase(postUrl, {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({
-            product_id: product_price.dataset.productId,
-            tx_hash: transferResult.transactionHash
-        })
-    }, 10, 3000);
-
-    if (!postResult.ok)
-        return showError('Network error. Please, contact support with your tx hash.');
-
-    swiper = new Swiper(swiperClass, swiperOptions);
-    swiper.autoplay.start();
-
-    setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
+    return transferResult.transactionHash;
 }
 
 /*

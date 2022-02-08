@@ -21,7 +21,8 @@ class ShopController extends Controller
     {
         return view('penalties.shop', [
             'products' => Product::get()->groupBy('division'),
-            'base_characters' => BaseCharacter::get()
+            'base_characters' => BaseCharacter::get(),
+            'characters' => Auth::user()->characters()->groupBy('division')
         ]);
     }
 
@@ -30,16 +31,18 @@ class ShopController extends Controller
         if (!$request->filled('product_id') || !$request->filled('tx_hash'))
             abort(404, 'Missing params.');
 
-        // TODO: finish this
-        if (!str_starts_with($request->input('tx_hash'), '0x') && $this->checkStuff($request->input('tx_hash')))
-            $this->payWithBalance();
-
         $product = Product::findOrFail($request->input('product_id'));
         $base_characters = BaseCharacter::lotteryArray();
         $characters = Auth::user()->charactersByDivision($product->division);
+        $characterCount = $characters->count();
+        $baseCount = count($base_characters);
 
-        if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
+        if ($characterCount === $baseCount || $characterCount > $baseCount)
             abort(403, 'You already have the maximum number of characters for this division.');
+
+        // TODO: finish this
+        if (!str_starts_with($request->input('tx_hash'), '0x') && $this->checkStuff($request->input('tx_hash')))
+            $this->payWithBalance();
 
         $base_id = $this->getBaseId($base_characters, $characters);
 
@@ -48,14 +51,16 @@ class ShopController extends Controller
             NftPayment::create(
                 $product->id,
                 $this->getPriceInGoal($product->price), // TODO rename column from price_in_goal to amount_paid
-                $request->input('tx_hash') // TODO come up with a unique string for purchases in busd and gls
+                $request->input('tx_hash') // TODO come up with a unique string for purchases in busd credit and gls
             ),
             $product
         );
 
         return response()->json([
             'ok' => true,
-            'characterIndex' => $base_id - 1
+            'characterIndex' => $base_id - 1,
+            'division' => $product->division,
+            'maxCharacters' => $baseCount - $characterCount === 1
         ], JsonResponse::HTTP_CREATED);
     }
 
