@@ -39,7 +39,7 @@ class GameController extends Controller
                 ->join('base_character', 'character.base_id', '=', 'base_character.id')
                 ->join('xp_for_level', fn($join) =>
                     $join->on('character.division', '=', 'xp_for_level.division')
-                            ->on('character.level', '=', 'xp_for_level.level')
+                         ->on('character.level', '=', 'xp_for_level.level')
                 )
                 ->select(
                     'character.id as character_id',
@@ -90,6 +90,9 @@ class GameController extends Controller
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function kick(int $character_id): JsonResponse
     {
         $stuff = $this->timeCheck($character_id);
@@ -98,10 +101,9 @@ class GameController extends Controller
         $max_percentage = $div->getMaxPercentage();
         $max_stats = $div->getMaxStats();
 
-        $result = Auth::user()->id === 2
-                    ? true
-                    //                       c                                              * b                / a
-                    : (random_int(1, 100) <= (($character->strength + $character->accuracy) * $max_percentage) / $max_stats);
+        $result = Auth::user()->id === 2 ||
+            //                     c                                              * b                / a
+            (random_int(1, 100) <= (($character->strength + $character->accuracy) * $max_percentage) / $max_stats);
 
         $kick = $character->currentKickOrCreate(
             $stuff[1],
@@ -118,6 +120,9 @@ class GameController extends Controller
         ], JsonResponse::HTTP_CREATED);
     }
 
+    /**
+     * @throws Exception
+     */
     public function kickReward(int $character_id): JsonResponse
     {
         $stuff = $this->timeCheck($character_id);
@@ -156,6 +161,9 @@ class GameController extends Controller
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     private function timeCheck(int $character_id): array
     {
         $timeChecks = $this->getTimeChecks();

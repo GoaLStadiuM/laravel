@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Setting;
 
 class WebController extends Controller
@@ -34,13 +33,13 @@ class WebController extends Controller
 
     private function footer_urls(): array
     {
-        return [
-            'facebook_url'  => Setting::where('code', 'facebook_url')->first()->value,
-            'instagram_url' => Setting::where('code', 'instagram_url')->first()->value,
-            'twitter_url'   => Setting::where('code', 'twitter_url')->first()->value,
-            'discord_url'   => Setting::where('code', 'discord_url')->first()->value,
-            'youtube_url'   => Setting::where('code', 'youtube_url')->first()->value,
-            'telegram_url'  => Setting::where('code', 'telegram_url')->first()->value
-        ];
+        return Setting::whereIn('code', [
+            'facebook_url',
+            'instagram_url',
+            'twitter_url',
+            'discord_url',
+            'youtube_url',
+            'telegram_url'
+        ])->get()->pluck('value', 'code');
     }
 }
