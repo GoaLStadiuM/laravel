@@ -1,10 +1,10 @@
-@extends('layouts.master')
+@extends('www.layouts.web')
 
 @section('title', 'Clasificaciones')
 
 @section('page-style')
-    <link rel="stylesheet" href='{{asset("css/tabs2.css")}}'>
-@stop
+    <link rel="stylesheet" href='{{ asset("css/tabs2.css") }}'>
+@endsection
 
 @section('content')
     <!-- breadcrumb-area -->

@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="row" style="justify-content: center;">
-            <img src="{{ asset('img/team/') }}" alt="">
+            <img src="{{ asset('img/team/team.webp') }}" alt="">
         </div>
     </div>
 </section>

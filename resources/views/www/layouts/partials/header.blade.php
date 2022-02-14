@@ -62,7 +62,14 @@
                                 <li><a href="{{ route('home').'#farming' }}">Farming/Staking</a></li>
                                 <li{{ request()->routeIs('collaborators') ? 'class="show"' : '' }}><a href="{{ route('collaborators') }}">Colaboradores</a></li>
                                 <li{{ request()->routeIs('rankings') ? 'class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
-                                <li><a href="{!! asset('document/whitepaper_es.pdf') !!}" target="_blank">Whitepaper</a></li>
+                                <li>
+                                    <a href="#">Whitepaper</a>
+                                    <ul class="submenu">
+                                        <li><a href="{!! asset("document/whitepaper_en.pdf") !!}" target="_blank">English</a></li>
+                                        <li><a href="{!! asset("document/whitepaper_es.pdf") !!}" target="_blank">Spanish</a></li>
+                                        <li><a href="{!! asset("document/whitepaper_pt.pdf") !!}" target="_blank">Portuguese</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -97,7 +104,14 @@
                                 <li><a href="{{ route('home').'#farming'}}">Farming/Staking</a></li>
                                 <li{{ request()->routeIs('collaborators') ? 'class="show"' : '' }}><a href="{{ route('collaborators')}}">Colaboradores</a></li>
                                 <li{{ request()->routeIs('rankings') ? 'class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
-                                <li><a href={!!asset("document/whitepaper_es.pdf")!!} target="_blank">Whitepaper</a></li>
+                                <li>
+                                    <a href="#">Whitepaper</a>
+                                    <ul class="submenu">
+                                        <li><a href="{!! asset("document/whitepaper_en.pdf") !!}" target="_blank">English</a></li>
+                                        <li><a href="{!! asset("document/whitepaper_es.pdf") !!}" target="_blank">Spanish</a></li>
+                                        <li><a href="{!! asset("document/whitepaper_pt.pdf") !!}" target="_blank">Portuguese</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </nav>

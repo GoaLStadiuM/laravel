@@ -5,8 +5,8 @@
 @section('content')
     <!-- breadcrumb-area -->
     @component('www.components.breadcrumbs')
-        @slot('title') Partners <span>& Colaboradores</span> @endslot
-        @slot('name') Colaboradores @endslot
+        @slot('title') Partners & <span>Colaboradores</span> @endslot
+        @slot('name') Collaborators @endslot
     @endcomponent
     <!-- breadcrumb-area-end -->
 

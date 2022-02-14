@@ -2,38 +2,46 @@
 
 return [
 
-    'character resting animation'                   => 'character resting animation',
-    'character training animation'                  => 'character training animation',
-    'coming soon'                                   => 'getting warmed up',
-    'our team'                                      => 'our team',
-    'collaborators'                                 => 'collaborators',
-    'youtubers'                                     => 'youtubers',
-    'partners & collaborators'                      => 'partners & collaborators',
-    'partners'                                      => 'partners',
-    'staking'                                       => 'staking',
-    'Invest an amount'                              => 'Invest an amount',
-    'Choose the time, More time = More Earnings'    => 'Choose the time, More time = More Earnings',
-    'Days'                                          => 'Days',
-    'Month'                                         => 'Month',
-    'Months'                                        => 'Months',
-    'Year'                                          => 'Year',
-    'Years'                                         => 'Years',
-    'You Choose 7days'                              => 'You Choose 7days',
-    'Your Bonus % is'                               => 'Your Bonus % is',
-    'the amount to invest'                          => 'the amount to invest',
-    'Invest'                                        => 'Invest',
-    'active investments'                            => 'active investments',
-    'Invested Quantity'                             => 'Invested Quantity',
-    'Beginning Date'                                => 'Beginning Date',
-    'jan'                                           => 'jan',
-    'team'                                          => 'team',
-    'Division'                                      => 'Division',
-    'Purchase'                                      => 'Purchase',
-    'Level'                                         => 'Level',
-    'Presale'                                       => 'Presale',
-    'Token'                                         => 'Token',
-    'Click here'                                    => 'Click here',
-    'Transaction Hash'                              => 'Transaction Hash',
-    'noappear'                                     => 'Your purchase does not appear?',
-    'introducehash'                                 => 'Introduce your transaction Hash',
+    /*
+     * Home
+     */
+
+    'home' => '',
+
+    /*
+     * Team
+     */
+
+    'team' => '',
+
+    /*
+     * Collaborators
+     */
+
+    'collaborators' => '',
+
+    /*
+     * Rankings
+     */
+
+    'rankings' => '',
+
+    /*
+     * Cookies
+     */
+
+    'cookies' => '',
+
+    /*
+     * Legal
+     */
+
+    'legal' => '',
+
+    /*
+     * Privacy
+     */
+
+    '' => ''
+
 ];

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('www.layouts.web')
 
 @section('title', 'Inicio')
 

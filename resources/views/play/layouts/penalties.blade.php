@@ -25,12 +25,12 @@
 
         <title>{{ config('app.name') }} Penalties | @yield('title')</title>
 
-        @include('layouts.partials.penalties_styles')
-        @yield('styles')
+        @include('play.layouts.partials.styles')
+        @yield('page-style')
     </head>
     <body>
         @yield('content')
-        @include('layouts.partials.penalties_scripts')
-        @yield('scripts')
+        @include('play.layouts.partials.scripts')
+        @yield('page-script')
     </body>
 </html>

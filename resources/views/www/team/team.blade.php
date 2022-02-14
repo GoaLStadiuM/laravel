@@ -1,11 +1,11 @@
-@extends('layouts.master')
+@extends('www.layouts.web')
 
-@section('title', 'Colaboradores y Partners')
+@section('title', 'Team')
 
 @section('content')
     <!-- breadcrumb-area -->
     @component('www.components.breadcrumbs')
-        @slot('title') Equipo @endslot
+        @slot('title') Equipo GoaL StadiuM @endslot
         @slot('name') Team @endslot
     @endcomponent
     <!-- breadcrumb-area-end -->
