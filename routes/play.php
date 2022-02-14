@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::domain('play.' . config('app.domain'))->middleware(['verified'])->group(function ()
 {
-    Route::get('/penalties', fn () => view('penalties.menu'))->name('menu');
-    Route::get('/penalties/click2earn', fn () => view('penalties.click2earn'))->name('click2earn');
+    Route::get('/penalties', fn () => view('play.penalties.menu'))->name('menu');
+    Route::get('/penalties/click2earn', fn () => view('play.penalties.click2earn'))->name('click2earn');
     Route::get('/penalties/play', [ GameController::class, 'play' ]);
     Route::get('/penalties/characterlist', [ GameController::class, 'characterList' ]);
     Route::get('/penalties/kick/{character_id}', [ GameController::class, 'kick' ]);

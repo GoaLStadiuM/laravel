@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\GameController;
-use App\Models\Presale;
 
 Route::domain('www.' . config('app.domain'))->group(function ()
 {
