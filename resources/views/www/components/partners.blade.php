@@ -9,7 +9,7 @@
             @foreach($partners as $partner)
                 <div class="col-12">
                     <div class="t-brand-item">
-                        <img src="{{ asset("$partner->img_url.webp") }}" alt="">
+                        <a href="{{ $partner->website_url }}"><img src="{{ asset("$partner->image_url.webp") }}" alt="partner {{ $partner->name }}"></a>
                     </div>
                 </div>
             @endforeach

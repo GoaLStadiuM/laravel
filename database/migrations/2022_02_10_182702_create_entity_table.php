@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonTable extends Migration
+class CreateEntityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePersonTable extends Migration
      */
     public function up()
     {
-        Schema::create('person', function (Blueprint $table) {
+        Schema::create('entity', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name');
             $table->string('image_url');
-            $table->text('note');
-            $table->boolean('hidden');
-            $table->unsignedBigInteger('user_id');
+            $table->text('note')->default('');
+            $table->boolean('hidden')->default(false);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user');
@@ -33,6 +33,6 @@ class CreatePersonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('person');
+        Schema::dropIfExists('entity');
     }
 }

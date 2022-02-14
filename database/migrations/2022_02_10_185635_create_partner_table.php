@@ -16,10 +16,10 @@ class CreatePartnerTable extends Migration
         Schema::create('partner', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('website_url');
-            $table->unsignedSmallInteger('person_id');
+            $table->unsignedSmallInteger('entity_id');
             $table->timestamps();
 
-            $table->foreign('person_id')->references('id')->on('person');
+            $table->foreign('entity_id')->references('id')->on('entity');
         });
     }
 

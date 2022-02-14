@@ -15,12 +15,12 @@ class CreateShareSentTable extends Migration
     {
         Schema::create('share_sent', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->unsignedSmallInteger('share_amount');
+            $table->unsignedSmallInteger('amount');
             $table->string('tx_hash');
-            $table->unsignedSmallInteger('person_id');
+            $table->unsignedSmallInteger('entity_id');
             $table->timestamps();
 
-            $table->foreign('person_id')->references('id')->on('person');
+            $table->foreign('entity_id')->references('id')->on('entity');
         });
     }
 

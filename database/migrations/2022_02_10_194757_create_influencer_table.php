@@ -19,12 +19,13 @@ class CreateInfluencerTable extends Migration
             $table->string('email');
             $table->unsignedSmallInteger('amount');
             $table->unsignedMediumInteger('share');
+            $table->string('wallet');
             $table->string('country_code');
-            $table->unsignedSmallInteger('person_id');
+            $table->unsignedSmallInteger('entity_id');
             $table->timestamps();
 
-            $table->foreign('type_id')->references('id')->on('person_type');
-            $table->foreign('person_id')->references('id')->on('person');
+            $table->foreign('type_id')->references('id')->on('entity_type');
+            $table->foreign('entity_id')->references('id')->on('entity');
         });
     }
 

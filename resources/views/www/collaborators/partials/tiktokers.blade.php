@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="row" style="justify-content: center;">
-            @foreach($tiktokers as $tiktoker)
+            @foreach($influencers['tiktoker'] as $tiktoker)
                 @component('www.collaborators.components.member')
-                    @slot('img') {{ asset("$tiktoker->img_url.webp") }} @endslot
+                    @slot('img') {{ asset("$tiktoker->image_url.webp") }} @endslot
                     @slot('name') {{ $tiktoker->name }} @endslot
                     @slot('title') {{ $tiktoker->title }} @endslot
                     @slot('flag') {{ $tiktoker->country_code }} @endslot

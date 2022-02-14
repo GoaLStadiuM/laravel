@@ -17,10 +17,11 @@ class CreateMemberTable extends Migration
             $table->smallIncrements('id');
             $table->string('title');
             $table->unsignedInteger('share');
-            $table->unsignedSmallInteger('person_id');
+            $table->string('wallet');
+            $table->unsignedSmallInteger('entity_id');
             $table->timestamps();
 
-            $table->foreign('person_id')->references('id')->on('person');
+            $table->foreign('entity_id')->references('id')->on('entity');
         });
     }
 
