@@ -26,11 +26,11 @@ class WebController extends Controller
     {
         return view('www.team.team', [
             ...$this->layoutStuff(),
-            'members' => Member::join('person', 'person.id', '=', 'member.person_id')
-                               ->where('person.hidden', false)
+            'members' => Member::join('entity', 'entity.id', '=', 'member.entity_id')
+                               ->where('entity.hidden', false)
                                ->select(
-                                   'person.image_url',
-                                   'person.name',
+                                   'entity.image_url',
+                                   'entity.name',
                                    'member.title'
                                )
                                ->get(),
@@ -42,23 +42,23 @@ class WebController extends Controller
     {
         return view('www.collaborators.collaborators', [
             ...$this->layoutStuff(),
-            'collaborators' => Collaborator::join('person', 'person.id', '=', 'collaborator.person_id')
-                                ->join('person_type', 'person_type.id', '=', 'person.type_id')
-                                ->where('person.hidden', false)
+            'collaborators' => Collaborator::join('entity', 'entity.id', '=', 'collaborator.entity_id')
+                                ->join('entity_type', 'entity_type.id', '=', 'entity.type_id')
+                                ->where('entity.hidden', false)
                                 ->select(
-                                   'person.image_url',
-                                   'person.name',
-                                   'person_type.name as title',
+                                   'entity.image_url',
+                                   'entity.name',
+                                   'entity_type.name as title',
                                    'collaborator.country_code'
                                 )
                                 ->get(),
-            'influencers' => Influencer::join('person', 'person.id', '=', 'influencer.person_id')
-                                ->join('person_type', 'person_type.id', '=', 'person.type_id')
-                                ->where('person.hidden', false)
+            'influencers' => Influencer::join('entity', 'entity.id', '=', 'influencer.entity_id')
+                                ->join('entity_type', 'entity_type.id', '=', 'entity.type_id')
+                                ->where('entity.hidden', false)
                                 ->select(
-                                    'person.image_url',
-                                    'person.name',
-                                    'person_type.name as title',
+                                    'entity.image_url',
+                                    'entity.name',
+                                    'entity_type.name as title',
                                     'influencer.country_code'
                                 )
                                 ->get()
@@ -103,9 +103,9 @@ class WebController extends Controller
 
     private function getPartners(): array
     {
-        return Partner::join('person', 'person.id', '=', 'partner.person_id')
-                    ->where('person.hidden', false)
-                    ->select('person.name', 'person.image_url', 'partner.website_url')
+        return Partner::join('entity', 'entity.id', '=', 'partner.entity_id')
+                    ->where('entity.hidden', false)
+                    ->select('entity.name', 'entity.image_url', 'partner.website_url')
                     ->get();
     }
 
