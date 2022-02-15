@@ -33,8 +33,7 @@ $(window).on('load', function () {
     =          Menu Bottom Line			      =
 =============================================*/
 function menu_bottom_line_active() {
-    const off = $('#mobile-menu > ul > li.show').offset(),
-          left = off.left,
+    const left = $('#mobile-menu > ul > li.show').offset().left,
           right = $(window).width() - left - $('#mobile-menu > ul > li.show').width() + $('#mobile-menu > ul > li.show').width();
 
     $('<style>.navbar-wrap > ul > li.show > a::after{width:' + right + 'px;}</style>').appendTo("head");
