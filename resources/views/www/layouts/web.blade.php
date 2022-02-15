@@ -52,7 +52,7 @@
         <!-- footer-area-end -->
 
         <!-- JS here -->
-        @include('www.layouts.scripts')
+        @include('www.layouts.partials.scripts')
         @yield('page-scripts')
     </body>
 </html>
