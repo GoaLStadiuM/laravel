@@ -45,7 +45,7 @@
                 <div class="main-menu menu-style-two">
                     <nav>
                         <div class="logo d-block d-lg-none">
-                            <a href="{{ route('home')}}"><img src="{{ asset('img/logo.webp') }}" alt="Logo" width="150"></a>
+                            <a href="{{ route('home')}}"><img src="{{ asset('img/logo.webp') }}" alt="Logo" width="125"></a>
                         </div>
                         <div class="navbar-wrap d-none d-lg-flex">
                             <ul class="left">

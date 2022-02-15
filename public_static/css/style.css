@@ -1160,7 +1160,7 @@ ul.minicart .cart-price .new {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-	top: -62px;
+	top: -50px;
 	z-index: 9;
 }
 .third-header-bg .navbar-wrap ul.left {
