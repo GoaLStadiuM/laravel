@@ -24,7 +24,13 @@
                             <a href="#"><i class="fas fa-user"></i>Usuario</a>
                             <ul class="submenu">
                                 <li><a href="{{ route('user') }}">Ajustes Usuario</a></li>
-                                <li><a href="{{ route('logout') }}">Logout</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <a href="{{ route('logout') }}">Logout</a>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                         @else
