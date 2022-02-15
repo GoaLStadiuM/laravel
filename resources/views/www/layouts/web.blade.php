@@ -35,7 +35,7 @@
 
         <!-- header-area -->
         <header class="third-header-bg">
-            @include('www.layouts.header')
+            @include('www.layouts.partials.header')
         </header>
         <!-- header-area-end -->
 
@@ -47,7 +47,7 @@
 
         <!-- footer-area -->
         <footer>
-            @include('www.layouts.footer')
+            @include('www.layouts.partials.footer')
         </footer>
         <!-- footer-area-end -->
 
