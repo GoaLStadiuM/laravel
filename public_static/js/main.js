@@ -1,4 +1,5 @@
-jQuery( document ).ready(function( $ ) {
+(function ($) {
+"use strict";
 
 const mailInfo = document.getElementById('mail-info'),
       mailInfl = document.getElementById('mail-infl'),
@@ -1063,4 +1064,4 @@ function wowAnimation() {
 }
 
 
-});
+})(jQuery);
