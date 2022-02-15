@@ -11,8 +11,8 @@
                         <a href="{{ route('team') }}" class="btn rotated-btn">Nuestro Equipo</a>
                     </div>
                 </div>
-                <div class="col-lg-3"><img src="{{ asset('img/home/hypsola.webp') }}" alt="" width="100%"></div>
             </div>
+            <div class="col-lg-3"><img src="{{ asset('img/home/hypsola.webp') }}" alt="" width="100%"></div>
         </div>
         <div class="see-my-info-wrap pt-120" id="metaverso">
             <div class="row">
