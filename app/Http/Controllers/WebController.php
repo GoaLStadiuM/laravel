@@ -17,7 +17,7 @@ class WebController extends Controller
     {
         return view('www.home.home', [
             ...$this->layoutStuff(),
-            'yt_video' => Setting::where('code', 'yt_video')->first()->value,
+            'yt_video' => Setting::where('code', 'yt_video')->firstOrFail()->value,
             'partners' => $this->getPartners()
         ]);
     }
