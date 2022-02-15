@@ -39,7 +39,7 @@
                             <li><a href={!! asset("document/AuditoriaTOKEN.pdf") !!} target="_blank">Auditorias</a></li>
                             <li><a href="https://bscscan.com/address/0xBF4013ca1d3D34873A3f02B5D169E593185B0204" target="_blank">Contrato Goal</a></li>
                             <li><a href="{{ route('legal') }}">Aviso Legal</a></li>
-                            <li><a href="{{ route('privacidad') }}">Política de Privacidad</a></li>
+                            <li><a href="{{ route('privacy') }}">Política de Privacidad</a></li>
                             <li><a href="{{ route('cookies') }}">Política de Cookies</a></li>
                         </ul>
                     </div>
