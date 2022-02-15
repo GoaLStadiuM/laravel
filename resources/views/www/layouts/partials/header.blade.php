@@ -90,7 +90,13 @@
                                     <a href="#"><i class="fas fa-user"></i>Usuario</a>
                                     <ul class="submenu">
                                         <li><a href="{{ route('user') }}">Ajustes Usuario</a></li>
-                                        <li><a href="{{ route('logout') }}">Logout</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+
+                                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </li>
                                 @else
@@ -108,8 +114,8 @@
                                 <li><a href="{{ route('home').'#play2earn'}}">Play<span>2Earn</span></a></li>
                                 <li><a href="{{ route('home').'#nfts'}}">Nfts</a></li>
                                 <li><a href="{{ route('home').'#farming'}}">Farming/Staking</a></li>
-                                <li{{ request()->routeIs('collaborators') ? ' class="show"' : '' }}><a href="{{ route('collaborators')}}">Colaboradores</a></li>
-                                <li{{ request()->routeIs('rankings') ? ' class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
+                                <li{{ request()->routeIs('collaborators') ? ' class="show"' : '' }}><a>Colaboradores</a></li>
+                                <li{{ request()->routeIs('rankings') ? ' class="show"' : '' }}><a>Clasificaciones</a></li>
                                 <li>
                                     <a href="#">Whitepaper</a>
                                     <ul class="submenu">

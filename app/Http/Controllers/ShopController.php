@@ -19,7 +19,7 @@ class ShopController extends Controller
 
     public function shop()
     {
-        return view('penalties.shop', [
+        return view('play.penalties.shop', [
             'products' => Product::get()->groupBy('division'),
             'base_characters' => BaseCharacter::get(),
             'characters' => Auth::user()->characters()->groupBy('division')
