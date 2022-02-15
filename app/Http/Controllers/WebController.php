@@ -101,7 +101,7 @@ class WebController extends Controller
         ]);
     }
 
-    private function getPartners(): array
+    private function getPartners(): Collection
     {
         return Partner::join('entity', 'entity.id', '=', 'partner.entity_id')
                     ->where('entity.hidden', false)
