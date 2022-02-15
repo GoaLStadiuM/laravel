@@ -21,7 +21,7 @@ $(window).on('load', function () {
     =          Menu Bottom Line			      =
 =============================================*/
 function menu_bottom_line_active() {
-    if (!$('#mobile-menu > ul > li.show'))
+    if (!$('#mobile-menu > ul > li.show').length)
         return;
 
 	var off = $('#mobile-menu > ul > li.show').offset(),
