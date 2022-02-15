@@ -31,13 +31,13 @@
                             <li>
                                 <a>Whitepaper</a>
                                 <ul class="submenu">
-                                    <li><a href="{!! asset("documents/whitepaper_en.pdf") !!}" target="_blank">English</a></li>
-                                    <li><a href="{!! asset("documents/whitepaper_es.pdf") !!}" target="_blank">Spanish</a></li>
-                                    <li><a href="{!! asset("documents/whitepaper_pt.pdf") !!}" target="_blank">Portuguese</a></li>
+                                    <li><a href="{!! asset('documents/whitepaper_en.pdf') !!}" target="_blank">English</a></li>
+                                    <li><a href="{!! asset('documents/whitepaper_es.pdf') !!}" target="_blank">Spanish</a></li>
+                                    <li><a href="{!! asset('documents/whitepaper_pt.pdf') !!}" target="_blank">Portuguese</a></li>
                                 </ul>
                             </li>
                             <li><a href={!! asset("document/AuditoriaTOKEN.pdf") !!} target="_blank">Auditorias</a></li>
-                            <li><a href="https://bscscan.com/address/0xBF4013ca1d3D34873A3f02B5D169E593185B0204" target="_blank">Contrato Goal</a></li>
+                            <li><a href="{{ $contract_address_url }}" target="_blank">Contrato Goal</a></li>
                             <li><a href="{{ route('legal') }}">Aviso Legal</a></li>
                             <li><a href="{{ route('privacy') }}">Política de Privacidad</a></li>
                             <li><a href="{{ route('cookies') }}">Política de Cookies</a></li>

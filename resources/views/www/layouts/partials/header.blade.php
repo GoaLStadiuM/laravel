@@ -49,7 +49,7 @@
                         </div>
                         <div class="navbar-wrap d-none d-lg-flex">
                             <ul class="left">
-                                <li{{ request()->routeIs('home') ? 'class="show"' : '' }}><a href="{{ route('home') }}">Inicio</a></li>
+                                <li{{ request()->routeIs('home') ? ' class="show"' : '' }}><a href="{{ route('home') }}">Inicio</a></li>
                                 <li><a href="{{ route('home').'#bienvenidos' }}">Bienvenidos</a></li>
                                 <li><a href="{{ route('home').'#metaverso' }}">Metaverso</a></li>
                                 <li><a href="{{ route('home').'#play2earn' }}">Play<span>2Earn</span></a></li>
@@ -60,14 +60,14 @@
                             </div>
                             <ul class="right">
                                 <li><a href="{{ route('home').'#farming' }}">Farming/Staking</a></li>
-                                <li{{ request()->routeIs('collaborators') ? 'class="show"' : '' }}><a href="{{ route('collaborators') }}">Colaboradores</a></li>
-                                <li{{ request()->routeIs('rankings') ? 'class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
+                                <li{{ request()->routeIs('collaborators') ? ' class="show"' : '' }}><a href="{{ route('collaborators') }}">Colaboradores</a></li>
+                                <li{{ request()->routeIs('rankings') ? ' class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
                                 <li>
                                     <a href="#">Whitepaper</a>
                                     <ul class="submenu">
-                                        <li><a href="{!! asset("documents/whitepaper_en.pdf") !!}" target="_blank">English</a></li>
-                                        <li><a href="{!! asset("documents/whitepaper_es.pdf") !!}" target="_blank">Spanish</a></li>
-                                        <li><a href="{!! asset("documents/whitepaper_pt.pdf") !!}" target="_blank">Portuguese</a></li>
+                                        <li><a href="{!! asset('documents/whitepaper_en.pdf') !!}" target="_blank">English</a></li>
+                                        <li><a href="{!! asset('documents/whitepaper_es.pdf') !!}" target="_blank">Spanish</a></li>
+                                        <li><a href="{!! asset('documents/whitepaper_pt.pdf') !!}" target="_blank">Portuguese</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -96,20 +96,20 @@
                         </div>
                         <div id="mobile-menu" class="navbar-wrap">
                             <ul>
-                                <li{{ request()->routeIs('home') ? 'class="show"' : '' }}><a href="{{ route('home')}}">Inicio</a></li>
+                                <li{{ request()->routeIs('home') ? ' class="show"' : '' }}><a href="{{ route('home')}}">Inicio</a></li>
                                 <li><a href="{{ route('home').'#bienvenidos'}}">Bienvenidos</a></li>
                                 <li><a href="{{ route('home').'#metaverso'}}">Metaverso</a></li>
                                 <li><a href="{{ route('home').'#play2earn'}}">Play<span>2Earn</span></a></li>
                                 <li><a href="{{ route('home').'#nfts'}}">Nfts</a></li>
                                 <li><a href="{{ route('home').'#farming'}}">Farming/Staking</a></li>
-                                <li{{ request()->routeIs('collaborators') ? 'class="show"' : '' }}><a href="{{ route('collaborators')}}">Colaboradores</a></li>
-                                <li{{ request()->routeIs('rankings') ? 'class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
+                                <li{{ request()->routeIs('collaborators') ? ' class="show"' : '' }}><a href="{{ route('collaborators')}}">Colaboradores</a></li>
+                                <li{{ request()->routeIs('rankings') ? ' class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
                                 <li>
                                     <a href="#">Whitepaper</a>
                                     <ul class="submenu">
-                                        <li><a href="{!! asset("documents/whitepaper_en.pdf") !!}" target="_blank">English</a></li>
-                                        <li><a href="{!! asset("documents/whitepaper_es.pdf") !!}" target="_blank">Spanish</a></li>
-                                        <li><a href="{!! asset("documents/whitepaper_pt.pdf") !!}" target="_blank">Portuguese</a></li>
+                                        <li><a href="{!! asset('documents/whitepaper_en.pdf') !!}" target="_blank">English</a></li>
+                                        <li><a href="{!! asset('documents/whitepaper_es.pdf') !!}" target="_blank">Spanish</a></li>
+                                        <li><a href="{!! asset('documents/whitepaper_pt.pdf') !!}" target="_blank">Portuguese</a></li>
                                     </ul>
                                 </li>
                             </ul>
