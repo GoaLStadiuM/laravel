@@ -21,6 +21,9 @@ $(window).on('load', function () {
     =          Menu Bottom Line			      =
 =============================================*/
 function menu_bottom_line_active() {
+    if (!$('#mobile-menu > ul > li.show'))
+        return;
+    
 	var off = $('#mobile-menu > ul > li.show').offset(),
 		left = off.left,
 		right = $(window).width() - left - $('#mobile-menu > ul > li.show').width() + $('#mobile-menu > ul > li.show').width();
