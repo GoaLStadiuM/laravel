@@ -380,7 +380,7 @@ class GameController extends Controller
         $training = $character->latestTraining;
         if ($training !== null && !$training->done)
         {
-            $view = 'farming.training';
+            $view = 'auth.farming.training';
             $data = [
                 'character' => $character,
                 'training' => $training,
@@ -390,7 +390,7 @@ class GameController extends Controller
 
         else
         {
-            $view = 'farming.stats';
+            $view = 'auth.farming.stats';
             $data = [
                 'character' => $character,
                 'sessions' => TrainingSession::get()
