@@ -15,7 +15,7 @@
         <!-- Goalkeeper Image /end -->
         <!-- Logo /start -->
         <div class="z-20">
-            <a href="{{ route('landing') }}"><img src="{{ asset('img/penalties/logo.webp') }}" alt="GoaL StadiuM logo" class="bg-auto md:w-1/3 w-1/2 mx-auto z-20"></a>
+            <a href="{{ route('home') }}"><img src="{{ asset('img/penalties/logo.webp') }}" alt="GoaL StadiuM logo" class="bg-auto md:w-1/3 w-1/2 mx-auto z-20"></a>
         </div>
         <!-- Logo /end -->
 
