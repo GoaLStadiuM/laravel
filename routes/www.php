@@ -13,6 +13,7 @@ Route::domain('www.' . config('app.domain'))->group(function ()
     Route::get('/legal', [ WebController::class, 'legal' ])->name('legal');
     Route::get('/privacy', [ WebController::class, 'privacy' ])->name('privacy');
     Route::get('/cookies', [ WebController::class, 'cookies' ])->name('cookies');
+    Route::get('/user', [ WebController::class, 'user' ])->name('user');
     // temp routes
     Route::get('/farming', [GameController::class, 'farmingWeb'])->name('farming')->middleware(['verified']);
     Route::get('/farming/stats/{payment_id}', [GameController::class, 'stats'])->name('stats')->middleware(['verified']);

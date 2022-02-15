@@ -82,21 +82,28 @@ class WebController extends Controller
 
     public function legal()
     {
-        return view('stake.stake', [
+        return view('www.legal', [
             ...$this->layoutStuff()
         ]);
     }
 
     public function privacy()
     {
-        return view('stake.stake', [
+        return view('www.privacy', [
             ...$this->layoutStuff()
         ]);
     }
 
     public function cookies()
     {
-        return view('stake.stake', [
+        return view('www.cookies', [
+            ...$this->layoutStuff()
+        ]);
+    }
+
+    public function user()
+    {
+        return view('www.user.user', [
             ...$this->layoutStuff()
         ]);
     }
