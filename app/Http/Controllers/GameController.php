@@ -255,7 +255,7 @@ class GameController extends Controller
 
     public function farmingWeb()
     {
-        return view('farming.index', [
+        return view('auth.farming.index', [
             'characters' => Auth::user()->characters()->get()
         ]);
     }
