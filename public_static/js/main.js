@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+jQuery( document ).ready(function( $ ) {
 
 const mailInfo = document.getElementById('mail-info'),
       mailInfl = document.getElementById('mail-infl'),
