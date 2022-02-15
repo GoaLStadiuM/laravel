@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="third-banner-img wow">
-                    <iframe width="100%" height="600" src="{{ $yt_video }}" title="YouTube video player" allowfullscreen></iframe>
+                    <iframe width="100%" height="600" src="{{ $yt_video }}" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="third-banner-content text-center wow bounceInUp" data-wow-delay=".2s">
                     <h2>Somos Goal<span>Stadium</span></h2>
