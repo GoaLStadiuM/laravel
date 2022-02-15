@@ -18,7 +18,7 @@ mailInve.href = 'mailto:investments@goalstadium.com';
 =============================================*/
 function preloader() {
 	$('#preloader').delay(0).fadeOut();
-}
+};
 
 $(window).on('load', function () {
 	preloader();
@@ -33,10 +33,11 @@ $(window).on('load', function () {
     =          Menu Bottom Line			      =
 =============================================*/
 function menu_bottom_line_active() {
-    const left = $('#mobile-menu > ul > li.show').offset().left,
-          right = $(window).width() - left - $('#mobile-menu > ul > li.show').width() + $('#mobile-menu > ul > li.show').width();
+	var off = $('#mobile-menu > ul > li.show').offset(),
+		left = off.left,
+		right = $(window).width() - left - $('#mobile-menu > ul > li.show').width() + $('#mobile-menu > ul > li.show').width();
 
-    $('<style>.navbar-wrap > ul > li.show > a::after{width:' + right + 'px;}</style>').appendTo("head");
+	$('<style>.navbar-wrap > ul > li.show > a::after{width:' + right + 'px;}</style>').appendTo("head");
 }
 
 menu_bottom_line_active();
