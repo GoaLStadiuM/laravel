@@ -9,7 +9,7 @@
                             <div class="inner">
                                 <h2>Farming</h2>
                                 <h6 class="vertical-title">Se el mejor</h6>
-                                <p>Los usuarios, tras adquirir sus Jugadores desde el Marketplace de entre las tres divisiones disponibles pueden comenzar a farmear colocando a todos sus jugadores a entrenar a la vez y las veces que quiera para coger experiencia de juego subiendo de nivel al entrenar con "Toques de Balón”, para aumentar por jugador sus habilidades de Fuerza y Precisión.</p>
+                                <p>Los usuarios, tras adquirir sus personajes desde la tienda de entre las tres divisiones disponibles pueden comenzar a farmear colocando a todos sus personajes a entrenar a la vez y las veces que quiera para coger experiencia de juego subiendo de nivel al entrenar con "Toques de Balón”, para aumentar por jugador sus habilidades de Fuerza y Precisión.</p>
                             </div>
                             <a href="{{ route('farming') }}" class="btn rotated-btn">Ir</a>
                         </div>
