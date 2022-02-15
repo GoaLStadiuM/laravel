@@ -15,7 +15,7 @@
                     <x-nav-link :href="route('farming')" :active="request()->routeIs('farming')">
                         {{ __('Farming') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('landing')" :active="request()->routeIs('landing')">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Back to Web') }}
                     </x-nav-link>
                 </div>
@@ -69,7 +69,7 @@
             <x-responsive-nav-link :href="route('farming')" :active="request()->routeIs('farming')">
                 {{ __('Farming') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('landing')" :active="request()->routeIs('landing')">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Back to Web') }}
             </x-responsive-nav-link>
         </div>
