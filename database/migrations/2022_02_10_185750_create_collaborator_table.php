@@ -15,13 +15,12 @@ class CreateCollaboratorTable extends Migration
     {
         Schema::create('collaborator', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->unsignedTinyInteger('type_id');
+            $table->unsignedTinyInteger('title');
             $table->unsignedSmallInteger('amount');
             $table->string('country_code');
             $table->unsignedSmallInteger('entity_id');
             $table->timestamps();
 
-            $table->foreign('type_id')->references('id')->on('entity_type');
             $table->foreign('entity_id')->references('id')->on('entity');
         });
     }

@@ -15,7 +15,7 @@ class CreateInfluencerTable extends Migration
     {
         Schema::create('influencer', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->unsignedTinyInteger('type_id');
+            $table->unsignedTinyInteger('title');
             $table->string('email');
             $table->unsignedSmallInteger('amount');
             $table->unsignedMediumInteger('share');
@@ -24,7 +24,6 @@ class CreateInfluencerTable extends Migration
             $table->unsignedSmallInteger('entity_id');
             $table->timestamps();
 
-            $table->foreign('type_id')->references('id')->on('entity_type');
             $table->foreign('entity_id')->references('id')->on('entity');
         });
     }
