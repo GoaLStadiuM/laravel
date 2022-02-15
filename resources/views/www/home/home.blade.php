@@ -31,3 +31,7 @@
     @include('www.home.partials.contact')
     <!-- contact-area-end -->
 @endsection
+
+@section('page-scripts')
+    <script src="{{ asset('js/home.js') }}"></script>
+@endsection
