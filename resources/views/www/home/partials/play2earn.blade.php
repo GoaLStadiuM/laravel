@@ -11,36 +11,36 @@
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="third-team-item text-center mb-30">
                     <div class="third-team-img">
-                        <img src="img/click2earn/1.jpg" alt="" width="100%">
+                        <img src="{{ asset('img/home/penalties.webp') }}" alt="penalties artwork" width="100%">
                     </div>
                     <div class="third-team-content">
                         <div class="main-bg"></div>
                         <div class="hover-bg"></div>
-                        <h3><a href="#">PENALTIES</a></h3>
+                        <h3><a href="{{ route('penalties') }}">PENALTIES</a></h3>
                     </div>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="third-team-item text-center mb-30">
                     <div class="third-team-img">
-                        <img src="img/click2earn/4.jpeg" alt="" width="100%">
+                        <img src="{{ asset('img/home/play_the_league.webp') }}" alt="play the league artwork" width="100%">
                     </div>
                     <div class="third-team-content">
                         <div class="main-bg"></div>
                         <div class="hover-bg"></div>
-                        <h3><a href="#">PLAY THE LEAGUE</a></h3>
+                        <h3><a>PLAY THE LEAGUE</a></h3>
                     </div>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="third-team-item text-center mb-30">
                     <div class="third-team-img">
-                        <img src="img/click2earn/2.jpg" alt="" width="100%">
+                        <img src="{{ asset('img/home/metaverse.webp') }}" alt="metaverse artwork" width="100%">
                     </div>
                     <div class="third-team-content">
                         <div class="main-bg"></div>
                         <div class="hover-bg"></div>
-                        <h3><a href="#">METAV3RSE</a></h3>
+                        <h3><a>METAV3RSE</a></h3>
                     </div>
                 </div>
             </div>
@@ -57,12 +57,12 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <img src="img/nfts/BENJA.jpg" alt="">
+                            <img src="{{ asset('img/nfts/BENJA.jpg') }}" alt="">
                         </div>
                         <div class="third-team-content">
                             <div class="main-bg"></div>
                             <div class="hover-bg"></div>
-                            <h5><a href="#">BENJA</a></h5>
+                            <h5><a>BENJA</a></h5>
                             <span>Oh Ah oh Ah oh Ah ooh!!!!</span>
                         </div>
                     </div>
@@ -70,12 +70,12 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <img src="img/nfts/CRISNALDO.jpg" alt="">
+                            <img src="{{ asset('img/nfts/CRISNALDO.jpg') }}" alt="">
                         </div>
                         <div class="third-team-content">
                             <div class="main-bg"></div>
                             <div class="hover-bg"></div>
-                            <h5><a href="#">CRISNALDO</a></h5>
+                            <h5><a>CRISNALDO</a></h5>
                             <span>Siuuuuuuuuuuh!</span>
                         </div>
                     </div>
@@ -83,12 +83,12 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <img src="img/nfts/PEQUE.jpg" alt="">
+                            <img src="{{ asset('img/nfts/PEQUE.jpg') }}" alt="">
                         </div>
                         <div class="third-team-content">
                             <div class="main-bg"></div>
                             <div class="hover-bg"></div>
-                            <h5><a href="#">PEQUE</a></h5>
+                            <h5><a>PEQUE</a></h5>
                             <span>Eu sou o rei do futebol</span>
                         </div>
                     </div>
@@ -96,12 +96,12 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <img src="img/nfts/SINEDINESEDINI.jpg" alt="">
+                            <img src="{{ asset('img/nfts/SINEDINESEDINI.jpg') }}" alt="">
                         </div>
                         <div class="third-team-content">
                             <div class="main-bg"></div>
                             <div class="hover-bg"></div>
-                            <h5><a href="#">SINEDINE SEDINI</a></h5>
+                            <h5><a>SINEDINE SEDINI</a></h5>
                             <span>Coup de tête que vous prenez!</span>
                         </div>
                     </div>

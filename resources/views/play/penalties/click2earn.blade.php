@@ -2,7 +2,7 @@
 
 @section('title', 'click2earn')
 
-@section('styles')
+@section('page-styles')
     <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -17,7 +17,7 @@
     @include('play.penalties.partials.clickygame')
 @endsection
 
-@section('scripts')
+@section('page-scripts')
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/slick.min.js') }}"></script>

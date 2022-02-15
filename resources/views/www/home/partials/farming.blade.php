@@ -17,10 +17,12 @@
                 </div>
                 <div class="col-xl-6 col-lg-5">
                     <div class="donation-img text-center">
-                        <img src="img/images/farming.jpeg" alt="" width="80%">
+                        <img src="{{ asset('img/home/farming.webp') }}" alt="" width="80%">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
+    <br>
 </section>

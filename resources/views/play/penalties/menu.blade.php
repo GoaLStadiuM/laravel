@@ -2,7 +2,7 @@
 
 @section('title', 'Menu')
 
-@section('styles')
+@section('page-styles')
     <!-- custom -->
     <link rel="stylesheet" href="{{ asset('css/penalties.css') }}">
 @endsection

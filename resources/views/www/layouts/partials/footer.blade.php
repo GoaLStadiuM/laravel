@@ -29,11 +29,11 @@
                     <div class="fw-quick-link">
                         <ul>
                             <li>
-                                <a href="#">Whitepaper</a>
+                                <a>Whitepaper</a>
                                 <ul class="submenu">
-                                    <li><a href="{!! asset("document/whitepaper_en.pdf") !!}" target="_blank">English</a></li>
-                                    <li><a href="{!! asset("document/whitepaper_es.pdf") !!}" target="_blank">Spanish</a></li>
-                                    <li><a href="{!! asset("document/whitepaper_pt.pdf") !!}" target="_blank">Portuguese</a></li>
+                                    <li><a href="{!! asset("documents/whitepaper_en.pdf") !!}" target="_blank">English</a></li>
+                                    <li><a href="{!! asset("documents/whitepaper_es.pdf") !!}" target="_blank">Spanish</a></li>
+                                    <li><a href="{!! asset("documents/whitepaper_pt.pdf") !!}" target="_blank">Portuguese</a></li>
                                 </ul>
                             </li>
                             <li><a href={!! asset("document/AuditoriaTOKEN.pdf") !!} target="_blank">Auditorias</a></li>

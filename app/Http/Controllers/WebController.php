@@ -37,7 +37,7 @@ class WebController extends Controller
         ]);
     }
 
-    public function collaborator()
+    public function collaborators()
     {
         return view('www.collaborators.collaborators', [
             ...$this->layoutStuff(),

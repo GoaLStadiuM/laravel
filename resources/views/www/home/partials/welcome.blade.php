@@ -1,7 +1,7 @@
 <section class="third-about-area third-about-bg pt-120 pb-90" id="bienvenidos">
     <div class="container custom-container">
         <div class="row align-items-center">
-            <div class="col-lg-3"><img src="{{ asset('img/home/johan_new.png') }}" alt="" width="100%"></div>
+            <div class="col-lg-3"><img src="{{ asset('img/home/johan.webp') }}" alt="" width="100%"></div>
             <div class="col-lg-6">
                 <div class="third-about-content">
                     <div class="third-title-style text-center">
@@ -11,7 +11,7 @@
                         <a href="{{ route('team') }}" class="btn rotated-btn">Nuestro Equipo</a>
                     </div>
                 </div>
-                <div class="col-lg-3"><img src="{{ asset('img/home/padel_morgan_new.png') }}" alt="" width="100%"></div>
+                <div class="col-lg-3"><img src="{{ asset('img/home/hypsola.webp') }}" alt="" width="100%"></div>
             </div>
         </div>
         <div class="see-my-info-wrap pt-120" id="metaverso">
@@ -28,7 +28,7 @@
                     <div class="my-info-box mb-30">
                         <div class="my-info-box-top">
                             <h6>Control Total</h6>
-                            <img src="img/bg/my_info_box_hover.png" alt="" class="info-box-top-hover">
+                            <img src="{{ asset('img/bg/my_info_box_hover.webp') }}" alt="" class="info-box-top-hover">
                         </div>
                         <div class="my-info-box-content">
                             <p>El usuario tiene el control para elegir el personaje con el que se quiere comenzar a jugar y que más se adapte a las necesidades y requisitos que se desee</p>
@@ -39,7 +39,7 @@
                     <div class="my-info-box mb-30">
                         <div class="my-info-box-top">
                             <h6>Mundo Virtual</h6>
-                            <img src="img/bg/my_info_box_hover.png" alt="" class="info-box-top-hover">
+                            <img src="{{ asset('img/bg/my_info_box_hover.webp') }}" alt="" class="info-box-top-hover">
                         </div>
                         <div class="my-info-box-content">
                             <p>Un mundo virtual en expansión continua y deleitarse participando activamente en unas fascinantes temporadas de diferentes competiciones en los campeonatos, ligas y copas</p>
@@ -50,7 +50,7 @@
                     <div class="my-info-box mb-30">
                         <div class="my-info-box-top">
                             <h6>Premios</h6>
-                            <img src="img/bg/my_info_box_hover.png" alt="" class="info-box-top-hover">
+                            <img src="{{ asset('img/bg/my_info_box_hover.webp') }}" alt="" class="info-box-top-hover">
                         </div>
                         <div class="my-info-box-content">
                             <p>Premios y sorpresas sorprendentes para los usuarios que entren en el Metaverso.</p>

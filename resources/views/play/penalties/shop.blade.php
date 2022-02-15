@@ -2,7 +2,7 @@
 
 @section('title', 'Shop')
 
-@section('styles')
+@section('page-styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <!-- swiper -->
@@ -253,7 +253,7 @@
     </main>
 @endsection
 
-@section('scripts')
+@section('page-scripts')
     @include('play.layouts.partials.moralis')
 
     <!-- custom -->

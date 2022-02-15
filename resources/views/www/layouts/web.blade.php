@@ -27,7 +27,7 @@
 
         <!-- CSS here -->
         @include('www.layouts.partials.styles')
-        @yield('page-style')
+        @yield('page-styles')
     </head>
     <body>
         <!-- preloader -->
@@ -53,6 +53,6 @@
 
         <!-- JS here -->
         @include('www.layouts.scripts')
-        @yield('page-script')
+        @yield('page-scripts')
     </body>
 </html>

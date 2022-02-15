@@ -2,7 +2,7 @@
 
 @section('title', 'Clasificaciones')
 
-@section('page-style')
+@section('page-styles')
     <link rel="stylesheet" href='{{ asset("css/tabs2.css") }}'>
 @endsection
 
@@ -19,6 +19,6 @@
     <!-- tables-end -->
 @endsection
 
-@section('page-script')
+@section('page-scripts')
     <script src="{{ asset('js/tabs.js') }}"></script>
 @endsection

@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-5">
                     <div class="donation-img text-center">
-                        <img src="img/images/1goal.png" alt="" width="400">
+                        <img src="{{ asset('img/home/staking.webp') }}" alt="" width="400">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
