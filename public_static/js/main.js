@@ -1,6 +1,14 @@
 (function ($) {
 "use strict";
 
+const mailInfo = document.getElementById('mail-info'),
+      mailInfl = document.getElementById('mail-infl'),
+      mailinve = document.getElementById('mail-inve');
+
+mailInfo.textContent = 'info@goalstadium.com';
+mailInfl.textContent = 'influencers@goalstadium.com';
+mailinve.textContent = 'investments@goalstadium.com';
+
 /*=============================================
     =    		 Preloader			      =
 =============================================*/
