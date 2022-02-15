@@ -4,7 +4,7 @@
             <div class="col-lg-6">
                 <div class="footer-widget mb-50">
                     <div class="logo mb-35">
-                        <a href="{{ route('home') }}"><img src="{{ route('img/footer-left.webp') }}" alt="" width="400"></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset('img/footer-left.webp') }}" alt="" width="400"></a>
                     </div>
                     <div class="fw-text">
                         <p>Un juego global inspirado en las más puras y grandiosas ligas del panorama futbolístico internacional actual, que proporciona una experiencia de juego totalmente nueva y muy original que irá evolucionando día a día.</p>
