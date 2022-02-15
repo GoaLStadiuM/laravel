@@ -1,6 +1,3 @@
-$(function () {
-"use strict";
-
 const mailInfo = document.getElementById('mail-info'),
       mailInfl = document.getElementById('mail-infl'),
       mailInve = document.getElementById('mail-inve');
@@ -1062,6 +1059,3 @@ function wowAnimation() {
 	});
 	wow.init();
 }
-
-
-})(jQuery);
