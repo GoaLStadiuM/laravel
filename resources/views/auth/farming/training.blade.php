@@ -7,12 +7,12 @@
                 </h1>
             </div>
             <div class="soccerball">
-                @include('farming.partials.soccerball', [ 'id' => 0 ])
-                @include('farming.partials.soccerball', [ 'id' => 1 ])
-                @include('farming.partials.soccerball', [ 'id' => 2 ])
-                @include('farming.partials.soccerball', [ 'id' => 3 ])
-                @include('farming.partials.soccerball', [ 'id' => 4 ])
-                @include('farming.partials.soccerball', [ 'id' => 5 ])
+                @include('auth.farming.partials.soccerball', [ 'id' => 0 ])
+                @include('auth.farming.partials.soccerball', [ 'id' => 1 ])
+                @include('auth.farming.partials.soccerball', [ 'id' => 2 ])
+                @include('auth.farming.partials.soccerball', [ 'id' => 3 ])
+                @include('auth.farming.partials.soccerball', [ 'id' => 4 ])
+                @include('auth.farming.partials.soccerball', [ 'id' => 5 ])
             </div>
             <aside class="sci-panel">
                 <div class="stats">
