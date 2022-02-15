@@ -66,8 +66,8 @@
                             </div>
                             <ul class="right">
                                 <li><a href="{{ route('home').'#farming' }}">Farming/Staking</a></li>
-                                <li{{ request()->routeIs('collaborators') ? ' class="show"' : '' }}><a href="{{ route('collaborators') }}">Colaboradores</a></li>
-                                <li{{ request()->routeIs('rankings') ? ' class="show"' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
+                                <li{{ request()->routeIs('collaborators') ? ' class="show"' : '' }}><a>Colaboradores</a></li>
+                                <li{{ request()->routeIs('rankings') ? ' class="show"' : '' }}><a>Clasificaciones</a></li>
                                 <li>
                                     <a href="#">Whitepaper</a>
                                     <ul class="submenu">
