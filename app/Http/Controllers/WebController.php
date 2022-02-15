@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\Partner;
 use App\Models\Setting;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 class WebController extends Controller
 {
@@ -108,7 +109,7 @@ class WebController extends Controller
                     ->get();
     }
 
-    private function layoutStuff(): array
+    private function layoutStuff(): Collection
     {
         return Setting::whereIn('code', [
             'contract_address_url',
