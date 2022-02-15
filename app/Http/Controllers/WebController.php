@@ -43,22 +43,20 @@ class WebController extends Controller
         return view('www.collaborators.collaborators', [
             ...$this->layoutStuff(),
             'collaborators' => Collaborator::join('entity', 'entity.id', '=', 'collaborator.entity_id')
-                                ->join('entity_type', 'entity_type.id', '=', 'entity.type_id')
                                 ->where('entity.hidden', false)
                                 ->select(
                                    'entity.image_url',
                                    'entity.name',
-                                   'entity_type.name as title',
+                                   'collaborator.title',
                                    'collaborator.country_code'
                                 )
                                 ->get(),
             'influencers' => Influencer::join('entity', 'entity.id', '=', 'influencer.entity_id')
-                                ->join('entity_type', 'entity_type.id', '=', 'entity.type_id')
                                 ->where('entity.hidden', false)
                                 ->select(
                                     'entity.image_url',
                                     'entity.name',
-                                    'entity_type.name as title',
+                                    'influencer.title',
                                     'influencer.country_code'
                                 )
                                 ->get()
