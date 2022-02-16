@@ -71,10 +71,10 @@ class WebController extends Controller
             ...$this->layoutStuff(),
             'rewards_users' => User::limit(10)->get(),
             'rewards_characters' => Character::limit(50)->get(),
-            'score_user' => User::limit(10)->get(),
-            'score_character' => Character::limit(50)->get(),
-            'injuries_user' => User::limit(10)->get(),
-            'injuries_character' => Character::limit(50)->get()
+            'score_users' => User::limit(10)->get(),
+            'score_characters' => Character::limit(50)->get(),
+            'injuries_users' => User::limit(10)->get(),
+            'injuries_characters' => Character::limit(50)->get()
         ]);
     }
 

@@ -11,12 +11,12 @@
             <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row">
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $rewards_user, 'header' => [ 'User', 'Rewards' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $rewards_users, 'header' => [ 'User', 'Rewards' ] ])
                             @slot('color') gold @endslot
                         @endcomponent
                     </div>
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $rewards_character, 'header' => [ 'Character', 'Rewards' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $rewards_characters, 'header' => [ 'Character', 'Rewards' ] ])
                             @slot('color') DarkGoldenRod @endslot
                         @endcomponent
                     </div>
@@ -25,12 +25,12 @@
             <div class="tab-pane" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="row">
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $score_user, 'header' => [ 'User', 'Goal Score' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $score_users, 'header' => [ 'User', 'Goal Score' ] ])
                             @slot('color') gold @endslot
                         @endcomponent
                     </div>
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $score_character, 'header' => [ 'Character', 'Goal Reward' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $score_characters, 'header' => [ 'Character', 'Goal Reward' ] ])
                             @slot('color') DarkGoldenRod @endslot
                         @endcomponent
                     </div>
@@ -39,12 +39,12 @@
             <div class="tab-pane" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <div class="row">
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $injuries_user, 'header' => [ 'User', 'Injuries' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $injuries_users, 'header' => [ 'User', 'Injuries' ] ])
                             @slot('color') gold @endslot
                         @endcomponent
                     </div>
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $injuries_character, 'header' => [ 'Character', 'Injuries' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $injuries_characters, 'header' => [ 'Character', 'Injuries' ] ])
                             @slot('color') DarkGoldenRod @endslot
                         @endcomponent
                     </div>
