@@ -80,10 +80,10 @@ class WebController extends Controller
             'score_users' => User::join('character', 'character.user_id', '=', 'user.id')
                 ->join('kick', 'kick.character_id', '=', 'character.id')
                 ->selectRaw('user.name, count(kick.result) as stuff')->where('kick.result', true)
-                ->orderBy('stuff', 'desc')->groupBy('user.name')->limit(100)->get(),
+                ->orderBy('stuff', 'desc')->groupBy('user.name')->limit(50)->get(),
             'score_characters' => Character::join('kick', 'kick.character_id', '=', 'character.id')
                 ->selectRaw('character.name, count(kick.result) as stuff')->where('kick.result', true)
-                ->orderBy('stuff', 'desc')->groupBy('character.name')->limit(100)->get(),
+                ->orderBy('stuff', 'desc')->groupBy('character.name')->limit(50)->get(),
             'injuries_users' => [],
             'injuries_characters' => []
         ]);

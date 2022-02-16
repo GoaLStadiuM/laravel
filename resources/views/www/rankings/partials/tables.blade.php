@@ -30,7 +30,7 @@
                         @endcomponent
                     </div>
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $score_characters, 'header' => [ 'Character', 'Goal Reward' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $score_characters, 'header' => [ 'Character', 'Goal Score' ] ])
                             @slot('color') DarkGoldenRod @endslot
                         @endcomponent
                     </div>
