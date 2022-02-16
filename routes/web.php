@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/www.php';
@@ -8,7 +7,7 @@ require __DIR__ . '/play.php';
 
 
 
-/*
+
 use App\Models\BaseCharacter;
 use App\Models\Character;
 use App\Models\NftPayment;
@@ -66,20 +65,20 @@ Route::middleware('admin')->group(function ()
     Route::get('/test', function() {
 
         $array = [
-            'lauramillanousa@gmail.com' => 60,
-            'drumer702@gmail.com' => 150,
-            'masmundocripto@gmail.com' => 300,
-            'blockchainexplica@gmail.com' => 120
+            'dona7cttb@gmail.com' => 300,
+            'oscarelunaa@hotmail.com' => 150,
+            'alastreyura443@gmail.com' => 150,
+            'xtianbadboy10@gmail.com' => 60,
+            'cryptoaddictyt@gmail.com' => 300,
+            'calelautaro@gmail.com' => 150
         ];
 
         foreach ($array as $email => $price)
         {
-
-        // create characters for the above youtubers
-        $base_characters = BaseCharacter::lotteryArray();
-            $user = User::where('email', 'buttrich.gaming@gmail.com')->firstOrFail();
-            $product = Product::find(3);
-            //continue;
+            // create characters for the above youtubers
+            $base_characters = BaseCharacter::lotteryArray();
+            $user = User::where('email', $email)->firstOrFail();
+            $product = Product::where('price', $price)->firstOrFail();
             $characters = $user->charactersByDivision($product->division);
 
             if ($characters->count() === count($base_characters) || $characters->count() > count($base_characters))
@@ -92,14 +91,12 @@ Route::middleware('admin')->group(function ()
                 NftPayment::create(
                     $product->id,
                     0,
-                    '0xc3a1e2fa3e4b526b4620d0eedcd3f27c59539fc80262e7832f7c66c97bdf307c',
-                    //"$user->id purchased at " . time() . 'using busd balance',
+                    "$user->id purchased at " . time() . 'using busd balance',
                     $user->id
                 ),
                 $product,
                 $user->id
             );
-        //}
-
+        }
     });
-});*/
+});

@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * The Person model.
+ * Represents an entity related to the organization.
  *
  * @property int    $id         The PK that identifies the instance.
  */
-class Person extends Model
+class Entity extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'person';
+    protected $table = 'entity';
 }
