@@ -10,7 +10,7 @@
         <div class="row" style="justify-content: center;">
             @foreach($influencers['TikToker'] as $tiktoker)
                 @component('www.collaborators.components.member')
-                    @slot('img') {{ asset($tiktoker->image_url) }} @endslot
+                    @slot('img_url') {{ $tiktoker->image_url }} @endslot
                     @slot('name') {{ $tiktoker->name }} @endslot
                     @slot('title') {{ $tiktoker->title }} @endslot
                     @slot('flag') {{ $tiktoker->country_code }} @endslot

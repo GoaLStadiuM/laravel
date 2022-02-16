@@ -10,7 +10,7 @@
         <div class="row" style="justify-content: center;">
             @foreach($influencers['Youtuber'] as $youtuber)
                 @component('www.collaborators.components.member')
-                    @slot('img') {{ asset($youtuber->image_url) }} @endslot
+                    @slot('img_url') {{ $youtuber->image_url }} @endslot
                     @slot('name') {{ $youtuber->name }} @endslot
                     @slot('title') {{ $youtuber->title }} @endslot
                     @slot('flag') {{ $youtuber->country_code }} @endslot
