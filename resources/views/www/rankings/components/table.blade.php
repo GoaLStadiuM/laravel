@@ -9,7 +9,7 @@
     <tbody style="text-align: center;">
         @foreach($rows as $row)
         <tr>
-            <td><span>{{ $row->ranking }}</span></td>
+            <td><span>{{ $loop->iteration }}</span></td>
             <td>{{ $row->name }}</td>
             <td>{{ $row->stuff }}</td>
         </tr>
