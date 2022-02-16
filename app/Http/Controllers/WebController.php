@@ -72,13 +72,20 @@ class WebController extends Controller
             ...$this->layoutStuff(),
             'rewards_users' => User::join('character', 'character.user_id', '=', 'user.id')
                 ->join('kick', 'kick.character_id', '=', 'character.id')
-                ->selectRaw('user.name, sum(kick.reward) as stuff')->orderBy('stuff', 'desc')->groupBy('user.name')
-                ->limit(10)->get(),
-            'rewards_characters' => Character::limit(50)->get(),
-            'score_users' => User::limit(10)->get(),
-            'score_characters' => Character::limit(50)->get(),
-            'injuries_users' => User::limit(10)->get(),
-            'injuries_characters' => Character::limit(50)->get()
+                ->selectRaw('user.name, sum(kick.reward) as stuff')
+                ->orderBy('stuff', 'desc')->groupBy('user.name')->limit(100)->get(),
+            'rewards_characters' => Character::join('kick', 'kick.character_id', '=', 'character.id')
+                ->selectRaw('character.name, sum(kick.reward) as stuff')->whereNotNull('character.name')
+                ->orderBy('stuff', 'desc')->groupBy('character.name')->limit(100)->get(),
+            'score_users' => User::join('character', 'character.user_id', '=', 'user.id')
+                ->join('kick', 'kick.character_id', '=', 'character.id')
+                ->selectRaw('user.name, count(kick.result) as stuff')->where('kick.result', true)
+                ->orderBy('stuff', 'desc')->groupBy('user.name')->limit(100)->get(),
+            'score_characters' => Character::join('kick', 'kick.character_id', '=', 'character.id')
+                ->selectRaw('character.name, count(kick.result) as stuff')->where('kick.result', true)
+                ->orderBy('stuff', 'desc')->groupBy('character.name')->limit(100)->get(),
+            'injuries_users' => [],
+            'injuries_characters' => []
         ]);
     }
 
