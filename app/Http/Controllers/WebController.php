@@ -10,6 +10,7 @@ use App\Models\Partner;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class WebController extends Controller
 {
@@ -69,7 +70,10 @@ class WebController extends Controller
     {
         return view('www.rankings.rankings', [
             ...$this->layoutStuff(),
-            'rewards_users' => User::limit(10)->get(),
+            'rewards_users' => User::join('character', 'character.user_id', '=', 'user.id')
+                ->join('kick', 'kick.character_id', '=', 'character.id')
+                ->select('user.name')->sum('kick.reward as stuff')->orderBy('stuff')
+                ->limit(10)->get(),
             'rewards_characters' => Character::limit(50)->get(),
             'score_users' => User::limit(10)->get(),
             'score_characters' => Character::limit(50)->get(),
