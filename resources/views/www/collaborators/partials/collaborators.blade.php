@@ -12,7 +12,7 @@
                 @component('www.collaborators.components.member')
                     @slot('img') {{ asset($collaborator->image_url) }} @endslot
                     @slot('name') {{ $collaborator->name }} @endslot
-                    @slot('title') {{ $collaborator->title }} @endslot
+                    @slot('title') {!! $collaborator->title !!} @endslot
                     @slot('flag') {{ $collaborator->country_code }} @endslot
                 @endcomponent
             @endforeach
