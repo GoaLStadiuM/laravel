@@ -11,12 +11,12 @@
             <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row">
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $rewards_users, 'header' => [ 'User', 'Rewards' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $rewards_users, 'header' => [ 'User', 'Rewards (GLS)' ] ])
                             @slot('color') gold @endslot
                         @endcomponent
                     </div>
                     <div class="col-lg-6">
-                        @component('www.rankings.components.table', [ 'rows' => $rewards_characters, 'header' => [ 'Character', 'Rewards' ] ])
+                        @component('www.rankings.components.table', [ 'rows' => $rewards_characters, 'header' => [ 'Character', 'Rewards (GLS)' ] ])
                             @slot('color') DarkGoldenRod @endslot
                         @endcomponent
                     </div>
