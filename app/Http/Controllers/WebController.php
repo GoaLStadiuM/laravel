@@ -72,7 +72,7 @@ class WebController extends Controller
             ...$this->layoutStuff(),
             'rewards_users' => User::join('character', 'character.user_id', '=', 'user.id')
                 ->join('kick', 'kick.character_id', '=', 'character.id')
-                ->selectRaw('user.name, sum(kick.reward) as stuff')->orderBy('stuff', 'asc')->groupBy('stuff')
+                ->selectRaw('user.name, sum(kick.reward) as stuff')->orderBy('stuff', 'asc')->groupBy('user.name')
                 ->limit(10)->get(),
             'rewards_characters' => Character::limit(50)->get(),
             'score_users' => User::limit(10)->get(),
