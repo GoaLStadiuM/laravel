@@ -15,7 +15,7 @@ class CreateInfluencerTable extends Migration
     {
         Schema::create('influencer', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->unsignedTinyInteger('title');
+            $table->string('title');
             $table->string('email');
             $table->unsignedSmallInteger('amount');
             $table->unsignedMediumInteger('share');

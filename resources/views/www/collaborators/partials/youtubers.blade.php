@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="row" style="justify-content: center;">
-            @foreach($influencers['youtuber'] as $youtuber)
+            @foreach($influencers['Youtuber'] as $youtuber)
                 @component('www.collaborators.components.member')
-                    @slot('img') {{ asset("$youtuber->image_url.webp") }} @endslot
+                    @slot('img') {{ asset($youtuber->image_url) }} @endslot
                     @slot('name') {{ $youtuber->name }} @endslot
                     @slot('title') {{ $youtuber->title }} @endslot
                     @slot('flag') {{ $youtuber->country_code }} @endslot

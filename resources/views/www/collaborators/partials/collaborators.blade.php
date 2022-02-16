@@ -10,7 +10,7 @@
         <div class="row" style="justify-content: center;">
             @foreach($collaborators as $collaborator)
                 @component('www.collaborators.components.member')
-                    @slot('img') {{ asset("$collaborator->image_url.webp") }} @endslot
+                    @slot('img') {{ asset($collaborator->image_url) }} @endslot
                     @slot('name') {{ $collaborator->name }} @endslot
                     @slot('title') {{ $collaborator->title }} @endslot
                     @slot('flag') {{ $collaborator->country_code }} @endslot

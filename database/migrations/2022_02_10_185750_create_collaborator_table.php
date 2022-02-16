@@ -15,7 +15,7 @@ class CreateCollaboratorTable extends Migration
     {
         Schema::create('collaborator', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->unsignedTinyInteger('title');
+            $table->string('title');
             $table->unsignedSmallInteger('amount');
             $table->string('country_code');
             $table->unsignedSmallInteger('entity_id');
