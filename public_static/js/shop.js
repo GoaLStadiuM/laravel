@@ -45,7 +45,7 @@ stroke="currentColor">
 
       postPurchase = (url, options, retries = 0, delay = 0) =>
 
-        fetch(url, options)
+         fetch(url, options)
             .then(res => {
                 if (res.ok)
                     return res.json();
@@ -99,11 +99,11 @@ async function purchase(el)
 
     // todo check if balance is >= product price
     else if (paymentOption === 'gls')
-        hash = 'gls';
+        return;//hash = 'gls';
 
     // todo check balance server-side first
     else if (paymentOption === 'busd')
-        hash = 'busd';
+        return;//hash = 'busd';
 
     if (hash === null)
         return;
