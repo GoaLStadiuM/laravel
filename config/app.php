@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', $_SERVER['REMOTE_ADDR'] === '2a0c:5a84:d202:2b00:2441:19f0:3777:5425'),
+    'debug' => (bool) env('APP_DEBUG', $_SERVER['REMOTE_ADDR'] === '81.43.176.225'),
 
     /*
     |--------------------------------------------------------------------------
