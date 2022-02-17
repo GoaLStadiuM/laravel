@@ -137,7 +137,7 @@ async function purchase(el)
 async function goalPayment(product)
 {
     if (!Moralis.User.current())
-        return;
+        return null;
 
     // todo show waiting animation
     modalCarrousel.classList.remove('hidden');
