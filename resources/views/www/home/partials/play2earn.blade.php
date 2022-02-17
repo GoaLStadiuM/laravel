@@ -57,7 +57,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <video id="nft-benja" width="100%">
+                            <video id="nft-benja" width="100%" preload>
                                 <source src="{{ asset('videos/benja.webm') }}" type="video/webm">
                                 <p>Your browser doesn't support HTML5 video. Here is a <a href="{{ asset('videos/benja.webm') }}">link to the video</a> instead.</p>
                             </video>
@@ -73,7 +73,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <video id="nft-crisnaldo" width="100%">
+                            <video id="nft-crisnaldo" width="100%" preload>
                                 <source src="{{ asset('videos/crisnaldo.webm') }}" type="video/webm">
                                 <p>Your browser doesn't support HTML5 video. Here is a <a href="{{ asset('videos/crisnaldo.webm') }}">link to the video</a> instead.</p>
                             </video>
@@ -89,7 +89,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <video id="nft-peque" width="100%">
+                            <video id="nft-peque" width="100%" preload>
                                 <source src="{{ asset('videos/peque.webm') }}" type="video/webm">
                                 <p>Your browser doesn't support HTML5 video. Here is a <a href="{{ asset('videos/peque.webm') }}">link to the video</a> instead.</p>
                             </video>
@@ -105,7 +105,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-8">
                     <div class="third-team-item text-center mb-30">
                         <div class="third-team-img">
-                            <video id="nft-sinedine" width="100%">
+                            <video id="nft-sinedine" width="100%" preload>
                                 <source src="{{ asset('videos/sinedine.webm') }}" type="video/webm">
                                 <p>Your browser doesn't support HTML5 video. Here is a <a href="{{ asset('videos/sinedine.webm') }}">link to the video</a> instead.</p>
                             </video>
