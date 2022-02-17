@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('menu') }}" class="py-2  px-5 z-20 items-menu flex items-center text-slate-50">
+                            <a href="{{ route('penalties') }}" class="py-2  px-5 z-20 items-menu flex items-center text-slate-50">
                                 <img src="{{ asset('img/penalties/icons/home-icon.svg') }}" alt="Items icon">
                                 Home
                             </a>
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ route('menu') }}" class="bg-white rounded-full p-2 border-4 border-goal-gray-100 btn-back">
+                        <a href="{{ route('penalties') }}" class="bg-white rounded-full p-2 border-4 border-goal-gray-100 btn-back">
                             <img src="{{ asset('img/penalties/icons/back-icon.svg') }}" alt="Back icon" class="w-8">
                         </a>
                     </div>
