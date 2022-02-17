@@ -15,7 +15,6 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       thirdDiv = document.querySelector('#third-division'),
       products = document.querySelectorAll('.card-goal'),
       prices = document.querySelectorAll('[id ^= "division"]'),
-      paymentOption = document.querySelector('input[name="payment-option"]:checked').value,
       modalCarrousel = document.querySelector('#modal-carrousel'),
       promptCard = document.querySelector('#prompt-card'),
       closeModal = document.querySelector('#close-carrousel'),
@@ -91,18 +90,19 @@ function showError(error)
 
 async function purchase(el)
 {// TODO: show loader
-    const product = el.lastElementChild;
+    const product = el.lastElementChild,
+          paymentOption = document.querySelector('input[name="payment-option"]:checked').value;
     let hash = null;
 
-    if (paymentOption.value === 'goal')
+    if (paymentOption === 'goal')
         hash = await goalPayment(product);
 
     // todo check if balance is >= product price
-    else if (paymentOption.value === 'gls')
+    else if (paymentOption === 'gls')
         hash = 'gls';
 
     // todo check balance server-side first
-    else if (paymentOption.value === 'busd')
+    else if (paymentOption === 'busd')
         hash = 'busd';
 
     if (hash === null)
@@ -124,7 +124,6 @@ async function purchase(el)
     if (!postResult.ok)
         return showError('Network error. Please, contact support with your tx hash.');
 
-    // TODO: hide loader
     swiper = new Swiper(swiperClass, swiperOptions);
     swiper.autoplay.start();
 

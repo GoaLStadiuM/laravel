@@ -36,13 +36,14 @@ class ShopController extends Controller
         $characters = Auth::user()->charactersByDivision($product->division);
         $characterCount = $characters->count();
         $baseCount = count($base_characters);
+        $tx_hash = $request->input('tx_hash'); // TODO come up with a unique string for purchases in busd credit and gls
 
         if ($characterCount === $baseCount || $characterCount > $baseCount)
             abort(403, 'You already have the maximum number of characters for this division.');
 
         // TODO: finish this
         if (!str_starts_with($request->input('tx_hash'), '0x') && $this->checkStuff($request->input('tx_hash')))
-            $this->payWithBalance();
+            $tx_hash = $this->payWithBalance();
 
         $base_id = $this->getBaseId($base_characters, $characters);
 
@@ -51,7 +52,7 @@ class ShopController extends Controller
             NftPayment::create(
                 $product->id,
                 $this->getPriceInGoal($product->price), // TODO rename column from price_in_goal to amount_paid
-                $request->input('tx_hash') // TODO come up with a unique string for purchases in busd credit and gls
+                $tx_hash
             ),
             $product
         );
@@ -69,7 +70,7 @@ class ShopController extends Controller
         abort(403, 'Not implemented yet.');
     }
 
-    private function payWithBalance(): void
+    private function payWithBalance(): string
     {
         abort(403, "You don't have enough balance.");
     }
