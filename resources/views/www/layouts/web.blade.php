@@ -23,7 +23,7 @@
             gtag('config', 'G-P226HL4B0H');
         </script>
 
-        <title>@hasSection('title') @yield('title') -  @endif{{ config('app.name') }}</title>
+        <title>@hasSection('title') @yield('title') - @endif{{ config('app.name') }}</title>
 
         <!-- CSS here -->
         @include('www.layouts.partials.styles')
