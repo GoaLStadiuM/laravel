@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-4 overflow-x-auto card-scroll lg:p-0 py-5 px-2 bg-black lg:bg-transparent bg-opacity-20">
-                                    <input id="payment-goal" type="radio" name="payment-option" value="goal">
+                                    <input id="payment-goal" type="radio" name="payment-option" value="goal" checked>
                                     <label for="payment-goal">GOAL</label>
                                     <input id="payment-gls" type="radio" name="payment-option" value="gls">
                                     <label for="payment-gls">GLS</label>
