@@ -143,7 +143,7 @@ class GameController extends Controller
             $character->save();
 
             // set the reward
-            $kick->reward = strval($this->calculateKickReward($character, $product) * 0.6);
+            $kick->reward = strval($this->calculateKickReward($character, $product) * 0.55);
 
             // add the reward to the user balance
             $user = Auth::user();
