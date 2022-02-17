@@ -9,7 +9,7 @@
 @section('content')
     <!-- breadcrumb-area -->
     @component('www.components.breadcrumbs')
-        @slot('title') Clasficiaciones @endslot
+        @slot('title') Clasificaciones @endslot
         @slot('name') Rankings @endslot
     @endcomponent
     <!-- breadcrumb-area-end -->
