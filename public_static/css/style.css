@@ -1603,6 +1603,7 @@ ul.minicart .cart-price .new {
     padding: 150px 0 130px;
     margin-top: -20px;
 }
+.landing-banner-bg { background-image: url("../img/bg/landing_bg.webp") }
 .rotated-btn {
     font-size: 16px;
     background: #EE1240;

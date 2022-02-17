@@ -1,4 +1,4 @@
-<section class="third-banner-bg">
+<section class="third-banner-bg landing-banner-bg">
     <div class="container custom-container">
         <div class="row">
             <div class="col-12">
