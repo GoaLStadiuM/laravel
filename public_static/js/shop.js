@@ -15,7 +15,7 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
       thirdDiv = document.querySelector('#third-division'),
       products = document.querySelectorAll('.card-goal'),
       prices = document.querySelectorAll('[id ^= "division"]'),
-      paymentOption = document.querySelector('.payment-option'),
+      paymentOption = document.querySelector('input[name="payment-option"]:checked').value,
       modalCarrousel = document.querySelector('#modal-carrousel'),
       promptCard = document.querySelector('#prompt-card'),
       closeModal = document.querySelector('#close-carrousel'),
@@ -30,7 +30,6 @@ const menuResponsive = document.querySelector('#bg-menu-responsive'),
           speed: 100,
       },
       swiperClass = '.mySwiper',
-      //Radnomtime carrousel
       randomTime = Math.floor(Math.random() * (15000 - 8000)) + 8000,
       svgX = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -68,6 +67,7 @@ stroke="currentColor">
 
     let swiper = null;
 
+// TODO: show preloader
 updatePrices();
 
 // product prices
@@ -89,22 +89,21 @@ function showError(error)
     hideCarrousel();
 }
 
-async function purchase(product)
-{
-    const product_price = product.lastElementChild;
+async function purchase(el)
+{// TODO: show loader
+    const product = el.lastElementChild;
     let hash = null;
 
-    try {
-        hash = abc;
-    } catch(e) {
-        console.log('detected: variable not exists');
-    }
-
     if (paymentOption.value === 'goal')
-        hash = await goalPayment(product_price);
+        hash = await goalPayment(product);
 
+    // todo check if balance is >= product price
     else if (paymentOption.value === 'gls')
         hash = 'gls';
+
+    // todo check balance server-side first
+    else if (paymentOption.value === 'busd')
+        hash = 'busd';
 
     if (hash === null)
         return;
@@ -117,7 +116,7 @@ async function purchase(product)
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
         body: JSON.stringify({
-            product_id: product_price.dataset.productId,
+            product_id: product.dataset.productId,
             tx_hash: hash
         })
     }, 10, 3000);
@@ -125,13 +124,18 @@ async function purchase(product)
     if (!postResult.ok)
         return showError('Network error. Please, contact support with your tx hash.');
 
+    // TODO: hide loader
     swiper = new Swiper(swiperClass, swiperOptions);
     swiper.autoplay.start();
 
     setTimeout(() => showCharacter(postResult.characterIndex), randomTime);
+
+    // TODO: check if user has reached character limit to disable products from the division section
+    // postResult.maxCharacters (bool)
+    // postResult.division (int)
 }
 
-async function goalPayment(product_price)
+async function goalPayment(product)
 {
     if (!Moralis.User.current())
         return;
@@ -143,7 +147,7 @@ async function goalPayment(product_price)
     const goal = (await fetchToken()).data,
           decimals = (await Moralis.Web3API.token.getTokenMetadata({ chain: 'bsc', addresses: tokenAddress }))[0].decimals;
 
-    let amount = Number.parseFloat(product_price.dataset.price / goal.price)/*;
+    let amount = Number.parseFloat(product.dataset.price / goal.price)/*;
     if (amount.toString().split('.')[1].length > 7)
         amount = amount*/.toFixed(0);
 

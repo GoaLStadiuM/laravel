@@ -107,6 +107,28 @@
                         </a>
                     </div>
                     <!-- Top buttons /end -->
+
+                    <div class="self-center lg:mt-6 my-5 lg:space-y-2 space-y-4 flex flex-col items-center">
+                        <div class="flex items-center lg:w-auto w-9/12  justify-center relative">
+                            <div class="w-full w-division">
+                                <div class="flex items-center">
+                                    <h3 class="title-division">Payment Option</h3>
+                                    <div class="lg:hidden block ml-4">
+                                        <img src="{{ asset('img/penalties/icons/scroll-icon.svg') }}" alt="Scroll Icon" class="w-8">
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4 overflow-x-auto card-scroll lg:p-0 py-5 px-2 bg-black lg:bg-transparent bg-opacity-20">
+                                    <input id="payment-goal" type="radio" name="payment-option" value="goal">
+                                    <label for="payment-goal">GOAL</label>
+                                    <input id="payment-gls" type="radio" name="payment-option" value="gls">
+                                    <label for="payment-gls">GLS</label>
+                                    <input id="payment-busd" type="radio" name="payment-option" value="busd">
+                                    <label for="payment-busd">BUSD</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Divisions /start -->
                     <div class="self-center lg:mt-6 my-5 lg:space-y-2 space-y-4 flex flex-col items-center">
                         <!-- First division /start -->
