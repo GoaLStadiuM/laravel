@@ -122,8 +122,8 @@
                                     <label for="payment-goal">GOAL</label>
                                     <input id="payment-gls" type="radio" name="payment-option" value="gls">
                                     <label for="payment-gls">GLS</label>
-                                    <input id="payment-busd" type="radio" name="payment-option" value="busd">
-                                    <label for="payment-busd">BUSD</label>
+                                    <!-- <input id="payment-busd" type="radio" name="payment-option" value="busd">
+                                    <label for="payment-busd">BUSD</label> -->
                                 </div>
                             </div>
                         </div>
