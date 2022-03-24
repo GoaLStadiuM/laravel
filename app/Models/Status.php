@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * The Status model.
  *
  * @property int    $id         The PK that identifies the instance.
  * @property string $code       The status code.
- * @property string $created_at When the status was created.
- * @property string $updated_at When the status was last updated.
+ * @property Carbon $created_at When the status was created.
+ * @property Carbon $updated_at When the status was last updated.
  */
 class Status extends Model
 {

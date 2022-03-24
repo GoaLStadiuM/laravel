@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * The Kicks per division model.
@@ -11,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int    $division   The PK that identifies the instance.
  * @property int    $kicks      The number of kicks characters in this division
  *                              can perform (for every window).
- * @property string $created_at When the kicks per division was created.
- * @property string $updated_at When the Kicks per division was last updated.
+ * @property Carbon $created_at When the kicks per division was created.
+ * @property Carbon $updated_at When the Kicks per division was last updated.
  */
 class KicksPerDivision extends Model
 {

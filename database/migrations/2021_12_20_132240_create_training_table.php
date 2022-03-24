@@ -18,6 +18,7 @@ class CreateTrainingTable extends Migration
             $table->unsignedBigInteger('character_id');
             $table->unsignedTinyInteger('session_id');
             $table->boolean('stopped')->default(false);
+            $table->tinyInteger('hours')->default(0);
             $table->boolean('done')->default(false);
             $table->timestamps();
 

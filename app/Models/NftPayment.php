@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -16,8 +17,8 @@ use Illuminate\Support\Facades\Auth;
  * @property int    $product_id    The FK to the purchased item.
  * @property string $price_in_goal The item price at the time of purchase.
  * @property string $tx_hash       The transaction hash.
- * @property string $created_at    When the purchase took place.
- * @property string $updated_at    When the purchase was last updated.
+ * @property Carbon $created_at    When the purchase took place.
+ * @property Carbon $updated_at    When the purchase was last updated.
  */
 class NftPayment extends Model
 {

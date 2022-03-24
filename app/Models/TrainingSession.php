@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * The Training Session model.
@@ -11,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int    $id         The PK that identifies the instance.
  * @property string $name       The name of the training session.
  * @property int    $max_hours  The duration of the training session.
- * @property string $created_at When this type of training session was created.
- * @property string $updated_at When this type of training session was last updated.
+ * @property Carbon $created_at When this type of training session was created.
+ * @property Carbon $updated_at When this type of training session was last updated.
  */
 class TrainingSession extends Model
 {

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * The Staking Option model.
@@ -10,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    $id               The PK that identifies the instance.
  * @property int    $vesting_period   The duration.
  * @property int    $bonus_percentage The bonus percentage used to calculate the reward.
- * @property string $created_at       When the staking option was added.
- * @property string $updated_at       When the staking option was last updated.
+ * @property Carbon $created_at       When the staking option was added.
+ * @property Carbon $updated_at       When the staking option was last updated.
  */
 class StakingOption extends Model
 {

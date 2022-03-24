@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
@@ -20,12 +21,14 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $goal              GOAL balance.
  * @property string $gls               GLS balance.
  * @property string $remember_token    Remember password token.
- * @property string $created_at        When the user signed up.
- * @property string $updated_at        When the user was last updated.
+ * @property Carbon $created_at        When the user signed up.
+ * @property Carbon $updated_at        When the user was last updated.
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    const ROLE_PRESIDENT = 0, ROLE_AGENT = 1, ROLE_PLAYER = 2, ROLE_NORMAL = 3, ROLE_GRANTEE = 4;
 
     /**
      * The table associated with the model.
@@ -76,6 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the user characters by division.
      *
+     * @param int $division
      * @return HasMany
      */
     public function charactersByDivision(int $division): HasMany
@@ -91,5 +95,55 @@ class User extends Authenticatable implements MustVerifyEmail
     public function stakings(): HasMany
     {
         return $this->hasMany(Staking::class);
+    }
+
+    /**
+     * Whether the user is a president or not.
+     *
+     * @return bool
+     */
+    public function isPresident(): bool
+    {
+        return $this->role === self::ROLE_PRESIDENT;
+    }
+
+    /**
+     * Whether the user is an agent or not.
+     *
+     * @return bool
+     */
+    public function isAgent(): bool
+    {
+        return $this->role === self::ROLE_AGENT;
+    }
+
+    /**
+     * Whether the user is a player or not.
+     *
+     * @return bool
+     */
+    public function isPlayer(): bool
+    {
+        return $this->role === self::ROLE_PLAYER;
+    }
+
+    /**
+     * Whether the user is standard or not.
+     *
+     * @return bool
+     */
+    public function isNormal(): bool
+    {
+        return $this->role === self::ROLE_NORMAL;
+    }
+
+    /**
+     * Whether the user is a grantee or not.
+     *
+     * @return bool
+     */
+    public function isGrantee(): bool
+    {
+        return $this->role === self::ROLE_GRANTEE;
     }
 }

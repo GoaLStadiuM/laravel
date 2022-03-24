@@ -17,6 +17,7 @@ class CreateCharacterAuthorizedTable extends Migration
             $table->id();
             $table->unsignedBigInteger('authorized_id');
             $table->unsignedBigInteger('character_id');
+            $table->unsignedTinyInteger('percentage');
             $table->timestamps();
 
             $table->foreign('authorized_id')->references('id')->on('user');

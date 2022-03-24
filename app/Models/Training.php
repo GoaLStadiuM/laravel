@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * The Training model.
@@ -12,9 +13,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int    $character_id The FK to the trainee.
  * @property int    $session_id   The FK to the training session.
  * @property bool   $stopped      If the training is currently stopped or in progress.
+ * @property int    $hours        Hours trained.
  * @property bool   $done         If the training has ended or not.
- * @property string $created_at   When the training started.
- * @property string $updated_at   When the training was last updated.
+ * @property Carbon $created_at   When the training started.
+ * @property Carbon $updated_at   When the training was last updated.
  */
 class Training extends Model
 {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * The Staking model.
@@ -12,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int    $user_id    The FK to the staker.
  * @property int    $option_id  The FK to the chosen option.
  * @property string $tx_hash    The transaction hash.
- * @property string $created_at When the staking started.
- * @property string $updated_at When the staking was last updated.
+ * @property Carbon $created_at When the staking started.
+ * @property Carbon $updated_at When the staking was last updated.
  */
 class Staking extends Model
 {

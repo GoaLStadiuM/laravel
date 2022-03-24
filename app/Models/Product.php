@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * The Product model.
@@ -15,8 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    $price       The product price.
  * @property string $video_url   The url of the product's video.
  * @property string $img_url     The url of the product's image.
- * @property string $created_at  When the product was added.
- * @property string $updated_at  When the product was last updated.
+ * @property Carbon $created_at  When the product was added.
+ * @property Carbon $updated_at  When the product was last updated.
  */
 class Product extends Model
 {
@@ -45,4 +46,12 @@ class Product extends Model
     ];
 
     // TODO: missing relationships
+
+    public static function priceFromCharacter(Character $character): string
+    {
+        return strval(Product::select('price')->where([
+            'division' => $character->division,
+            'level' => $character->level
+        ])->first()->price);
+    }
 }

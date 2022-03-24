@@ -10,7 +10,6 @@ use App\Models\Partner;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 class WebController extends Controller
 {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * The XP for level model.
@@ -13,8 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int    $level             The Character's current level.
  * @property int    $xp_for_next_level The xp needed to advance to $level + 1
  *                                     (if 0 then $level is the maximum level).
- * @property string $created_at        When the xp for level was added.
- * @property string $updated_at        When the xp for level was last updated.
+ * @property Carbon $created_at        When the xp for level was added.
+ * @property Carbon $updated_at        When the xp for level was last updated.
  */
 class XpForLevel extends Model
 {

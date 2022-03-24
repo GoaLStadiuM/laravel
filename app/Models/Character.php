@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -26,8 +27,8 @@ use Illuminate\Support\Facades\Auth;
  * @property string $strength   The character's strength.
  * @property string $accuracy   The character's accuracy.
  * @property int    $xp         The character's experience points.
- * @property string $created_at When the character was purchased.
- * @property string $updated_at When the character was last updated.
+ * @property Carbon $created_at When the character was purchased.
+ * @property Carbon $updated_at When the character was last updated.
  */
 class Character extends Model
 {
@@ -118,7 +119,68 @@ class Character extends Model
      */
     public function xpForLevel(): array
     {
-        return $this->belongsTo(XpForLevel::class, 'division', 'division')->get()->pluck('xp_for_next_level', 'level')->toArray();
+        return $this->belongsTo(XpForLevel::class, 'division', 'division')
+                    ->get()
+                    ->pluck('xp_for_next_level', 'level')
+                    ->toArray();
+    }
+
+    /**
+     * Checks if the character is in a training session.
+     *
+     * @return bool Whether the character is currently training or not.
+     */
+    public function isTraining(): bool
+    {
+        return $this->hasOne(Training::class)
+                    ->where([
+                        'stopped' => false,
+                        'done' => false
+                    ])
+                    ->exists();
+    }
+
+    /**
+     * Checks if the character is not in a training session.
+     *
+     * @return bool Whether the character is currently training or not.
+     */
+    public function isNotTraining(): bool
+    {
+        return $this->hasOne(Training::class)
+            ->where([
+                'stopped' => false,
+                'done' => false
+            ])
+            ->doesntExist();
+    }
+
+    /**
+     * Checks if the character has a pending training session.
+     *
+     * @return bool Whether the character has a pending training session or not.
+     */
+    public function isTrainingStopped(): bool
+    {
+        return $this->hasOne(Training::class)
+            ->where([
+                'stopped' => true,
+                'done' => false
+            ])
+            ->exists();
+    }
+
+    /**
+     * Checks if the character has already done the specified training session in the past 24 hours.
+     *
+     * @return bool Whether the character did the specified training session or not.
+     */
+    public function checkTraining(int $session_id, \DateTime $date): bool
+    {
+        return $this->hasOne(Training::class)
+                    ->where('session_id', $session_id)
+                    ->whereDate('created_at', '<', $date)
+                    ->exists();
     }
 
     /**
@@ -139,6 +201,20 @@ class Character extends Model
     public function latestTraining(): HasOne
     {
         return $this->hasOne(Training::class)->latestOfMany();
+    }
+
+    /**
+     * Get the current training for the character.
+     *
+     * @return HasOne
+     */
+    public function currentTraining(): HasOne
+    {
+        return $this->hasOne(Training::class)
+                    ->where([
+                        'stopped' => false,
+                        'done' => false
+                    ])->firstOrFail();
     }
 
     /**
@@ -172,7 +248,10 @@ class Character extends Model
      */
     public function currentKicks(array $window): int
     {
-        return $this->hasMany(Kick::class)->whereNotNull('reward')->whereBetween('created_at', $window)->count();
+        return $this->hasMany(Kick::class)
+                    ->whereNotNull('reward')
+                    ->whereBetween('created_at', $window)
+                    ->count();
     }
 
     /**
@@ -194,7 +273,9 @@ class Character extends Model
      */
     public function currentKick(array $window): HasOne
     {
-        return $this->hasOne(Kick::class)->whereNull('reward')->whereBetween('created_at', $window);
+        return $this->hasOne(Kick::class)
+                    ->whereNull('reward')
+                    ->whereBetween('created_at', $window);
     }
 
     /**

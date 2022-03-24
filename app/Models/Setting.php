@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * The Setting model.
@@ -10,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    $id         The PK that identifies the instance.
  * @property string $code       The setting code.
  * @property string $value      The setting value.
- * @property string $created_at When the setting was created.
- * @property string $updated_at When the setting was last updated.
+ * @property Carbon $created_at When the setting was created.
+ * @property Carbon $updated_at When the setting was last updated.
  */
 class Setting extends Model
 {

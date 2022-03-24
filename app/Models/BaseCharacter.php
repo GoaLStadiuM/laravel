@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * The Base character model.
@@ -16,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *                               when purchasing an NFT character.
  * @property string $video_url   The url of the soccer player's video.
  * @property string $img_url     The url of the soccer player's image.
- * @property string $created_at  When this soccer player was added to the game.
- * @property string $updated_at  When this soccer player was last updated.
+ * @property Carbon $created_at  When this soccer player was added to the game.
+ * @property Carbon $updated_at  When this soccer player was last updated.
  */
 class BaseCharacter extends Model
 {

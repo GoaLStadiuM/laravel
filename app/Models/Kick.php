@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * The Kick model.
@@ -12,8 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int    $character_id The FK to the kicker.
  * @property bool   $result       Whether the character scored a goal or not.
  * @property string $reward       The reward for scoring a goal (in GLS).
- * @property string $created_at   When the kick took place.
- * @property string $updated_at   When the kick was last updated.
+ * @property Carbon $created_at   When the kick took place.
+ * @property Carbon $updated_at   When the kick was last updated.
  */
 class Kick extends Model
 {
