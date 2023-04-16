@@ -13,6 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call();
+        $this->call([
+            BaseCharacterSeeder::class,
+            KicksPerDivisionSeeder::class,
+            ProductSeeder::class,
+            SettingSeeder::class,
+            StakingOptionSeeder::class,
+            //StatusSeeder::class,
+            TrainingSessionSeeder::class,
+            XpForLevelSeeder::class
+        ]);
     }
 }

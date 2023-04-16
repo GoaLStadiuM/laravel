@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TrainingSessionSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class TrainingSessionSeeder extends Seeder
      */
     public function run()
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = Carbon::now();
 
-        DB::table('training_session')->insert([
+        DB::table('training_session')->upsert([
             [
                 'name' => 'Head Training',
                 'max_hours' => 6,
@@ -41,6 +42,6 @@ class TrainingSessionSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ],
-        ]);
+        ], [ 'name' ], [ 'name', 'max_hours', 'updated_at' ]);
     }
 }

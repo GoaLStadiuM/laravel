@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class XpForLevelSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class XpForLevelSeeder extends Seeder
      */
     public function run()
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = Carbon::now();
 
-        DB::table('xp_for_level')->insert([
+        DB::table('xp_for_level')->upsert([
             [
                 'division' => 1,
                 'level' => 1,
@@ -178,6 +179,6 @@ class XpForLevelSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ]
-        ]);
+        ], [ 'division', 'level' ], [ 'division', 'level', 'xp_for_next_level', 'updated_at' ]);
     }
 }

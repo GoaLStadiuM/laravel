@@ -16,7 +16,7 @@ class CreateKicksPerDivisionTable extends Migration
     {
         Schema::create('kicks_per_division', function (Blueprint $table) {
             $table->tinyIncrements('division');
-            $table->unsignedTinyInteger('kicks');
+            $table->unsignedTinyInteger('kicks')->unique();
             $table->timestamps();
         });
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class StakingOptionSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class StakingOptionSeeder extends Seeder
      */
     public function run()
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = Carbon::now();
 
-        DB::table('staking_option')->insert([
+        DB::table('staking_option')->upsert([
             [
                 'vesting_period' => 'P7D',
                 'bonus_percentage' => 3,
@@ -53,6 +54,6 @@ class StakingOptionSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ]
-        ]);
+        ], [  'vesting_period' ], [  'vesting_period', 'bonus_percentage', 'updated_at' ]);
     }
 }

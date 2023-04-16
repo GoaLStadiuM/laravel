@@ -16,7 +16,7 @@ class CreateProductTable extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description');
             $table->unsignedTinyInteger('division');
             $table->unsignedTinyInteger('level');

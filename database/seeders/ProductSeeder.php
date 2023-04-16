@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProductSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = Carbon::now();
 
-        DB::table('product')->insert([
+        DB::table('product')->upsert([
             [
                 'name' => 'Random Character Level 1 Division 1',
                 'description' => 'You will obtain one character from Division 1 with level 1.',
@@ -270,6 +271,6 @@ class ProductSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ]
-        ]);
+        ], [ 'name' ], [ 'name', 'description', 'division', 'level', 'price', 'video_url', 'img_url', 'updated_at' ]);
     }
 }

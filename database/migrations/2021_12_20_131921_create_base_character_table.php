@@ -16,7 +16,7 @@ class CreateBaseCharacterTable extends Migration
     {
         Schema::create('base_character', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->unsignedTinyInteger('probability');
             $table->string('video_url');
             $table->string('img_url');

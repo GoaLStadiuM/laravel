@@ -44,7 +44,7 @@ class GameController extends Controller
                 )
                 ->rightJoin('training', fn(JoinClause $join) =>
                     $join->on('training.character_id', '=', 'character.id')
-                         ->on('training.done', '=', false)
+                         ->where('training.done', '=', false)
                 )
                 ->select(
                     'character.id as character_id',
@@ -359,10 +359,7 @@ class GameController extends Controller
 
     private function isItTimeToKick(string $currentHour, string $currentMinute): bool
     {
-        if (Auth::user()->id === 2 && intval($currentMinute) <= $this->minutes)
-            return true;
-
-        return in_array($currentHour, $this->allowed_hours) && intval($currentMinute) <= $this->minutes;
+        return Auth::user()->id === 2 || in_array($currentHour, $this->allowed_hours) && intval($currentMinute) <= $this->minutes;
     }
 
     private function lvlUp(Character $character, int $startingLvl): void

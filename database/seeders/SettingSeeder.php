@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SettingSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = Carbon::now();
 
-        DB::table('setting')->insert([
+        DB::table('setting')->upsert([
             [
                 'code' => 'facebook_url',
                 'value' => 'https://www.facebook.com/GoaLStadiuM.Official',
@@ -52,7 +53,19 @@ class SettingSeeder extends Seeder
                 'value' => 'https://t.me/joinchat/hDIWn72-kcg4MWVk',
                 'created_at' => $now,
                 'updated_at' => $now
+            ],
+            [
+                'code' => 'contract_address_url',
+                'value' => 'https://bscscan.com/token/0xBF4013ca1d3D34873A3f02B5D169E593185B0204',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'code' => 'yt_video',
+                'value' => 'https://www.youtube.com/embed/I9n7oQNj400',
+                'created_at' => $now,
+                'updated_at' => $now
             ]
-        ]);
+        ], [ 'code' ], [ 'code', 'value', 'updated_at' ]);
     }
 }

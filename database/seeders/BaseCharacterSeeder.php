@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class BaseCharacterSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class BaseCharacterSeeder extends Seeder
      */
     public function run()
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = Carbon::now();
 
-        DB::table('base_character')->insert([
+        DB::table('base_character')->upsert([
             [
                 'name' => 'Amiguita',
                 'probability' => 20,
@@ -225,6 +226,6 @@ class BaseCharacterSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ]
-        ]);
+        ], [ 'name' ], [ 'name', 'probability', 'video_url', 'img_url', 'updated_at' ]);
     }
 }

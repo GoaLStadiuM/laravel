@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class KicksPerDivisionSeeder extends Seeder
 {
@@ -14,9 +15,9 @@ class KicksPerDivisionSeeder extends Seeder
      */
     public function run()
     {
-        $now = new DateTime(null, new DateTimeZone('UTC'));
+        $now = Carbon::now();
 
-        DB::table('kicks_per_division')->insert([
+        DB::table('kicks_per_division')->upsert([
             [
                 'kicks' => 4,
                 'created_at' => $now,
@@ -32,6 +33,6 @@ class KicksPerDivisionSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ]
-        ]);
+        ], [ 'kicks' ], [ 'kicks', 'updated_at' ]);
     }
 }

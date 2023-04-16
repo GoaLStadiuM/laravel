@@ -16,7 +16,7 @@ class CreateStakingOptionTable extends Migration
     {
         Schema::create('staking_option', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('vesting_period');
+            $table->string('vesting_period')->unique();
             $table->unsignedSmallInteger('bonus_percentage');
             $table->timestamps();
         });
