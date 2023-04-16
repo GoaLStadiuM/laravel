@@ -23,6 +23,10 @@
     @include('www.home.partials.staking')
     <!-- staking-area-end -->
 
+    <!-- trademate-area -->
+    @include('www.home.partials.trademate')
+    <!-- trademate-area-end -->
+
     <!-- partners-area -->
     @include('www.components.partners')
     <!-- partners-area-end -->

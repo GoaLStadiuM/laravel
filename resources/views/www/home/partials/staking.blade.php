@@ -1,4 +1,4 @@
-<section class="donation-area staking-bg fix pt-65">
+<section class="donation-area staking-bg fix pt-65" id="staking">
     <div class="container custom-container">
         <div class="donation-wrap">
             <div class="row align-items-center">

@@ -60,12 +60,14 @@
                                 <li><a href="{{ route('home').'#metaverso' }}">Metaverso</a></li>
                                 <li><a href="{{ route('home').'#play2earn' }}">Play<span>2Earn</span></a></li>
                                 <li><a href="{{ route('home').'#nfts' }}">Nfts</a></li>
+                                <li><a href="{{ route('home').'#farming' }}">Farming</a></li>
                             </ul>
                             <div class="logo">
                                 <a href="{{ route('home') }}"><img src="{{ asset('img/logo.webp') }}" alt="Logo" width="125"></a>
                             </div>
                             <ul class="right">
-                                <li><a href="{{ route('home').'#farming' }}">Farming/Staking</a></li>
+                                <li><a href="{{ route('home').'#staking' }}">Staking</a></li>
+                                <li><a href="{{ route('home').'#trading' }}">Trading</a></li>
                                 <li{{ request()->routeIs('collaborators') ? ' class=show' : '' }}><a href="{{ route('collaborators') }}">Colaboradores</a></li>
                                 <li{{ request()->routeIs('rankings') ? ' class=show' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
                                 <li>
