@@ -14,4 +14,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/public_static/game/penalties/*
+/static/game/penalties/*
