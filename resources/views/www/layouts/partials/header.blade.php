@@ -59,7 +59,7 @@
                                 <li><a href="{{ route('home').'#bienvenidos' }}">Bienvenidos</a></li>
                                 <li><a href="{{ route('home').'#metaverso' }}">Metaverso</a></li>
                                 <li><a href="{{ route('home').'#play2earn' }}">Play<span>2Earn</span></a></li>
-                                <li><a href="{{ route('home').'#nfts' }}">Nfts</a></li>
+                                <li><a href="{{ route('home').'#nfts' }}">Assets</a></li>
                                 <li><a href="{{ route('home').'#farming' }}">Farming</a></li>
                             </ul>
                             <div class="logo">
@@ -114,8 +114,10 @@
                                 <li><a href="{{ route('home').'#bienvenidos'}}">Bienvenidos</a></li>
                                 <li><a href="{{ route('home').'#metaverso'}}">Metaverso</a></li>
                                 <li><a href="{{ route('home').'#play2earn'}}">Play<span>2Earn</span></a></li>
-                                <li><a href="{{ route('home').'#nfts'}}">Nfts</a></li>
-                                <li><a href="{{ route('home').'#farming'}}">Farming/Staking</a></li>
+                                <li><a href="{{ route('home').'#nfts'}}">Assets</a></li>
+                                <li><a href="{{ route('home').'#farming'}}">Farming</a></li>
+                                <li><a href="{{ route('home').'#staking'}}">Staking</a></li>
+                                <li><a href="{{ route('home').'#trading'}}">Trading</a></li>
                                 <li{{ request()->routeIs('collaborators') ? ' class=show' : '' }}><a href="{{ route('collaborators') }}">Colaboradores</a></li>
                                 <li{{ request()->routeIs('rankings') ? ' class=show' : '' }}><a href="{{ route('rankings') }}">Clasificaciones</a></li>
                                 <li>
