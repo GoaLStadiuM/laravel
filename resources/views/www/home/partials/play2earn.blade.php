@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="third-section-title text-center mb-60">
-                        <h2>NFTS <span>GOAL</span>STADIUM</h2>
+                        <h2>ASSETS <span>GOAL</span>STADIUM</h2>
                     </div>
                 </div>
             </div>
