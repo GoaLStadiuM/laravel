@@ -8,7 +8,7 @@
                 <div class="third-banner-content text-center wow bounceInUp" data-wow-delay=".2s">
                     <h2>Somos Goal<span>Stadium</span></h2>
                     <h6>La vamos a sacar del estadio</h6>
-                    <a href="{{ $contract_address_url }}" target="_blank" class="btn rotated-btn">Contrato Goal</a>
+                    <!-- <a href="{{ $contract_address_url }}" target="_blank" class="btn rotated-btn">Contrato Goal</a> -->
                 </div>
             </div>
         </div>

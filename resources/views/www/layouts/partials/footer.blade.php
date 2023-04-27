@@ -36,8 +36,8 @@
                                     <li><a href="{!! asset('documents/whitepaper_pt.pdf') !!}" target="_blank">Portuguese</a></li>
                                 </ul>
                             </li>
-                            <li><a href={!! asset("documents/AuditoriaTOKEN.pdf") !!} target="_blank">Auditorias</a></li>
-                            <li><a href="{{ $contract_address_url }}" target="_blank">Contrato Goal</a></li>
+                            <!-- <li><a href="{!! asset('documents/AuditoriaTOKEN.pdf') !!}" target="_blank">Auditorias</a></li> -->
+                            <!-- <li><a href="{{ $contract_address_url }}" target="_blank">Contrato Goal</a></li> -->
                             <li><a href="{{ route('legal') }}">Aviso Legal</a></li>
                             <li><a href="{{ route('privacy') }}">Política de Privacidad</a></li>
                             <li><a href="{{ route('cookies') }}">Política de Cookies</a></li>
