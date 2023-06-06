@@ -22,6 +22,7 @@ class CreateXpForLevelTable extends Migration
             $table->timestamps();
 
             $table->unique(['division', 'level']);
+            $table->index('level');
         });
 
         (new XpForLevelSeeder)->run();

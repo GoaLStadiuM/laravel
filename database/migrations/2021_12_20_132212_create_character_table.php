@@ -29,11 +29,8 @@ class CreateCharacterTable extends Migration
             $table->foreign('user_id')->references('id')->on('user');
             $table->foreign('base_id')->references('id')->on('base_character');
             $table->foreign('payment_id')->references('id')->on('nft_payment');
-            $table->foreign('division')->references('division')->on('kicks_per_division');
-            // laravel bullshit
-            // need to run it manually:
-            // alter table `character` add constraint `character_division_xp_for_level` foreign key (`division`) references `xp_for_level` (`division`);
-            //$table->foreign('division')->references('division')->on('xp_for_level');
+            $table->foreign('division', 'character_division_kicks_per_division_foreign')->references('division')->on('kicks_per_division');
+            $table->foreign('division', 'character_division_xp_for_level_foreign')->references('division')->on('xp_for_level');
             $table->foreign('level')->references('level')->on('xp_for_level');
         });
     }
