@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <!-- swiper -->
-    <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
 
     <!-- custom -->
     <link rel="stylesheet" href="{{ asset('css/penalties.css') }}">
@@ -276,12 +276,12 @@
 @endsection
 
 @section('page-scripts')
-    @include('play.layouts.partials.moralis')
+    <!-- @include('play.layouts.partials.moralis') -->
 
     <!-- custom -->
     <script src="{{ asset('js/wallet.js') }}"></script>
     <script src="{{ asset('js/shop.js') }}" type="module"></script>
 
     <!-- swiper -->
-    <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 @endsection

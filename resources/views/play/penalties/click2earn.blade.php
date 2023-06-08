@@ -18,6 +18,10 @@
 @endsection
 
 @section('page-scripts')
+    <script>
+        const assetsUrl =  '{{ config('app.asset_url') }}/img/character/',
+              gameUrl =  '{{ config('app.play_url') }}/penalties/';
+    </script>
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/slick.min.js') }}"></script>
